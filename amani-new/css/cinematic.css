@@ -1,0 +1,306 @@
+/* ============================================
+   Amani's Kitchen — Cinematic Video Scroll Section
+   ============================================ */
+
+:root {
+  --amani-maroon: #742f1c;
+  --amani-cream: #f7f1e8;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  background: #0a0705;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Scroll container (drives the timeline) ---------- */
+
+.cinematic-section {
+  position: relative;
+  width: 100%;
+  height: 400vh; /* scroll distance that maps to video duration */
+}
+
+/* ---------- Sticky viewport ---------- */
+
+.cinematic-stage {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0705;
+}
+
+/* ---------- Video ---------- */
+
+.cinematic-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  background: #0a0705;
+}
+
+/* ---------- Overlay (kept subtle so the video stays the hero) ---------- */
+
+.cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.12) 30%,
+    rgba(0, 0, 0, 0.12) 70%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Intro layer: scroll indicator (logo is embedded in the video) ---------- */
+
+.intro-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 6vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--amani-cream);
+  opacity: 0.85;
+  will-change: opacity, transform;
+  transition: opacity 0.5s var(--ease-premium);
+}
+
+.scroll-arrow {
+  font-size: 20px;
+  line-height: 1;
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+.scroll-label {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.scroll-indicator.is-hidden {
+  opacity: 0;
+}
+
+/* ---------- Final reveal layer ---------- */
+
+.final-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s var(--ease-premium);
+}
+
+.final-layer.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.final-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(10, 7, 5, 0.72) 0%,
+    rgba(10, 7, 5, 0.5) 55%,
+    rgba(10, 7, 5, 0.62) 100%
+  );
+}
+
+.final-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px;
+  color: var(--amani-cream);
+}
+
+.final-title,
+.final-subtitle,
+.final-actions .final-btn {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+}
+
+.final-layer.is-visible .final-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
+}
+
+.final-layer.is-visible .final-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+.final-layer.is-visible .final-actions .final-btn:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.65s;
+}
+
+.final-layer.is-visible .final-actions .final-btn:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.85s;
+}
+
+.final-title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin-bottom: 12px;
+}
+
+.final-subtitle {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(247, 241, 232, 0.82);
+  margin-bottom: 36px;
+}
+
+.final-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.final-btn {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--amani-cream);
+  padding: 14px 38px;
+  border: 1px solid rgba(247, 241, 232, 0.55);
+  border-radius: 2px;
+  min-width: 220px;
+  transition: background-color 0.35s var(--ease-premium),
+    color 0.35s var(--ease-premium),
+    border-color 0.35s var(--ease-premium);
+}
+
+.final-btn:hover,
+.final-btn:focus-visible {
+  background-color: var(--amani-cream);
+  color: var(--amani-maroon);
+  border-color: var(--amani-cream);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .cinematic-video {
+    object-position: 62% center; /* keep the walking path centered on mobile crop */
+  }
+
+  .scroll-indicator {
+    bottom: 5vh;
+  }
+
+  .final-title {
+    font-size: 22px;
+  }
+
+  .final-btn {
+    min-width: 200px;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 420px) {
+  .cinematic-section {
+    height: 350vh;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-section {
+    height: 100vh;
+  }
+
+  .cinematic-stage {
+    position: relative;
+  }
+
+  .intro-layer {
+    display: none;
+  }
+
+  .scroll-arrow {
+    animation: none;
+  }
+
+  .final-layer,
+  .final-title,
+  .final-subtitle,
+  .final-actions .final-btn {
+    transition: none;
+  }
+
+  .final-layer {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .final-title,
+  .final-subtitle,
+  .final-actions .final-btn {
+    opacity: 1;
+    transform: none;
+  }
+}
