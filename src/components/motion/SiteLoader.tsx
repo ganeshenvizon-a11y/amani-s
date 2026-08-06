@@ -15,7 +15,7 @@ import { gsap } from '../../lib/gsap';
 import '../../styles/loader.css';
 
 interface SiteLoaderProps {
-  onDone: () => void;
+  onDone?: () => void;
 }
 
 const MIN_DURATION_MS = 1800;
@@ -101,7 +101,7 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
       }
       document.documentElement.classList.remove('is-loading');
       document.body.classList.remove('is-loading');
-      onDone();
+      onDone?.();
     }
 
     function finishLoading() {
@@ -146,16 +146,23 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
     document.documentElement.classList.add('is-loading');
     document.body.classList.add('is-loading');
 
-    window.addEventListener('load', scheduleFinish, { once: true });
-    const safetyTimer = setTimeout(scheduleFinish, MAX_SAFETY_MS);
+    let safetyTimer: ReturnType<typeof setTimeout> | null = null;
 
-    if (document.readyState === 'complete') {
-      scheduleFinish();
+    if (onDone) {
+      window.addEventListener('load', scheduleFinish, { once: true });
+      safetyTimer = setTimeout(scheduleFinish, MAX_SAFETY_MS);
+
+      if (document.readyState === 'complete') {
+        scheduleFinish();
+      }
     }
 
     return () => {
-      clearTimeout(safetyTimer);
+      if (safetyTimer) clearTimeout(safetyTimer);
+      if (onDone) window.removeEventListener('load', scheduleFinish);
       killLiving();
+      document.documentElement.classList.remove('is-loading');
+      document.body.classList.remove('is-loading');
     };
   }, [onDone]);
 
@@ -200,3 +207,5 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
     </div>
   );
 }
+
+export { SiteLoader as Loader, SiteLoader as PageLoader };

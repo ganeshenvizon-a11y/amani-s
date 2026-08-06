@@ -58,7 +58,7 @@ function AppShell() {
   // Phase 3: Main website
   return (
     <PublicLayout>
-      <Suspense fallback={null}>
+      <Suspense fallback={<SiteLoader />}>
         <Outlet />
       </Suspense>
     </PublicLayout>
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <AppShell />,
     errorElement: (
-      <Suspense fallback={null}>
+      <Suspense fallback={<SiteLoader />}>
         <NotFoundPage />
       </Suspense>
     ),
