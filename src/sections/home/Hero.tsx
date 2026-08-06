@@ -4,14 +4,12 @@
  */
 
 import { useRef, useEffect } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
 import { HERO_CONTENT } from '../../content/home';
 import { gsap } from '../../lib/gsap';
 
 export function Hero() {
   const heroRef    = useRef<HTMLElement>(null);
   const bgImageRef = useRef<HTMLImageElement>(null);
-  const shouldReduceMotion = useReducedMotion();
   const headlineLines = HERO_CONTENT.headline.split('\n');
 
   useEffect(() => {
@@ -19,6 +17,7 @@ export function Hero() {
     const bgImg = bgImageRef.current;
     if (!hero || !bgImg) return;
 
+    const titleLines = hero.querySelectorAll<HTMLElement>('.home-hero__title-line-inner');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) return;
 
@@ -29,12 +28,25 @@ export function Hero() {
         { scale: 1, duration: 10, ease: 'sine.out' }
       );
 
-      // Parallax: background image drifts slower than scroll, content fades/rises faster
+      gsap.fromTo(
+        titleLines,
+        { yPercent: 110, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.1,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: hero, start: 'top 72%', once: true },
+        }
+      );
+
+      // Retain the existing cinematic movement, with a more restrained image drift.
       gsap.fromTo(
         bgImg,
-        { yPercent: -12 },
+        { yPercent: -3 },
         {
-          yPercent: 12,
+          yPercent: 3,
           ease: 'none',
           scrollTrigger: {
             trigger: hero,
@@ -63,7 +75,7 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative h-[100svh] w-full overflow-hidden bg-[var(--amani-void)]"
+      className="home-hero relative w-full overflow-hidden bg-[var(--amani-void)]"
       aria-label="Welcome to Amani"
     >
       {/* Background Media with Dark Gradient Overlay */}
@@ -71,27 +83,20 @@ export function Hero() {
         <img
           ref={bgImageRef}
           src={HERO_CONTENT.image}
-          alt="Amani South Indian dining atmosphere with warm tables and prepared feast"
-          className="absolute inset-x-0 -top-[15%] w-full h-[130%] object-cover object-center will-change-transform"
+          alt="Golden masala dosa with South Indian accompaniments"
+          className="absolute inset-x-0 -top-[15%] w-full h-[130%] object-cover object-[52%_center] will-change-transform"
           loading="eager"
           decoding="async"
         />
         <div className="absolute inset-0 home-hero__overlay" />
       </div>
 
-      {/* Hero Statement */}
+      {/* Hero Statement — shares the navigation's exact inner content boundary. */}
       <div className="hero-content-wrapper home-hero__content">
         <h1 className="home-hero__title" data-split="true">
           {headlineLines.map((line, i) => (
             <span key={i} className="home-hero__title-line">
-              <motion.span
-                className="block"
-                initial={shouldReduceMotion ? false : { y: '105%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
-                transition={{ duration: 0.9, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {line}
-              </motion.span>
+              <span className="home-hero__title-line-inner">{line}</span>
             </span>
           ))}
         </h1>

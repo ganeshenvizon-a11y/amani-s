@@ -48,7 +48,7 @@ export interface GalleryItem {
 
 export const HERO_CONTENT = {
   headline: 'FLAVOUR FROM FIRE.\nMEMORY FROM HOME.',
-  image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1600&auto=format&fit=crop',
+  image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
 };
 
 export const MOOD_FINDER_CONTENT = {

@@ -1,23 +1,24 @@
 /**
- * Amani — Root application router & entry flow manager
- * Ensures page refresh always displays the active route cleanly without forcing intro video loops.
+ * Amani — Root application router
+ * Flow:
+ *   First session visit to '/' → CinematicIntro video → navigate to destination
+ *   All other cases → page renders immediately at top
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
+  ScrollRestoration,
   Outlet,
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { SiteLoader } from '../components/motion/SiteLoader';
+import { useLenis } from 'lenis/react';
 import { CinematicIntro } from '../components/motion/CinematicIntro';
-import { ViewRestaurantTransition } from '../components/motion/ViewRestaurantTransition';
 import { PublicLayout } from '../layouts/PublicLayout';
 
-// ── Lazy page imports ────────────────────────────────────────────────────────
-import { lazy, Suspense } from 'react';
+// ── Lazy page imports ─────────────────────────────────────────────────────────
 const HomePage       = lazy(() => import('../pages/home/HomePage').then(m => ({ default: m.HomePage })));
 const StoriesPage    = lazy(() => import('../pages/stories/StoriesPage').then(m => ({ default: m.StoriesPage })));
 const MenuPage       = lazy(() => import('../pages/menu/MenuPage').then(m => ({ default: m.MenuPage })));
@@ -25,82 +26,55 @@ const GatheringsPage = lazy(() => import('../pages/gatherings/GatheringsPage').t
 const VisitPage      = lazy(() => import('../pages/visit/VisitPage').then(m => ({ default: m.VisitPage })));
 const NotFoundPage   = lazy(() => import('../pages/not-found/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
+// ── AppShell ──────────────────────────────────────────────────────────────────
 function AppShell() {
   const navigate = useNavigate();
   const location = useLocation();
+  const lenis    = useLenis();
+  const prevPath = useRef(location.pathname);
 
-  // Check if session has visited site or if user is refreshing/navigating
-  const [hasVisitedSession] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    return sessionStorage.getItem('amani_visited') === 'true';
-  });
-
-  // Loader state: Fast subtle initial loader on first page mount
-  const [loaderDone, setLoaderDone] = useState(() => hasVisitedSession);
-
-  // Intro state: Only show video intro if visiting root '/' and session hasn't visited yet
+  // Show CinematicIntro only on first cold session visit to '/'
   const [introDone, setIntroDone] = useState(() => {
-    return hasVisitedSession || location.pathname !== '/';
+    if (typeof window === 'undefined') return true;
+    const visited = sessionStorage.getItem('amani_visited') === 'true';
+    return visited || location.pathname !== '/';
   });
 
-  const [inTransition, setInTransition] = useState(false);
-  const [pendingDest, setPendingDest] = useState<string | null>(null);
-
-  // Mark session as visited on mount so refresh never loops back to intro
+  // Mark visited immediately so refresh never replays the intro
   useEffect(() => {
+    try { sessionStorage.setItem('amani_visited', 'true'); } catch { /* noop */ }
+  }, []);
+
+  // Scroll to top on every SPA route change
+  useEffect(() => {
+    if (prevPath.current === location.pathname) return;
+    prevPath.current = location.pathname;
     try {
-      sessionStorage.setItem('amani_visited', 'true');
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
     } catch {
-      // Storage fallback
+      window.scrollTo(0, 0);
     }
-  }, []);
+  }, [location.pathname, lenis]);
 
-  const handleLoaderDone = useCallback(() => {
-    setLoaderDone(true);
-  }, []);
-
+  // CinematicIntro done → navigate to chosen destination
   const handleIntroDone = useCallback((destination: string) => {
-    try {
-      sessionStorage.setItem('amani_visited', 'true');
-    } catch {
-      // Storage fallback
-    }
-
-    if (destination === '/') {
-      setPendingDest(destination);
-      setInTransition(true);
-    } else {
-      setIntroDone(true);
-      navigate(destination);
-    }
+    setIntroDone(true);
+    navigate(destination, { replace: true });
   }, [navigate]);
 
-  const handleTransitionComplete = useCallback(() => {
-    setInTransition(false);
-    setIntroDone(true);
-    if (pendingDest) {
-      navigate(pendingDest);
-    }
-  }, [navigate, pendingDest]);
-
-  // Phase 1: Fast loader on initial cold load (bypassed on refresh)
-  if (!loaderDone) {
-    return <SiteLoader onDone={handleLoaderDone} />;
-  }
-
-  // Phase 2: Smooth View Restaurant transition overlay
-  if (inTransition) {
-    return <ViewRestaurantTransition onComplete={handleTransitionComplete} />;
-  }
-
-  // Phase 3: Video intro screen (only on first cold session visit to '/')
+  // Show video intro on first cold visit to '/'
   if (!introDone && location.pathname === '/') {
     return <CinematicIntro onComplete={handleIntroDone} />;
   }
 
-  // Phase 4: Current Page Content inside PublicLayout
+  // All other cases: render page immediately
   return (
     <PublicLayout>
+      <ScrollRestoration />
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
@@ -108,7 +82,7 @@ function AppShell() {
   );
 }
 
-// ── Router definition ────────────────────────────────────────────────────────
+// ── Router definition ─────────────────────────────────────────────────────────
 const router = createBrowserRouter([
   {
     path: '/',

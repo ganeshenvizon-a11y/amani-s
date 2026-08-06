@@ -259,13 +259,13 @@ export function Header() {
         aria-label="Main Site Header"
       >
         <div className="restaurant-header__inner">
-          {/* Left Reserve Button */}
+          {/* Left Booking Link */}
           <NavLink
             to={CTA_NAV_LINK.path}
             onClick={() => isOpen && handleClose()}
             className="restaurant-header__reserve"
           >
-            RESERVE A TABLE
+            BOOK TABLE
           </NavLink>
 
           {/* Centered Editorial Wordmark */}
@@ -308,6 +308,8 @@ export function Header() {
           id="amani-navigation-panel"
           className="restaurant-menu"
           aria-label="Site Navigation"
+          onWheel={(event) => event.stopPropagation()}
+          onTouchMove={(event) => event.stopPropagation()}
         >
           {/* Primary Navigation Links */}
           <div className="restaurant-menu__primary">

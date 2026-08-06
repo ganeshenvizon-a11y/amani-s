@@ -1,6 +1,8 @@
 /**
- * SiteLoader — Lightweight, responsive brand loader animation.
- * Plays a quick 400ms entrance & exit reveal, ensuring pages load immediately without freezing.
+ * SiteLoader — Brand loader with continuously spinning outer ring.
+ * • Outer dashed ring spins indefinitely via CSS keyframe (reliable, smooth).
+ * • GSAP handles logo entrance (scale + fade) and exit (fade out).
+ * • Calls onDone after ~700ms so the animation is visible on every load.
  */
 
 import { useEffect, useRef } from 'react';
@@ -12,15 +14,13 @@ interface SiteLoaderProps {
 }
 
 export function SiteLoader({ onDone }: SiteLoaderProps) {
-  const loaderRef  = useRef<HTMLDivElement>(null);
-  const logoRef    = useRef<HTMLDivElement>(null);
-  const ringRef    = useRef<SVGGElement>(null);
-  const hasExited  = useRef(false);
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const logoRef   = useRef<HTMLDivElement>(null);
+  const hasExited = useRef(false);
 
   useEffect(() => {
     const loader = loaderRef.current;
     const logo   = logoRef.current;
-    const ring   = ringRef.current;
 
     if (!loader || !logo) {
       document.documentElement.classList.remove('is-loading');
@@ -30,6 +30,9 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
     }
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.documentElement.classList.add('is-loading');
+    document.body.classList.add('is-loading');
 
     function finish() {
       if (hasExited.current) return;
@@ -45,7 +48,7 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
 
       gsap.to(loader, {
         opacity: 0,
-        duration: 0.35,
+        duration: 0.4,
         ease: 'power2.out',
         onComplete: () => {
           if (loader) loader.style.display = 'none';
@@ -54,19 +57,25 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
       });
     }
 
-    document.documentElement.classList.add('is-loading');
-    document.body.classList.add('is-loading');
-
-    // Smooth logo scale in + ring rotation
-    if (!prefersReduced) {
-      gsap.fromTo(logo, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
-      if (ring) {
-        gsap.to(ring, { rotation: 180, duration: 0.5, ease: 'power1.inOut', transformOrigin: '50% 50%' });
-      }
+    if (prefersReduced) {
+      // No animation — just show briefly and leave
+      const timer = setTimeout(finish, 300);
+      return () => {
+        clearTimeout(timer);
+        document.documentElement.classList.remove('is-loading');
+        document.body.classList.remove('is-loading');
+      };
     }
 
-    // Finish after 450ms safety window
-    const timer = setTimeout(finish, 450);
+    // Entrance: logo fades + scales in
+    gsap.fromTo(
+      logo,
+      { opacity: 0, scale: 0.85 },
+      { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' }
+    );
+
+    // Hold for 700ms then exit (ring keeps spinning via CSS during this window)
+    const timer = setTimeout(finish, 700);
 
     return () => {
       clearTimeout(timer);
@@ -77,27 +86,55 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] bg-[var(--amani-canvas)] text-[var(--amani-ink)] flex items-center justify-center pointer-events-none"
       ref={loaderRef}
+      className="site-loader"
       role="status"
       aria-label="Loading Amani"
     >
-      <div className="flex flex-col items-center gap-4" ref={logoRef}>
-        <svg
-          className="w-20 h-20 text-[var(--amani-maroon)]"
-          viewBox="0 0 208 208"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <g ref={ringRef}>
-            <circle cx="104" cy="104" r="90" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" opacity="0.4" />
-            <circle cx="104" cy="104" r="70" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
-          </g>
-          <circle cx="104" cy="104" r="12" fill="currentColor" />
-        </svg>
-        <span className="font-serif text-2xl tracking-wider text-[var(--amani-ink)]">Āmani</span>
+      <div ref={logoRef} className="site-loader__logo">
+        {/* Logo mark */}
+        <div className="site-loader__mark">
+          <svg
+            className="site-loader__svg"
+            viewBox="0 0 208 208"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            {/* Outer dashed spinning ring — animated via CSS */}
+            <circle
+              className="site-loader__ring-outer"
+              cx="104"
+              cy="104"
+              r="90"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeDasharray="8 6"
+            />
+
+            {/* Inner static ring */}
+            <circle
+              className="site-loader__ring-inner"
+              cx="104"
+              cy="104"
+              r="68"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+
+            {/* Center dot */}
+            <circle cx="104" cy="104" r="10" fill="currentColor" />
+          </svg>
+        </div>
+
+        {/* Wordmark below */}
+        <span className="site-loader__wordmark">Āmani</span>
       </div>
+
+      {/* SR-only live region */}
+      <span className="site-loader__sr-only" aria-live="polite">
+        Loading…
+      </span>
     </div>
   );
 }

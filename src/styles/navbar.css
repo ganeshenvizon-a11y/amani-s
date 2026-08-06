@@ -4,23 +4,28 @@
    ========================================================================== */
 
 :root {
-  --amani-nav-width: 800px;
-  --amani-nav-top-closed: 24px;
-  --amani-nav-top-open: 16px;
-  --amani-nav-height-closed: 66px;
-  --amani-nav-height-open: 74px;
+  --amani-nav-width: 600px;
+  --amani-nav-inline-padding: 20px;
+  --amani-nav-border-width: 0px;
+  --amani-nav-shell-width: min(var(--amani-nav-width), calc(100vw - 32px));
+  --amani-nav-top-closed: 8px;
+  --amani-nav-top-open: 8px;
+  --amani-nav-height-closed: 45px;
+  --amani-nav-height-open: 45px;
   --amani-nav-panel-gap: 8px;
-  --amani-nav-radius: 6px;
+  --amani-nav-radius: 4px;
   
   /* Black Glass Tokens */
-  --amani-nav-bg-closed: rgba(14, 12, 10, 0.78);
-  --amani-nav-bg-closed-scrolled: rgba(10, 8, 6, 0.92);
-  --amani-nav-border-closed: 1px solid rgba(255, 255, 255, 0.14);
-  --amani-nav-shadow-closed: 0 16px 36px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  --amani-nav-bg-closed:
+    linear-gradient(115deg, rgba(132, 177, 205, 0.18), rgba(3, 9, 13, 0.32) 48%, rgba(79, 128, 159, 0.16));
+  --amani-nav-bg-closed-scrolled:
+    linear-gradient(115deg, rgba(106, 154, 185, 0.20), rgba(3, 9, 13, 0.48) 48%, rgba(61, 106, 137, 0.18));
+  --amani-nav-border-closed: 0;
+  --amani-nav-shadow-closed: 0 10px 30px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(234, 246, 252, 0.22);
   
   /* Open Light Card Tokens */
   --amani-nav-bg-open: #ffffff;
-  --amani-nav-border-open: 1px solid rgba(15, 15, 12, 0.14);
+  --amani-nav-border-open: 0;
   --amani-nav-shadow-open: 0 12px 32px -4px rgba(0, 0, 0, 0.08);
 }
 
@@ -46,7 +51,7 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  width: min(var(--amani-nav-width), calc(100vw - 32px));
+  width: var(--amani-nav-shell-width);
   z-index: 120;
   border-radius: var(--amani-nav-radius);
   transition: top 480ms cubic-bezier(0.76, 0, 0.24, 1),
@@ -65,13 +70,12 @@
   background: var(--amani-nav-bg-closed);
   border: var(--amani-nav-border-closed);
   box-shadow: var(--amani-nav-shadow-closed);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(155%) contrast(1.04);
+  -webkit-backdrop-filter: blur(28px) saturate(155%) contrast(1.04);
 }
 
 .restaurant-header--closed.restaurant-header--scrolled {
   background: var(--amani-nav-bg-closed-scrolled);
-  border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* Open State Header */
@@ -93,29 +97,29 @@
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 0 16px;
+  padding: 0 var(--amani-nav-inline-padding);
   box-sizing: border-box;
 }
 
 /* Left Reservation Button (Closed State) */
 .restaurant-header__reserve {
   grid-column: 1;
-  height: 48px;
-  padding: 0 20px;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #f5efe5;
+  border: 0;
+  background: transparent;
+  color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: 12px;
   font-weight: 650;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 260ms ease, border-color 260ms ease, transform 260ms ease, color 260ms ease;
+  transition: color 220ms ease, transform 220ms ease;
   white-space: nowrap;
   user-select: none;
   width: fit-content;
@@ -123,8 +127,6 @@
 }
 
 .restaurant-header__reserve:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.45);
   transform: translateY(-1px);
   color: #ffffff;
 }
@@ -136,18 +138,15 @@
 
 /* Open State Left Reservation Button */
 .restaurant-header--open .restaurant-header__reserve {
-  height: 50px;
-  padding: 0 20px;
-  border: 1px solid rgba(17, 17, 17, 0.24);
-  border-radius: 4px;
-  background: #ffffff;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #11110f;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .restaurant-header--open .restaurant-header__reserve:hover {
-  background: #f8f8f6;
-  border-color: rgba(17, 17, 17, 0.48);
   color: #000000;
   transform: translateY(-1px);
 }
@@ -182,7 +181,7 @@
 
 .restaurant-header__brand-text {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 300;
   letter-spacing: 0.22em;
   line-height: 1;
@@ -213,31 +212,26 @@
 
 /* Hamburger lines in Closed State */
 .restaurant-header__hamburger {
-  width: 64px;
-  height: 48px;
+  width: 50px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5.5px;
+  gap: 6px;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   box-sizing: border-box;
-  transition: background-color 260ms ease, border-color 260ms ease, opacity 300ms ease;
+  transition: opacity 300ms ease;
 }
 
 .restaurant-header__hamburger span {
   display: block;
-  width: 26px;
-  height: 1.5px;
-  background-color: #f6f0e6;
+  width: 32px;
+  height: 1px;
+  background-color: var(--amani-cream-on-dark);
   transition: transform 260ms ease, opacity 260ms ease, background-color 300ms ease;
-}
-
-.restaurant-header__toggle:hover .restaurant-header__hamburger {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.45);
 }
 
 .restaurant-header__toggle:hover .restaurant-header__hamburger span:nth-child(1) {
@@ -250,12 +244,12 @@
 
 /* Close Box Button in Open State */
 .restaurant-header__close {
-  width: 64px;
-  height: 50px;
-  border: 1px solid rgba(17, 17, 17, 0.24);
-  border-radius: 4px;
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.05);
+  width: 50px;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   position: relative;
   display: flex;
   align-items: center;
@@ -263,17 +257,12 @@
   transition: background-color 220ms ease, border-color 220ms ease, transform 220ms ease;
 }
 
-.restaurant-header__toggle:hover .restaurant-header__close {
-  background: #f8f8f6;
-  border-color: rgba(17, 17, 17, 0.48);
-}
-
 .restaurant-header__close::before,
 .restaurant-header__close::after {
   content: "";
   position: absolute;
-  width: 34px;
-  height: 1.5px;
+  width: 30px;
+  height: 1px;
   background-color: #11110f;
   left: 50%;
   top: 50%;
@@ -297,16 +286,22 @@
   top: calc(var(--amani-nav-top-open) + var(--amani-nav-height-open) + var(--amani-nav-panel-gap));
   left: 50%;
   transform: translateX(-50%);
-  width: min(var(--amani-nav-width), calc(100vw - 32px));
-  max-height: calc(100vh - (var(--amani-nav-top-open) + var(--amani-nav-height-open) + var(--amani-nav-panel-gap) + 24px));
+  width: var(--amani-nav-shell-width);
+  height: auto;
+  max-height: min(623px, calc(100svh - (var(--amani-nav-top-open) + var(--amani-nav-height-open) + var(--amani-nav-panel-gap) + 16px)));
   background: #fffefd;
-  border: 1px solid rgba(17, 17, 17, 0.1);
+  border: 0;
   border-radius: var(--amani-nav-radius);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
   z-index: 110;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 20px 16px 14px 16px;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 16px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -331,9 +326,9 @@
   align-items: center;
   justify-content: center;
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #090909;
   text-decoration: none;
@@ -369,9 +364,10 @@
 }
 
 .restaurant-menu__primary-link:focus-visible {
-  outline: 2px solid #11110f;
-  outline-offset: 4px;
-  border-radius: 2px;
+  outline: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
 }
 
 /* Secondary Links Container */
@@ -391,9 +387,9 @@
   justify-content: center;
   gap: 4px;
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 13.5px;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #38342f;
   text-decoration: none;
@@ -415,8 +411,9 @@
 /* Featured Promotional Image Banner */
 .restaurant-menu__feature {
   width: 100%;
-  aspect-ratio: 1.66 / 1;
-  min-height: 350px;
+  height: 175px;
+  min-height: 175px;
+  aspect-ratio: auto;
   border-radius: 4px;
   overflow: hidden;
   position: relative;
@@ -497,35 +494,42 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
+  :root {
+    --amani-nav-inline-padding: 14px;
+    --amani-nav-shell-width: calc(100vw - 24px);
+  }
+
   .restaurant-header {
-    width: calc(100vw - 24px);
+    width: var(--amani-nav-shell-width);
   }
 
   .restaurant-header--closed {
-    top: 12px;
-    height: 62px;
+    top: 8px;
+    height: 45px;
   }
 
   .restaurant-header--open {
-    top: 12px;
-    height: 66px;
+    top: 8px;
+    height: 45px;
   }
 
   .restaurant-header__inner {
     grid-template-columns: auto 1fr auto;
-    padding: 0 10px;
+    padding: 0 var(--amani-nav-inline-padding);
   }
 
   .restaurant-header__reserve {
-    height: 44px;
-    padding: 0 10px;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
     font-size: 10px;
     letter-spacing: 0.05em;
   }
 
   .restaurant-header--open .restaurant-header__reserve {
-    height: 44px;
-    padding: 0 10px;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
     font-size: 10px;
     letter-spacing: 0.05em;
   }
@@ -536,34 +540,36 @@
   }
 
   .restaurant-header__hamburger {
-    width: 50px;
-    height: 44px;
+    width: 42px;
+    height: 100%;
   }
 
   .restaurant-header__hamburger span {
-    width: 22px;
+    width: 26px;
   }
 
   .restaurant-header__close {
-    width: 50px;
-    height: 44px;
+    width: 42px;
+    height: 100%;
   }
 
   .restaurant-header__close::before,
   .restaurant-header__close::after {
-    width: 22px;
+    width: 26px;
   }
 
   .restaurant-menu {
-    width: calc(100vw - 24px);
-    top: calc(12px + 66px + 6px);
-    max-height: calc(100vh - 96px);
-    padding: 16px 12px 12px 12px;
+    width: var(--amani-nav-shell-width);
+    top: calc(8px + 45px + 6px);
+    height: auto;
+    max-height: calc(100svh - 75px);
+    padding: 16px 12px 0;
   }
 
   .restaurant-menu__feature {
-    min-height: 220px;
-    aspect-ratio: 1.33 / 1;
+    height: 110px;
+    min-height: 110px;
+    aspect-ratio: auto;
   }
 
   .restaurant-menu__feature-overlay {
