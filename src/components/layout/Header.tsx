@@ -16,6 +16,7 @@ import {
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavHidden, setIsNavHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -27,6 +28,7 @@ export function Header() {
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const lastScrollYRef = useRef(0);
 
   // Check scroll threshold
   useEffect(() => {
@@ -40,6 +42,31 @@ export function Header() {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
+
+  // Keep the interface quiet while reading, but reveal navigation as soon as the user scrolls back up.
+  useEffect(() => {
+    const handleScrollDirection = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollYRef.current;
+
+      if (currentScrollY <= 12) {
+        setIsNavHidden(false);
+      } else if (Math.abs(scrollDelta) >= 6) {
+        setIsNavHidden(scrollDelta > 0);
+      }
+
+      lastScrollYRef.current = currentScrollY;
+    };
+
+    lastScrollYRef.current = window.scrollY;
+    window.addEventListener('scroll', handleScrollDirection, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScrollDirection);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) setIsNavHidden(false);
+  }, [isOpen]);
 
   // Lock scroll when menu is open
   useEffect(() => {
@@ -255,7 +282,9 @@ export function Header() {
       <header
         className={`restaurant-header ${
           isOpen ? 'restaurant-header--open' : 'restaurant-header--closed'
-        } ${isScrolled ? 'restaurant-header--scrolled' : ''}`}
+        } ${isScrolled ? 'restaurant-header--scrolled' : ''} ${
+          isNavHidden && !isOpen ? 'restaurant-header--hidden' : ''
+        }`}
         aria-label="Main Site Header"
       >
         <div className="restaurant-header__inner">

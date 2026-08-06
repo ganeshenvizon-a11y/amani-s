@@ -4,6 +4,7 @@
  */
 
 import { Hero } from '../../sections/home/Hero';
+import { GatheringStatement } from '../../sections/home/GatheringStatement';
 import { MoodFinder } from '../../sections/home/MoodFinder';
 import { SignatureExperiences } from '../../sections/home/SignatureExperiences';
 import { SignatureDishes } from '../../sections/home/SignatureDishes';
@@ -36,10 +37,15 @@ export function HomePage() {
       />
 
       <div className="w-full flex flex-col">
-        {/* Section 01: Hero */}
-        <Hero />
+        <div className="home-hero-transition">
+          {/* Section 01: Hero */}
+          <Hero />
 
-        {/* Section 02: Mood Finder */}
+          {/* Section 02: Editorial transition */}
+          <GatheringStatement />
+        </div>
+
+        {/* Section 03: Mood Finder */}
         <MoodFinder />
 
         {/* Section 03: Signature Experiences */}

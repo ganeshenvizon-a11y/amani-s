@@ -19,6 +19,9 @@ export const PRIMARY_OPEN_NAV_LINKS: NavLinkItem[] = [
 
 export const SECONDARY_OPEN_NAV_LINKS: NavLinkItem[] = [
   { label: 'INSTAGRAM ↗', path: 'https://instagram.com', isExternal: true },
+  { label: 'FACEBOOK ↗', path: 'https://facebook.com', isExternal: true },
+  { label: 'YOUTUBE ↗', path: 'https://youtube.com', isExternal: true },
+  { label: 'PINTEREST ↗', path: 'https://pinterest.com', isExternal: true },
   { label: 'GET DIRECTIONS ↗', path: '/visit/#location', isExternal: false },
 ];
 
@@ -45,4 +48,3 @@ export const FOOTER_NAV_LINKS: NavLinkItem[] = [
   { label: 'Visit',      path: '/visit/' },
   { label: 'Reservations', path: '/visit/#reserve' },
 ];
-

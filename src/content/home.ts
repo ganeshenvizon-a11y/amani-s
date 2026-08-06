@@ -49,6 +49,28 @@ export interface GalleryItem {
 export const HERO_CONTENT = {
   headline: 'FLAVOUR FROM FIRE.\nMEMORY FROM HOME.',
   image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
+  slides: [
+    {
+      image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
+      alt: 'Golden masala dosa with South Indian accompaniments',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=85&w=2000&auto=format&fit=crop',
+      alt: 'Friends sharing a meal at a restaurant table',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=85&w=2000&auto=format&fit=crop',
+      alt: 'Warmly lit restaurant dining room prepared for guests',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?q=85&w=2000&auto=format&fit=crop',
+      alt: 'Guests gathered in a softly lit restaurant',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=85&w=2000&auto=format&fit=crop',
+      alt: 'Friends enjoying a shared restaurant meal',
+    },
+  ],
 };
 
 export const MOOD_FINDER_CONTENT = {
@@ -76,7 +98,7 @@ export const MOOD_FINDER_CONTENT = {
       id: 'spicy',
       title: 'Bold and spicy',
       description: 'Deeper heat, roasted spices and flavours with a little more energy.',
-      image: 'https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?q=80&w=1200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=84&w=1400&auto=format&fit=crop',
       dishes: ['Chettinad Spice Roast', 'Kara Podi Dosa', 'Pepper Roasted Mushroom'],
       menuLink: '/menu/#curries',
     },
@@ -84,7 +106,7 @@ export const MOOD_FINDER_CONTENT = {
       id: 'share',
       title: 'Made to share',
       description: 'Plates for passing, tasting and bringing everyone into the meal.',
-      image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=84&w=1400&auto=format&fit=crop',
       dishes: ['Amani Banana Leaf Feast', 'Family Tiffin Platter', 'Shared Curry Bowls'],
       menuLink: '/menu/#feasts',
     },
@@ -92,7 +114,7 @@ export const MOOD_FINDER_CONTENT = {
       id: 'first',
       title: 'My first time at Amani',
       description: 'A considered introduction to the dishes that represent Amani best.',
-      image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1567337710282-00832b415979?q=84&w=1400&auto=format&fit=crop',
       dishes: ['Ghee Podi Idli', 'Mysore Masala Dosa', 'Filter Coffee'],
       menuLink: '/menu/#signatures',
     },
