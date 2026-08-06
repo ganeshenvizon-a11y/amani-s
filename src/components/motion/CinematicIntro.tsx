@@ -32,11 +32,12 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
 
   const duration       = useRef(0);
   const isReady        = useRef(false);
-  const progress       = useRef(0);
+  const targetProgress  = useRef(0);
+  const currentProgress = useRef(0);
   const hasScrolled    = useRef(false);
   const finalRevealed  = useRef(false);
   const pendingTime    = useRef<number | null>(null);
-  const rafPending     = useRef(false);
+  const animFrameId    = useRef<number | null>(null);
 
   useEffect(() => {
     const video      = videoRef.current;
@@ -95,22 +96,32 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
       }
     }
 
-    function requestTick() {
-      if (!rafPending.current) {
-        rafPending.current = true;
-        requestAnimationFrame(() => {
-          rafPending.current = false;
-          applyProgress(progress.current);
-        });
+    // ── Smooth Lerp Loop ───────────────────────────────────────────
+    function startSmoothLoop() {
+      if (animFrameId.current !== null) return;
+
+      function step() {
+        const diff = targetProgress.current - currentProgress.current;
+        if (Math.abs(diff) > 0.0001) {
+          currentProgress.current += diff * 0.08;
+          applyProgress(currentProgress.current);
+          animFrameId.current = requestAnimationFrame(step);
+        } else {
+          currentProgress.current = targetProgress.current;
+          applyProgress(currentProgress.current);
+          animFrameId.current = null;
+        }
       }
+
+      animFrameId.current = requestAnimationFrame(step);
     }
 
     // ── Wheel scrubbing ────────────────────────────────────────────
     function onWheel(e: WheelEvent) {
       e.preventDefault();
-      const delta = e.deltaY * (e.deltaMode === 1 ? 0.04 : 0.0008);
-      progress.current = clamp(progress.current + delta, 0, 1);
-      requestTick();
+      const delta = e.deltaY * (e.deltaMode === 1 ? 0.006 : 0.00012);
+      targetProgress.current = clamp(targetProgress.current + delta, 0, 1);
+      startSmoothLoop();
     }
 
     // ── Touch scrubbing ────────────────────────────────────────────
@@ -122,22 +133,22 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     function onTouchMove(e: TouchEvent) {
       e.preventDefault();
       const touchY = e.touches[0].clientY;
-      const deltaY = (touchStartY - touchY) * 0.0025;
+      const deltaY = (touchStartY - touchY) * 0.0006;
       touchStartY = touchY;
-      progress.current = clamp(progress.current + deltaY, 0, 1);
-      requestTick();
+      targetProgress.current = clamp(targetProgress.current + deltaY, 0, 1);
+      startSmoothLoop();
     }
 
     // ── Key navigation ─────────────────────────────────────────────
     function onKeyDown(e: KeyboardEvent) {
       if (['ArrowDown', 'PageDown', 'Space'].includes(e.code)) {
         e.preventDefault();
-        progress.current = clamp(progress.current + 0.08, 0, 1);
-        requestTick();
+        targetProgress.current = clamp(targetProgress.current + 0.02, 0, 1);
+        startSmoothLoop();
       } else if (['ArrowUp', 'PageUp'].includes(e.code)) {
         e.preventDefault();
-        progress.current = clamp(progress.current - 0.08, 0, 1);
-        requestTick();
+        targetProgress.current = clamp(targetProgress.current - 0.02, 0, 1);
+        startSmoothLoop();
       }
     }
 
@@ -164,7 +175,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
         window.addEventListener('touchstart', onTouchStart, { passive: true });
         window.addEventListener('touchmove', onTouchMove, { passive: false });
         window.addEventListener('keydown', onKeyDown);
-        applyProgress(progress.current);
+        applyProgress(currentProgress.current);
       }
     }
 
@@ -172,6 +183,9 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     video.addEventListener('seeked', onSeeked);
 
     return () => {
+      if (animFrameId.current !== null) {
+        cancelAnimationFrame(animFrameId.current);
+      }
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
       window.removeEventListener('wheel', onWheel);
