@@ -1,0 +1,604 @@
+/* ==========================================================================
+   AMANI — Ballena Editorial Navbar Design System
+   Black & Glass Theme with Precision UI Sizing & Padding
+   ========================================================================== */
+
+:root {
+  --amani-nav-width: 800px;
+  --amani-nav-top-closed: 24px;
+  --amani-nav-top-open: 16px;
+  --amani-nav-height-closed: 66px;
+  --amani-nav-height-open: 74px;
+  --amani-nav-panel-gap: 8px;
+  --amani-nav-radius: 6px;
+  
+  /* Black Glass Tokens */
+  --amani-nav-bg-closed: rgba(14, 12, 10, 0.78);
+  --amani-nav-bg-closed-scrolled: rgba(10, 8, 6, 0.92);
+  --amani-nav-border-closed: 1px solid rgba(255, 255, 255, 0.14);
+  --amani-nav-shadow-closed: 0 16px 36px -8px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  
+  /* Open Light Card Tokens */
+  --amani-nav-bg-open: #ffffff;
+  --amani-nav-border-open: 1px solid rgba(15, 15, 12, 0.14);
+  --amani-nav-shadow-open: 0 12px 32px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* Shell Wrapper */
+.restaurant-nav-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.restaurant-nav-shell * {
+  pointer-events: auto;
+}
+
+/* Base Header Styling */
+.restaurant-header {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(var(--amani-nav-width), calc(100vw - 32px));
+  z-index: 120;
+  border-radius: var(--amani-nav-radius);
+  transition: top 480ms cubic-bezier(0.76, 0, 0.24, 1),
+              height 480ms cubic-bezier(0.76, 0, 0.24, 1),
+              background-color 480ms cubic-bezier(0.76, 0, 0.24, 1),
+              border-color 480ms cubic-bezier(0.76, 0, 0.24, 1),
+              box-shadow 480ms cubic-bezier(0.76, 0, 0.24, 1);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Closed State — Black & Glass Theme */
+.restaurant-header--closed {
+  top: var(--amani-nav-top-closed);
+  height: var(--amani-nav-height-closed);
+  background: var(--amani-nav-bg-closed);
+  border: var(--amani-nav-border-closed);
+  box-shadow: var(--amani-nav-shadow-closed);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.restaurant-header--closed.restaurant-header--scrolled {
+  background: var(--amani-nav-bg-closed-scrolled);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Open State Header */
+.restaurant-header--open {
+  top: var(--amani-nav-top-open);
+  height: var(--amani-nav-height-open);
+  background: var(--amani-nav-bg-open);
+  border: var(--amani-nav-border-open);
+  box-shadow: var(--amani-nav-shadow-open);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Inner 3-Column Layout */
+.restaurant-header__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Left Reservation Button (Closed State) */
+.restaurant-header__reserve {
+  grid-column: 1;
+  height: 48px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f5efe5;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 260ms ease, border-color 260ms ease, transform 260ms ease, color 260ms ease;
+  white-space: nowrap;
+  user-select: none;
+  width: fit-content;
+  flex-shrink: 0;
+}
+
+.restaurant-header__reserve:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+.restaurant-header__reserve:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Open State Left Reservation Button */
+.restaurant-header--open .restaurant-header__reserve {
+  height: 50px;
+  padding: 0 20px;
+  border: 1px solid rgba(17, 17, 17, 0.24);
+  border-radius: 4px;
+  background: #ffffff;
+  color: #11110f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.restaurant-header--open .restaurant-header__reserve:hover {
+  background: #f8f8f6;
+  border-color: rgba(17, 17, 17, 0.48);
+  color: #000000;
+  transform: translateY(-1px);
+}
+
+.restaurant-header--open .restaurant-header__reserve:focus-visible {
+  outline: 2px solid #11110f;
+  outline-offset: 2px;
+}
+
+/* Centered Wordmark / Logo */
+.restaurant-header__brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #f6f0e6;
+  transition: color 480ms ease, opacity 200ms ease;
+  user-select: none;
+}
+
+.restaurant-header--open .restaurant-header__brand {
+  color: #11110f;
+}
+
+.restaurant-header__brand:hover {
+  opacity: 0.85;
+}
+
+.restaurant-header__brand-text {
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: currentColor;
+}
+
+/* Right Control Toggle Button */
+.restaurant-header__toggle {
+  grid-column: 3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.restaurant-header__toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -4px;
+  border-radius: 4px;
+}
+
+/* Hamburger lines in Closed State */
+.restaurant-header__hamburger {
+  width: 64px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 5.5px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  box-sizing: border-box;
+  transition: background-color 260ms ease, border-color 260ms ease, opacity 300ms ease;
+}
+
+.restaurant-header__hamburger span {
+  display: block;
+  width: 26px;
+  height: 1.5px;
+  background-color: #f6f0e6;
+  transition: transform 260ms ease, opacity 260ms ease, background-color 300ms ease;
+}
+
+.restaurant-header__toggle:hover .restaurant-header__hamburger {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.restaurant-header__toggle:hover .restaurant-header__hamburger span:nth-child(1) {
+  transform: translateY(-1px);
+}
+
+.restaurant-header__toggle:hover .restaurant-header__hamburger span:nth-child(3) {
+  transform: translateY(1px);
+}
+
+/* Close Box Button in Open State */
+.restaurant-header__close {
+  width: 64px;
+  height: 50px;
+  border: 1px solid rgba(17, 17, 17, 0.24);
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.05);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.restaurant-header__toggle:hover .restaurant-header__close {
+  background: #f8f8f6;
+  border-color: rgba(17, 17, 17, 0.48);
+}
+
+.restaurant-header__close::before,
+.restaurant-header__close::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 1.5px;
+  background-color: #11110f;
+  left: 50%;
+  top: 50%;
+  transform-origin: center;
+}
+
+.restaurant-header__close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.restaurant-header__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* ==========================================================================
+   OPEN MENU PANEL STYLING
+   ========================================================================== */
+
+.restaurant-menu {
+  position: fixed;
+  top: calc(var(--amani-nav-top-open) + var(--amani-nav-height-open) + var(--amani-nav-panel-gap));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(var(--amani-nav-width), calc(100vw - 32px));
+  max-height: calc(100vh - (var(--amani-nav-top-open) + var(--amani-nav-height-open) + var(--amani-nav-panel-gap) + 24px));
+  background: #fffefd;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: var(--amani-nav-radius);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  z-index: 110;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 16px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Primary Navigation Links Container */
+.restaurant-menu__primary {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+/* Primary Link */
+.restaurant-menu__primary-link {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #090909;
+  text-decoration: none;
+  position: relative;
+  transition: transform 220ms ease, color 220ms ease;
+  padding: 0 6px;
+}
+
+.restaurant-menu__primary-link::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background-color: #090909;
+  transform: translateX(-50%);
+  transition: width 260ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.restaurant-menu__primary-link:hover {
+  transform: translateY(-1px);
+  color: #000000;
+}
+
+.restaurant-menu__primary-link:hover::after {
+  width: 100%;
+}
+
+.restaurant-menu__primary-link.is-active::after {
+  width: 16px;
+  height: 1.5px;
+}
+
+.restaurant-menu__primary-link:focus-visible {
+  outline: 2px solid #11110f;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Secondary Links Container */
+.restaurant-menu__secondary {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 22px;
+}
+
+.restaurant-menu__secondary-link {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #38342f;
+  text-decoration: none;
+  transition: transform 220ms ease, color 220ms ease;
+  padding: 0 6px;
+}
+
+.restaurant-menu__secondary-link:hover {
+  transform: translateY(-1px);
+  color: #000000;
+}
+
+.restaurant-menu__secondary-link:focus-visible {
+  outline: 2px solid #11110f;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Featured Promotional Image Banner */
+.restaurant-menu__feature {
+  width: 100%;
+  aspect-ratio: 1.66 / 1;
+  min-height: 350px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  margin-bottom: 0;
+}
+
+.restaurant-menu__feature-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 700ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.restaurant-menu__feature:hover .restaurant-menu__feature-media {
+  transform: scale(1.025);
+}
+
+.restaurant-menu__feature-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 8, 5, 0.52) 0%,
+    rgba(10, 8, 5, 0.08) 45%,
+    rgba(10, 8, 5, 0.35) 100%
+  );
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 32px 42px;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.restaurant-menu__feature-text-left {
+  justify-self: start;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.restaurant-menu__feature-mark {
+  justify-self: center;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.restaurant-menu__feature-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.restaurant-menu__feature-text-right {
+  justify-self: end;
+  text-align: right;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE STYLES (< 900px)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .restaurant-header {
+    width: calc(100vw - 24px);
+  }
+
+  .restaurant-header--closed {
+    top: 12px;
+    height: 62px;
+  }
+
+  .restaurant-header--open {
+    top: 12px;
+    height: 66px;
+  }
+
+  .restaurant-header__inner {
+    grid-template-columns: auto 1fr auto;
+    padding: 0 10px;
+  }
+
+  .restaurant-header__reserve {
+    height: 44px;
+    padding: 0 10px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .restaurant-header--open .restaurant-header__reserve {
+    height: 44px;
+    padding: 0 10px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .restaurant-header__brand-text {
+    font-size: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .restaurant-header__hamburger {
+    width: 50px;
+    height: 44px;
+  }
+
+  .restaurant-header__hamburger span {
+    width: 22px;
+  }
+
+  .restaurant-header__close {
+    width: 50px;
+    height: 44px;
+  }
+
+  .restaurant-header__close::before,
+  .restaurant-header__close::after {
+    width: 22px;
+  }
+
+  .restaurant-menu {
+    width: calc(100vw - 24px);
+    top: calc(12px + 66px + 6px);
+    max-height: calc(100vh - 96px);
+    padding: 16px 12px 12px 12px;
+  }
+
+  .restaurant-menu__feature {
+    min-height: 220px;
+    aspect-ratio: 1.33 / 1;
+  }
+
+  .restaurant-menu__feature-overlay {
+    padding: 20px 24px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .restaurant-menu__feature-text-left,
+  .restaurant-menu__feature-text-right {
+    justify-self: center;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .restaurant-menu__feature-mark {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-header,
+  .restaurant-header__reserve,
+  .restaurant-header__brand,
+  .restaurant-header__hamburger span,
+  .restaurant-header__close,
+  .restaurant-menu__primary-link,
+  .restaurant-menu__secondary-link,
+  .restaurant-menu__feature-media {
+    transition: opacity 150ms linear !important;
+    transform: none !important;
+  }
+}

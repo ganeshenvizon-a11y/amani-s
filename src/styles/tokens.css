@@ -1,1 +1,45 @@
-/* Amani Design Tokens */
+/* ==========================================================================
+   AMANI — Design Tokens & CSS Variables
+   ========================================================================== */
+
+:root {
+  /* Canvases */
+  --amani-canvas:         #F8F2E5; /* Warm rice canvas (primary) */
+  --amani-paper:          #EFE5D4; /* Soft paper tint */
+  --amani-sand:           #D8C7AA; /* Natural sand background */
+  --amani-canvas-dim:     #EDE4D0; /* Cream -8% lightness */
+
+  /* Ink & Typography Colors */
+  --amani-ink:            #171411; /* Main ink - primary headings/body */
+  --amani-ink-soft:       #403A34; /* Soft ink - body copy */
+  --amani-ink-muted:      #746E66; /* Muted text - captions/labels */
+  --amani-ink-faint:      rgba(23, 20, 17, 0.25);
+
+  /* Brand Accents */
+  --amani-maroon:         #7A1F24; /* Deep Amani maroon - CTAs/accents */
+  --amani-maroon-dark:    #551317; /* Deep maroon hover/active */
+  --amani-maroon-tint:    rgba(122, 31, 36, 0.1);
+  --amani-terracotta:     #A2553E; /* Muted terracotta */
+  --amani-olive:          #6D7254; /* Banana-leaf olive */
+  --amani-turmeric:       #C99732; /* Restrained turmeric accent */
+
+  /* Dark Editorial Scenes */
+  --amani-void:           #11100E; /* Cinematic near black */
+  --amani-dark-warm:      #1B1814; /* Warm dark surface */
+  --amani-cream-on-dark:  #F4EDDF; /* Warm ivory text on dark */
+  --amani-cream-muted:    rgba(244, 237, 223, 0.7);
+
+  /* Hairlines & Borders */
+  --amani-hairline:       rgba(23, 20, 17, 0.12);
+  --amani-hairline-dark:  rgba(244, 237, 223, 0.15);
+
+  /* Typography Families */
+  --amani-font-display:   'Cormorant Garamond', Georgia, serif;
+  --amani-font-ui:        'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Layout & Spacing */
+  --amani-max-width:      1600px;
+  --amani-gutter:         clamp(1rem, 4vw, 3rem);
+  --amani-radius-sm:      4px;
+  --amani-radius-md:      8px;
+}
