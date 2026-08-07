@@ -5,6 +5,7 @@
 import type { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
+import { RangoliChakriCursor } from '../components/motion/RangoliChakriCursor';
 
 interface PublicLayoutProps {
   children: ReactNode;
@@ -16,6 +17,9 @@ export function PublicLayout({ children }: PublicLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--amani-canvas)] text-[var(--amani-ink)] font-sans">
+      {/* Traditional Rangoli Kolam / Chakri Custom Cursor */}
+      <RangoliChakriCursor />
+
       {/* Floating Fixed Header */}
       <Header />
 
