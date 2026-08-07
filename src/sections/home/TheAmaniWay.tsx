@@ -43,8 +43,8 @@ export function TheAmaniWay() {
           {/* Craft Photography */}
           <div className="lg:col-span-6 aspect-[4/3] rounded-[var(--amani-radius-md)] overflow-hidden border border-[var(--amani-hairline)] shadow-sm">
             <img
-              src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1200&auto=format&fit=crop"
-              alt="Amani chef hand tempering aromatic spices and preparing fresh dosa on iron griddle"
+              src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=1200&auto=format&fit=crop"
+              alt="Amani chef tempering aromatic South Indian spices with curry leaves and mustard seeds"
               className="w-full h-full object-cover"
               loading="lazy"
               decoding="async"

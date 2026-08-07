@@ -399,7 +399,7 @@ export function Header() {
             tabIndex={-1}
           >
             <img
-              src="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?q=80&w=1200&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=1200&auto=format&fit=crop"
               alt="Amani South Indian Kitchen"
               className="restaurant-menu__feature-media"
               loading="lazy"

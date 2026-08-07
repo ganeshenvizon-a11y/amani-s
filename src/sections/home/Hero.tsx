@@ -30,6 +30,16 @@ const CARD_ROTATION_RANGES = [
   [10, 16],
 ] as const;
 
+const HERO_CARD_META = [
+  { stamp: 'MYSORE 1974', tag: 'DOSA TIFFIN' },
+  { stamp: 'BANANA LEAF', tag: 'SOUTH THALI' },
+  { stamp: 'AMANI ROOM', tag: 'HOMELY DINING' },
+  { stamp: 'CHETTINAD', tag: 'SPICE ROAST' },
+  { stamp: 'SHARED TABLE', tag: 'FAMILY MEMORY' },
+  { stamp: 'KAAPI BREW', tag: 'BRASS DAVARA' },
+  { stamp: 'RECIPE NO. 01', tag: 'PODI IDLI' },
+];
+
 type HeroCardStyle = CSSProperties & {
   '--hero-card-scale': string;
 };
@@ -42,7 +52,7 @@ type CardMotion = {
   velocityX: number;
   velocityY: number;
   angularVelocity: number;
-  mode: 'waiting' | 'falling' | 'resting' | 'dragging' | 'throwing';
+  mode: 'waiting' | 'falling' | 'settling' | 'resting' | 'dragging' | 'throwing';
   launchAt: number;
   lastPointerX: number;
   lastPointerY: number;
@@ -117,32 +127,58 @@ export function Hero() {
       const dt = Math.min((time - previousTime) / 1000, 0.032);
       previousTime = time;
 
-      cardMotion.current.forEach((card) => {
+      cardMotion.current.forEach((card, index) => {
+        const targetRotation = cardRotations.current[index] ?? 0;
+
         if (card.mode === 'waiting' && time >= card.launchAt) {
           card.mode = 'falling';
           card.velocityY = 0;
-          card.angularVelocity = (card.rotation > 0 ? -1 : 1) * 38;
+          card.angularVelocity = (targetRotation > 0 ? -1 : 1) * 20;
           card.element.style.visibility = 'visible';
           card.element.style.opacity = '1';
         }
 
         if (card.mode === 'falling') {
-          // Gravity and a damped floor collision produce the landing rather than a preset bounce ease.
-          card.velocityY += 5100 * dt;
+          // Organic, soft gravity drop
+          card.velocityY += 3600 * dt;
           card.y += card.velocityY * dt;
           card.rotation += card.angularVelocity * dt;
 
+          // Gently orient rotation toward target angle as card approaches the floor
+          const alignFactor = 1 - Math.exp(-6 * dt);
+          card.rotation += (targetRotation - card.rotation) * alignFactor * 0.45;
+
           if (card.y >= 0) {
             card.y = 0;
-            card.velocityY *= -0.28;
-            card.angularVelocity *= -0.36;
-            if (Math.abs(card.velocityY) < 82) {
-              card.velocityY = 0;
-              card.angularVelocity = 0;
-              card.rotation = cardRotations.current[cards.indexOf(card.element)] ?? 0;
-              card.mode = 'resting';
-              card.element.style.willChange = 'auto';
+            card.velocityY *= -0.22;
+            card.angularVelocity *= -0.25;
+
+            if (Math.abs(card.velocityY) < 140) {
+              card.mode = 'settling';
             }
+          }
+          render(card);
+        }
+
+        if (card.mode === 'settling') {
+          // Critically damped exponential spring easing — ZERO snapping!
+          const springFactor = 1 - Math.exp(-14 * dt);
+          card.y += (0 - card.y) * springFactor;
+          card.x += (0 - card.x) * springFactor;
+          card.rotation += (targetRotation - card.rotation) * springFactor;
+          card.velocityY *= Math.exp(-12 * dt);
+          card.angularVelocity *= Math.exp(-12 * dt);
+
+          if (
+            Math.abs(card.y) < 0.15 &&
+            Math.abs(card.x) < 0.15 &&
+            Math.abs(card.rotation - targetRotation) < 0.08
+          ) {
+            card.y = 0;
+            card.x = 0;
+            card.rotation = targetRotation;
+            card.mode = 'resting';
+            card.element.style.willChange = 'auto';
           }
           render(card);
         }
@@ -151,24 +187,31 @@ export function Hero() {
           card.x += card.velocityX * dt;
           card.y += card.velocityY * dt;
           card.rotation += card.angularVelocity * dt;
-          card.velocityX *= Math.pow(0.018, dt);
-          card.velocityY *= Math.pow(0.018, dt);
-          card.angularVelocity *= Math.pow(0.035, dt);
+          card.velocityX *= Math.pow(0.02, dt);
+          card.velocityY *= Math.pow(0.02, dt);
+          card.angularVelocity *= Math.pow(0.04, dt);
 
           if (card.x < card.bounds.minX || card.x > card.bounds.maxX) {
             card.x = clamp(card.x, card.bounds.minX, card.bounds.maxX);
-            card.velocityX *= -0.32;
+            card.velocityX *= -0.28;
           }
           if (card.y < card.bounds.minY || card.y > card.bounds.maxY) {
             card.y = clamp(card.y, card.bounds.minY, card.bounds.maxY);
-            card.velocityY *= -0.32;
+            card.velocityY *= -0.28;
           }
 
-          if (Math.hypot(card.velocityX, card.velocityY) < 18 && Math.abs(card.angularVelocity) < 5) {
-            card.rotation = clamp(card.rotation, -16, 16);
-            card.mode = 'resting';
-            card.element.style.willChange = 'auto';
-            render(card);
+          if (Math.hypot(card.velocityX, card.velocityY) < 22 && Math.abs(card.angularVelocity) < 6) {
+            const clampedTargetRot = clamp(card.rotation, -16, 16);
+            const throwEase = 1 - Math.exp(-14 * dt);
+            card.rotation += (clampedTargetRot - card.rotation) * throwEase;
+            card.velocityX *= 0.8;
+            card.velocityY *= 0.8;
+
+            if (Math.abs(card.rotation - clampedTargetRot) < 0.1) {
+              card.rotation = clampedTargetRot;
+              card.mode = 'resting';
+              card.element.style.willChange = 'auto';
+            }
           }
           render(card);
         }
@@ -268,20 +311,44 @@ export function Hero() {
       </div>
 
       <div className="home-hero__card-deck" aria-label="Draggable Amani visual introduction">
-        {HERO_CARDS.map((card, index) => (
-          <button
-            type="button"
-            key={card.image}
-            style={{ '--hero-card-scale': String(cardScales.current[index] ?? 1) } as HeroCardStyle}
-            ref={(element) => { cardRefs.current[index] = element; }}
-            className={`home-hero__card ${draggedCard === index ? 'is-grabbing' : ''}`}
-            onPointerDown={(event) => startDrag(index, event)}
-            aria-label={`Drag card: ${card.alt}`}
-          >
-            <img src={card.image} alt="" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
-            <span className="home-hero__card-caption">{String(index + 1).padStart(2, '0')}</span>
-          </button>
-        ))}
+        {HERO_CARDS.map((card, index) => {
+          const meta = HERO_CARD_META[index] || { stamp: 'AMANI 1974', tag: 'TIFFIN' };
+          const tearVariant = (index % 4) + 1;
+          return (
+            <button
+              type="button"
+              key={card.image}
+              style={{ '--hero-card-scale': String(cardScales.current[index] ?? 1) } as HeroCardStyle}
+              ref={(element) => { cardRefs.current[index] = element; }}
+              className={`home-hero__card home-hero__card--retro home-hero__card--tear-${tearVariant} ${draggedCard === index ? 'is-grabbing' : ''}`}
+              onPointerDown={(event) => startDrag(index, event)}
+              aria-label={`Drag card: ${card.alt}`}
+            >
+              {/* Translucent Frosted Scotch Tape Strip */}
+              <span className="home-hero__card-tape" aria-hidden="true" />
+              
+              {/* Paper Crease Line */}
+              <span className="home-hero__card-crease" aria-hidden="true" />
+
+              {/* Vintage Ink Stamp */}
+              <span className="home-hero__card-stamp" aria-hidden="true">
+                {meta.stamp}
+              </span>
+
+              {/* Photo Frame & Vintage Vignette */}
+              <div className="home-hero__card-media">
+                <img src={card.image} alt="" loading={index < 3 ? 'eager' : 'lazy'} decoding="async" />
+                <div className="home-hero__card-vignette" aria-hidden="true" />
+              </div>
+
+              {/* Retro Footer Tag & Number */}
+              <div className="home-hero__card-footer">
+                <span className="home-hero__card-tag">{meta.tag}</span>
+                <span className="home-hero__card-caption">{String(index + 1).padStart(2, '0')}</span>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </section>
   );

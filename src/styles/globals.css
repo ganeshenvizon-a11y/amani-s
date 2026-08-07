@@ -420,7 +420,8 @@ html, body {
   position: relative;
   z-index: 4;
   height: 100svh;
-  min-height: 42rem;
+  min-height: 44rem;
+  padding-bottom: clamp(3.5rem, 6vh, 6rem);
   overflow: hidden;
   background: var(--amani-void);
   color: var(--amani-cream-on-dark);
@@ -460,10 +461,10 @@ html, body {
 
 .home-mood-journey__viewport {
   position: absolute;
-  inset: 0 0 -72px;
+  inset: 0;
   display: flex;
   align-items: end;
-  padding: 0 clamp(1.5rem, 3.5vw, 4rem) clamp(2.75rem, 5vw, 4.5rem);
+  padding: 0 clamp(1.5rem, 3.5vw, 4rem) clamp(4rem, 7vh, 6.5rem);
 }
 
 .home-mood-journey__rail {
@@ -476,141 +477,185 @@ html, body {
 
 .mood-journey-card {
   position: relative;
-  width: clamp(17rem, 27vw, 28rem);
-  height: min(54vh, 33rem);
-  min-height: 26rem;
+  width: clamp(17rem, 23vw, 24rem);
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: #18140f;
-  border-radius: 0.3rem;
-  box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.25);
+  background: #120f0c;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.35);
 }
 
-.mood-journey-card__image,
+.mood-journey-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.03);
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mood-journey-card:hover .mood-journey-card__image {
+  transform: scale(1.035);
+}
+
 .mood-journey-card__veil {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.03) 25%,
+      rgba(0, 0, 0, 0.72) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(18, 15, 12, 0.94) 0%,
+      rgba(18, 15, 12, 0.74) 35%,
+      rgba(18, 15, 12, 0.22) 68%,
+      transparent 100%
+    );
 }
 
-.mood-journey-card__image {
-  object-fit: cover;
-  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mood-journey-card:hover .mood-journey-card__image {
-  transform: scale(1.045);
-}
-
-.mood-journey-card__veil {
-  background: linear-gradient(180deg, rgba(7, 6, 4, 0.05) 15%, rgba(7, 6, 4, 0.2) 45%, rgba(7, 6, 4, 0.64) 100%);
-}
-
-.mood-journey-card__glass {
+.mood-journey-card__content {
   position: absolute;
-  right: 0.75rem;
-  bottom: 0.75rem;
-  left: 0.75rem;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  grid-template-rows: auto auto;
-  gap: 0.85rem 0.9rem;
-  align-items: center;
-  padding: 1.1rem;
-  overflow: hidden;
-  color: var(--amani-cream-on-dark);
-  background: linear-gradient(135deg, rgba(30, 30, 26, 0.45), rgba(248, 242, 229, 0.1));
-  border: 1px solid rgba(248, 242, 229, 0.2);
-  border-radius: 0.2rem;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px) saturate(125%);
-  -webkit-backdrop-filter: blur(15px) saturate(125%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 2.2vw, 28px) clamp(18px, 2vw, 26px) clamp(18px, 1.8vw, 24px);
+  color: #ffffff;
+}
+
+.mood-journey-card__content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  pointer-events: none;
 }
 
 .mood-journey-card__number {
-  color: rgba(248, 242, 229, 0.68);
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-family: 'Instrument Sans', var(--amani-font-ui), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.68);
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
-.mood-journey-card h3 {
-  margin: -0.13rem 0 0;
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+.mood-journey-card__title {
+  margin: 0 0 22px 0;
+  font-family: 'Instrument Sans', var(--amani-font-ui), sans-serif;
+  font-size: clamp(24px, 2.2vw, 34px);
   font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  max-width: 82%;
+  color: #ffffff;
 }
 
-.mood-journey-card ul {
-  grid-column: 2;
+.mood-journey-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.mood-journey-card__tags {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 7px;
   padding: 0;
   margin: 0;
-  list-style: none;
 }
 
-.mood-journey-card li {
-  padding: 0.26rem 0.45rem;
-  color: rgba(248, 242, 229, 0.94);
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.66rem;
+.mood-journey-card__tag {
+  height: 32px;
+  padding-inline: 12px;
+  border-radius: 999px;
+  background: rgba(16, 14, 12, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: 'Instrument Sans', var(--amani-font-ui), sans-serif;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.025em;
-  background: rgba(8, 7, 5, 0.22);
-  border: 1px solid rgba(248, 242, 229, 0.14);
-  border-radius: 99px;
+  color: rgba(255, 255, 255, 0.82);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.mood-journey-card:hover .mood-journey-card__tag {
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .mood-journey-card__link {
-  grid-column: 3;
-  grid-row: 1 / 3;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(20, 18, 15, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  color: inherit;
-  background: rgba(8, 7, 5, 0.18);
-  border: 1px solid rgba(248, 242, 229, 0.46);
-  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
-  transition: color 240ms ease, background-color 240ms ease, border-color 240ms ease, transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mood-journey-card__link svg {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 17px;
+  height: 17px;
   stroke: currentColor;
-  stroke-width: 1.4;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.mood-journey-card:hover .mood-journey-card__link,
 .mood-journey-card__link:hover,
 .mood-journey-card__link:focus-visible {
-  color: var(--amani-void);
-  background: var(--amani-cream-on-dark);
-  border-color: var(--amani-cream-on-dark);
+  background: #F4EDDF;
+  border-color: #F4EDDF;
+  color: #18140F;
   outline: none;
-  transform: scale(1.08);
 }
 
+.mood-journey-card:hover .mood-journey-card__link svg,
 .mood-journey-card__link:hover svg,
 .mood-journey-card__link:focus-visible svg {
-  transform: translate(0.15rem, -0.15rem);
+  transform: translate(2px, -2px);
+}
+
+.mood-journey-card__link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(244, 237, 223, 0.4);
 }
 
 @media (max-width: 767px) {
   .home-mood-journey {
     height: auto;
     min-height: 100svh;
-    padding: 0 0 2rem;
+    padding: 0 0 3.75rem;
   }
 
   .home-mood-journey__intro {
@@ -625,7 +670,7 @@ html, body {
   .home-mood-journey__viewport {
     position: relative;
     display: block;
-    padding: 0 0 0 1.25rem;
+    padding: 0 0 2rem 1.25rem;
   }
 
   .home-mood-journey__rail {
@@ -641,12 +686,13 @@ html, body {
   }
 
   .mood-journey-card {
-    width: min(82vw, 23rem);
-    height: 30rem;
+    width: min(84vw, 22rem);
+    aspect-ratio: 4 / 5;
+    height: auto;
     min-height: 0;
     scroll-snap-align: start;
+    border-radius: 16px;
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -757,7 +803,7 @@ html, body {
   top: auto;
   left: auto;
   width: min(92rem, calc(100% - 12vw));
-  transform: translateY(-9vh);
+  transform: translateY(-11vh);
   text-align: center;
   pointer-events: auto;
 }
@@ -802,74 +848,78 @@ html, body {
 
 .home-hero__card {
   position: absolute;
-  bottom: -4.5svh;
-  width: clamp(7.2rem, calc(12vw * var(--hero-card-scale, 1)), 14.5rem);
+  bottom: -5.5svh;
+  width: clamp(7.5rem, calc(11.5vw * var(--hero-card-scale, 1)), 14.5rem);
   aspect-ratio: 0.78;
-  padding: 0.38rem;
-  overflow: hidden;
+  padding: 0.42rem 0.42rem 1.65rem 0.42rem;
+  overflow: visible;
   cursor: grab;
   touch-action: none;
   user-select: none;
-  background: #fdfaf3;
-  border: 1px solid rgba(23, 20, 17, 0.15);
-  box-shadow: 0 0.75rem 1.75rem rgba(37, 29, 20, 0.18);
+  background: linear-gradient(135deg, #fbf5e7 0%, #f4e9d3 60%, #eae0c7 100%);
+  border: 1px solid rgba(135, 110, 80, 0.32);
+  box-shadow: 
+    0 12px 28px -6px rgba(35, 25, 15, 0.35),
+    0 4px 10px -2px rgba(35, 25, 15, 0.18),
+    inset 0 0 12px rgba(180, 140, 90, 0.2);
   pointer-events: auto;
   will-change: transform;
   transition: box-shadow 180ms ease, filter 180ms ease;
+  border-radius: 2px;
 }
 
 .home-hero__card:nth-child(1) {
   z-index: 1;
-  left: clamp(1.25rem, 5.9vw, 7.5rem);
-  width: clamp(8.4rem, calc(13.5vw * var(--hero-card-scale, 1)), 16rem);
-  aspect-ratio: 0.73;
+  left: clamp(1.25rem, 5.5vw, 6.5rem);
+  width: clamp(8.8rem, calc(13.5vw * var(--hero-card-scale, 1)), 16.5rem);
+  aspect-ratio: 0.76;
 }
 
 .home-hero__card:nth-child(2) {
   z-index: 2;
   left: 21%;
-  bottom: -2.5svh;
-  width: clamp(6.6rem, calc(10.2vw * var(--hero-card-scale, 1)), 12.5rem);
-  aspect-ratio: 0.92;
+  bottom: -4.2svh;
+  width: clamp(8.2rem, calc(12vw * var(--hero-card-scale, 1)), 15rem);
+  aspect-ratio: 0.98;
 }
 
 .home-hero__card:nth-child(3) {
   z-index: 1;
   left: 34%;
-  bottom: -7svh;
-  width: clamp(6.5rem, calc(11vw * var(--hero-card-scale, 1)), 13.5rem);
-  aspect-ratio: 1.06;
+  bottom: -8.8svh;
+  width: clamp(8rem, calc(12.2vw * var(--hero-card-scale, 1)), 15.2rem);
+  aspect-ratio: 1.02;
 }
 
 .home-hero__card:nth-child(4) {
   z-index: 3;
   left: 50%;
-  bottom: -1.5svh;
-  width: clamp(8.8rem, calc(14vw * var(--hero-card-scale, 1)), 17rem);
+  bottom: -2.8svh;
+  width: clamp(9.4rem, calc(14.2vw * var(--hero-card-scale, 1)), 17.5rem);
   aspect-ratio: 0.77;
 }
 
 .home-hero__card:nth-child(5) {
   z-index: 1;
   right: 23%;
-  bottom: -6.5svh;
-  width: clamp(6rem, calc(10vw * var(--hero-card-scale, 1)), 12rem);
-  aspect-ratio: 1.12;
+  bottom: -8.2svh;
+  width: clamp(7.8rem, calc(11.8vw * var(--hero-card-scale, 1)), 14.8rem);
+  aspect-ratio: 1.0;
 }
 
 .home-hero__card:nth-child(6) {
   z-index: 2;
-  right: 12.3%;
-  bottom: -2.2svh;
-  width: clamp(6.8rem, calc(11vw * var(--hero-card-scale, 1)), 13rem);
-  aspect-ratio: 0.8;
+  right: 12.5%;
+  bottom: -3.8svh;
+  width: clamp(8.4rem, calc(12.5vw * var(--hero-card-scale, 1)), 15.6rem);
+  aspect-ratio: 0.96;
 }
 
 .home-hero__card:nth-child(7) {
   z-index: 1;
-  right: clamp(1.25rem, 4.5vw, 6rem);
-  bottom: -5.6svh;
-  width: clamp(7.7rem, calc(12.5vw * var(--hero-card-scale, 1)), 15rem);
+  right: clamp(1.25rem, 4.2vw, 5.5rem);
+  bottom: -6.5svh;
+  width: clamp(8.2rem, calc(12.8vw * var(--hero-card-scale, 1)), 15.5rem);
   aspect-ratio: 0.78;
 }
 
@@ -877,7 +927,7 @@ html, body {
   z-index: 8;
   cursor: grabbing;
   filter: saturate(1.04);
-  box-shadow: 0 1.2rem 2.6rem rgba(37, 29, 20, 0.3);
+  box-shadow: 0 1.6rem 3.4rem rgba(37, 29, 20, 0.42);
 }
 
 .home-hero__card:focus-visible {
@@ -886,23 +936,170 @@ html, body {
   outline-offset: 0.25rem;
 }
 
+/* Aged paper grain & edge stain effect */
+.home-hero__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(140, 105, 60, 0.12) 100%);
+  z-index: 4;
+}
+
+/* Paper crease line effect */
+.home-hero__card-crease {
+  position: absolute;
+  top: 18%;
+  left: -10%;
+  width: 120%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), rgba(120, 90, 50, 0.18), transparent);
+  transform: rotate(-18deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Distinct retro tear patterns per card variant */
+.home-hero__card--tear-1 {
+  clip-path: polygon(0% 0%, 93% 0%, 100% 6%, 100% 100%, 2% 100%, 0% 98%);
+}
+
+.home-hero__card--tear-2 {
+  clip-path: polygon(2% 0%, 100% 0%, 100% 94%, 94% 100%, 0% 100%, 0% 3%);
+}
+
+.home-hero__card--tear-3 {
+  clip-path: polygon(0% 4%, 96% 0%, 100% 0%, 100% 100%, 0% 96%);
+}
+
+.home-hero__card--tear-4 {
+  clip-path: polygon(0% 0%, 100% 0%, 98% 95%, 93% 100%, 0% 100%);
+}
+
+/* Translucent Frosted Scotch Tape Strips */
+.home-hero__card-tape {
+  position: absolute;
+  top: -0.65rem;
+  left: 18%;
+  width: 3.2rem;
+  height: 1.15rem;
+  background: rgba(245, 235, 205, 0.76);
+  border: 1px solid rgba(190, 170, 130, 0.55);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(1.5px);
+  transform: rotate(-4deg);
+  z-index: 6;
+  pointer-events: none;
+}
+
+.home-hero__card:nth-child(even) .home-hero__card-tape {
+  left: auto;
+  right: 16%;
+  transform: rotate(5deg);
+  width: 3.5rem;
+}
+
+.home-hero__card:nth-child(3) .home-hero__card-tape {
+  top: -0.75rem;
+  left: 32%;
+  transform: rotate(-2deg);
+}
+
+/* Vintage Rubber Ink Stamps */
+.home-hero__card-stamp {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  padding: 0.18rem 0.5rem;
+  border: 1.8px dashed rgba(160, 40, 30, 0.72);
+  color: rgba(150, 35, 25, 0.85);
+  font-family: 'Courier New', monospace;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: rotate(-11deg);
+  z-index: 5;
+  pointer-events: none;
+  background: rgba(247, 241, 227, 0.6);
+  mix-blend-mode: multiply;
+  box-shadow: inset 0 0 4px rgba(160, 40, 30, 0.14);
+}
+
+.home-hero__card:nth-child(even) .home-hero__card-stamp {
+  top: auto;
+  bottom: 2rem;
+  left: 0.65rem;
+  right: auto;
+  transform: rotate(8deg);
+  border-color: rgba(120, 45, 30, 0.75);
+  color: rgba(120, 45, 30, 0.85);
+}
+
+/* Photo Media Frame & Warm Vintage Filter */
+.home-hero__card-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(100, 80, 50, 0.22);
+  box-shadow: inset 0 0 10px rgba(40, 25, 10, 0.25);
+}
+
+.home-hero__card-media img,
 .home-hero__card img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: sepia(0.14) contrast(1.06) saturate(1.08);
+  transition: filter 200ms ease;
+}
+
+.home-hero__card:hover .home-hero__card-media img,
+.home-hero__card:hover img {
+  filter: sepia(0.06) contrast(1.08) saturate(1.15);
+}
+
+.home-hero__card-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 12px rgba(20, 15, 10, 0.28);
+}
+
+/* Retro Card Footer (Typewriter Label & Card Number) */
+.home-hero__card-footer {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.home-hero__card-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #4a3828;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .home-hero__card-caption {
-  position: absolute;
-  right: 0.65rem;
-  bottom: 0.55rem;
-  color: #fffdf7;
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.38);
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #312115;
+  opacity: 0.95;
+  position: static;
+  text-shadow: none;
 }
 
 /* The first hero image collection now belongs to the full-screen second-section slider. */
