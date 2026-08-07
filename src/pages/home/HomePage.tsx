@@ -8,7 +8,6 @@ import { GatheringStatement } from '../../sections/home/GatheringStatement';
 import { MoodFinder } from '../../sections/home/MoodFinder';
 import { ThaliExperience } from '../../sections/home/ThaliExperience';
 import { BrandStory } from '../../sections/home/BrandStory';
-import { SignatureExperiences } from '../../sections/home/SignatureExperiences';
 import { SignatureDishes } from '../../sections/home/SignatureDishes';
 import { TheAmaniWay } from '../../sections/home/TheAmaniWay';
 import { InsideAmani } from '../../sections/home/InsideAmani';
@@ -58,9 +57,6 @@ export function HomePage() {
 
         {/* Section 06: Signature Dishes */}
         <SignatureDishes />
-
-        {/* Section 07: Signature Experiences */}
-        <SignatureExperiences />
 
         {/* Section 05: The Amani Way */}
         <TheAmaniWay />

@@ -1,125 +1,164 @@
 /**
- * Section 02 — Signature Experiences
- * Pinned GSAP ScrollTrigger editorial sequence on desktop; stacked layout on mobile & reduced-motion.
+ * Section 02 / 07 — Signature Experiences
+ * Interactive 100vh layout with click-to-select step navigation (no scroll-pinning / no scroll-based selection).
+ * Design system consistency: sans-serif typography, clean header without subtext.
  */
 
-import { useRef, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { EXPERIENCES_CONTENT } from '../../content/home';
-import { Reveal } from '../../components/motion/Reveal';
-import { gsap } from '../../lib/gsap';
 
 export function SignatureExperiences() {
-  const containerRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const isDesktop = window.innerWidth >= 1024;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!isDesktop || reducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>('.experience-step');
-
-      items.forEach((item, index) => {
-        gsap.to(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 50%',
-            end: 'bottom 50%',
-            onEnter: () => setActiveIndex(index),
-            onEnterBack: () => setActiveIndex(index),
-          },
-        });
-      });
-    }, container);
-
-    return () => ctx.revert();
-  }, []);
 
   const activeExp = EXPERIENCES_CONTENT.experiences[activeIndex] || EXPERIENCES_CONTENT.experiences[0];
 
   return (
     <section
-      ref={containerRef}
-      className="section-padding bg-[var(--amani-paper)] text-[var(--amani-ink)] border-b border-[var(--amani-hairline)] relative"
+      className="w-full h-screen max-h-screen min-h-[640px] bg-[var(--amani-paper)] text-[var(--amani-ink)] border-b border-[var(--amani-hairline)] relative overflow-hidden flex flex-col justify-between py-6 lg:py-8 px-6 md:px-12 lg:px-16"
       aria-label="Signature Experiences"
     >
-      <div className="max-w-[1600px] mx-auto px-6 md:px-10">
+      <div className="max-w-[1600px] w-full mx-auto h-full flex flex-col justify-between">
         {/* Section Header */}
-        <Reveal className="max-w-2xl mb-16">
-          <span className="text-eyebrow mb-3 block">{EXPERIENCES_CONTENT.label}</span>
-          <h2 className="text-h1 mb-4 font-serif">{EXPERIENCES_CONTENT.heading}</h2>
-          <p className="text-body-lg">{EXPERIENCES_CONTENT.intro}</p>
-        </Reveal>
+        <header className="flex items-end justify-between border-b border-[var(--amani-hairline)] pb-4 lg:pb-5">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[var(--amani-maroon)] font-bold block mb-1">
+              {EXPERIENCES_CONTENT.label}
+            </span>
+            <h2 className="text-2xl lg:text-3xl font-sans font-semibold text-[var(--amani-ink)] tracking-tight">
+              {EXPERIENCES_CONTENT.heading}
+            </h2>
+          </div>
+          <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[var(--amani-ink-muted)]">
+            <span className="text-[var(--amani-maroon)] font-bold">{String(activeIndex + 1).padStart(2, '0')}</span>
+            <span>/</span>
+            <span>{String(EXPERIENCES_CONTENT.experiences.length).padStart(2, '0')}</span>
+          </div>
+        </header>
 
-        {/* Desktop Pinned Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Experience Steps List */}
-          <div className="lg:col-span-6 space-y-16">
+        {/* Desktop 100vh Split Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center flex-1 min-h-0 py-4 lg:py-6">
+          {/* Left Column: Interactive Experience Steps List */}
+          <div className="lg:col-span-6 flex flex-col justify-center space-y-2.5 lg:space-y-3 h-full max-h-[540px]">
             {EXPERIENCES_CONTENT.experiences.map((exp, idx) => {
               const isActive = idx === activeIndex;
               return (
-                <div
+                <button
                   key={exp.id}
-                  className={`experience-step rounded-[var(--amani-radius-md)] transition-all duration-500 border overflow-hidden ${
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  className={`group relative text-left w-full p-3.5 lg:p-4 rounded-xl border transition-all duration-300 flex items-stretch gap-4 ${
                     isActive
-                      ? 'bg-[var(--amani-canvas)] border-[var(--amani-maroon)] shadow-sm'
-                      : 'bg-transparent border-[var(--amani-hairline)] opacity-70'
+                      ? 'bg-[var(--amani-canvas)] border-[var(--amani-maroon)] shadow-sm text-[var(--amani-ink)] scale-[1.01]'
+                      : 'bg-transparent border-[var(--amani-hairline)] opacity-60 hover:opacity-100 hover:border-[var(--amani-ink-soft)] text-[var(--amani-ink-soft)]'
                   }`}
                 >
-                  {/* Mobile Image — shown inline below each step */}
-                  <div className="lg:hidden w-full aspect-[16/9] overflow-hidden">
-                    <img
-                      src={exp.image}
-                      alt={exp.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                  {/* Left Active Accent Indicator */}
+                  <div
+                    className={`w-1 rounded-full transition-all duration-300 ${
+                      isActive ? 'bg-[var(--amani-maroon)]' : 'bg-transparent'
+                    }`}
+                  />
+
+                  {/* Step Content */}
+                  <div className="flex-1 min-w-0 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="text-xs font-mono font-bold text-[var(--amani-maroon)]">
+                        {exp.number}
+                      </span>
+                      <h3 className="font-sans text-base lg:text-lg font-semibold tracking-tight text-[var(--amani-ink)] truncate">
+                        {exp.title}
+                      </h3>
+                    </div>
+                    <p className="font-sans text-xs lg:text-sm text-[var(--amani-ink-soft)] line-clamp-1 leading-snug">
+                      {exp.description}
+                    </p>
                   </div>
 
-                  {/* Text Content */}
-                  <div className="p-8">
-                    <span className="text-sm font-mono tracking-widest text-[var(--amani-maroon)] font-semibold mb-3 block">
-                      {exp.number}
-                    </span>
-                    <h3 className="text-h2 mb-4 font-serif">{exp.title}</h3>
-                    <p className="text-body font-sans leading-relaxed">{exp.description}</p>
+                  {/* Arrow Indicator */}
+                  <div className="flex items-center justify-center pl-2">
+                    <svg
+                      aria-hidden="true"
+                      className={`w-4 h-4 transition-transform duration-300 ${
+                        isActive
+                          ? 'text-[var(--amani-maroon)] translate-x-1'
+                          : 'text-[var(--amani-ink-muted)] opacity-0 group-hover:opacity-100'
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
 
-          {/* Right Column: Sticky Image Panel — all images stacked, active one visible via opacity */}
-          <div className="hidden lg:block lg:col-span-6 sticky top-28">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--amani-radius-md)] border border-[var(--amani-hairline)] shadow-sm bg-[var(--amani-ink)]">
-              {EXPERIENCES_CONTENT.experiences.map((exp, idx) => (
-                <img
-                  key={exp.id}
-                  src={exp.image}
-                  alt={exp.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                  style={{ opacity: idx === activeIndex ? 1 : 0 }}
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              ))}
+          {/* Right Column: Showcase Panel with Cross-fading Images */}
+          <div className="lg:col-span-6 h-full min-h-[340px] max-h-[540px] flex items-center justify-center">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[var(--amani-hairline)] shadow-md bg-[var(--amani-void)]">
+              {EXPERIENCES_CONTENT.experiences.map((exp, idx) => {
+                const isActive = idx === activeIndex;
+                return (
+                  <img
+                    key={exp.id}
+                    src={exp.image}
+                    alt={exp.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
+                      isActive ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0 pointer-events-none'
+                    }`}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                );
+              })}
 
-              {/* Caption overlay */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 bg-[rgba(17,16,14,0.75)] backdrop-blur-sm text-[var(--amani-cream-on-dark)] rounded font-sans text-xs z-10">
-                <span className="text-[var(--amani-terracotta)] font-mono font-semibold block mb-1">
-                  {activeExp.number} — EXPERIENCE
-                </span>
-                <span>{activeExp.title}</span>
+              {/* Gradient Overlay for Text Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(23,20,17,0.7)] via-transparent to-transparent z-10 pointer-events-none" />
+
+              {/* Floating Caption Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 lg:right-6 p-4 bg-[rgba(23,20,17,0.85)] backdrop-blur-md text-[var(--amani-cream-on-dark)] rounded-xl border border-[rgba(244,237,223,0.12)] z-20 flex items-center justify-between">
+                <div>
+                  <span className="text-[var(--amani-terracotta)] font-mono text-[10px] lg:text-xs font-bold uppercase tracking-wider block mb-0.5">
+                    {activeExp.number} — SIGNATURE EXPERIENCE
+                  </span>
+                  <p className="font-sans font-semibold text-sm lg:text-base text-[var(--amani-cream-on-dark)]">
+                    {activeExp.title}
+                  </p>
+                </div>
+                <div className="hidden sm:flex items-center gap-1 text-[var(--amani-cream-muted)] text-xs font-mono">
+                  <span className="text-[var(--amani-cream-on-dark)] font-bold">{activeIndex + 1}</span>
+                  <span>/</span>
+                  <span>{EXPERIENCES_CONTENT.experiences.length}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Footer Bar / Navigation Dots */}
+        <footer className="flex items-center justify-between border-t border-[var(--amani-hairline)] pt-3 lg:pt-4 text-xs">
+          <div className="flex items-center gap-2">
+            {EXPERIENCES_CONTENT.experiences.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                aria-label={`Go to experience step ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === activeIndex
+                    ? 'w-8 bg-[var(--amani-maroon)]'
+                    : 'w-2 bg-[var(--amani-ink-muted)] opacity-30 hover:opacity-70'
+                }`}
+              />
+            ))}
+          </div>
+          <span className="font-mono text-[11px] text-[var(--amani-ink-muted)] uppercase tracking-wider">
+            Select a step to explore
+          </span>
+        </footer>
       </div>
     </section>
   );
