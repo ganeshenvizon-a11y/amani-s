@@ -56,11 +56,11 @@ export function HomePage() {
         {/* Section 05: Amani Brand Story */}
         <BrandStory />
 
-        {/* Section 06: Signature Experiences */}
-        <SignatureExperiences />
-
-        {/* Section 04: Signature Dishes */}
+        {/* Section 06: Signature Dishes */}
         <SignatureDishes />
+
+        {/* Section 07: Signature Experiences */}
+        <SignatureExperiences />
 
         {/* Section 05: The Amani Way */}
         <TheAmaniWay />

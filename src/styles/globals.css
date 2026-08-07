@@ -74,10 +74,10 @@ html, body {
   margin: 0;
   color: var(--amani-cream-on-dark);
   text-align: left;
-  text-transform: uppercase;
-  font-family: 'Instrument Sans', sans-serif;
+  text-transform: none;
+  font-family: 'Clash Display', sans-serif;
   font-size: clamp(4rem, 5vw, 4.75rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.035em;
   text-wrap: balance;
@@ -252,12 +252,12 @@ html, body {
   align-self: start;
   max-width: min(77rem, 78vw);
   margin: 0;
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: clamp(3.25rem, 7.45vw, 8rem);
-  font-weight: 400;
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 80px);
+  font-weight: 500;
   line-height: 0.89;
-  letter-spacing: -0.055em;
-  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  text-transform: none;
 }
 
 .home-gathering-statement__title-line-mask {
@@ -474,12 +474,12 @@ html, body {
 .home-mood-journey__intro h2 {
   max-width: 31rem;
   margin: 0;
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: 'Clash Display', sans-serif;
   font-size: clamp(2rem, 3.4vw, 3.8rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 0.96;
-  letter-spacing: -0.052em;
-  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  text-transform: none;
   transform-origin: left top;
   will-change: transform, opacity;
 }
@@ -790,41 +790,43 @@ html, body {
 
 .home-hero__kicker {
   margin: 0 0 0.85rem;
-  color: var(--amani-maroon);
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  color: var(--amani-maroon, #7A1F24);
+  font-family: 'Clash Display', 'Tenor Sans', sans-serif;
+  font-size: clamp(0.64rem, 0.82vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 .home-hero--editorial .home-hero__title {
   width: 100%;
   color: #171411;
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: clamp(1.7rem, 6.15vw, 7.4rem);
-  font-weight: 400;
-  line-height: 0.86;
-  letter-spacing: -0.045em;
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(1.75rem, 6.1vw, 7.3rem);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
   text-align: center;
+  text-transform: none;
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.35),
-    0 8px 28px rgba(52, 35, 24, 0.035);
-  text-rendering: geometricPrecision;
+    0 1px 0 rgba(255, 255, 255, 0.4),
+    0 10px 32px rgba(45, 30, 20, 0.04);
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 .home-hero--editorial .home-hero__title-line + .home-hero__title-line {
-  margin-top: 0.12em;
+  margin-top: 0.1em;
 }
 
 .home-hero--editorial .home-hero__title-line-inner {
   white-space: nowrap;
 }
 
-/* Terracotta Semantic Word Highlights & Smooth Editorial Word Cycle */
+/* Terracotta Semantic Word Highlights in Clash Display */
 .home-hero__word--fire {
-  color: #934932;
+  color: #A34A31;
+  font-weight: 500;
   display: inline;
 }
 
@@ -838,7 +840,8 @@ html, body {
 
 .home-hero__word--dynamic {
   display: inline-block;
-  color: #A15B43;
+  color: #A34A31;
+  font-weight: 500;
   transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
               opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
               filter 650ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -1390,12 +1393,12 @@ html, body {
 .thali-experience__heading {
   margin: 0;
   padding-bottom: 64px;
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: 'Clash Display', sans-serif;
   font-size: clamp(52px, 5.5vw, 94px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 0.88;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  text-transform: none;
   color: #181512;
 }
 
@@ -1799,12 +1802,12 @@ html, body {
 .brand-story__intro h2 {
   max-width: 31rem;
   margin: 0;
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: 'Clash Display', sans-serif;
   font-size: clamp(2rem, 3.4vw, 3.8rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 0.96;
-  letter-spacing: -0.052em;
-  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  text-transform: none;
   transform-origin: left top;
   will-change: transform, opacity;
 }
@@ -2026,4 +2029,354 @@ html, body {
   .brand-story__rail { overflow-x: auto; }
 
   .brand-story-card__image { transition: none; }
+}
+
+/* ==========================================================================
+   Home Signature Dishes — pinned light-mode card stack
+   ========================================================================== */
+
+.signature-stack {
+  position: relative;
+  z-index: 5;
+  height: 100svh;
+  min-height: 44rem;
+  overflow: hidden;
+  color: var(--amani-ink);
+  background:
+    radial-gradient(circle at 88% 10%, rgba(162, 91, 53, 0.1), transparent 28%),
+    linear-gradient(125deg, #f7f1e6 0%, var(--amani-canvas) 58%, #eee1cd 100%);
+}
+
+.signature-stack::before {
+  position: absolute;
+  top: clamp(1rem, 2vw, 2rem);
+  right: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 2rem);
+  left: clamp(1rem, 2vw, 2rem);
+  content: '';
+  pointer-events: none;
+  border: 1px solid rgba(50, 35, 24, 0.12);
+}
+
+.signature-stack__shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(26rem, 1.08fr) minmax(22rem, 0.92fr);
+  gap: clamp(2rem, 4vw, 5rem);
+  align-items: center;
+  width: min(91rem, calc(100% - clamp(3rem, 9vw, 9rem)));
+  height: 100%;
+  margin: 0 auto;
+}
+
+.signature-stack__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: min(100%, 47rem);
+  max-width: none;
+  transform: translateY(-3vh);
+}
+
+.signature-stack__intro > p {
+  margin: 0 0 clamp(1.5rem, 2vw, 2rem);
+  color: var(--amani-maroon);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.signature-stack__headline-group {
+  position: relative;
+  width: min(100%, 47rem);
+}
+
+.signature-stack__intro h2 {
+  margin: 0;
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(3.75rem, 5.3vw, 6.4rem);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-transform: none;
+}
+
+.signature-stack__intro h2 > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.signature-stack__intro h2 em {
+  color: #A34A31;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.signature-stack__motif {
+  position: absolute;
+  top: 57%;
+  right: -4.5rem;
+  width: clamp(3.25rem, 4vw, 4.25rem);
+  height: auto;
+  color: var(--amani-maroon);
+  opacity: 0.26;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.signature-stack__summary {
+  max-width: 18rem;
+  margin: clamp(1.8rem, 2.5vw, 2.25rem) 0 0 !important;
+  color: rgba(24, 20, 17, 0.64);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(1.06rem, 1.35vw, 1.31rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.018em !important;
+  line-height: 1.45;
+  text-transform: none !important;
+}
+
+.signature-stack__menu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: clamp(1.9rem, 2.4vw, 2.25rem);
+  color: var(--amani-ink);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 220ms ease;
+}
+
+.signature-stack__menu-link::after {
+  width: 3rem;
+  height: 1px;
+  content: '';
+  background: currentColor;
+  transition: width 400ms cubic-bezier(0.22, 1, 0.36, 1), transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.signature-stack__menu-link:hover,
+.signature-stack__menu-link:focus-visible {
+  color: var(--amani-maroon);
+  outline: none;
+}
+
+.signature-stack__menu-link:hover::after,
+.signature-stack__menu-link:focus-visible::after {
+  width: 4.5rem;
+  transform: translateX(2px);
+}
+
+.signature-stack__stage {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 37rem);
+  height: min(74svh, 43rem);
+  overflow: hidden;
+}
+
+.signature-stack-card {
+  --signature-card-radius: 1.15rem;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+  isolation: isolate;
+  background: #fbf7ed;
+  border: 1px solid rgba(68, 45, 30, 0.17);
+  border-radius: var(--signature-card-radius);
+  clip-path: inset(0 round var(--signature-card-radius));
+  box-shadow: 0 1.25rem 3.5rem rgba(57, 37, 22, 0.2);
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.signature-stack-card__image-wrap {
+  min-height: 0;
+  overflow: hidden;
+  background: #b88659;
+  border-radius: var(--signature-card-radius) var(--signature-card-radius) 0 0;
+}
+
+.signature-stack-card__image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.signature-stack-card:hover .signature-stack-card__image-wrap img { transform: scale(1.035); }
+
+.signature-stack-card__copy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(0.8rem, 1.7vw, 1.3rem);
+  align-items: center;
+  min-height: clamp(6.1rem, 12vh, 7.6rem);
+  padding: clamp(1rem, 1.8vw, 1.35rem) clamp(1.05rem, 2.2vw, 1.8rem);
+  border-top: 1px solid rgba(68, 45, 30, 0.13);
+  border-radius: 0 0 var(--signature-card-radius) var(--signature-card-radius);
+}
+
+.signature-stack-card__copy > span {
+  align-self: start;
+  padding-top: 0.12rem;
+  color: var(--amani-maroon);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.signature-stack-card__copy p {
+  margin: 0 0 0.32rem;
+  color: rgba(24, 20, 17, 0.55);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signature-stack-card__copy h3 {
+  margin: 0;
+  color: var(--amani-ink);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(1.35rem, 2.05vw, 2.15rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.signature-stack-card__copy a {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  color: var(--amani-ink);
+  text-decoration: none;
+  border: 1px solid rgba(24, 20, 17, 0.32);
+  border-radius: 50%;
+  place-items: center;
+  transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease;
+}
+
+.signature-stack-card__copy a svg {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 220ms ease;
+}
+
+.signature-stack-card:hover .signature-stack-card__copy a,
+.signature-stack-card__copy a:hover,
+.signature-stack-card__copy a:focus-visible {
+  color: #f7f1e6;
+  background: var(--amani-maroon);
+  border-color: var(--amani-maroon);
+  outline: none;
+}
+
+.signature-stack-card:hover .signature-stack-card__copy a svg,
+.signature-stack-card__copy a:hover svg,
+.signature-stack-card__copy a:focus-visible svg { transform: translate(2px, -2px); }
+
+@media (max-width: 899px) {
+  .signature-stack {
+    height: auto;
+    min-height: 100svh;
+    padding: 5.25rem 1.25rem 2.5rem;
+    overflow: visible;
+  }
+
+  .signature-stack__shell {
+    display: block;
+    width: min(100%, 42rem);
+    height: auto;
+  }
+
+  .signature-stack__intro {
+    margin-bottom: 2.25rem;
+    transform: none;
+  }
+
+  .signature-stack__intro h2 {
+    font-size: clamp(2.7rem, 10.8vw, 4.85rem);
+    line-height: 0.91;
+  }
+
+  .signature-stack__intro h2 > span { white-space: normal; }
+
+  .signature-stack__headline-group { padding-bottom: 3.35rem; }
+
+  .signature-stack__motif {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: clamp(2.5rem, 9vw, 3.25rem);
+    transform: none;
+  }
+
+  .signature-stack__stage {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .signature-stack-card {
+    position: relative;
+    min-height: min(32rem, 100svh);
+  }
+}
+
+@media (max-width: 520px) {
+  .signature-stack__intro h2 { font-size: clamp(2.55rem, 10.8vw, 3.55rem); }
+  .signature-stack-card { min-height: 28rem; }
+  .signature-stack-card__copy h3 { font-size: 1.45rem; }
+  .signature-stack-card__copy p { font-size: 0.61rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-stack {
+    height: auto;
+    min-height: 100svh;
+    padding: 5.25rem 1.25rem 2.5rem;
+    overflow: visible;
+  }
+
+  .signature-stack__shell {
+    display: block;
+    width: min(100%, 42rem);
+    height: auto;
+  }
+
+  .signature-stack__stage {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .signature-stack-card {
+    position: relative;
+    min-height: min(32rem, 100svh);
+  }
+
+  .signature-stack-card__image-wrap img { transition: none; }
 }

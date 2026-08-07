@@ -60,7 +60,7 @@ const THALI_CHOICES: ThaliChoice[] = [
   },
 ];
 
-const DYNAMIC_WORDS = ['WAY', 'STYLE', 'TASTE'] as const;
+const DYNAMIC_WORDS = ['Style', 'Way', 'Taste'] as const;
 const WORD_DELAYS = [3200, 2600, 2600] as const;
 
 export function ThaliExperience() {
@@ -179,8 +179,8 @@ export function ThaliExperience() {
             id="thali-experience-heading"
             className="thali-experience__heading"
           >
-            ONE TABLE.<br />
-            YOUR{' '}
+            One table.<br />
+            Your{' '}
             <span className="thali-experience__dynamic-wrap">
               <span className={`thali-experience__word--dynamic is-${wordState}`}>
                 {DYNAMIC_WORDS[wordIndex]}

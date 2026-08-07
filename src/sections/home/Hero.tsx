@@ -9,8 +9,8 @@ import { gsap } from '../../lib/gsap';
 
 const HERO_CARDS = [
   {
-    image: '/media/images/dish-andhra-chicken-curry.jpg',
-    alt: 'Andhra Chicken Curry served in a brass kadai',
+    image: '/media/images/happy-south-indian-dining.png',
+    alt: 'Happy Indian family enjoying a traditional South Indian meal in a warm restaurant setting',
   },
   {
     image: '/media/images/dish-chepala-pulusu.jpg',
@@ -21,8 +21,8 @@ const HERO_CARDS = [
     alt: 'Grandmother cooking on a traditional stone in an Andhra kitchen',
   },
   {
-    image: '/media/images/dish-chicken-majestic.jpg',
-    alt: 'Chicken Majestic — crispy Andhra-style fried chicken',
+    image: '/media/images/gathering-interior-01.webp',
+    alt: 'Warm and atmospheric restaurant interior ambience at Amani',
   },
   {
     image: '/media/images/dish-naatu-kodi-pulusu.jpg',
@@ -46,10 +46,10 @@ const CARD_ROTATION_RANGES = [
 ] as const;
 
 const HERO_CARD_META = [
-  { stamp: 'ANDHRA 1974', tag: 'ANDHRA CHICKEN CURRY' },
+  { stamp: 'HAPPY TABLE', tag: 'SHARED FEAST' },
   { stamp: 'COASTAL CATCH', tag: 'CHEPALA PULUSU' },
   { stamp: 'AMMAMMA VANTA', tag: 'HOMELY COOKING' },
-  { stamp: 'RECIPE NO. 03', tag: 'CHICKEN MAJESTIC' },
+  { stamp: 'WARM AMBIENCE', tag: 'RESTAURANT INTERIOR' },
   { stamp: 'NAATU KODI', tag: 'NAATU KODI PULUSU' },
   { stamp: 'ROLU ROKALI', tag: 'STONE GROUND SPICES' },
   { stamp: 'SHARED TABLE', tag: 'FAMILY MEMORY' },
@@ -75,7 +75,7 @@ type CardMotion = {
   bounds: { minX: number; maxX: number; minY: number; maxY: number };
 };
 
-const DYNAMIC_WORDS = ['HOME', 'LOVE', 'CARE'] as const;
+const DYNAMIC_WORDS = ['Home', 'Love', 'Care'] as const;
 const WORD_DELAYS = [3200, 2600, 2600] as const;
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
@@ -364,12 +364,12 @@ export function Hero() {
         <h1 className="home-hero__title" data-split="true">
           <span className="home-hero__title-line">
             <span className="home-hero__title-line-inner">
-              FLAVOUR FROM <span className="home-hero__word home-hero__word--fire">FIRE</span>.
+              Flavour from <span className="home-hero__word home-hero__word--fire">Fire</span>.
             </span>
           </span>
           <span className="home-hero__title-line">
             <span className="home-hero__title-line-inner">
-              MEMORY FROM{' '}
+              Memory from{' '}
               <span className="home-hero__dynamic-wrap">
                 <span className={`home-hero__word home-hero__word--dynamic is-${wordState}`}>
                   {DYNAMIC_WORDS[wordIndex]}

@@ -62,7 +62,7 @@ export const HERO_CONTENT = {
     {
       image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
       alt: 'Golden crisp Mysore masala dosa served with sambar and coconut chutneys',
-      titleLines: ['WHERE EVERY', 'GATHERING FINDS', 'ITS FLAVOUR'],
+      titleLines: ['Where every', 'gathering finds', 'its flavour'],
       description: 'Rooted in the generous spirit of the South, Amani brings fire, fragrance and thoughtful hospitality to every table.',
       ctaText: 'Explore gatherings',
       ctaLink: '/gatherings/',
@@ -70,7 +70,7 @@ export const HERO_CONTENT = {
     {
       image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=85&w=2000&auto=format&fit=crop',
       alt: 'Authentic South Indian banana leaf feast with aromatic curries, rice, and papad',
-      titleLines: ['TRADITION SERVED', 'ON FRESH', 'BANANA LEAVES'],
+      titleLines: ['Tradition served', 'on fresh', 'banana leaves'],
       description: 'Experience traditional communal feasting where rich curries, fragrant rice, and time-honored recipes come together in abundance.',
       ctaText: 'Explore gatherings',
       ctaLink: '/gatherings/',
@@ -78,7 +78,7 @@ export const HERO_CONTENT = {
     {
       image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=85&w=2000&auto=format&fit=crop',
       alt: 'Warmly lit homely South Indian restaurant dining room with wood and brass accents',
-      titleLines: ['AN AMBIANCE', 'BUILT FOR SLOW', 'CONVERSATIONS'],
+      titleLines: ['An ambiance', 'built for slow', 'conversations'],
       description: 'Warm teak, brass details, and soft glow welcome you into a sanctuary designed for unhurried meals and shared memories.',
       ctaText: 'Explore gatherings',
       ctaLink: '/gatherings/',
@@ -86,7 +86,7 @@ export const HERO_CONTENT = {
     {
       image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=85&w=2000&auto=format&fit=crop',
       alt: 'Fiery South Indian Chettinad spice roast curry prepared with fresh spices',
-      titleLines: ['CRAFTED WITH', 'FIRE AND ROASTED', 'CHETTINAD SPICES'],
+      titleLines: ['Crafted with', 'fire and roasted', 'Chettinad spices'],
       description: 'Freshly ground masalas, slow-simmered gravies, and vibrant heat bring the legendary culinary heritage of Tamil Nadu to life.',
       ctaText: 'Explore gatherings',
       ctaLink: '/gatherings/',
@@ -94,7 +94,7 @@ export const HERO_CONTENT = {
     {
       image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=85&w=2000&auto=format&fit=crop',
       alt: 'Family and friends enjoying a shared South Indian meal together',
-      titleLines: ['MOMENTS THAT', 'BECOME CHERISHED', 'MEMORIES'],
+      titleLines: ['Moments that', 'become cherished', 'memories'],
       description: 'Gather your loved ones around overflowing platters, passing plates and celebrating life’s sweetest milestones around our table.',
       ctaText: 'Explore gatherings',
       ctaLink: '/gatherings/',

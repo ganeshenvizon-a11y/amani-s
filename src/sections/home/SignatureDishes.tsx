@@ -1,95 +1,177 @@
 /**
- * Section 04 — Signature Dishes
- * Editorial showcase of Amani's core signature dishes with price, veg, spice level, and menu link.
+ * Signature dishes — a scroll-pinned stack of Amani's most-loved plates.
  */
 
+import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { SIGNATURE_DISHES_CONTENT } from '../../content/home';
-import { Reveal } from '../../components/motion/Reveal';
+import { gsap } from '../../lib/gsap';
+import { RangoliPattern } from '../../components/motion/RangoliPattern';
+
+const SIGNATURE_DISHES = [
+  {
+    name: 'Naatu Kodi Pulusu',
+    note: 'Slow-cooked country chicken',
+    image: '/media/images/signatures/naatu-kodi-pulusu.webp',
+  },
+  {
+    name: 'Paneer Tikka',
+    note: 'Charred paneer from the grill',
+    image: '/media/images/signatures/paneer-tikka.webp',
+  },
+  {
+    name: 'Avakai Biryani',
+    note: 'Mango pickle biryani',
+    image: '/media/images/signatures/avakai-biryani.webp',
+  },
+  {
+    name: 'Bhimavaram Mixed Pulav',
+    note: 'A fragrant coastal rice',
+    image: '/media/images/signatures/bhimavaram-mixed-pulav.webp',
+  },
+  {
+    name: 'Bommidala Pulusu',
+    note: 'Tangy coastal fish curry',
+    image: '/media/images/signatures/bommidala-pulusu.webp',
+  },
+  {
+    name: 'Chicken Biryani',
+    note: 'Dum rice and spiced chicken',
+    image: '/media/images/signatures/chicken-biryani.webp',
+  },
+  {
+    name: 'Gongura Mutton Curry',
+    note: 'Slow-cooked mutton and sorrel',
+    image: '/media/images/signatures/gongura-mutton-curry.webp',
+  },
+] as const;
 
 export function SignatureDishes() {
-  return (
-    <section
-      className="section-padding bg-[var(--amani-canvas)] text-[var(--amani-ink)] border-b border-[var(--amani-hairline)]"
-      aria-label="Signature Dishes"
-    >
-      <div className="max-w-[1600px] mx-auto px-6 md:px-10">
-        {/* Section Header */}
-        <Reveal className="max-w-2xl mb-16">
-          <span className="text-eyebrow mb-3 block">{SIGNATURE_DISHES_CONTENT.label}</span>
-          <h2 className="text-h1 mb-4 font-serif">{SIGNATURE_DISHES_CONTENT.heading}</h2>
-          <p className="text-body-lg">{SIGNATURE_DISHES_CONTENT.intro}</p>
-        </Reveal>
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<HTMLElement[]>([]);
 
-        {/* Editorial Alternating Layout */}
-        <div className="space-y-20 mb-16">
-          {SIGNATURE_DISHES_CONTENT.dishes.map((dish, idx) => {
-            const isEven = idx % 2 === 0;
-            return (
-              <Reveal key={dish.id} direction={isEven ? 'left' : 'right'}>
-                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-10 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
-                  {/* Dish Image */}
-                  <div className={`lg:col-span-7 ${isEven ? 'order-1' : 'order-1 lg:order-2'} aspect-[4/3] rounded-[var(--amani-radius-md)] overflow-hidden border border-[var(--amani-hairline)]`}>
-                    <img
-                      src={dish.image}
-                      alt={dish.name}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
+  useEffect(() => {
+    const section = sectionRef.current;
+    const cards = cardRefs.current.filter(Boolean);
+    if (!section || cards.length === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-                  {/* Dish Content */}
-                  <div className={`lg:col-span-5 ${isEven ? 'order-2' : 'order-2 lg:order-1'} space-y-4`}>
-                    <div className="flex items-center gap-3">
-                      {dish.isVeg && (
-                        <span className="w-4 h-4 border border-emerald-600 flex items-center justify-center p-0.5" title="Vegetarian">
-                          <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                        </span>
-                      )}
-                      {dish.spiceLevel && (
-                        <span className="text-xs uppercase tracking-wider text-[var(--amani-maroon)] font-semibold font-mono">
-                          {'🌶️'.repeat(dish.spiceLevel)} Mild Heat
-                        </span>
-                      )}
-                    </div>
+    const media = gsap.matchMedia();
+    const ctx = gsap.context(() => {
+      media.add('(min-width: 900px)', () => {
+        gsap.set(cards, {
+          autoAlpha: 1,
+          x: 28,
+          yPercent: 115,
+          scale: 1,
+        });
+        gsap.set(cards[0], { x: 0, yPercent: 0, zIndex: 1 });
 
-                    <div className="flex items-baseline justify-between gap-4 border-b border-[var(--amani-hairline)] pb-3">
-                      <h3 className="text-h2 font-serif">{dish.name}</h3>
-                      {dish.price && <span className="text-xl font-serif text-[var(--amani-maroon)] font-medium">{dish.price}</span>}
-                    </div>
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${Math.round(window.innerHeight * (SIGNATURE_DISHES.length - 0.1))}`,
+            scrub: 1.1,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-                    <p className="text-body font-sans leading-relaxed">{dish.description}</p>
+        cards.slice(1).forEach((card, index) => {
+          const incomingIndex = index + 1;
+          const stackStart = index;
+          const position = index;
 
-                    {dish.allergens && (
-                      <p className="text-xs text-[var(--amani-ink-muted)] font-mono">
-                        Contains: {dish.allergens.join(', ')}
-                      </p>
-                    )}
-
-                    <div className="pt-2">
-                      <NavLink
-                        to={dish.categoryLink}
-                        className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[var(--amani-maroon)] font-semibold hover:underline"
-                      >
-                        View Category in Menu →
-                      </NavLink>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
+          for (let depth = 0; depth <= stackStart; depth += 1) {
+            const stackedCard = cards[stackStart - depth];
+            timeline.to(
+              stackedCard,
+              {
+                x: -(depth + 1) * 10,
+                y: (depth + 1) * 16,
+                scale: 1 - (depth + 1) * 0.028,
+                duration: 0.72,
+                ease: 'power2.out',
+              },
+              position,
             );
-          })}
-        </div>
+          }
 
-        {/* Section Footer CTA */}
-        <div className="text-center pt-8 border-t border-[var(--amani-hairline)]">
-          <NavLink
-            to={SIGNATURE_DISHES_CONTENT.ctaLink}
-            className="inline-flex items-center justify-center bg-[var(--amani-maroon)] text-[var(--amani-canvas)] px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-[var(--amani-radius-sm)] hover:bg-[var(--amani-maroon-dark)] transition-colors focus:ring-2 focus:ring-[var(--amani-maroon)]"
-          >
-            {SIGNATURE_DISHES_CONTENT.ctaText}
+          timeline.to(
+            card,
+            {
+              x: 0,
+              yPercent: 0,
+              scale: 1,
+              duration: 0.9,
+              ease: 'power3.out',
+              onStart: () => gsap.set(card, { zIndex: incomingIndex + 1 }),
+            },
+            position,
+          );
+        });
+
+        timeline.to({}, { duration: 0.32 });
+        return () => timeline.kill();
+      });
+    }, section);
+
+    return () => {
+      media.revert();
+      ctx.revert();
+    };
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="signature-stack" aria-labelledby="signature-stack-heading">
+      <div className="signature-stack__shell">
+        <header className="signature-stack__intro">
+          <p>06 / Signature dishes</p>
+          <div className="signature-stack__headline-group">
+            <h2 id="signature-stack-heading">
+              <span>From our <em>fire</em></span>
+              <span>to your table.</span>
+            </h2>
+            <RangoliPattern className="signature-stack__motif" size="68" color="currentColor" strokeWidth={1.2} />
+          </div>
+          <p className="signature-stack__summary">Seven plates worth returning for.</p>
+          <NavLink to="/menu/" className="signature-stack__menu-link">
+            Explore the menu
           </NavLink>
+        </header>
+
+        <div className="signature-stack__stage" aria-label="Amani signature dishes">
+          {SIGNATURE_DISHES.map((dish, index) => (
+            <article
+              className="signature-stack-card"
+              key={dish.name}
+              ref={(element) => {
+                if (element) cardRefs.current[index] = element;
+              }}
+            >
+              <div className="signature-stack-card__image-wrap">
+                <img
+                  src={dish.image}
+                  alt={dish.name}
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+              <div className="signature-stack-card__copy">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <p>{dish.note}</p>
+                  <h3>{dish.name}</h3>
+                </div>
+                <NavLink to="/menu/" aria-label={`View ${dish.name} on the menu`}>
+                  <svg aria-hidden="true" viewBox="0 0 18 18" fill="none">
+                    <path d="M5 13 13 5M7 5h6v6" />
+                  </svg>
+                </NavLink>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
