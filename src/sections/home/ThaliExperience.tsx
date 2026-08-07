@@ -19,7 +19,7 @@ const THALI_CHOICES: ThaliChoice[] = [
   {
     id: 'vegetarian',
     label: 'VEGETARIAN',
-    title: 'A GENEROUS GARDEN TABLE.',
+    title: 'A generous garden table.',
     description: 'Seasonal vegetables, slow-cooked dal, sambar and fresh chutneys.',
     items: [
       'Sona Masoori Rice',
@@ -33,7 +33,7 @@ const THALI_CHOICES: ThaliChoice[] = [
   {
     id: 'non-vegetarian',
     label: 'NON-VEG',
-    title: 'DEEPLY SPICED & COASTAL.',
+    title: 'Deeply spiced & coastal.',
     description: 'Coastal curries, roasted meats and cooling accompaniments balanced with rice.',
     items: [
       'Coastal Fish Curry & Ghee Rice',
@@ -47,7 +47,7 @@ const THALI_CHOICES: ThaliChoice[] = [
   {
     id: 'jain',
     label: 'JAIN',
-    title: 'THOUGHTFULLY PREPARED.',
+    title: 'Thoughtfully prepared.',
     description: 'Made without onion or garlic, with equal generosity, warmth and texture.',
     items: [
       'Fragrant Steamed Basmati Rice',

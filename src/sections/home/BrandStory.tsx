@@ -102,7 +102,6 @@ export function BrandStory() {
   return (
     <section ref={sectionRef} className="brand-story" aria-labelledby="brand-story-heading">
       <div ref={introRef} className="brand-story__intro">
-        <p className="brand-story__eyebrow">05 / OUR STORY</p>
         <h2 id="brand-story-heading">A table built<br />by Grandma.</h2>
       </div>
 
