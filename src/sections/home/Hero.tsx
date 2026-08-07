@@ -6,18 +6,33 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { HERO_CONTENT } from '../../content/home';
 import { gsap } from '../../lib/gsap';
-import { RangoliPattern } from '../../components/motion/RangoliPattern';
 
 const HERO_CARDS = [
-  ...HERO_CONTENT.slides,
   {
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=85&w=1200&auto=format&fit=crop',
-    alt: 'Traditional South Indian filter coffee',
+    image: '/media/images/dish-andhra-chicken-curry.jpg',
+    alt: 'Andhra Chicken Curry served in a brass kadai',
   },
   {
-    image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=85&w=1200&auto=format&fit=crop',
-    alt: 'South Indian tiffin served for the table',
+    image: '/media/images/dish-chepala-pulusu.jpg',
+    alt: 'Chepala Pulusu — traditional Andhra fish curry',
   },
+  {
+    image: '/media/images/grandma-cooking-stone-1.png',
+    alt: 'Grandmother cooking on a traditional stone in an Andhra kitchen',
+  },
+  {
+    image: '/media/images/dish-chicken-majestic.jpg',
+    alt: 'Chicken Majestic — crispy Andhra-style fried chicken',
+  },
+  {
+    image: '/media/images/dish-naatu-kodi-pulusu.jpg',
+    alt: 'Naatu Kodi Pulusu — country chicken curry',
+  },
+  {
+    image: '/media/images/grandma-cooking-stone-2.png',
+    alt: 'Grandmother grinding spices on a traditional silbatta stone',
+  },
+  HERO_CONTENT.slides[4],
 ];
 
 const CARD_ROTATION_RANGES = [
@@ -31,13 +46,13 @@ const CARD_ROTATION_RANGES = [
 ] as const;
 
 const HERO_CARD_META = [
-  { stamp: 'MYSORE 1974', tag: 'DOSA TIFFIN' },
-  { stamp: 'BANANA LEAF', tag: 'SOUTH THALI' },
-  { stamp: 'AMANI ROOM', tag: 'HOMELY DINING' },
-  { stamp: 'CHETTINAD', tag: 'SPICE ROAST' },
+  { stamp: 'ANDHRA 1974', tag: 'ANDHRA CHICKEN CURRY' },
+  { stamp: 'COASTAL CATCH', tag: 'CHEPALA PULUSU' },
+  { stamp: 'AMMAMMA VANTA', tag: 'HOMELY COOKING' },
+  { stamp: 'RECIPE NO. 03', tag: 'CHICKEN MAJESTIC' },
+  { stamp: 'NAATU KODI', tag: 'NAATU KODI PULUSU' },
+  { stamp: 'ROLU ROKALI', tag: 'STONE GROUND SPICES' },
   { stamp: 'SHARED TABLE', tag: 'FAMILY MEMORY' },
-  { stamp: 'KAAPI BREW', tag: 'BRASS DAVARA' },
-  { stamp: 'RECIPE NO. 01', tag: 'PODI IDLI' },
 ];
 
 type HeroCardStyle = CSSProperties & {
@@ -60,6 +75,9 @@ type CardMotion = {
   bounds: { minX: number; maxX: number; minY: number; maxY: number };
 };
 
+const DYNAMIC_WORDS = ['HOME', 'LOVE', 'CARE'] as const;
+const WORD_DELAYS = [3200, 2600, 2600] as const;
+
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 export function Hero() {
@@ -70,12 +88,51 @@ export function Hero() {
   const cardRotations = useRef<number[]>([]);
   const cardScales = useRef<number[]>([]);
   const [draggedCard, setDraggedCard] = useState<number | null>(null);
-  const headlineLines = HERO_CONTENT.headline.split('\n');
+
+  // Dynamic word animation state for HOME -> LOVE -> CARE -> HOME
+  const [wordIndex, setWordIndex] = useState(0);
+  const [wordState, setWordState] = useState<'idle' | 'leaving' | 'entering'>('idle');
 
   if (cardRotations.current.length === 0) {
     cardRotations.current = CARD_ROTATION_RANGES.map(([min, max]) => min + Math.random() * (max - min));
     cardScales.current = HERO_CARDS.map(() => 0.95 + Math.random() * 0.13);
   }
+
+  // Handle slow, editorial semantic word cycle on second headline line
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
+    let timerId: ReturnType<typeof setTimeout>;
+    let transitionTimerId: ReturnType<typeof setTimeout>;
+
+    const scheduleNext = (currentIndex: number) => {
+      const delay = WORD_DELAYS[currentIndex] ?? 3200;
+      timerId = setTimeout(() => {
+        setWordState('leaving');
+
+        transitionTimerId = setTimeout(() => {
+          const nextIndex = (currentIndex + 1) % DYNAMIC_WORDS.length;
+          setWordIndex(nextIndex);
+          setWordState('entering');
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setWordState('idle');
+              scheduleNext(nextIndex);
+            });
+          });
+        }, 320);
+      }, delay);
+    };
+
+    scheduleNext(0);
+
+    return () => {
+      clearTimeout(timerId);
+      clearTimeout(transitionTimerId);
+    };
+  }, []);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -293,20 +350,34 @@ export function Hero() {
 
   return (
     <section ref={heroRef} className="home-hero home-hero--editorial" aria-label="Welcome to Amani">
-      <div className="home-hero__rangoli home-hero__rangoli--left" aria-hidden="true">
-        <RangoliPattern size="100%" color="var(--amani-maroon)" strokeWidth={0.8} />
-      </div>
-      <div className="home-hero__rangoli home-hero__rangoli--right" aria-hidden="true">
-        <RangoliPattern size="100%" color="var(--amani-maroon)" strokeWidth={0.8} />
+      <div className="home-hero__bg-pattern" aria-hidden="true">
+        <img
+          src="/media/images/hero-pattern.png"
+          alt=""
+          className="home-hero__bg-pattern-img"
+          loading="eager"
+          decoding="async"
+        />
       </div>
       <div className="home-hero__content">
         <p className="home-hero__kicker">A table shaped by warmth and memory</p>
         <h1 className="home-hero__title" data-split="true">
-          {headlineLines.map((line, index) => (
-            <span key={index} className="home-hero__title-line">
-              <span className="home-hero__title-line-inner">{line}</span>
+          <span className="home-hero__title-line">
+            <span className="home-hero__title-line-inner">
+              FLAVOUR FROM <span className="home-hero__word home-hero__word--fire">FIRE</span>.
             </span>
-          ))}
+          </span>
+          <span className="home-hero__title-line">
+            <span className="home-hero__title-line-inner">
+              MEMORY FROM{' '}
+              <span className="home-hero__dynamic-wrap">
+                <span className={`home-hero__word home-hero__word--dynamic is-${wordState}`}>
+                  {DYNAMIC_WORDS[wordIndex]}
+                </span>
+                <span className="home-hero__period">.</span>
+              </span>
+            </span>
+          </span>
         </h1>
       </div>
 

@@ -1,5 +1,5 @@
 /**
- * Section 03 — Signature Experiences
+ * Section 02 — Signature Experiences
  * Pinned GSAP ScrollTrigger editorial sequence on desktop; stacked layout on mobile & reduced-motion.
  */
 
@@ -65,36 +65,58 @@ export function SignatureExperiences() {
               return (
                 <div
                   key={exp.id}
-                  className={`experience-step p-8 rounded-[var(--amani-radius-md)] transition-all duration-500 border ${
+                  className={`experience-step rounded-[var(--amani-radius-md)] transition-all duration-500 border overflow-hidden ${
                     isActive
                       ? 'bg-[var(--amani-canvas)] border-[var(--amani-maroon)] shadow-sm'
                       : 'bg-transparent border-[var(--amani-hairline)] opacity-70'
                   }`}
                 >
-                  <span className="text-sm font-mono tracking-widest text-[var(--amani-maroon)] font-semibold mb-3 block">
-                    {exp.number}
-                  </span>
-                  <h3 className="text-h2 mb-4 font-serif">{exp.title}</h3>
-                  <p className="text-body font-sans leading-relaxed">{exp.description}</p>
+                  {/* Mobile Image — shown inline below each step */}
+                  <div className="lg:hidden w-full aspect-[16/9] overflow-hidden">
+                    <img
+                      src={exp.image}
+                      alt={exp.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="p-8">
+                    <span className="text-sm font-mono tracking-widest text-[var(--amani-maroon)] font-semibold mb-3 block">
+                      {exp.number}
+                    </span>
+                    <h3 className="text-h2 mb-4 font-serif">{exp.title}</h3>
+                    <p className="text-body font-sans leading-relaxed">{exp.description}</p>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Right Column: Sticky Dominant Experience Image (Desktop) */}
-          <div className="hidden lg:block lg:col-span-6 sticky top-28 aspect-[4/5] overflow-hidden rounded-[var(--amani-radius-md)] border border-[var(--amani-hairline)] shadow-sm">
-            <img
-              src={activeExp.image}
-              alt={activeExp.title}
-              className="w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="absolute bottom-6 left-6 right-6 p-4 bg-[rgba(17,16,14,0.75)] backdrop-blur-sm text-[var(--amani-cream-on-dark)] rounded font-sans text-xs">
-              <span className="text-[var(--amani-terracotta)] font-mono font-semibold block mb-1">
-                {activeExp.number} — EXPERIENCE
-              </span>
-              <span>{activeExp.title}</span>
+          {/* Right Column: Sticky Image Panel — all images stacked, active one visible via opacity */}
+          <div className="hidden lg:block lg:col-span-6 sticky top-28">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--amani-radius-md)] border border-[var(--amani-hairline)] shadow-sm bg-[var(--amani-ink)]">
+              {EXPERIENCES_CONTENT.experiences.map((exp, idx) => (
+                <img
+                  key={exp.id}
+                  src={exp.image}
+                  alt={exp.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+                  style={{ opacity: idx === activeIndex ? 1 : 0 }}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              ))}
+
+              {/* Caption overlay */}
+              <div className="absolute bottom-6 left-6 right-6 p-4 bg-[rgba(17,16,14,0.75)] backdrop-blur-sm text-[var(--amani-cream-on-dark)] rounded font-sans text-xs z-10">
+                <span className="text-[var(--amani-terracotta)] font-mono font-semibold block mb-1">
+                  {activeExp.number} — EXPERIENCE
+                </span>
+                <span>{activeExp.title}</span>
+              </div>
             </div>
           </div>
         </div>

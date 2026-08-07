@@ -46,6 +46,15 @@ export interface GalleryItem {
   aspectRatio: '4:5' | '16:9' | '3:4' | '1:1';
 }
 
+export interface HeroSlideItem {
+  image: string;
+  alt: string;
+  titleLines: string[];
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+}
+
 export const HERO_CONTENT = {
   headline: 'FLAVOUR FROM FIRE.\nMEMORY FROM HOME.',
   image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
@@ -53,24 +62,44 @@ export const HERO_CONTENT = {
     {
       image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
       alt: 'Golden crisp Mysore masala dosa served with sambar and coconut chutneys',
+      titleLines: ['WHERE EVERY', 'GATHERING FINDS', 'ITS FLAVOUR'],
+      description: 'Rooted in the generous spirit of the South, Amani brings fire, fragrance and thoughtful hospitality to every table.',
+      ctaText: 'Explore gatherings',
+      ctaLink: '/gatherings/',
     },
     {
       image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=85&w=2000&auto=format&fit=crop',
       alt: 'Authentic South Indian banana leaf feast with aromatic curries, rice, and papad',
+      titleLines: ['TRADITION SERVED', 'ON FRESH', 'BANANA LEAVES'],
+      description: 'Experience traditional communal feasting where rich curries, fragrant rice, and time-honored recipes come together in abundance.',
+      ctaText: 'Explore gatherings',
+      ctaLink: '/gatherings/',
     },
     {
       image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=85&w=2000&auto=format&fit=crop',
       alt: 'Warmly lit homely South Indian restaurant dining room with wood and brass accents',
+      titleLines: ['AN AMBIANCE', 'BUILT FOR SLOW', 'CONVERSATIONS'],
+      description: 'Warm teak, brass details, and soft glow welcome you into a sanctuary designed for unhurried meals and shared memories.',
+      ctaText: 'Explore gatherings',
+      ctaLink: '/gatherings/',
     },
     {
       image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=85&w=2000&auto=format&fit=crop',
       alt: 'Fiery South Indian Chettinad spice roast curry prepared with fresh spices',
+      titleLines: ['CRAFTED WITH', 'FIRE AND ROASTED', 'CHETTINAD SPICES'],
+      description: 'Freshly ground masalas, slow-simmered gravies, and vibrant heat bring the legendary culinary heritage of Tamil Nadu to life.',
+      ctaText: 'Explore gatherings',
+      ctaLink: '/gatherings/',
     },
     {
       image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=85&w=2000&auto=format&fit=crop',
       alt: 'Family and friends enjoying a shared South Indian meal together',
+      titleLines: ['MOMENTS THAT', 'BECOME CHERISHED', 'MEMORIES'],
+      description: 'Gather your loved ones around overflowing platters, passing plates and celebrating life’s sweetest milestones around our table.',
+      ctaText: 'Explore gatherings',
+      ctaLink: '/gatherings/',
     },
-  ],
+  ] as HeroSlideItem[],
 };
 
 export const MOOD_FINDER_CONTENT = {
@@ -163,28 +192,35 @@ export const EXPERIENCES_CONTENT = {
       number: '01',
       title: 'A meal that remembers home',
       description: 'Familiar South Indian flavours presented with care, clarity and enough restraint to let every ingredient remain recognisable.',
-      image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1200&auto=format&fit=crop',
+      image: '/media/images/experiences/exp-01.jpg',
     },
     {
       id: 'griddle-fresh',
       number: '02',
       title: 'From the griddle to the table',
       description: 'The sound, aroma and immediacy of dishes prepared fresh and served at their best.',
-      image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1200&auto=format&fit=crop',
+      image: '/media/images/experiences/exp-02.jpg',
     },
     {
       id: 'family-table',
       number: '03',
       title: 'The shared family table',
       description: 'Food designed for passing, tasting and letting the meal unfold through conversation.',
-      image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1200&auto=format&fit=crop',
+      image: '/media/images/experiences/exp-03.jpg',
     },
     {
       id: 'gatherings',
       number: '04',
       title: 'Moments worth gathering for',
       description: 'A warm setting for birthdays, family meals and the occasions that deserve a little more attention.',
-      image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop',
+      image: '/media/images/experiences/exp-04.jpg',
+    },
+    {
+      id: 'intimate-setting',
+      number: '05',
+      title: 'An intimate setting for every mood',
+      description: 'Warm banquette seating, handcrafted details and a room that adapts to the pace of your evening.',
+      image: '/media/images/experiences/exp-05.jpg',
     },
   ] as ExperienceItem[],
 };

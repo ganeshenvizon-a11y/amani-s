@@ -37,6 +37,9 @@ export function MoodFinder() {
             end: () => `+=${pinDistance()}`,
             scrub: 1.4,
             pin: true,
+            // Keep the full pinned-scroll distance in normal document flow so
+            // the following thali section never enters beneath this experience.
+            pinSpacing: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },

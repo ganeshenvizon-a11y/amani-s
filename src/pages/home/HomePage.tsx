@@ -6,6 +6,8 @@
 import { Hero } from '../../sections/home/Hero';
 import { GatheringStatement } from '../../sections/home/GatheringStatement';
 import { MoodFinder } from '../../sections/home/MoodFinder';
+import { ThaliExperience } from '../../sections/home/ThaliExperience';
+import { BrandStory } from '../../sections/home/BrandStory';
 import { SignatureExperiences } from '../../sections/home/SignatureExperiences';
 import { SignatureDishes } from '../../sections/home/SignatureDishes';
 import { TheAmaniWay } from '../../sections/home/TheAmaniWay';
@@ -48,7 +50,13 @@ export function HomePage() {
         {/* Section 03: Mood Finder */}
         <MoodFinder />
 
-        {/* Section 03: Signature Experiences */}
+        {/* Section 04: Dietary Thali Experience */}
+        <ThaliExperience />
+
+        {/* Section 05: Amani Brand Story */}
+        <BrandStory />
+
+        {/* Section 06: Signature Experiences */}
         <SignatureExperiences />
 
         {/* Section 04: Signature Dishes */}

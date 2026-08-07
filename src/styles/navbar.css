@@ -197,6 +197,25 @@
   color: currentColor;
 }
 
+.restaurant-header__logo-img {
+  height: 24px;
+  max-height: 26px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: filter 480ms ease, opacity 220ms ease, transform 220ms ease;
+  filter: brightness(1);
+}
+
+.restaurant-header--open .restaurant-header__logo-img {
+  filter: brightness(0);
+}
+
+.restaurant-header__brand:hover .restaurant-header__logo-img {
+  opacity: 0.85;
+  transform: translateY(-0.5px);
+}
+
 /* Right Control Toggle Button */
 .restaurant-header__toggle {
   grid-column: 3;
@@ -554,6 +573,10 @@
   .restaurant-header__brand-text {
     font-size: 20px;
     letter-spacing: 0.1em;
+  }
+
+  .restaurant-header__logo-img {
+    height: 19px;
   }
 
   .restaurant-header__hamburger {

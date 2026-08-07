@@ -31,6 +31,8 @@ export function RangoliChakriCursor() {
       return;
     }
 
+    document.body.classList.add('has-custom-cursor');
+
     let animationFrameId: number;
 
     const onPointerMove = (e: MouseEvent) => {
@@ -108,14 +110,14 @@ export function RangoliChakriCursor() {
 
     // Smooth lerp physics loop
     const loop = () => {
-      followerPos.current.x += (pos.current.x - followerPos.current.x) * 0.16;
-      followerPos.current.y += (pos.current.y - followerPos.current.y) * 0.16;
+      followerPos.current.x += (pos.current.x - followerPos.current.x) * 0.55;
+      followerPos.current.y += (pos.current.y - followerPos.current.y) * 0.55;
 
       const spinSpeed = isHovered ? 1.8 : 0.6;
       rotation.current = (rotation.current + spinSpeed) % 360;
 
       const desiredScale = isClicking ? 0.85 : isHovered ? 1.45 : 1;
-      currentScale.current += (desiredScale - currentScale.current) * 0.2;
+      currentScale.current += (desiredScale - currentScale.current) * 0.45;
 
       if (cursorFollowerRef.current) {
         cursorFollowerRef.current.style.transform = `translate3d(${followerPos.current.x}px, ${
@@ -134,6 +136,7 @@ export function RangoliChakriCursor() {
     loop();
 
     return () => {
+      document.body.classList.remove('has-custom-cursor');
       window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('mousedown', onPointerDown);
       window.removeEventListener('mouseup', onPointerUp);

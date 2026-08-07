@@ -1,6 +1,6 @@
 /**
  * Section 02 — Gathering Statement
- * Existing full-screen banner with a cinematic GSAP counter-motion image slider.
+ * Existing full-screen banner with a cinematic GSAP counter-motion image slider and animated text sync.
  */
 
 import {
@@ -16,33 +16,67 @@ import { gsap } from '../../lib/gsap';
 
 type SwipeStart = { x: number; y: number };
 
+const GATHERING_SLIDE_IMAGES = [
+  {
+    image: '/media/images/gathering-interior-01.webp',
+    alt: 'Sunlit Amani dining room with warm wood, brass accents, and lush plants',
+  },
+  {
+    image: '/media/images/gathering-interior-02.webp',
+    alt: 'Amani dining room with warm arched wood details and softly lit pendant lamps',
+  },
+  {
+    image: '/media/images/gathering-interior-03.webp',
+    alt: 'An intimate Amani banquette with brass, wood, and hand-finished details',
+  },
+  {
+    image: '/media/images/gathering-interior-04.webp',
+    alt: 'Amani restaurant interior with a warm open kitchen and handcrafted lighting',
+  },
+  {
+    image: '/media/images/gathering-interior-05.webp',
+    alt: 'Amani dining room with arched windows, warm wood beams, and brass lanterns',
+  },
+] as const;
+
+const GATHERING_SLIDES = HERO_CONTENT.slides.map((slide, index) => ({
+  ...slide,
+  ...GATHERING_SLIDE_IMAGES[index],
+}));
+
 export function GatheringStatement() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageLayerRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
   const mediaRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const textGroupRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const titleLineRefs = useRef<Array<Array<HTMLSpanElement | null>>>([]);
+  const noteRefs = useRef<Array<HTMLDivElement | null>>([]);
   const activeIndexRef = useRef(0);
   const isAnimatingRef = useRef(false);
   const initializedRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const autoplayRef = useRef<number | null>(null);
   const lastAdvanceRef = useRef(Date.now());
-  const pointerStartRef = useRef<SwipeStart | null>(null);
-  const pausedRef = useRef(false);
+  const userClickedRef = useRef(false);
   const reducedMotionRef = useRef(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const totalSlides = HERO_CONTENT.slides.length;
+  const totalSlides = GATHERING_SLIDES.length;
 
   const updateSlideAccessibility = useCallback((activeIndex: number) => {
     slideRefs.current.forEach((slide, index) => {
       if (!slide) return;
       slide.setAttribute('aria-hidden', String(index !== activeIndex));
     });
+    textGroupRefs.current.forEach((group, index) => {
+      if (!group) return;
+      group.setAttribute('aria-hidden', String(index !== activeIndex));
+    });
   }, []);
 
   const preloadSlide = useCallback((index: number) => {
-    const slide = HERO_CONTENT.slides[(index + totalSlides) % totalSlides];
+    const slide = GATHERING_SLIDES[(index + totalSlides) % totalSlides];
     if (!slide || typeof window === 'undefined') return;
     const image = new Image();
     image.src = slide.image;
@@ -64,17 +98,36 @@ export function GatheringStatement() {
     const nextSlide = slideRefs.current[nextIndex];
     const currentMedia = mediaRefs.current[currentIndex];
     const nextMedia = mediaRefs.current[nextIndex];
+
+    const currentTextGroup = textGroupRefs.current[currentIndex];
+    const nextTextGroup = textGroupRefs.current[nextIndex];
+    const currentTitleLines = (titleLineRefs.current[currentIndex] || []).filter(
+      (item): item is HTMLSpanElement => Boolean(item)
+    );
+    const nextTitleLines = (titleLineRefs.current[nextIndex] || []).filter(
+      (item): item is HTMLSpanElement => Boolean(item)
+    );
+    const currentNote = noteRefs.current[currentIndex];
+    const nextNote = noteRefs.current[nextIndex];
+
     if (!currentSlide || !nextSlide || !currentMedia || !nextMedia) return;
 
     lastAdvanceRef.current = Date.now();
     preloadSlide(nextIndex);
     timelineRef.current?.kill();
-    gsap.killTweensOf([currentSlide, nextSlide, currentMedia, nextMedia]);
+    gsap.killTweensOf(
+      [
+        currentSlide,
+        nextSlide,
+      ].filter(Boolean)
+    );
 
     if (reducedMotionRef.current) {
       isAnimatingRef.current = true;
       gsap.set(nextSlide, { autoAlpha: 1, xPercent: 0, zIndex: 3 });
+      if (nextTextGroup) gsap.set(nextTextGroup, { autoAlpha: 1, zIndex: 3 });
       gsap.to(currentSlide, { autoAlpha: 0, duration: 0.12, overwrite: true });
+      if (currentTextGroup) gsap.to(currentTextGroup, { autoAlpha: 0, duration: 0.12, overwrite: true });
       gsap.to(nextSlide, {
         autoAlpha: 1,
         duration: 0.12,
@@ -82,6 +135,8 @@ export function GatheringStatement() {
         onComplete: () => {
           gsap.set(currentSlide, { xPercent: 0, zIndex: 1 });
           gsap.set(nextSlide, { xPercent: 0, zIndex: 2 });
+          if (currentTextGroup) gsap.set(currentTextGroup, { zIndex: 1 });
+          if (nextTextGroup) gsap.set(nextTextGroup, { zIndex: 2 });
           activeIndexRef.current = nextIndex;
           setActiveSlide(nextIndex);
           updateSlideAccessibility(nextIndex);
@@ -120,6 +175,24 @@ export function GatheringStatement() {
       willChange: 'transform',
     });
 
+    if (currentTextGroup) gsap.set(currentTextGroup, { autoAlpha: 1, zIndex: 2 });
+    if (nextTextGroup) gsap.set(nextTextGroup, { autoAlpha: 1, zIndex: 3 });
+
+    if (nextTitleLines.length > 0) {
+      gsap.set(nextTitleLines, {
+        yPercent: direction * 108,
+        autoAlpha: 0,
+        willChange: 'transform, opacity',
+      });
+    }
+    if (nextNote) {
+      gsap.set(nextNote, {
+        y: direction * 28,
+        autoAlpha: 0,
+        willChange: 'transform, opacity',
+      });
+    }
+
     const timeline = gsap.timeline({
       defaults: { duration: 1.25, ease: 'power4.inOut' },
       onComplete: () => {
@@ -146,6 +219,13 @@ export function GatheringStatement() {
           clearProps: 'willChange',
         });
 
+        if (currentTextGroup) gsap.set(currentTextGroup, { autoAlpha: 0, zIndex: 1 });
+        if (nextTextGroup) gsap.set(nextTextGroup, { autoAlpha: 1, zIndex: 2 });
+        if (currentTitleLines.length > 0) gsap.set(currentTitleLines, { clearProps: 'willChange' });
+        if (nextTitleLines.length > 0) gsap.set(nextTitleLines, { clearProps: 'willChange' });
+        if (currentNote) gsap.set(currentNote, { clearProps: 'willChange' });
+        if (nextNote) gsap.set(nextNote, { clearProps: 'willChange' });
+
         activeIndexRef.current = nextIndex;
         setActiveSlide(nextIndex);
         updateSlideAccessibility(nextIndex);
@@ -167,6 +247,58 @@ export function GatheringStatement() {
       }, 0)
       .to(nextSlide, { xPercent: 0 }, 0)
       .to(nextMedia, { xPercent: 0, scale: 1 }, 0);
+
+    if (currentTitleLines.length > 0) {
+      timeline.to(
+        currentTitleLines,
+        {
+          yPercent: direction * -100,
+          autoAlpha: 0,
+          duration: 0.48,
+          stagger: 0.04,
+          ease: 'power3.in',
+        },
+        0
+      );
+    }
+    if (currentNote) {
+      timeline.to(
+        currentNote,
+        {
+          y: direction * -20,
+          autoAlpha: 0,
+          duration: 0.42,
+          ease: 'power3.in',
+        },
+        0
+      );
+    }
+
+    if (nextTitleLines.length > 0) {
+      timeline.to(
+        nextTitleLines,
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 0.82,
+          stagger: 0.06,
+          ease: 'power4.out',
+        },
+        0.22
+      );
+    }
+    if (nextNote) {
+      timeline.to(
+        nextNote,
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.78,
+          ease: 'power4.out',
+        },
+        0.34
+      );
+    }
 
     timelineRef.current = timeline;
   }, [preloadSlide, totalSlides, updateSlideAccessibility]);
@@ -197,6 +329,33 @@ export function GatheringStatement() {
         });
       });
       gsap.set(media, { xPercent: 0, scale: 1 });
+
+      textGroupRefs.current.forEach((group, index) => {
+        if (!group) return;
+        const isFirst = index === 0;
+        gsap.set(group, {
+          autoAlpha: isFirst ? 1 : 0,
+          zIndex: isFirst ? 2 : 1,
+        });
+
+        const lines = (titleLineRefs.current[index] || []).filter(
+          (item): item is HTMLSpanElement => Boolean(item)
+        );
+        lines.forEach((line) => {
+          gsap.set(line, {
+            yPercent: isFirst ? 0 : 108,
+            autoAlpha: isFirst ? 1 : 0,
+          });
+        });
+
+        const note = noteRefs.current[index];
+        if (note) {
+          gsap.set(note, {
+            y: isFirst ? 0 : 28,
+            autoAlpha: isFirst ? 1 : 0,
+          });
+        }
+      });
     }, section);
 
     activeIndexRef.current = 0;
@@ -237,18 +396,19 @@ export function GatheringStatement() {
     return () => ctx.revert();
   }, []);
 
+  // Auto-scroll loop — advances slides every 4.5 seconds if user hasn't clicked
   useEffect(() => {
     if (totalSlides < 2 || reducedMotionRef.current) return;
 
     autoplayRef.current = window.setInterval(() => {
       const ready =
-        !pausedRef.current &&
+        !userClickedRef.current &&
         !document.hidden &&
         !isAnimatingRef.current &&
-        Date.now() - lastAdvanceRef.current >= 6000;
+        Date.now() - lastAdvanceRef.current >= 4500;
 
       if (ready) showNextSlide();
-    }, 300);
+    }, 400);
 
     return () => {
       if (autoplayRef.current !== null) window.clearInterval(autoplayRef.current);
@@ -262,10 +422,12 @@ export function GatheringStatement() {
 
       if (event.key === 'ArrowRight') {
         event.preventDefault();
+        userClickedRef.current = true;
         lastAdvanceRef.current = Date.now();
         showNextSlide();
       } else if (event.key === 'ArrowLeft') {
         event.preventDefault();
+        userClickedRef.current = true;
         lastAdvanceRef.current = Date.now();
         showPreviousSlide();
       }
@@ -283,6 +445,8 @@ export function GatheringStatement() {
     };
   }, [showNextSlide, showPreviousSlide]);
 
+  const pointerStartRef = useRef<SwipeStart | null>(null);
+
   const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
     pointerStartRef.current = { x: event.clientX, y: event.clientY };
   };
@@ -297,18 +461,10 @@ export function GatheringStatement() {
     const horizontalIntent = Math.abs(distanceX) > Math.abs(distanceY) * 1.25;
     if (!horizontalIntent || Math.abs(distanceX) < 55) return;
 
+    userClickedRef.current = true;
     lastAdvanceRef.current = Date.now();
     if (distanceX < 0) showNextSlide();
     else showPreviousSlide();
-  };
-
-  const pauseAutoplay = () => {
-    pausedRef.current = true;
-  };
-
-  const resumeAutoplay = () => {
-    pausedRef.current = false;
-    lastAdvanceRef.current = Date.now();
   };
 
   return (
@@ -319,12 +475,6 @@ export function GatheringStatement() {
       aria-roledescription="carousel"
       aria-label="Amani restaurant highlights"
       tabIndex={0}
-      onMouseEnter={pauseAutoplay}
-      onMouseLeave={resumeAutoplay}
-      onFocusCapture={pauseAutoplay}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) resumeAutoplay();
-      }}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerCancel={() => {
@@ -332,7 +482,7 @@ export function GatheringStatement() {
       }}
     >
       <div ref={imageLayerRef} className="home-gathering-statement__media">
-        {HERO_CONTENT.slides.map((slide, index) => (
+        {GATHERING_SLIDES.map((slide, index) => (
           <div
             key={slide.image}
             ref={(element) => {
@@ -366,18 +516,50 @@ export function GatheringStatement() {
       <div className="home-gathering-statement__shade" aria-hidden="true" />
 
       <div className="home-gathering-statement__content">
-        <p className="home-gathering-statement__eyebrow">South Indian table</p>
-        <h2 id="gathering-statement-heading" className="home-gathering-statement__title">
-          <span>WHERE EVERY</span>
-          <span>GATHERING FINDS</span>
-          <span>ITS FLAVOUR</span>
-        </h2>
-        <div className="home-gathering-statement__note">
-          <p>Rooted in the generous spirit of the South, Amani brings fire, fragrance and thoughtful hospitality to every table.</p>
-          <NavLink to="/gatherings/" className="home-gathering-statement__link">
-            Explore gatherings
-          </NavLink>
-        </div>
+        {GATHERING_SLIDES.map((slide, index) => (
+          <div
+            key={slide.image}
+            ref={(element) => {
+              textGroupRefs.current[index] = element;
+            }}
+            className={`home-gathering-statement__text-group ${
+              index === activeSlide ? 'is-active' : ''
+            }`}
+            aria-hidden={index !== activeSlide}
+          >
+            <h2
+              id={index === 0 ? 'gathering-statement-heading' : undefined}
+              className="home-gathering-statement__title"
+            >
+              {slide.titleLines.map((line, lineIndex) => (
+                <span key={lineIndex} className="home-gathering-statement__title-line-mask">
+                  <span
+                    ref={(element) => {
+                      if (!titleLineRefs.current[index]) {
+                        titleLineRefs.current[index] = [];
+                      }
+                      titleLineRefs.current[index][lineIndex] = element;
+                    }}
+                    className="home-gathering-statement__title-line"
+                  >
+                    {line}
+                  </span>
+                </span>
+              ))}
+            </h2>
+            <div
+              ref={(element) => {
+                noteRefs.current[index] = element;
+              }}
+              className="home-gathering-statement__note"
+            >
+              <p>{slide.description}</p>
+              <NavLink to={slide.ctaLink} className="home-gathering-statement__link">
+                {slide.ctaText}
+              </NavLink>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="home-gathering-statement__navigation" aria-label="Banner controls">
@@ -386,6 +568,7 @@ export function GatheringStatement() {
           className="home-gathering-statement__arrow"
           aria-label="Show previous banner image"
           onClick={() => {
+            userClickedRef.current = true;
             lastAdvanceRef.current = Date.now();
             showPreviousSlide();
           }}
@@ -394,7 +577,7 @@ export function GatheringStatement() {
         </button>
 
         <div className="home-gathering-statement__pagination" aria-label="Choose a banner image">
-          {HERO_CONTENT.slides.map((slide, index) => (
+          {GATHERING_SLIDES.map((slide, index) => (
             <button
               key={slide.image}
               type="button"
@@ -402,6 +585,7 @@ export function GatheringStatement() {
               aria-label={`Show banner image ${index + 1}`}
               aria-current={activeSlide === index ? 'true' : undefined}
               onClick={() => {
+                userClickedRef.current = true;
                 lastAdvanceRef.current = Date.now();
                 goToSlide(index, index > activeIndexRef.current ? 1 : -1);
               }}
@@ -416,6 +600,7 @@ export function GatheringStatement() {
           className="home-gathering-statement__arrow"
           aria-label="Show next banner image"
           onClick={() => {
+            userClickedRef.current = true;
             lastAdvanceRef.current = Date.now();
             showNextSlide();
           }}

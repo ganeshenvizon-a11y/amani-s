@@ -20,12 +20,13 @@
   --amani-maroon-dark:    #551317; /* Deep maroon hover/active */
   --amani-maroon-tint:    rgba(122, 31, 36, 0.1);
   --amani-terracotta:     #A2553E; /* Muted terracotta */
+  --amani-terracotta-dark: #2E130B; /* Deep dark terracotta brown variant */
   --amani-olive:          #6D7254; /* Banana-leaf olive */
   --amani-turmeric:       #C99732; /* Restrained turmeric accent */
 
   /* Dark Editorial Scenes */
-  --amani-void:           #11100E; /* Cinematic near black */
-  --amani-dark-warm:      #1B1814; /* Warm dark surface */
+  --amani-void:           #2E130B; /* Deep terracotta brown dark background */
+  --amani-dark-warm:      #3A190E; /* Warm dark terracotta surface */
   --amani-cream-on-dark:  #F4EDDF; /* Warm ivory text on dark */
   --amani-cream-muted:    rgba(244, 237, 223, 0.7);
 

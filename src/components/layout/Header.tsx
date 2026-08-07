@@ -13,6 +13,7 @@ import {
   SECONDARY_OPEN_NAV_LINKS,
   CTA_NAV_LINK,
 } from '../../config/navigation';
+import { BRAND_CONFIG } from '../../config/brand';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -304,7 +305,11 @@ export function Header() {
             className="restaurant-header__brand"
             aria-label="Amani Restaurant Home"
           >
-            <span className="restaurant-header__brand-text">AMANI</span>
+            <img
+              src={BRAND_CONFIG.logoWordmarkPng}
+              alt="Amani's"
+              className="restaurant-header__logo-img"
+            />
           </NavLink>
 
           {/* Right Hamburger / Close Control */}

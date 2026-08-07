@@ -17,8 +17,8 @@ export function PublicLayout({ children }: PublicLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--amani-canvas)] text-[var(--amani-ink)] font-sans">
-      {/* Traditional Rangoli Kolam / Chakri Custom Cursor */}
-      <RangoliChakriCursor />
+      {/* Traditional Rangoli Kolam / Chakri Custom Cursor — Home Page Only */}
+      {isHomePage && <RangoliChakriCursor />}
 
       {/* Floating Fixed Header */}
       <Header />

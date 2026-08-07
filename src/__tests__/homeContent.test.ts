@@ -23,7 +23,7 @@ describe('Homepage Content Structure', () => {
   });
 
   it('should have 4 signature experiences', () => {
-    expect(EXPERIENCES_CONTENT.experiences).toHaveLength(4);
+    expect(EXPERIENCES_CONTENT.experiences).toHaveLength(5);
   });
 
   it('should have 4 signature dishes', () => {
