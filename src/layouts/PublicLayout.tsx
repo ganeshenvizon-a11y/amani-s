@@ -5,6 +5,7 @@
 import type { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
+import { Footer } from '../components/layout/Footer';
 import { RangoliChakriCursor } from '../components/motion/RangoliChakriCursor';
 
 interface PublicLayoutProps {
@@ -31,6 +32,9 @@ export function PublicLayout({ children }: PublicLayoutProps) {
       >
         {children}
       </main>
+
+      {/* 100VH Cinematic Interactive Footer */}
+      <Footer />
     </div>
   );
 }

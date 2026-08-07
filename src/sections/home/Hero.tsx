@@ -4,7 +4,6 @@
  */
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import { HERO_CONTENT } from '../../content/home';
 import { gsap } from '../../lib/gsap';
 
 const HERO_CARDS = [
@@ -32,7 +31,6 @@ const HERO_CARDS = [
     image: '/media/images/grandma-cooking-stone-2.png',
     alt: 'Grandmother grinding spices on a traditional silbatta stone',
   },
-  HERO_CONTENT.slides[4],
 ];
 
 const CARD_ROTATION_RANGES = [
@@ -42,7 +40,6 @@ const CARD_ROTATION_RANGES = [
   [-3, 4],
   [-11, -6],
   [7, 12],
-  [10, 16],
 ] as const;
 
 const HERO_CARD_META = [
@@ -52,7 +49,6 @@ const HERO_CARD_META = [
   { stamp: 'WARM AMBIENCE', tag: 'RESTAURANT INTERIOR' },
   { stamp: 'NAATU KODI', tag: 'NAATU KODI PULUSU' },
   { stamp: 'ROLU ROKALI', tag: 'STONE GROUND SPICES' },
-  { stamp: 'SHARED TABLE', tag: 'FAMILY MEMORY' },
 ];
 
 type HeroCardStyle = CSSProperties & {
