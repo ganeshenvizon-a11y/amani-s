@@ -45,6 +45,19 @@ const SIGNATURE_DISHES = [
   },
 ] as const;
 
+// Each card keeps a distinct resting angle so the reveal feels like a casually
+// placed pile of printed menus, rather than perfectly aligned panels.
+const CARD_TILTS = [-3.4, 2.6, -1.9, 3.1, -2.5, 1.8, -3.0] as const;
+const CARD_NUDGES = [
+  { x: -5, y: 1 },
+  { x: 4, y: -2 },
+  { x: -3, y: 2 },
+  { x: 6, y: 0 },
+  { x: -6, y: -1 },
+  { x: 3, y: 2 },
+  { x: -2, y: -2 },
+] as const;
+
 export function SignatureDishes() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<HTMLElement[]>([]);
@@ -61,9 +74,10 @@ export function SignatureDishes() {
           autoAlpha: 1,
           x: 28,
           yPercent: 115,
+          rotation: (index) => CARD_TILTS[index],
           scale: 1,
         });
-        gsap.set(cards[0], { x: 0, yPercent: 0, zIndex: 1 });
+        gsap.set(cards[0], { x: 0, yPercent: 0, rotation: CARD_TILTS[0], zIndex: 1 });
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -85,11 +99,14 @@ export function SignatureDishes() {
 
           for (let depth = 0; depth <= stackStart; depth += 1) {
             const stackedCard = cards[stackStart - depth];
+            const stackedIndex = stackStart - depth;
+            const nudge = CARD_NUDGES[stackedIndex];
             timeline.to(
               stackedCard,
               {
-                x: -(depth + 1) * 10,
-                y: (depth + 1) * 16,
+                x: -(depth + 1) * 10 + nudge.x,
+                y: (depth + 1) * 16 + nudge.y,
+                rotation: CARD_TILTS[stackedIndex],
                 scale: 1 - (depth + 1) * 0.028,
                 duration: 0.72,
                 ease: 'power2.out',
@@ -103,6 +120,7 @@ export function SignatureDishes() {
             {
               x: 0,
               yPercent: 0,
+              rotation: CARD_TILTS[incomingIndex],
               scale: 1,
               duration: 0.9,
               ease: 'power3.out',
