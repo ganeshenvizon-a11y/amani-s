@@ -4,7 +4,7 @@
  * Uses Instrument Sans typography matching sections 01–03.
  */
 
-import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type ThaliChoice = {
@@ -75,6 +75,13 @@ export function ThaliExperience() {
   const [wordIndex, setWordIndex] = useState(0);
   const [wordState, setWordState] = useState<'idle' | 'leaving' | 'entering'>('idle');
 
+  // Hover-reveal is a pointer interaction — enable it only on devices that can
+  // actually hover (desktop). On touch (mobile/tablet) the thali shows in full.
+  const [canHover, setCanHover] = useState(() =>
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches,
+  );
+
   const animateLens = () => {
     const stage = stageRef.current;
     if (!stage) {
@@ -123,6 +130,17 @@ export function ThaliExperience() {
 
   useEffect(() => () => {
     if (lensFrameRef.current !== null) cancelAnimationFrame(lensFrameRef.current);
+  }, []);
+
+  useEffect(() => {
+    const query = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => {
+      setCanHover(query.matches);
+      if (!query.matches) setIsRevealing(false);
+    };
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
   }, []);
 
   useEffect(() => {
@@ -242,23 +260,43 @@ export function ThaliExperience() {
 
         <div
           ref={stageRef}
-          className={`thali-reveal-stage ${isRevealing ? 'is-revealing' : ''}`}
-          onPointerEnter={(event) => { setLensPosition(event); setIsRevealing(true); }}
-          onPointerMove={setLensPosition}
-          onPointerLeave={() => setIsRevealing(false)}
-          onPointerDown={(event) => { setLensPosition(event); setIsRevealing(true); }}
-          onFocus={() => setIsRevealing(true)}
-          onBlur={() => setIsRevealing(false)}
-          tabIndex={0}
-          role="img"
-          aria-label="An empty brass thali reveals a complete South Indian feast as you hover"
+          className={`thali-reveal-stage ${canHover ? '' : 'is-touch'} ${isRevealing ? 'is-revealing' : ''}`}
+          {...(canHover
+            ? {
+                onPointerEnter: (event: PointerEvent<HTMLDivElement>) => { setLensPosition(event); setIsRevealing(true); },
+                onPointerMove: setLensPosition,
+                onPointerLeave: () => setIsRevealing(false),
+                onPointerDown: (event: PointerEvent<HTMLDivElement>) => { setLensPosition(event); setIsRevealing(true); },
+                onFocus: () => setIsRevealing(true),
+                onBlur: () => setIsRevealing(false),
+                tabIndex: 0,
+                role: 'img',
+                'aria-label': 'An empty brass thali reveals a complete South Indian feast as you hover',
+              }
+            : {
+                onClick: () => setIsRevealing((revealed) => !revealed),
+                onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setIsRevealing((revealed) => !revealed);
+                  }
+                },
+                tabIndex: 0,
+                role: 'button',
+                'aria-pressed': isRevealing,
+                'aria-label': isRevealing
+                  ? 'Hide the thali'
+                  : 'Tap to reveal the complete South Indian feast',
+              })}
         >
           <img className="thali-reveal-stage__image" src="/media/images/thali/empty-plate.png" alt="" />
           <img className="thali-reveal-stage__image thali-reveal-stage__image--full" src="/media/images/thali/south-indian-thali.png" alt="" />
-          <span className="thali-reveal-stage__lens" aria-hidden="true" />
+          {canHover && <span className="thali-reveal-stage__lens" aria-hidden="true" />}
           <p className="thali-reveal-stage__hint">
             <span className="thali-reveal-stage__hint-icon" aria-hidden="true">+</span>
-            {isRevealing ? 'A FEAST, REVEALED' : 'HOVER TO REVEAL THE THALI'}
+            {canHover
+              ? (isRevealing ? 'A FEAST, REVEALED' : 'HOVER TO REVEAL THE THALI')
+              : (isRevealing ? 'A FEAST, REVEALED' : 'TAP TO REVEAL THE THALI')}
           </p>
           <span className="thali-reveal-stage__caption">THE AMANI'S THALI</span>
         </div>
