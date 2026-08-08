@@ -3,27 +3,53 @@
  * Production UI/UX refined implementation with clear image atmosphere, center logo focal point & baseline alignment.
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { gsap } from '../../lib/gsap';
 import { RESTAURANT_CONFIG } from '../../config/restaurant';
 import { BRAND_CONFIG } from '../../config/brand';
 
-// Clean SVG Up-Right Arrow Icon
-function ArrowUpRightIcon({ className = 'footer-social-icon' }: { className?: string }) {
+function InstagramIcon({ className = 'footer-social-icon' }: { className?: string }) {
   return (
     <svg
       className={className}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <line x1="7" y1="17" x2="17" y2="7" />
-      <polyline points="7 7 17 7 17 17" />
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
+      <circle cx="12" cy="12" r="3.6" />
+      <circle cx="17.45" cy="6.55" r="0.7" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className = 'footer-social-icon' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M13.8 21v-8h2.7l.4-3.1h-3.1V7.95c0-.9.25-1.5 1.56-1.5H17V3.68A22.9 22.9 0 0 0 14.58 3C12.18 3 10.54 4.47 10.54 7.16V9.9H8v3.1h2.54v8h3.26Z" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ className = 'footer-social-icon' }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20.5 11.5a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.55-4.35A8.4 8.4 0 1 1 20.5 11.5Z" />
+      <path d="M8.9 8.05c.18-.44.37-.45.65-.46h.55c.17 0 .42.06.51.38l.7 1.65c.08.2.05.43-.08.6l-.48.62c-.1.13-.1.3-.02.43.37.64.9 1.17 1.55 1.54.13.08.3.07.43-.03l.62-.48c.17-.13.4-.16.6-.08l1.65.7c.32.1.38.34.38.51v.55c-.01.28-.02.47-.46.65-.39.16-1.26.05-2.44-.52-1.04-.5-2.15-1.46-2.88-2.75-.57-1.01-.68-1.81-.51-2.18Z" />
     </svg>
   );
 }
@@ -31,6 +57,7 @@ function ArrowUpRightIcon({ className = 'footer-social-icon' }: { className?: st
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const mediaImgRef = useRef<HTMLImageElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
   
   // Smooth pointer tracking interpolation
   const targetPos = useRef({ x: 50, y: 50 });
@@ -146,6 +173,19 @@ export function Footer() {
     };
   }, []);
 
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollableHeight > 0 ? Math.min(window.scrollY / scrollableHeight, 1) : 0);
+    };
+
+    updateScrollProgress();
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    return () => window.removeEventListener('scroll', updateScrollProgress);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
   return (
     <footer ref={footerRef} className="site-footer" aria-label="Site Footer">
       {/* Background Media Photograph with 10-15% reduced overlay */}
@@ -241,7 +281,35 @@ export function Footer() {
         <div className="w-full flex flex-col justify-end">
           {/* Navigation & Social Links Row — Baseline Aligned */}
           <div className="footer-middle-row">
-            <nav aria-label="Footer Navigation">
+            <div className="footer-brand-group">
+              <button type="button" className="footer-scroll-top" onClick={scrollToTop} aria-label="Back to top">
+                <svg className="footer-scroll-top__loader" viewBox="0 0 40 40" aria-hidden="true">
+                  <circle className="footer-scroll-top__track" cx="20" cy="20" r="16" />
+                  <circle
+                    className="footer-scroll-top__progress"
+                    cx="20"
+                    cy="20"
+                    r="16"
+                    pathLength="1"
+                    style={{ strokeDasharray: 1, strokeDashoffset: 1 - scrollProgress }}
+                  />
+                </svg>
+                <svg className="footer-scroll-top__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 17V7M8 11l4-4 4 4" />
+                </svg>
+              </button>
+
+              <div className="footer-closing-gesture">
+                <img
+                  src={BRAND_CONFIG.logoSvg}
+                  alt="Amani's South Indian Kitchen"
+                  className="footer-wordmark-img"
+                />
+              </div>
+            </div>
+
+            <div className="footer-link-groups">
+              <nav aria-label="Footer Navigation">
               <ul className="footer-nav-list">
                 <li className="flex items-center">
                   {/* Small Quiet Top-Left Brand Motif */}
@@ -283,18 +351,18 @@ export function Footer() {
                   </NavLink>
                 </li>
               </ul>
-            </nav>
+              </nav>
 
-            <ul className="footer-social-list" aria-label="Social Media Links">
+              <ul className="footer-social-list" aria-label="Social Media Links">
               <li>
                 <a
                   href={RESTAURANT_CONFIG.contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-social-link"
+                  aria-label="Follow Amani's on Instagram"
                 >
-                  <span>INSTAGRAM</span>
-                  <ArrowUpRightIcon />
+                  <InstagramIcon />
                 </a>
               </li>
               <li>
@@ -303,9 +371,9 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-social-link"
+                  aria-label="Follow Amani's on Facebook"
                 >
-                  <span>FACEBOOK</span>
-                  <ArrowUpRightIcon />
+                  <FacebookIcon />
                 </a>
               </li>
               <li>
@@ -314,21 +382,13 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-social-link"
+                  aria-label="Message Amani's on WhatsApp"
                 >
-                  <span>WHATSAPP</span>
-                  <ArrowUpRightIcon />
+                  <WhatsAppIcon />
                 </a>
               </li>
-            </ul>
-          </div>
-
-          {/* Centered Amani's Logo Signature (Emotional Focal Point) */}
-          <div className="footer-closing-gesture">
-            <img
-              src={BRAND_CONFIG.logoSvg}
-              alt="Amani's South Indian Kitchen"
-              className="footer-wordmark-img"
-            />
+              </ul>
+            </div>
           </div>
 
           {/* Bottom Divider Line */}

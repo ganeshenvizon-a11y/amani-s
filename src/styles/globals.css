@@ -2162,18 +2162,19 @@ html, body {
 }
 
 .signature-stack__stage {
+  --signature-card-safe-inset: clamp(1.25rem, 2vw, 1.75rem);
   position: relative;
   justify-self: end;
   width: min(100%, 37rem);
   height: min(74svh, 43rem);
-  /* Let the deliberately tilted card corners extend beyond the stage. */
-  overflow: visible;
+  padding: var(--signature-card-safe-inset);
+  overflow: hidden;
 }
 
 .signature-stack-card {
   --signature-card-radius: 1.15rem;
   position: absolute;
-  inset: 0;
+  inset: var(--signature-card-safe-inset);
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   overflow: hidden;
@@ -2323,11 +2324,13 @@ html, body {
     gap: 1rem;
     width: 100%;
     height: auto;
+    padding: 0;
     overflow: visible;
   }
 
   .signature-stack-card {
     position: relative;
+    inset: auto;
     min-height: min(32rem, 100svh);
   }
 }
@@ -2358,11 +2361,13 @@ html, body {
     gap: 1rem;
     width: 100%;
     height: auto;
+    padding: 0;
     overflow: visible;
   }
 
   .signature-stack-card {
     position: relative;
+    inset: auto;
     min-height: min(32rem, 100svh);
   }
 
