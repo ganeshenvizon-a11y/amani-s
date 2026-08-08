@@ -81,9 +81,11 @@ export function Hero() {
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const cardMotion = useRef<CardMotion[]>([]);
   const activeCard = useRef<CardMotion | null>(null);
+  const cardInteraction = useRef({ index: -1, startX: 0, startY: 0, moved: false });
   const cardRotations = useRef<number[]>([]);
   const cardScales = useRef<number[]>([]);
   const [draggedCard, setDraggedCard] = useState<number | null>(null);
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   // Dynamic word animation state for HOME -> LOVE -> CARE -> HOME
   const [wordIndex, setWordIndex] = useState(0);
@@ -129,6 +131,22 @@ export function Hero() {
       clearTimeout(transitionTimerId);
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedCard === null) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedCard(null);
+    };
+
+    document.body.classList.add('image-lightbox-open');
+    window.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.body.classList.remove('image-lightbox-open');
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [selectedCard]);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -278,6 +296,10 @@ export function Hero() {
       const card = activeCard.current;
       if (!card || card.mode !== 'dragging') return;
 
+      if (Math.hypot(event.clientX - cardInteraction.current.startX, event.clientY - cardInteraction.current.startY) > 6) {
+        cardInteraction.current.moved = true;
+      }
+
       const elapsed = Math.max((event.timeStamp - card.lastPointerTime) / 1000, 0.016);
       const deltaX = event.clientX - card.lastPointerX;
       const deltaY = event.clientY - card.lastPointerY;
@@ -296,11 +318,13 @@ export function Hero() {
     const releaseCard = () => {
       const card = activeCard.current;
       if (!card) return;
+      const openedCardIndex = cardInteraction.current.moved ? -1 : cardInteraction.current.index;
       card.element.releasePointerCapture?.(card.element.dataset.pointerId ? Number(card.element.dataset.pointerId) : -1);
       delete card.element.dataset.pointerId;
       card.mode = reducedMotion ? 'resting' : 'throwing';
       activeCard.current = null;
       setDraggedCard(null);
+      if (openedCardIndex >= 0) setSelectedCard(openedCardIndex);
     };
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
@@ -337,6 +361,7 @@ export function Hero() {
     card.lastPointerX = event.clientX;
     card.lastPointerY = event.clientY;
     card.lastPointerTime = event.timeStamp;
+    cardInteraction.current = { index, startX: event.clientX, startY: event.clientY, moved: false };
     card.element.dataset.pointerId = String(event.pointerId);
     card.element.setPointerCapture(event.pointerId);
     card.element.style.willChange = 'transform';
@@ -389,7 +414,16 @@ export function Hero() {
               ref={(element) => { cardRefs.current[index] = element; }}
               className={`home-hero__card home-hero__card--retro home-hero__card--tear-${tearVariant} ${draggedCard === index ? 'is-grabbing' : ''}`}
               onPointerDown={(event) => startDrag(index, event)}
-              aria-label={`Drag card: ${card.alt}`}
+              onClick={() => {
+                if (!cardInteraction.current.moved) setSelectedCard(index);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setSelectedCard(index);
+                }
+              }}
+              aria-label={`Open or drag card: ${card.alt}`}
             >
               {/* Translucent Frosted Scotch Tape Strip */}
               <span className="home-hero__card-tape" aria-hidden="true" />
@@ -417,6 +451,27 @@ export function Hero() {
           );
         })}
       </div>
+
+      {selectedCard !== null && (
+        <div
+          className="hero-image-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Expanded image: ${HERO_CARDS[selectedCard].alt}`}
+          onPointerDown={(event) => {
+            if (event.target === event.currentTarget) setSelectedCard(null);
+          }}
+        >
+          <figure className="hero-image-lightbox__content">
+            <img src={HERO_CARDS[selectedCard].image} alt={HERO_CARDS[selectedCard].alt} />
+            <figcaption>{HERO_CARD_META[selectedCard].tag}</figcaption>
+            <button type="button" className="hero-image-lightbox__close" onClick={() => setSelectedCard(null)} aria-label="Close image">
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+            </button>
+          </figure>
+        </div>
+      )}
     </section>
   );
 }
