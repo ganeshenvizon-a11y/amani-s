@@ -303,7 +303,7 @@ export function Header() {
             to="/"
             onClick={() => isOpen && handleClose()}
             className="restaurant-header__brand"
-            aria-label="Amani Restaurant Home"
+            aria-label="Amani's Restaurant Home"
           >
             <img
               src={BRAND_CONFIG.logoWordmarkPng}
@@ -400,12 +400,12 @@ export function Header() {
             to="/stories/"
             onClick={handleClose}
             className="restaurant-menu__feature"
-            aria-label="Amani South Indian Kitchen feature"
+            aria-label="Amani's South Indian Kitchen feature"
             tabIndex={-1}
           >
             <img
               src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=1200&auto=format&fit=crop"
-              alt="Amani South Indian Kitchen"
+              alt="Amani's South Indian Kitchen"
               className="restaurant-menu__feature-media"
               loading="lazy"
             />

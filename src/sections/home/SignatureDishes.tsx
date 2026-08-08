@@ -141,7 +141,7 @@ export function SignatureDishes() {
           </NavLink>
         </header>
 
-        <div className="signature-stack__stage" aria-label="Amani signature dishes">
+        <div className="signature-stack__stage" aria-label="Amani's signature dishes">
           {SIGNATURE_DISHES.map((dish, index) => (
             <article
               className="signature-stack-card"

@@ -22,7 +22,7 @@ describe('Restaurant Status Calculation', () => {
   });
 
   it('should have valid restaurant config properties', () => {
-    expect(RESTAURANT_CONFIG.name).toBe('Amani');
+    expect(RESTAURANT_CONFIG.name).toBe("Amani's");
     expect(RESTAURANT_CONFIG.address.city).toBe('Hyderabad');
     expect(RESTAURANT_CONFIG.contact.phone).toBe('+91 40 2355 8899');
   });

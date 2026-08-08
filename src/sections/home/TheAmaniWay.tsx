@@ -12,7 +12,7 @@ export function TheAmaniWay() {
   return (
     <section
       className="section-padding bg-[var(--amani-paper)] text-[var(--amani-ink)] border-b border-[var(--amani-hairline)]"
-      aria-label="The Amani Way — Our Philosophy"
+      aria-label="The Amani's Way — Our Philosophy"
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10">
         {/* Entry Rangoli Line Divider */}
@@ -44,7 +44,7 @@ export function TheAmaniWay() {
           <div className="lg:col-span-6 aspect-[4/3] rounded-[var(--amani-radius-md)] overflow-hidden border border-[var(--amani-hairline)] shadow-sm">
             <img
               src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=1200&auto=format&fit=crop"
-              alt="Amani chef tempering aromatic South Indian spices with curry leaves and mustard seeds"
+              alt="Amani's chef tempering aromatic South Indian spices with curry leaves and mustard seeds"
               className="w-full h-full object-cover"
               loading="lazy"
               decoding="async"

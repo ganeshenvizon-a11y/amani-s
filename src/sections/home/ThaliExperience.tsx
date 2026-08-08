@@ -260,7 +260,7 @@ export function ThaliExperience() {
             <span className="thali-reveal-stage__hint-icon" aria-hidden="true">+</span>
             {isRevealing ? 'A FEAST, REVEALED' : 'HOVER TO REVEAL THE THALI'}
           </p>
-          <span className="thali-reveal-stage__caption">THE AMANI THALI</span>
+          <span className="thali-reveal-stage__caption">THE AMANI'S THALI</span>
         </div>
 
       </div>

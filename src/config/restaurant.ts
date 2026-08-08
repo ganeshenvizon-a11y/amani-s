@@ -15,7 +15,7 @@ export interface DaySchedule {
 }
 
 export const RESTAURANT_CONFIG = {
-  name: 'Amani',
+  name: "Amani's",
   subName: 'South Indian Kitchen',
   tagline: 'Made between food and feeling.',
   heroStatement: 'Come for the flavours. Stay for the feeling.',
@@ -37,6 +37,7 @@ export const RESTAURANT_CONFIG = {
     email: 'hello@amanirestaurant.in',
     instagram: 'https://instagram.com/amani.kitchen',
     directionsUrl: 'https://maps.google.com/?q=Amani+Restaurant+Jubilee+Hills+Hyderabad',
+    googleReviewUrl: 'https://www.google.com/maps/search/?api=1&query=Amani%20Restaurant%20Jubilee%20Hills%20Hyderabad',
   },
 
   timezone: 'Asia/Kolkata',

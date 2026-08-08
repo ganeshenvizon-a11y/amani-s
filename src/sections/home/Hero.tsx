@@ -21,7 +21,7 @@ const HERO_CARDS = [
   },
   {
     image: '/media/images/gathering-interior-01.webp',
-    alt: 'Warm and atmospheric restaurant interior ambience at Amani',
+    alt: "Warm and atmospheric restaurant interior ambience at Amani's",
   },
   {
     image: '/media/images/dish-naatu-kodi-pulusu.jpg',
@@ -345,7 +345,7 @@ export function Hero() {
   };
 
   return (
-    <section ref={heroRef} className="home-hero home-hero--editorial" aria-label="Welcome to Amani">
+    <section ref={heroRef} className="home-hero home-hero--editorial" aria-label="Welcome to Amani's">
       <div className="home-hero__bg-pattern" aria-hidden="true">
         <img
           src="/media/images/hero-pattern.png"
@@ -377,7 +377,7 @@ export function Hero() {
         </h1>
       </div>
 
-      <div className="home-hero__card-deck" aria-label="Draggable Amani visual introduction">
+      <div className="home-hero__card-deck" aria-label="Draggable Amani's visual introduction">
         {HERO_CARDS.map((card, index) => {
           const meta = HERO_CARD_META[index] || { stamp: 'AMANI 1974', tag: 'TIFFIN' };
           const tearVariant = (index % 4) + 1;

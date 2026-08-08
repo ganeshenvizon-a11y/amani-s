@@ -3,7 +3,7 @@
  */
 
 export const BRAND_CONFIG = {
-  name: 'Amani',
+  name: "Amani's",
   descriptor: 'South Indian Kitchen',
   tagline: 'Made between food and feeling.',
   logoSvg: '/media/images/amani-logo.svg',

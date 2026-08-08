@@ -14,7 +14,7 @@ export interface ReviewItem {
 export const GUEST_REVIEWS_CONTENT = {
   label: '06 / AT THE TABLE',
   heading: 'In the words of our guests',
-  intro: 'The clearest expression of Amani is often found in what people remember after the meal ends.',
+  intro: "The clearest expression of Amani's is often found in what people remember after the meal ends.",
   reviews: [
     {
       id: 'rev-01',
@@ -38,7 +38,7 @@ export const GUEST_REVIEWS_CONTENT = {
       author: 'Srinivas Reddy',
       source: 'Verified Reservation Guest',
       date: 'May 2026',
-      dishMentioned: 'Amani Banana Leaf Feast',
+      dishMentioned: "Amani's Banana Leaf Feast",
     },
     {
       id: 'rev-04',

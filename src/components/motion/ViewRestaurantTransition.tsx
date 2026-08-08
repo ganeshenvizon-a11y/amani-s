@@ -107,7 +107,7 @@ export function ViewRestaurantTransition({ onComplete }: ViewRestaurantTransitio
     <div
       ref={containerRef}
       className="fixed inset-0 z-[9999] pointer-events-none flex items-center justify-center overflow-hidden bg-[var(--amani-void)]"
-      aria-label="Entering Amani homepage"
+      aria-label="Entering Amani's homepage"
     >
       <div
         ref={panelRef}
@@ -116,7 +116,7 @@ export function ViewRestaurantTransition({ onComplete }: ViewRestaurantTransitio
         <div className="text-[var(--amani-maroon)] flex flex-col items-center gap-4">
           <RangoliPattern ref={rangoliRef} size={140} color="var(--amani-maroon)" strokeWidth={1.5} />
           <span className="text-[var(--amani-eyebrow)] tracking-[0.2em] text-[var(--amani-ink)] font-semibold mt-2">
-            AMANI · SOUTH INDIAN KITCHEN
+            AMANI'S · SOUTH INDIAN KITCHEN
           </span>
         </div>
       </div>

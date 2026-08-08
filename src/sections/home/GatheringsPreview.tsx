@@ -9,25 +9,28 @@ import { Reveal } from '../../components/motion/Reveal';
 const GATHERING_SLIDES = [
   {
     image: '/media/images/happy-south-indian-dining.png',
-    alt: 'Family enjoying a shared South Indian meal at Amani',
+    alt: "Family enjoying a shared South Indian meal at Amani's",
     label: 'Family celebrations',
   },
   {
     image: '/media/images/gathering-interior-01.webp',
-    alt: 'Warm Amani dining room prepared for a gathering',
+    alt: "Warm Amani's dining room prepared for a gathering",
     label: 'Slow evenings',
   },
   {
     image: '/media/images/gathering-interior-03.webp',
-    alt: 'Amani dining room with softly lit tables and warm details',
+    alt: "Amani's dining room with softly lit tables and warm details",
     label: 'Intimate dinners',
   },
   {
     image: '/media/images/gathering-interior-05.webp',
-    alt: 'Generous Amani restaurant space ready for a milestone meal',
+    alt: "Generous Amani's restaurant space ready for a milestone meal",
     label: 'Milestones',
   },
 ] as const;
+
+const DYNAMIC_GATHERING_WORDS = ['gather', 'love', 'cherish'] as const;
+const WORD_CYCLE_DELAY = 3000;
 
 interface PointerStart {
   x: number;
@@ -40,6 +43,43 @@ export function GatheringsPreview() {
   const pauseAutoplayRef = useRef(false);
   const pointerStartRef = useRef<PointerStart | null>(null);
   const totalSlides = GATHERING_SLIDES.length;
+
+  // Dynamic red word cycle state (gather -> love -> cherish -> gather)
+  const [wordIndex, setWordIndex] = useState(0);
+  const [wordState, setWordState] = useState<'idle' | 'leaving' | 'entering'>('idle');
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let timerId: ReturnType<typeof setTimeout>;
+    let transitionTimerId: ReturnType<typeof setTimeout>;
+
+    const scheduleNext = (currentIndex: number) => {
+      timerId = setTimeout(() => {
+        setWordState('leaving');
+
+        transitionTimerId = setTimeout(() => {
+          const nextIndex = (currentIndex + 1) % DYNAMIC_GATHERING_WORDS.length;
+          setWordIndex(nextIndex);
+          setWordState('entering');
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setWordState('idle');
+              scheduleNext(nextIndex);
+            });
+          });
+        }, 380);
+      }, WORD_CYCLE_DELAY);
+    };
+
+    scheduleNext(0);
+
+    return () => {
+      clearTimeout(timerId);
+      clearTimeout(transitionTimerId);
+    };
+  }, []);
 
   const goToSlide = useCallback((nextIndex: number) => {
     const currentIndex = activeIndexRef.current;
@@ -87,7 +127,17 @@ export function GatheringsPreview() {
         <div className="gatherings-content">
           <Reveal direction="up">
             <span className="gatherings-eyebrow">{GATHERINGS_PREVIEW_CONTENT.label}</span>
-            <h2 id="gatherings-heading" className="gatherings-heading">{GATHERINGS_PREVIEW_CONTENT.heading}</h2>
+            <h2 id="gatherings-heading" className="gatherings-heading">
+              <span className="gatherings-heading__line">Made to</span>
+              <span className="gatherings-heading__line gatherings-heading__line--dynamic">
+                <span className="gatherings-dynamic-wrap">
+                  <span className={`gatherings-word--red is-${wordState}`}>
+                    {DYNAMIC_GATHERING_WORDS[wordIndex]}
+                  </span>
+                </span>
+                <span aria-hidden="true">.</span>
+              </span>
+            </h2>
             <p className="gatherings-body">{GATHERINGS_PREVIEW_CONTENT.body}</p>
           </Reveal>
 
@@ -114,7 +164,7 @@ export function GatheringsPreview() {
           <div
             className="gatherings-slider"
             aria-roledescription="carousel"
-            aria-label="Amani gatherings gallery"
+            aria-label="Amani's gatherings gallery"
             tabIndex={0}
             onPointerDown={(event) => { pointerStartRef.current = { x: event.clientX, y: event.clientY }; }}
             onPointerUp={handlePointerUp}

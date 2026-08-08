@@ -18,17 +18,17 @@ export function VisitPreview() {
   const landmarkPins = [
     { top: '22%', left: '58%', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=300&auto=format&fit=crop', alt: 'Ghee Podi Idli' },
     { top: '24%', left: '84%', image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=300&auto=format&fit=crop', alt: 'Crisp Dosa' },
-    { top: '74%', left: '76%', image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=300&auto=format&fit=crop', alt: 'Amani Dining Room' },
+    { top: '74%', left: '76%', image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=300&auto=format&fit=crop', alt: "Amani's Dining Room" },
   ];
 
   return (
-    <section className="visit-section-fullmap" aria-label="Visit Amani">
+    <section className="visit-section-fullmap" aria-label="Visit Amani's">
       {/* Full-Bleed Map Background (Center shifted so Jubilee Hills is on the right) */}
       <div className="visit-fullmap-bg">
         <iframe
           src="https://www.openstreetmap.org/export/embed.html?bbox=78.3820%2C17.4210%2C78.4260%2C17.4410&amp;layer=mapnik&amp;marker=17.4318%2C78.4072"
           className="visit-fullmap-iframe"
-          title="Amani Jubilee Hills Location Map"
+          title="Amani's Jubilee Hills Location Map"
           loading="lazy"
         />
 
@@ -57,7 +57,7 @@ export function VisitPreview() {
             <div className="visit-popover-image-wrapper">
               <img
                 src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=600&auto=format&fit=crop"
-                alt="Amani Dining Atmosphere"
+                alt="Amani's Dining Atmosphere"
                 className="visit-popover-image"
                 loading="lazy"
               />
@@ -83,15 +83,15 @@ export function VisitPreview() {
             target="_blank"
             rel="noopener noreferrer"
             className="visit-map-primary-badge"
-            title="Hover to preview Amani location & photography"
+            title="Hover to preview Amani's location & photography"
           >
             <div className="visit-map-badge-pill">
               <img
                 src="/media/images/amani-loader-symbol.svg"
-                alt="Amani Chakra Logo"
+                alt="Amani's Chakra Logo"
                 className="visit-map-chakra-icon"
               />
-              <span>Amani · Jubilee Hills ★ {RESTAURANT_CONFIG.googleRating}</span>
+              <span>Amani's · Jubilee Hills ★ {RESTAURANT_CONFIG.googleRating}</span>
             </div>
             <div className="visit-map-badge-pointer" />
           </a>
@@ -145,7 +145,7 @@ export function VisitPreview() {
               <p className="visit-value">
                 <a
                   href={`tel:${RESTAURANT_CONFIG.contact.phoneRaw}`}
-                  aria-label={`Call Amani at ${RESTAURANT_CONFIG.contact.phone}`}
+                  aria-label={`Call Amani's at ${RESTAURANT_CONFIG.contact.phone}`}
                 >
                   {RESTAURANT_CONFIG.contact.phone}
                 </a>

@@ -89,7 +89,7 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
       ref={loaderRef}
       className="site-loader"
       role="status"
-      aria-label="Loading Amani"
+      aria-label="Loading Amani's"
     >
       <div ref={logoRef} className="site-loader__logo">
         {/* Logo mark */}

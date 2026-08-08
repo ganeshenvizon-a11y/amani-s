@@ -42,7 +42,7 @@ export function InsideAmani() {
   return (
     <section
       className="section-padding bg-[var(--amani-canvas)] text-[var(--amani-ink)] border-b border-[var(--amani-hairline)]"
-      aria-label="Inside Amani — Photo Gallery"
+      aria-label="Inside Amani's — Photo Gallery"
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-10">
         {/* Section Header */}

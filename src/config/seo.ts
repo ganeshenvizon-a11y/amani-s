@@ -4,8 +4,8 @@
 import { RESTAURANT_CONFIG } from './restaurant';
 
 export const SEO_CONFIG = {
-  defaultTitle: 'Amani — South Indian Restaurant in Jubilee Hills, Hyderabad',
-  defaultDescription: 'Discover Amani in Jubilee Hills, Hyderabad—South Indian food shaped by familiar recipes, genuine hospitality and a warm setting for everyday meals and meaningful gatherings.',
+  defaultTitle: "Amani's — South Indian Restaurant in Jubilee Hills, Hyderabad",
+  defaultDescription: "Discover Amani's in Jubilee Hills, Hyderabad—South Indian food shaped by familiar recipes, genuine hospitality and a warm setting for everyday meals and meaningful gatherings.",
   siteUrl: 'https://amanirestaurant.in',
   ogImage: 'https://amanirestaurant.in/og/amani-og.jpg',
 };

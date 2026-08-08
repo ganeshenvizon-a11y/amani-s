@@ -19,23 +19,23 @@ type SwipeStart = { x: number; y: number };
 const GATHERING_SLIDE_IMAGES = [
   {
     image: '/media/images/gathering-interior-01.webp',
-    alt: 'Sunlit Amani dining room with warm wood, brass accents, and lush plants',
+    alt: "Sunlit Amani's dining room with warm wood, brass accents, and lush plants",
   },
   {
     image: '/media/images/gathering-interior-02.webp',
-    alt: 'Amani dining room with warm arched wood details and softly lit pendant lamps',
+    alt: "Amani's dining room with warm arched wood details and softly lit pendant lamps",
   },
   {
     image: '/media/images/gathering-interior-03.webp',
-    alt: 'An intimate Amani banquette with brass, wood, and hand-finished details',
+    alt: "An intimate Amani's banquette with brass, wood, and hand-finished details",
   },
   {
     image: '/media/images/gathering-interior-04.webp',
-    alt: 'Amani restaurant interior with a warm open kitchen and handcrafted lighting',
+    alt: "Amani's restaurant interior with a warm open kitchen and handcrafted lighting",
   },
   {
     image: '/media/images/gathering-interior-05.webp',
-    alt: 'Amani dining room with arched windows, warm wood beams, and brass lanterns',
+    alt: "Amani's dining room with arched windows, warm wood beams, and brass lanterns",
   },
 ] as const;
 
@@ -473,7 +473,7 @@ export function GatheringStatement() {
       className="home-gathering-statement"
       aria-labelledby="gathering-statement-heading"
       aria-roledescription="carousel"
-      aria-label="Amani restaurant highlights"
+      aria-label="Amani's restaurant highlights"
       tabIndex={0}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}

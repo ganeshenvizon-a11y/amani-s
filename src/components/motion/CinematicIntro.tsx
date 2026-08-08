@@ -201,7 +201,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     <section
       className="cinematic-section"
       id="cinematicSection"
-      aria-label="Amani restaurant introduction"
+      aria-label="Amani's restaurant introduction"
     >
       <div className="cinematic-stage" id="cinematicStage">
         {/* Scrubbed video — muted, no autoplay */}
@@ -232,7 +232,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
         <div className="final-layer" id="finalLayer" ref={finalLayerRef}>
           <div className="final-overlay" />
           <div className="final-content">
-            <h1 className="final-title">Welcome to Amani</h1>
+            <h1 className="final-title">Welcome to Amani's</h1>
             <p className="final-subtitle">What would you like to explore?</p>
             <nav className="final-actions" aria-label="Choose where to go">
               <button

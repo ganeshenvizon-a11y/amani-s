@@ -2721,6 +2721,119 @@ html, body {
   margin-top: 1.25rem;
 }
 
+.amani-google-review-card {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 25.5rem);
+  margin-top: 1.6rem;
+  padding: 14px 16px;
+  color: #181512;
+  text-align: left;
+  text-decoration: none;
+  background-color: #F6F1E7;
+  border: 1px solid rgba(24, 21, 18, 0.10);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(30, 24, 18, 0.06);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 320ms ease,
+              box-shadow 320ms ease;
+}
+
+.amani-google-review-card__mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  flex: 0 0 auto;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.amani-google-review-card__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.amani-google-review-card__eyebrow {
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  color: rgba(24, 21, 18, 0.55);
+  text-transform: uppercase;
+}
+
+.amani-google-review-card__title {
+  overflow: hidden;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #181512;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amani-google-review-card__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 14px;
+  line-height: 1;
+  color: #181512;
+  white-space: nowrap;
+}
+
+.amani-google-review-card__rating strong {
+  font-weight: 600;
+}
+
+.amani-google-review-card__star {
+  color: #E67E22;
+  font-size: 14px;
+}
+
+.amani-google-review-card__arrow {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  flex: 0 0 auto;
+  color: #181512;
+  background: rgba(24, 21, 18, 0.05);
+  border: 1px solid rgba(24, 21, 18, 0.10);
+  border-radius: 50%;
+  transition: background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.amani-google-review-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(24, 21, 18, 0.22);
+  box-shadow: 0 12px 28px rgba(30, 24, 18, 0.09);
+}
+
+.amani-google-review-card:hover .amani-google-review-card__arrow {
+  background-color: #4285F4;
+  border-color: #4285F4;
+  color: #FFFFFF;
+  transform: translate(1px, -1px);
+}
+
+.amani-google-review-card:focus-visible {
+  outline: 2px solid #4285F4;
+  outline-offset: 4px;
+}
+
 /* Card wrappers */
 .amani-story-card {
   z-index: 2;
@@ -2779,24 +2892,92 @@ html, body {
   filter: saturate(0.95) contrast(1.04) sepia(0);
 }
 
-/* Hover quote overlay */
-.amani-story-hover-overlay {
+/* Side Thought-Cloud Memory Popover Tooltip (Appears on Hover) */
+.amani-story-cloud {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(18, 15, 12, 0.85) 0%, rgba(18, 15, 12, 0.25) 60%, transparent 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.25rem 1rem 1.6rem;
+  top: 50%;
+  z-index: 45;
+  width: clamp(210px, 16vw, 245px);
+  background: #FFFDF9;
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: 0 16px 36px -6px rgba(24, 21, 18, 0.2), 0 4px 14px rgba(24, 21, 18, 0.08);
+  border: 1px solid rgba(23, 20, 17, 0.08);
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 350ms ease, transform 350ms ease;
+  visibility: hidden;
   pointer-events: none;
+  transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 300ms ease;
 }
 
-.amani-story-card-inner:hover .amani-story-hover-overlay {
+/* Right-side cloud */
+.amani-story-cloud--right {
+  left: calc(100% + 14px);
+  transform: translateY(-50%) translateX(-12px) scale(0.92);
+}
+
+.amani-story-card-inner:hover .amani-story-cloud--right {
   opacity: 1;
-  transform: translateY(0);
+  visibility: visible;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.amani-story-cloud--right .amani-story-cloud-arrow {
+  position: absolute;
+  top: 50%;
+  left: -7px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #FFFDF9;
+  border-left: 1px solid rgba(23, 20, 17, 0.08);
+  border-bottom: 1px solid rgba(23, 20, 17, 0.08);
+}
+
+/* Left-side cloud */
+.amani-story-cloud--left {
+  right: calc(100% + 14px);
+  transform: translateY(-50%) translateX(12px) scale(0.92);
+}
+
+.amani-story-card-inner:hover .amani-story-cloud--left {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.amani-story-cloud--left .amani-story-cloud-arrow {
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #FFFDF9;
+  border-right: 1px solid rgba(23, 20, 17, 0.08);
+  border-top: 1px solid rgba(23, 20, 17, 0.08);
+}
+
+.amani-story-cloud-quote {
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--amani-ink, #171411);
+  font-weight: 500;
+  margin: 0 0 6px 0;
+  text-align: left;
+}
+
+.amani-story-cloud-author {
+  display: block;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--amani-terracotta, #A2553E);
+  text-align: left;
 }
 
 /* Mobile Quote Overlay (Always subtle visible) */
@@ -2891,6 +3072,10 @@ html, body {
     display: flex;
     flex-direction: column;
   }
+  .amani-google-review-card {
+    width: min(100%, 21.5rem);
+    margin-top: 1.35rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2960,6 +3145,9 @@ html, body {
 }
 
 .gatherings-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   font-family: "Clash Display", sans-serif;
   font-weight: 400;
   font-size: clamp(64px, 6.2vw, 108px);
@@ -2968,6 +3156,48 @@ html, body {
   color: #181512;
   margin: 0 0 clamp(24px, 3vh, 30px) 0;
   text-transform: none;
+}
+
+.gatherings-heading__line {
+  display: block;
+}
+
+.gatherings-heading__line--dynamic {
+  display: flex;
+  align-items: baseline;
+  gap: 0.03em;
+}
+
+.gatherings-dynamic-wrap {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.04em;
+  margin-bottom: -0.04em;
+}
+
+.gatherings-word--red {
+  display: inline-block;
+  color: var(--amani-terracotta, #A2553E);
+  font-weight: 400;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 380ms ease;
+  will-change: transform, opacity;
+}
+
+.gatherings-word--red.is-idle {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.gatherings-word--red.is-leaving {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.gatherings-word--red.is-entering {
+  transform: translateY(100%);
+  opacity: 0;
 }
 
 .gatherings-body {
@@ -3003,9 +3233,10 @@ html, body {
 }
 
 .gatherings-row__text {
-  font-family: var(--amani-font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(18px, 1.4vw, 24px);
-  font-weight: 400;
+  font-family: "Clash Display", var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: clamp(17px, 1.3vw, 21px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: #181512;
   transition: color 300ms ease;
 }

@@ -92,7 +92,7 @@ export function AmaniNumbers() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="amani-numbers" aria-label="Amani by the numbers">
+    <section ref={sectionRef} className="amani-numbers" aria-label="Amani's by the numbers">
       <div className="amani-numbers__grid">
         {/* Panel 01 - 07 Signature Plates */}
         <div className="amani-numbers__col">

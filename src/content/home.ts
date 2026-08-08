@@ -63,7 +63,7 @@ export const HERO_CONTENT = {
       image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
       alt: 'Golden crisp Mysore masala dosa served with sambar and coconut chutneys',
       titleLines: ['Where every', 'gathering finds', 'its flavour'],
-      description: 'Rooted in the generous spirit of the South, Amani brings fire, fragrance and thoughtful hospitality to every table.',
+      description: "Rooted in the generous spirit of the South, Amani's brings fire, fragrance and thoughtful hospitality to every table.",
       ctaText: 'Explore gatherings',
       ctaLink: '/gatherings/',
     },
@@ -136,13 +136,13 @@ export const MOOD_FINDER_CONTENT = {
       title: 'Made to share',
       description: 'Plates for passing, tasting and bringing everyone into the meal.',
       image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=84&w=1400&auto=format&fit=crop',
-      dishes: ['Amani Banana Leaf Feast', 'Family Tiffin Platter', 'Shared Curry Bowls'],
+      dishes: ["Amani's Banana Leaf Feast", 'Family Tiffin Platter', 'Shared Curry Bowls'],
       menuLink: '/menu/#feasts',
     },
     {
       id: 'first',
-      title: 'My first time at Amani',
-      description: 'A considered introduction to the dishes that represent Amani best.',
+      title: "My first time at Amani's",
+      description: "A considered introduction to the dishes that represent Amani's best.",
       image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=84&w=1400&auto=format&fit=crop',
       dishes: ['Ghee Podi Idli', 'Mysore Masala Dosa', 'Filter Coffee'],
       menuLink: '/menu/#signatures',
@@ -278,7 +278,7 @@ export const SIGNATURE_DISHES_CONTENT = {
 };
 
 export const AMANI_WAY_CONTENT = {
-  label: '04 / THE AMANI WAY',
+  label: "04 / THE AMANI'S WAY",
   heading: 'Thoughtful in every detail',
   body: 'We believe hospitality is felt in the details: food prepared with attention, a welcome that feels natural, thoughtful recommendations and a room where every table can find its own rhythm.',
   principles: [
@@ -298,12 +298,12 @@ export const AMANI_WAY_CONTENT = {
       description: 'Attentive when needed, unhurried where it matters and always respectful of the table.',
     },
   ] as PrincipleItem[],
-  ctaText: 'Discover the Amani Story',
+  ctaText: "Discover the Amani's Story",
   ctaLink: '/stories/',
 };
 
 export const INSIDE_AMANI_CONTENT = {
-  label: '05 / INSIDE AMANI',
+  label: "05 / INSIDE AMANI'S",
   heading: 'Where the atmosphere takes shape',
   body: 'Light, texture, movement and the quiet energy of a room coming alive—from the first table prepared to the final conversation of the evening.',
   gallery: [
@@ -353,7 +353,7 @@ export const INSIDE_AMANI_CONTENT = {
 };
 
 export const VISIT_PREVIEW_CONTENT = {
-  label: 'VISIT AMANI',
+  label: "VISIT AMANI'S",
   heading: 'Come find your table.',
   description: 'Find us in Jubilee Hills. Check today’s hours, get directions or call before you arrive.',
   image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop',
@@ -361,7 +361,7 @@ export const VISIT_PREVIEW_CONTENT = {
 };
 
 export const GATHERINGS_PREVIEW_CONTENT = {
-  label: '08 / GATHERINGS',
+  label: 'GATHERINGS',
   heading: 'Made to gather.',
   body: 'From family dinners to meaningful celebrations, we make room for the moments worth sharing.',
   occasions: [
@@ -377,7 +377,7 @@ export const GATHERINGS_PREVIEW_CONTENT = {
   
   finalInvitation: {
     heading: 'Meet us around the table',
-    description: 'Choose the time, bring the people and let the rest of the meal unfold at Amani.',
+    description: "Choose the time, bring the people and let the rest of the meal unfold at Amani's.",
     ctaText: 'Reserve a Table',
     ctaLink: '/visit/#reserve',
   },
