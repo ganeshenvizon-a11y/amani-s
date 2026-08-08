@@ -10,7 +10,6 @@ export function RangoliChakriCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
 
   const pos = useRef({ x: -100, y: -100 });
-  const currentPos = useRef({ x: -100, y: -100 });
 
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);

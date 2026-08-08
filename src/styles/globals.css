@@ -899,6 +899,98 @@ html, body {
   pointer-events: none;
 }
 
+body.image-lightbox-open { overflow: hidden; }
+
+.hero-image-lightbox {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  padding: clamp(1.25rem, 4vw, 4rem);
+  background: rgba(24, 16, 10, 0.38);
+  backdrop-filter: blur(15px) saturate(0.78);
+  -webkit-backdrop-filter: blur(15px) saturate(0.78);
+  place-items: center;
+  animation: hero-image-lightbox-fade 220ms ease-out;
+}
+
+.hero-image-lightbox__content {
+  position: relative;
+  display: grid;
+  width: fit-content;
+  max-width: min(90vw, 72rem);
+  max-height: 92svh;
+  margin: 0;
+  padding: clamp(0.45rem, 0.8vw, 0.75rem);
+  background: #f7f1e6;
+  box-shadow: 0 2rem 6rem rgba(16, 9, 5, 0.44);
+  animation: hero-image-lightbox-pop 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-image-lightbox__content img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(92svh - 4rem);
+  object-fit: contain;
+}
+
+.hero-image-lightbox__content figcaption {
+  padding: 0.62rem 0.35rem 0.1rem;
+  color: #4a3828;
+  font-family: 'Courier New', monospace;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-image-lightbox__close {
+  position: absolute;
+  top: -0.8rem;
+  right: -0.8rem;
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  color: #f7f1e6;
+  cursor: pointer;
+  background: #3b1c12;
+  border: 1px solid rgba(247, 241, 230, 0.5);
+  border-radius: 50%;
+  box-shadow: 0 0.45rem 1.15rem rgba(25, 10, 5, 0.25);
+  place-items: center;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.hero-image-lightbox__close span {
+  position: absolute;
+  width: 0.8rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.hero-image-lightbox__close span:first-child { transform: rotate(45deg); }
+.hero-image-lightbox__close span:last-child { transform: rotate(-45deg); }
+
+.hero-image-lightbox__close:hover,
+.hero-image-lightbox__close:focus-visible {
+  background: var(--amani-maroon);
+  outline: none;
+  transform: scale(1.07);
+}
+
+@keyframes hero-image-lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hero-image-lightbox-pop {
+  from { opacity: 0; transform: scale(0.96) translateY(0.7rem); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 .home-hero__card {
   position: absolute;
   bottom: 0.3svh;
@@ -2198,18 +2290,19 @@ html, body {
 }
 
 .signature-stack__stage {
+  --signature-card-safe-inset: clamp(1.25rem, 2vw, 1.75rem);
   position: relative;
   justify-self: end;
   width: min(100%, 37rem);
   height: min(74svh, 43rem);
-  /* Let the deliberately tilted card corners extend beyond the stage. */
-  overflow: visible;
+  padding: var(--signature-card-safe-inset);
+  overflow: hidden;
 }
 
 .signature-stack-card {
   --signature-card-radius: 1.15rem;
   position: absolute;
-  inset: 0;
+  inset: var(--signature-card-safe-inset);
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   overflow: hidden;
@@ -2359,11 +2452,13 @@ html, body {
     gap: 1rem;
     width: 100%;
     height: auto;
+    padding: 0;
     overflow: visible;
   }
 
   .signature-stack-card {
     position: relative;
+    inset: auto;
     min-height: min(32rem, 100svh);
   }
 }
@@ -2394,11 +2489,13 @@ html, body {
     gap: 1rem;
     width: 100%;
     height: auto;
+    padding: 0;
     overflow: visible;
   }
 
   .signature-stack-card {
     position: relative;
+    inset: auto;
     min-height: min(32rem, 100svh);
   }
 
