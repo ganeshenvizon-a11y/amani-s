@@ -25,20 +25,18 @@ export function MoodFinder() {
     const ctx = gsap.context(() => {
       media.add('(min-width: 768px)', () => {
         const heading = introRef.current?.querySelector<HTMLElement>('h2');
-        // Align the final card comfortably inside the right edge.
-        const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 160);
-        // Multiply travel distance by 2.25 to slow down horizontal scroll speed so cards can be easily read.
-        const pinDistance = () => Math.round(travel() * 2.25 + window.innerHeight * 0.7);
+        // Align final card cleanly within viewport edge
+        const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 80);
+        // 1:1 pin distance matching horizontal travel length for natural scroll pacing
+        const pinDistance = () => Math.round(travel() * 1.08);
 
         const timeline = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             start: 'top top',
             end: () => `+=${pinDistance()}`,
-            scrub: 1.4,
+            scrub: 0.6,
             pin: true,
-            // Keep the full pinned-scroll distance in normal document flow so
-            // the following thali section never enters beneath this experience.
             pinSpacing: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -50,13 +48,10 @@ export function MoodFinder() {
         if (heading) {
           timeline.to(
             heading,
-            { scale: 0.62, autoAlpha: 0.7, duration: 1, ease: 'none' },
+            { scale: 0.7, autoAlpha: 0.6, duration: 1, ease: 'none' },
             0,
           );
         }
-
-        // Deliberate pause after reaching the final card before unpinning.
-        timeline.to({}, { duration: 0.25 });
 
         return () => timeline.kill();
       });

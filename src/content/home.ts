@@ -353,26 +353,24 @@ export const INSIDE_AMANI_CONTENT = {
 };
 
 export const VISIT_PREVIEW_CONTENT = {
-  label: '07 / VISIT AMANI',
-  heading: 'Your table is closer than you think',
-  description: 'Plan your route, check today’s opening status or speak with the team before your visit.',
+  label: 'VISIT AMANI',
+  heading: 'Come find your table.',
+  description: 'Find us in Jubilee Hills. Check today’s hours, get directions or call before you arrive.',
   image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop',
-  primaryCta: 'Get Directions',
-  secondaryCta: 'View Visit Information',
-  secondaryCtaLink: '/visit/',
+  primaryCta: 'GET DIRECTIONS',
 };
 
 export const GATHERINGS_PREVIEW_CONTENT = {
   label: '08 / GATHERINGS',
-  heading: 'Made for more than an ordinary meal',
-  body: 'From intimate family dinners to larger celebrations, Amani creates gatherings around good food, considered service and a setting that feels naturally special.',
+  heading: 'Made to gather.',
+  body: 'From family dinners to meaningful celebrations, we make room for the moments worth sharing.',
   occasions: [
     { label: 'Family celebrations', path: '/gatherings/#family' },
     { label: 'Intimate dinners', path: '/gatherings/#intimate' },
-    { label: 'Birthdays and milestones', path: '/gatherings/#milestones' },
+    { label: 'Milestones', path: '/gatherings/#milestones' },
   ],
-  image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1200&auto=format&fit=crop',
-  primaryCta: 'Plan a Gathering',
+  image: '/media/images/happy-south-indian-dining.png',
+  primaryCta: 'PLAN A GATHERING',
   primaryCtaLink: '/gatherings/',
   secondaryCta: 'Explore the Spaces',
   secondaryCtaLink: '/gatherings/#spaces',

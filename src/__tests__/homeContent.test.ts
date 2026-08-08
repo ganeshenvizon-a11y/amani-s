@@ -45,7 +45,7 @@ describe('Homepage Content Structure', () => {
   });
 
   it('should have Visit Preview and Gatherings Preview content', () => {
-    expect(VISIT_PREVIEW_CONTENT.primaryCta).toBe('Get Directions');
+    expect(VISIT_PREVIEW_CONTENT.primaryCta).toBe('GET DIRECTIONS');
     expect(GATHERINGS_PREVIEW_CONTENT.finalInvitation.heading).toBe('Meet us around the table');
   });
 });

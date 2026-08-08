@@ -42,6 +42,22 @@ const STORY_CHAPTERS = [
   },
   {
     number: '05',
+    label: 'Passing it on',
+    title: 'Every recipe stayed close.',
+    body: 'Grandma wrote things down so every generation could keep cooking with heart.',
+    image: '/media/images/story/amani-story-05-recipes.webp',
+    alt: 'Grandmother and granddaughter writing a family recipe together in a home kitchen',
+  },
+  {
+    number: '06',
+    label: 'The long table',
+    title: 'More seats. Same warmth.',
+    body: 'Big family meals turned a local favourite into a room for everyone.',
+    image: '/media/images/story/amani-story-06-community.webp',
+    alt: 'Families sharing a South Indian feast around a long table in a warm restaurant',
+  },
+  {
+    number: '07',
     label: 'Today',
     title: 'Still made like home.',
     body: 'Today, every shared meal carries a little of Grandma’s first table.',
@@ -67,14 +83,14 @@ export function BrandStory() {
     const ctx = gsap.context(() => {
       media.add('(min-width: 768px)', () => {
         const heading = introRef.current?.querySelector<HTMLElement>('h2');
-        const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 160);
-        const pinDistance = () => Math.round(travel() * 2.25 + window.innerHeight * 0.7);
+        const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 80);
+        const pinDistance = () => Math.round(travel() * 1.08);
         const timeline = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             start: 'top top',
             end: () => `+=${pinDistance()}`,
-            scrub: 1.4,
+            scrub: 0.6,
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
@@ -84,10 +100,8 @@ export function BrandStory() {
 
         timeline.to(rail, { x: () => -travel(), duration: 1, ease: 'none' }, 0);
         if (heading) {
-          timeline.to(heading, { scale: 0.62, autoAlpha: 0.7, duration: 1, ease: 'none' }, 0);
+          timeline.to(heading, { scale: 0.7, autoAlpha: 0.6, duration: 1, ease: 'none' }, 0);
         }
-
-        timeline.to({}, { duration: 0.25 });
 
         return () => timeline.kill();
       });

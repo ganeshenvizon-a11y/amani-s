@@ -1,92 +1,179 @@
 /**
- * Section 09 — Gatherings Preview & Final Reservation Invitation
- * Introduces private dining and transitions naturally into the dark Footer with a final reservation CTA.
+ * Gatherings preview — editorial split layout with an accessible image slider.
  */
-
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { GATHERINGS_PREVIEW_CONTENT } from '../../content/home';
 import { Reveal } from '../../components/motion/Reveal';
 
+const GATHERING_SLIDES = [
+  {
+    image: '/media/images/happy-south-indian-dining.png',
+    alt: 'Family enjoying a shared South Indian meal at Amani',
+    label: 'Family celebrations',
+  },
+  {
+    image: '/media/images/gathering-interior-01.webp',
+    alt: 'Warm Amani dining room prepared for a gathering',
+    label: 'Slow evenings',
+  },
+  {
+    image: '/media/images/gathering-interior-03.webp',
+    alt: 'Amani dining room with softly lit tables and warm details',
+    label: 'Intimate dinners',
+  },
+  {
+    image: '/media/images/gathering-interior-05.webp',
+    alt: 'Generous Amani restaurant space ready for a milestone meal',
+    label: 'Milestones',
+  },
+] as const;
+
+interface PointerStart {
+  x: number;
+  y: number;
+}
+
 export function GatheringsPreview() {
-  const { finalInvitation } = GATHERINGS_PREVIEW_CONTENT;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
+  const pauseAutoplayRef = useRef(false);
+  const pointerStartRef = useRef<PointerStart | null>(null);
+  const totalSlides = GATHERING_SLIDES.length;
+
+  const goToSlide = useCallback((nextIndex: number) => {
+    const currentIndex = activeIndexRef.current;
+    if (currentIndex === nextIndex) return;
+
+    activeIndexRef.current = nextIndex;
+    setActiveIndex(nextIndex);
+  }, []);
+
+  const showNext = useCallback(() => {
+    const nextIndex = (activeIndexRef.current + 1) % totalSlides;
+    goToSlide(nextIndex);
+  }, [goToSlide, totalSlides]);
+
+  const showPrevious = useCallback(() => {
+    const nextIndex = (activeIndexRef.current - 1 + totalSlides) % totalSlides;
+    goToSlide(nextIndex);
+  }, [goToSlide, totalSlides]);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const interval = window.setInterval(() => {
+      if (!pauseAutoplayRef.current && !document.hidden) showNext();
+    }, 6200);
+
+    return () => window.clearInterval(interval);
+  }, [showNext]);
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLElement>) => {
+    const start = pointerStartRef.current;
+    pointerStartRef.current = null;
+    if (!start) return;
+
+    const xDistance = event.clientX - start.x;
+    const yDistance = event.clientY - start.y;
+    if (Math.abs(xDistance) < 48 || Math.abs(xDistance) < Math.abs(yDistance) * 1.25) return;
+    if (xDistance < 0) showNext();
+    else showPrevious();
+  };
 
   return (
-    <section
-      className="section-padding bg-[var(--amani-paper)] text-[var(--amani-ink)] border-b border-[var(--amani-hairline)]"
-      aria-label="Gatherings & Celebrations Preview"
-    >
-      <div className="max-w-[1600px] mx-auto px-6 md:px-10">
-        {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
-          <div className="lg:col-span-6 space-y-6">
-            <Reveal>
-              <span className="text-eyebrow mb-3 block">{GATHERINGS_PREVIEW_CONTENT.label}</span>
-              <h2 className="text-h1 mb-4 font-serif">{GATHERINGS_PREVIEW_CONTENT.heading}</h2>
-              <p className="text-body-lg mb-8">{GATHERINGS_PREVIEW_CONTENT.body}</p>
-            </Reveal>
+    <section className="gatherings-section" aria-labelledby="gatherings-heading">
+      <div className="gatherings-container">
+        <div className="gatherings-content">
+          <Reveal direction="up">
+            <span className="gatherings-eyebrow">{GATHERINGS_PREVIEW_CONTENT.label}</span>
+            <h2 id="gatherings-heading" className="gatherings-heading">{GATHERINGS_PREVIEW_CONTENT.heading}</h2>
+            <p className="gatherings-body">{GATHERINGS_PREVIEW_CONTENT.body}</p>
+          </Reveal>
 
-            {/* Occasions List */}
-            <div className="space-y-4 pt-4 border-t border-[var(--amani-hairline)] font-sans">
-              <span className="text-xs uppercase tracking-widest text-[var(--amani-ink-muted)] font-semibold block">
-                Occasions We Host:
-              </span>
-              <ul className="space-y-3">
-                {GATHERINGS_PREVIEW_CONTENT.occasions.map((occ, idx) => (
-                  <li key={idx}>
-                    <NavLink
-                      to={occ.path}
-                      className="font-serif text-xl text-[var(--amani-ink)] hover:text-[var(--amani-maroon)] transition-colors flex items-center justify-between border-b border-[var(--amani-hairline)] pb-2"
-                    >
-                      <span>{occ.label}</span>
-                      <span className="text-sm font-mono">→</span>
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+          <Reveal direction="up" delay={0.15}>
+            <div className="gatherings-occasions" role="list">
+              {GATHERINGS_PREVIEW_CONTENT.occasions.map((occasion) => (
+                <NavLink key={occasion.path} to={occasion.path} className="gatherings-row" role="listitem">
+                  <span className="gatherings-row__text">{occasion.label}</span>
+                  <span className="gatherings-row__arrow" aria-hidden="true">→</span>
+                </NavLink>
+              ))}
             </div>
+          </Reveal>
 
-            <div className="pt-4 flex items-center gap-4">
-              <NavLink
-                to={GATHERINGS_PREVIEW_CONTENT.primaryCtaLink}
-                className="inline-flex items-center justify-center bg-[var(--amani-maroon)] text-[var(--amani-canvas)] px-6 py-3.5 text-xs font-semibold uppercase tracking-widest rounded-[var(--amani-radius-sm)] hover:bg-[var(--amani-maroon-dark)] transition-colors"
-              >
-                {GATHERINGS_PREVIEW_CONTENT.primaryCta}
-              </NavLink>
-            </div>
-          </div>
-
-          {/* Gathering Image */}
-          <div className="lg:col-span-6 aspect-[4/3] rounded-[var(--amani-radius-md)] overflow-hidden border border-[var(--amani-hairline)] shadow-sm">
-            <img
-              src={GATHERINGS_PREVIEW_CONTENT.image}
-              alt="Family and friends gathered around warm South Indian dinner table"
-              className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
-
-        {/* Final Integrated Reservation Invitation Card */}
-        <div className="mt-20 p-10 md:p-16 bg-[var(--amani-dark-warm)] text-[var(--amani-cream-on-dark)] rounded-[var(--amani-radius-md)] text-center max-w-4xl mx-auto space-y-6 relative overflow-hidden border border-[var(--amani-hairline-dark)]">
-          <Reveal>
-            <span className="text-xs uppercase tracking-[0.2em] text-[var(--amani-terracotta)] font-semibold font-mono block mb-2">
-              RESERVATIONS
-            </span>
-            <h3 className="font-serif text-4xl md:text-5xl mb-4 leading-tight">
-              {finalInvitation.heading}
-            </h3>
-            <p className="text-body-lg text-[var(--amani-cream-muted)] max-w-xl mx-auto mb-8 font-sans">
-              {finalInvitation.description}
-            </p>
-            <NavLink
-              to={finalInvitation.ctaLink}
-              className="inline-flex items-center justify-center bg-[var(--amani-canvas)] text-[var(--amani-ink)] px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-[var(--amani-radius-sm)] hover:bg-[var(--amani-paper)] transition-colors focus:ring-2 focus:ring-[var(--amani-cream-on-dark)]"
-            >
-              {finalInvitation.ctaText}
+          <Reveal direction="up" delay={0.25}>
+            <NavLink to={GATHERINGS_PREVIEW_CONTENT.primaryCtaLink} className="gatherings-cta">
+              <span>{GATHERINGS_PREVIEW_CONTENT.primaryCta}</span>
+              <span className="gatherings-cta__line" aria-hidden="true" />
             </NavLink>
           </Reveal>
         </div>
+
+        <Reveal direction="left" delay={0.2}>
+          <div
+            className="gatherings-slider"
+            aria-roledescription="carousel"
+            aria-label="Amani gatherings gallery"
+            tabIndex={0}
+            onPointerDown={(event) => { pointerStartRef.current = { x: event.clientX, y: event.clientY }; }}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={() => { pointerStartRef.current = null; }}
+            onFocus={() => { pauseAutoplayRef.current = true; }}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) pauseAutoplayRef.current = false;
+            }}
+            onPointerEnter={() => { pauseAutoplayRef.current = true; }}
+            onPointerLeave={() => { pauseAutoplayRef.current = false; }}
+            onKeyDown={(event) => {
+              if (event.key === 'ArrowRight') { event.preventDefault(); showNext(); }
+              if (event.key === 'ArrowLeft') { event.preventDefault(); showPrevious(); }
+            }}
+          >
+            <div className="gatherings-slider__media">
+              {GATHERING_SLIDES.map((slide, index) => (
+                <div
+                  key={slide.image}
+                  className={`gatherings-slider__slide ${index === activeIndex ? 'is-active' : ''}`}
+                  aria-hidden={index !== activeIndex}
+                >
+                  <img
+                    src={slide.image}
+                    alt={index === activeIndex ? slide.alt : ''}
+                    className="gatherings-slider__image"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={index === 0 ? 'high' : 'auto'}
+                    decoding="async"
+                    draggable="false"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="gatherings-slider__overlay" aria-hidden="true" />
+            <div className="gatherings-slider__caption" aria-live="polite">
+              <span>{String(activeIndex + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}</span>
+              <strong>{GATHERING_SLIDES[activeIndex].label}</strong>
+            </div>
+
+            <div className="gatherings-slider__navigation" aria-label="Gatherings gallery controls">
+              <button type="button" aria-label="Show previous gathering image" onClick={showPrevious}>←</button>
+              <div className="gatherings-slider__progress" aria-label="Choose a gathering image">
+                {GATHERING_SLIDES.map((slide, index) => (
+                  <button
+                    key={slide.image}
+                    type="button"
+                    className={index === activeIndex ? 'is-active' : ''}
+                    aria-label={`Show ${slide.label}`}
+                    aria-current={index === activeIndex ? 'true' : undefined}
+                    onClick={() => goToSlide(index)}
+                  />
+                ))}
+              </div>
+              <button type="button" aria-label="Show next gathering image" onClick={showNext}>→</button>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

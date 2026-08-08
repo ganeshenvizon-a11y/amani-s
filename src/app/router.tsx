@@ -1,25 +1,21 @@
 /**
  * Amani — Root application router
- * Flow:
- *   First session visit to '/' → CinematicIntro video → navigate to destination
- *   All other cases → page renders immediately at top
+ * The homepage is the immediate root experience. Secondary pages remain
+ * code-split, with a layout-stable fallback while their chunks load.
  */
 
-import { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
+import { useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  ScrollRestoration,
   Outlet,
-  useNavigate,
   useLocation,
 } from 'react-router-dom';
 import { useLenis } from 'lenis/react';
-import { CinematicIntro } from '../components/motion/CinematicIntro';
 import { PublicLayout } from '../layouts/PublicLayout';
+import { HomePage } from '../pages/home/HomePage';
 
 // ── Lazy page imports ─────────────────────────────────────────────────────────
-const HomePage       = lazy(() => import('../pages/home/HomePage').then(m => ({ default: m.HomePage })));
 const StoriesPage    = lazy(() => import('../pages/stories/StoriesPage').then(m => ({ default: m.StoriesPage })));
 const MenuPage       = lazy(() => import('../pages/menu/MenuPage').then(m => ({ default: m.MenuPage })));
 const GatheringsPage = lazy(() => import('../pages/gatherings/GatheringsPage').then(m => ({ default: m.GatheringsPage })));
@@ -28,54 +24,37 @@ const NotFoundPage   = lazy(() => import('../pages/not-found/NotFoundPage').then
 
 // ── AppShell ──────────────────────────────────────────────────────────────────
 function AppShell() {
-  const navigate = useNavigate();
   const location = useLocation();
   const lenis    = useLenis();
-  const prevPath = useRef(location.pathname);
+  const previousLocation = useRef<string | undefined>(undefined);
 
-  // Show CinematicIntro only on first cold session visit to '/'
-  const [introDone, setIntroDone] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    const visited = sessionStorage.getItem('amani_visited') === 'true';
-    return visited || location.pathname !== '/';
-  });
+  // Always begin a non-hash route at its top. This runs before paint, avoiding
+  // a momentary footer-first render on reload or on a route transition.
+  useLayoutEffect(() => {
+    const locationKey = `${location.pathname}${location.search}${location.hash}`;
+    if (previousLocation.current === locationKey) return;
+    previousLocation.current = locationKey;
+    if (location.hash) return;
 
-  // Mark visited immediately so refresh never replays the intro
-  useEffect(() => {
-    try { sessionStorage.setItem('amani_visited', 'true'); } catch { /* noop */ }
-  }, []);
-
-  // Scroll to top on every SPA route change
-  useEffect(() => {
-    if (prevPath.current === location.pathname) return;
-    prevPath.current = location.pathname;
-    try {
-      if (lenis) {
-        lenis.scrollTo(0, { immediate: true });
-      } else {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      }
-    } catch {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    } else {
       window.scrollTo(0, 0);
     }
-  }, [location.pathname, lenis]);
+  }, [lenis, location.hash, location.pathname, location.search]);
 
-  // CinematicIntro done → navigate to chosen destination
-  const handleIntroDone = useCallback((destination: string) => {
-    setIntroDone(true);
-    navigate(destination, { replace: true });
-  }, [navigate]);
+  // Refresh scroll-based layouts after fonts and image dimensions settle.
+  useEffect(() => {
+    const refreshScrollLayout = () => window.dispatchEvent(new Event('resize'));
+    const fontsReady = document.fonts?.ready;
+    fontsReady?.then(refreshScrollLayout).catch(() => undefined);
+    window.addEventListener('load', refreshScrollLayout, { once: true });
+    return () => window.removeEventListener('load', refreshScrollLayout);
+  }, []);
 
-  // Show video intro on first cold visit to '/'
-  if (!introDone && location.pathname === '/') {
-    return <CinematicIntro onComplete={handleIntroDone} />;
-  }
-
-  // All other cases: render page immediately
   return (
     <PublicLayout>
-      <ScrollRestoration />
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="route-loading" role="status"><span className="sr-only">Loading page</span></div>}>
         <Outlet />
       </Suspense>
     </PublicLayout>
