@@ -3,7 +3,7 @@
  * Production UI/UX refined implementation with clear image atmosphere, center logo focal point & baseline alignment.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { gsap } from '../../lib/gsap';
 import { RESTAURANT_CONFIG } from '../../config/restaurant';
@@ -57,8 +57,7 @@ function WhatsAppIcon({ className = 'footer-social-icon' }: { className?: string
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const mediaImgRef = useRef<HTMLImageElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  
+
   // Smooth pointer tracking interpolation
   const targetPos = useRef({ x: 50, y: 50 });
   const currentPos = useRef({ x: 50, y: 50 });
@@ -173,19 +172,6 @@ export function Footer() {
     };
   }, []);
 
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(scrollableHeight > 0 ? Math.min(window.scrollY / scrollableHeight, 1) : 0);
-    };
-
-    updateScrollProgress();
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    return () => window.removeEventListener('scroll', updateScrollProgress);
-  }, []);
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
   return (
     <footer ref={footerRef} className="site-footer" aria-label="Site Footer">
       {/* Background Media Photograph with 10-15% reduced overlay */}
@@ -282,23 +268,6 @@ export function Footer() {
           {/* Navigation & Social Links Row — Baseline Aligned */}
           <div className="footer-middle-row">
             <div className="footer-brand-group">
-              <button type="button" className="footer-scroll-top" onClick={scrollToTop} aria-label="Back to top">
-                <svg className="footer-scroll-top__loader" viewBox="0 0 40 40" aria-hidden="true">
-                  <circle className="footer-scroll-top__track" cx="20" cy="20" r="16" />
-                  <circle
-                    className="footer-scroll-top__progress"
-                    cx="20"
-                    cy="20"
-                    r="16"
-                    pathLength="1"
-                    style={{ strokeDasharray: 1, strokeDashoffset: 1 - scrollProgress }}
-                  />
-                </svg>
-                <svg className="footer-scroll-top__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 17V7M8 11l4-4 4 4" />
-                </svg>
-              </button>
-
               <div className="footer-closing-gesture">
                 <img
                   src={BRAND_CONFIG.logoSvg}

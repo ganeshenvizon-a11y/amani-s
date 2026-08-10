@@ -171,7 +171,7 @@
 .menu-hero__kicker {
   margin: 0 0 1.15rem;
   color: var(--amani-maroon, #7A1F24);
-  font-family: 'Clash Display', 'Tenor Sans', sans-serif;
+  font-family: var(--amani-font-ui);
   font-size: clamp(0.64rem, 0.82vw, 0.78rem);
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -383,7 +383,7 @@
   padding: 0.18rem 0.5rem;
   border: 1.8px dashed rgba(160, 40, 30, 0.72);
   color: rgba(150, 35, 25, 0.85);
-  font-family: 'Courier New', monospace;
+  font-family: var(--amani-font-ui);
   font-size: 0.6rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -447,7 +447,7 @@
   align-items: center;
   z-index: 5;
   pointer-events: none;
-  font-family: 'Courier New', monospace;
+  font-family: var(--amani-font-ui);
   font-size: 0.6rem;
   font-weight: 800;
   letter-spacing: 0.1em;

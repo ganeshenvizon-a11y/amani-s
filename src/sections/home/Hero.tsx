@@ -158,6 +158,7 @@ export function Hero() {
       card.element.style.transform = `translate3d(${card.x}px, ${card.y}px, 0) rotate(${card.rotation}deg)`;
     };
     const now = performance.now();
+    const startDelay = 100;
 
     cardMotion.current = cards.map((element, index) => {
       const rotation = cardRotations.current[index] ?? 0;
@@ -170,7 +171,7 @@ export function Hero() {
         velocityY: 0,
         angularVelocity: 0,
         mode: reducedMotion ? 'resting' : 'waiting',
-        launchAt: now + 420 + index * 115,
+        launchAt: now + startDelay + index * 110,
         lastPointerX: 0,
         lastPointerY: 0,
         lastPointerTime: now,
@@ -189,6 +190,11 @@ export function Hero() {
         '.home-hero__title-line-inner',
         { yPercent: 115, opacity: 0 },
         { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.12, delay: 0.15, ease: 'power4.out' },
+      );
+      gsap.fromTo(
+        '.home-hero__kicker',
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.1, ease: 'power3.out' }
       );
     }, hero);
 

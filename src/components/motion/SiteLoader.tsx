@@ -1,28 +1,35 @@
 /**
- * SiteLoader — Brand loader with continuously spinning outer ring.
- * • Outer dashed ring spins indefinitely via CSS keyframe (reliable, smooth).
- * • GSAP handles logo entrance (scale + fade) and exit (fade out).
- * • Calls onDone after ~700ms so the animation is visible on every load.
+ * SiteLoader — Premium Anime.js Staggered Page Reveal
+ * • 9 vertical rectangular strips covering 100dvh.
+ * • Centered Amani brand logo entrance (fade + scale + slide up, 600ms) with 250ms hold.
+ * • Center-outward-upward stagger reveal of the hero section underneath (850ms, easeInOutQuart).
+ * • Logo exit simultaneous with panel lift (350ms).
+ * • Scroll lock management & reduced motion support.
  */
 
 import { useEffect, useRef } from 'react';
-import { gsap } from '../../lib/gsap';
+import { createTimeline, stagger } from 'animejs';
+import { BRAND_CONFIG } from '../../config/brand';
 import '../../styles/loader.css';
 
 interface SiteLoaderProps {
   onDone: () => void;
 }
 
+const STRIP_COUNT = 9;
+
 export function SiteLoader({ onDone }: SiteLoaderProps) {
   const loaderRef = useRef<HTMLDivElement>(null);
-  const logoRef   = useRef<HTMLDivElement>(null);
-  const hasExited = useRef(false);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const stripsRef = useRef<Array<HTMLDivElement | null>>([]);
+  const hasFinishedRef = useRef(false);
 
   useEffect(() => {
     const loader = loaderRef.current;
-    const logo   = logoRef.current;
+    const logo = logoRef.current;
+    const strips = stripsRef.current.filter((s): s is HTMLDivElement => s !== null);
 
-    if (!loader || !logo) {
+    if (!loader || !logo || strips.length === 0) {
       document.documentElement.classList.remove('is-loading');
       document.body.classList.remove('is-loading');
       onDone();
@@ -31,35 +38,25 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Lock page scroll while loader is active
     document.documentElement.classList.add('is-loading');
     document.body.classList.add('is-loading');
 
     function finish() {
-      if (hasExited.current) return;
-      hasExited.current = true;
+      if (hasFinishedRef.current) return;
+      hasFinishedRef.current = true;
 
       document.documentElement.classList.remove('is-loading');
       document.body.classList.remove('is-loading');
 
-      if (prefersReduced) {
-        onDone();
-        return;
+      if (loader) {
+        loader.style.display = 'none';
       }
-
-      gsap.to(loader, {
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power2.out',
-        onComplete: () => {
-          if (loader) loader.style.display = 'none';
-          onDone();
-        },
-      });
+      onDone();
     }
 
     if (prefersReduced) {
-      // No animation — just show briefly and leave
-      const timer = setTimeout(finish, 300);
+      const timer = setTimeout(finish, 200);
       return () => {
         clearTimeout(timer);
         document.documentElement.classList.remove('is-loading');
@@ -67,18 +64,57 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
       };
     }
 
-    // Entrance: logo fades + scales in
-    gsap.fromTo(
-      logo,
-      { opacity: 0, scale: 0.85 },
-      { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' }
+    // Single controlled Anime.js Timeline for the entrance, hold, and stagger curtain reveal
+    const tl = createTimeline({
+      onComplete: finish,
+    });
+
+    // 1. Logo entrance (0 → 1 opacity, .92 → 1 scale, 12px → 0 translateY, ~600ms, smooth ease-out)
+    tl.add(logo, {
+      opacity: [0, 1],
+      scale: [0.92, 1],
+      translateY: [12, 0],
+      duration: 600,
+      ease: 'outCubic',
+    });
+
+    // 2. Hold for ~250ms, then main stagger reveal of strips center → outward → upward
+    tl.add(
+      strips,
+      {
+        translateY: ['0%', '-105%'],
+        delay: stagger(65, { from: 'center' }),
+        duration: 850,
+        ease: 'inOutQuart',
+      },
+      '+=250'
     );
 
-    // Hold for 700ms then exit (ring keeps spinning via CSS during this window)
-    const timer = setTimeout(finish, 700);
+    // 3. Logo exit synchronized with panel lift (opacity 1 → 0, translateY 0 → -20px, scale 1 → .96, ~350ms)
+    tl.add(
+      logo,
+      {
+        opacity: [1, 0],
+        translateY: [0, -20],
+        scale: [1, 0.96],
+        duration: 350,
+        ease: 'inCubic',
+      },
+      '-=850'
+    );
+
+    // Safety fallback timeout to prevent hanging if timeline gets interrupted
+    const fallbackTimer = setTimeout(() => {
+      finish();
+    }, 2400);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(fallbackTimer);
+      try {
+        tl.pause();
+      } catch {
+        // ignore cleanup error
+      }
       document.documentElement.classList.remove('is-loading');
       document.body.classList.remove('is-loading');
     };
@@ -89,52 +125,39 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
       ref={loaderRef}
       className="site-loader"
       role="status"
-      aria-label="Loading Amani's"
+      aria-label="Loading Amani's Restaurant"
     >
-      <div ref={logoRef} className="site-loader__logo">
-        {/* Logo mark */}
-        <div className="site-loader__mark">
-          <svg
-            className="site-loader__svg"
-            viewBox="0 0 208 208"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            {/* Outer dashed spinning ring — animated via CSS */}
-            <circle
-              className="site-loader__ring-outer"
-              cx="104"
-              cy="104"
-              r="90"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeDasharray="8 6"
-            />
-
-            {/* Inner static ring */}
-            <circle
-              className="site-loader__ring-inner"
-              cx="104"
-              cy="104"
-              r="68"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            />
-
-            {/* Center dot */}
-            <circle cx="104" cy="104" r="10" fill="currentColor" />
-          </svg>
-        </div>
-
-        {/* Wordmark below */}
-        <span className="site-loader__wordmark">Āmani</span>
+      {/* 9 Vertical Rectangular Strips */}
+      <div className="site-loader__strips" aria-hidden="true">
+        {Array.from({ length: STRIP_COUNT }).map((_, index) => (
+          <div
+            key={index}
+            ref={(el) => {
+              stripsRef.current[index] = el;
+            }}
+            className="site-loader__strip"
+          />
+        ))}
       </div>
 
-      {/* SR-only live region */}
+      {/* Centered Brand Logo Overlay Stage */}
+      <div ref={logoRef} className="site-loader__brand-stage">
+        <div className="site-loader__logo-wrapper">
+          <img
+            src={BRAND_CONFIG.logoMarkSvg}
+            alt="Amani's"
+            className="site-loader__logo-img"
+          />
+          <span className="site-loader__wordmark-text">Āmani</span>
+          <span className="site-loader__kicker-text">South Indian Kitchen</span>
+        </div>
+      </div>
+
+      {/* Screen Reader Notification */}
       <span className="site-loader__sr-only" aria-live="polite">
-        Loading…
+        Loading Amani's South Indian Kitchen…
       </span>
     </div>
   );
 }
+
