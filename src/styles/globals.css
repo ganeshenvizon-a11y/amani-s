@@ -511,6 +511,7 @@ html, body {
 
 .mood-journey-card {
   position: relative;
+  flex: 0 0 auto;
   width: clamp(17rem, 23vw, 24rem);
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -685,34 +686,37 @@ html, body {
   box-shadow: 0 0 0 3px rgba(244, 237, 223, 0.4);
 }
 
-@media (max-width: 767px) {
+/* Phones and portrait tablets: swap the pinned horizontal journey for a
+   naturally-flowing, swipeable rail (the GSAP pin only runs at >= 1024px). */
+@media (max-width: 1023px) {
   .home-mood-journey {
     height: auto;
-    min-height: 100svh;
-    padding: 0 0 3.75rem;
+    min-height: 0;
+    padding: 0 0 clamp(2.5rem, 6vh, 3.75rem);
   }
 
   .home-mood-journey__intro {
     width: 100%;
-    padding: 1.75rem 1.25rem 1.5rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
   }
 
   .home-mood-journey__intro h2 {
-    font-size: clamp(2.1rem, 10vw, 3.25rem);
+    font-size: clamp(2.1rem, 7vw, 3.5rem);
   }
 
   .home-mood-journey__viewport {
     position: relative;
     display: block;
-    padding: 0 0 2rem 1.25rem;
+    padding: 0 0 2rem clamp(1.25rem, 4vw, 2.5rem);
   }
 
   .home-mood-journey__rail {
     width: auto;
-    padding-right: 1.25rem;
+    padding-right: clamp(1.25rem, 4vw, 2.5rem);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   .home-mood-journey__rail::-webkit-scrollbar {
@@ -720,12 +724,19 @@ html, body {
   }
 
   .mood-journey-card {
-    width: min(84vw, 22rem);
+    width: min(78vw, 20rem);
     aspect-ratio: 4 / 5;
     height: auto;
     min-height: 0;
     scroll-snap-align: start;
     border-radius: 16px;
+  }
+}
+
+/* Portrait tablets can afford a slightly larger card without over-filling. */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .mood-journey-card {
+    width: min(52vw, 22rem);
   }
 }
 
@@ -1280,8 +1291,13 @@ body.image-lightbox-open { overflow: hidden; }
   }
 
   .home-hero--editorial .home-hero__title {
-    font-size: clamp(1.65rem, 7vw, 2.15rem);
-    line-height: 0.9;
+    font-size: clamp(2.35rem, 9.6vw, 3.05rem);
+    line-height: 0.92;
+  }
+
+  .home-hero__kicker {
+    font-size: clamp(0.78rem, 3vw, 0.95rem);
+    letter-spacing: 0.2em;
   }
 
   .home-hero__card-deck {
@@ -1290,54 +1306,86 @@ body.image-lightbox-open { overflow: hidden; }
     height: 100%;
   }
 
-  .home-hero__card {
-    bottom: -2rem;
-    width: clamp(5rem, calc(21vw * var(--hero-card-scale, 1)), 7rem);
-    padding: 0.24rem;
-  }
+}
 
-  .home-hero__card:nth-child(1) {
-    left: 0.75rem;
-    bottom: -1.5rem;
-    width: clamp(5.7rem, calc(24vw * var(--hero-card-scale, 1)), 7.8rem);
-  }
-
-  .home-hero__card:nth-child(2) {
-    left: 16%;
-    bottom: -0.8rem;
-    width: clamp(4.6rem, calc(18vw * var(--hero-card-scale, 1)), 6.1rem);
-  }
-
-  .home-hero__card:nth-child(3) {
-    left: 30%;
-    bottom: -2.4rem;
-    width: clamp(4.6rem, calc(19vw * var(--hero-card-scale, 1)), 6.3rem);
-  }
-
-  .home-hero__card:nth-child(4) {
-    left: 44%;
-    bottom: -0.9rem;
-    width: clamp(5.9rem, calc(24vw * var(--hero-card-scale, 1)), 8rem);
-  }
-
-  .home-hero__card:nth-child(5) {
-    right: 23%;
-    bottom: -2.2rem;
-    width: clamp(4.4rem, calc(18vw * var(--hero-card-scale, 1)), 5.9rem);
-  }
-
-  .home-hero__card:nth-child(6) {
-    right: 10%;
-    bottom: -0.8rem;
-    width: clamp(4.6rem, calc(19vw * var(--hero-card-scale, 1)), 6.3rem);
-  }
-
+/* ==========================================================================
+   Hero cards — mobile & tablet: three equal-height polaroids (matches ref)
+   Desktop (>=1024px) layout is untouched.
+   ========================================================================== */
+@media (max-width: 1023px) {
+  /* Keep only three cards visible */
+  .home-hero__card:nth-child(4),
+  .home-hero__card:nth-child(5),
+  .home-hero__card:nth-child(6),
   .home-hero__card:nth-child(7) {
-    right: 0.35rem;
-    bottom: -1.9rem;
-    width: clamp(5.2rem, calc(21vw * var(--hero-card-scale, 1)), 7.2rem);
+    display: none;
   }
 
+  /* Shared: anchor all cards to the horizontal centre and give them a
+     matching height (width follows the aspect-ratio). The sizing is repeated
+     on each :nth-child below because the desktop per-card rules have higher
+     specificity and would otherwise win. --m-card-w is the resulting width. */
+  .home-hero__card {
+    --m-card-h: clamp(11.5rem, 40vw, 19rem);
+    --m-card-w: calc(var(--m-card-h) * 0.78);
+    padding: clamp(0.24rem, 1vw, 0.42rem) clamp(0.24rem, 1vw, 0.42rem)
+      clamp(1rem, 4vw, 1.4rem);
+  }
+
+  /* Left — tilted, sits lower, behind */
+  .home-hero__card:nth-child(1) {
+    left: 50%;
+    right: auto;
+    height: var(--m-card-h);
+    width: auto;
+    aspect-ratio: 0.78;
+    margin-left: calc(var(--m-card-w) * -1.12);
+    bottom: 2svh;
+    z-index: 1;
+  }
+
+  /* Center — upright, prominent, in front */
+  .home-hero__card:nth-child(2) {
+    left: 50%;
+    right: auto;
+    height: var(--m-card-h);
+    width: auto;
+    aspect-ratio: 0.78;
+    margin-left: calc(var(--m-card-w) / -2);
+    bottom: 6svh;
+    z-index: 3;
+  }
+
+  /* Right — tilted, sits lower, behind */
+  .home-hero__card:nth-child(3) {
+    left: 50%;
+    right: auto;
+    height: var(--m-card-h);
+    width: auto;
+    aspect-ratio: 0.78;
+    margin-left: calc(var(--m-card-w) * 0.12);
+    bottom: 2svh;
+    z-index: 1;
+  }
+}
+
+/* Tablet only (768–1023px): larger hero title and taller images.
+   Mobile image height is intentionally left unchanged. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-hero--editorial .home-hero__title {
+    font-size: clamp(3.6rem, 7.8vw, 5.2rem);
+    line-height: 0.95;
+  }
+
+  .home-hero__kicker {
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    letter-spacing: 0.22em;
+  }
+
+  /* Taller cards on tablet — overrides the shared --m-card-h above */
+  .home-hero__card {
+    --m-card-h: clamp(18rem, 44vw, 26rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1742,6 +1790,22 @@ body.image-lightbox-open { overflow: hidden; }
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* Touch devices (mobile/tablet): no hover — tap the stage to reveal the
+   full thali with a centred circular wipe (no pointer-tracking lens). */
+.thali-reveal-stage.is-touch {
+  cursor: pointer;
+}
+
+.thali-reveal-stage.is-touch .thali-reveal-stage__image--full {
+  clip-path: circle(0.5px at 50% 50%);
+  transition: clip-path 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.thali-reveal-stage.is-touch.is-revealing .thali-reveal-stage__image--full {
+  clip-path: circle(140% at 50% 50%);
+  transition-duration: 560ms;
+}
+
 .thali-reveal-stage__hint,
 .thali-reveal-stage__caption {
   position: absolute;
@@ -1783,37 +1847,46 @@ body.image-lightbox-open { overflow: hidden; }
   color: rgba(248, 234, 210, 0.84);
 }
 
-@media (max-width: 900px) {
-  .thali-experience__shell { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
-  .thali-experience__content { padding-inline: clamp(1.25rem, 4.5vw, 3rem); }
-  .thali-experience__detail { min-height: 100px; }
-}
+/* Mobile & tablet: identical single-column stack that flows to its natural
+   height (never a fixed viewport split, which used to clip the item list
+   under the CTA). The thali sits below the content and is tap-to-reveal. */
+@media (max-width: 1024px) {
+  .thali-experience {
+    height: auto;
+    min-height: auto;
+  }
 
-@media (max-width: 680px) {
   .thali-experience__shell {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 61%) minmax(0, 39%);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    grid-template-columns: none;
   }
 
   .thali-experience__content {
     justify-content: flex-start;
-    padding: calc(4.2rem + env(safe-area-inset-top)) 1.25rem 1.5rem;
+    max-width: 100%;
+    padding: calc(4.4rem + env(safe-area-inset-top)) clamp(1.25rem, 5vw, 3rem) 2rem;
   }
 
-  .thali-experience__heading { font-size: clamp(2.4rem, 11vw, 3.6rem); margin-bottom: 1rem; }
-  .thali-experience__tabs { gap: clamp(16px, 4vw, 28px); }
-  .thali-tab { font-size: 0.8rem; }
+  .thali-experience__heading { font-size: clamp(2.6rem, 9vw, 4.4rem); padding-bottom: 0; margin-bottom: 1.5rem; }
+  .thali-experience__tabs-wrapper { margin-bottom: 1.75rem; }
+  .thali-experience__tabs { gap: clamp(16px, 5vw, 40px); }
+  .thali-tab { font-size: clamp(0.8rem, 1.6vw, 0.95rem); }
   .thali-experience__detail { min-height: 0; margin-bottom: 1.5rem; }
-  .thali-experience__detail-heading { font-size: clamp(1.25rem, 5vw, 1.6rem); margin-bottom: 0.5rem; }
-  .thali-experience__detail-body { font-size: 0.88rem; line-height: 1.45; }
-  .thali-experience__items-list { grid-template-columns: 1fr; gap: 8px; margin-top: 14px; }
-  .thali-experience__item { font-size: 0.82rem; }
-  .thali-experience__cta { font-size: 0.78rem; }
-  .thali-reveal-stage__hint { bottom: 1rem; left: 1.15rem; font-size: 0.6rem; }
-  .thali-reveal-stage__caption { top: 1rem; right: 1.15rem; font-size: 0.56rem; }
-  .thali-reveal-stage.is-revealing .thali-reveal-stage__image--full { clip-path: circle(7.5rem at var(--thali-lens-x) var(--thali-lens-y)); }
-  .thali-reveal-stage__lens { width: 15rem; }
+  .thali-experience__detail-heading { font-size: clamp(1.35rem, 3.6vw, 2rem); margin-bottom: 0.5rem; }
+  .thali-experience__detail-body { font-size: clamp(0.88rem, 1.8vw, 1.05rem); line-height: 1.45; }
+  .thali-experience__items-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; margin-top: 16px; }
+  .thali-experience__item { font-size: clamp(0.8rem, 1.6vw, 0.95rem); }
+  .thali-experience__cta { font-size: clamp(0.78rem, 1.5vw, 0.9rem); padding-top: 1.75rem; }
+
+  .thali-reveal-stage {
+    width: 100%;
+    height: clamp(300px, 62vw, 540px);
+  }
+
+  .thali-reveal-stage__hint { bottom: 1rem; left: 1.15rem; font-size: clamp(0.6rem, 1.4vw, 0.72rem); }
+  .thali-reveal-stage__caption { top: 1rem; right: 1.15rem; font-size: clamp(0.56rem, 1.3vw, 0.68rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

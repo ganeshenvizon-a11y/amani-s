@@ -23,7 +23,7 @@ export function MoodFinder() {
 
     const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      media.add('(min-width: 768px)', () => {
+      media.add('(min-width: 1024px)', () => {
         const heading = introRef.current?.querySelector<HTMLElement>('h2');
         // Align final card cleanly within viewport edge
         const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 80);
