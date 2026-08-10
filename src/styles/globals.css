@@ -8,6 +8,10 @@
 @import "./utilities.css";
 @import "./navbar.css";
 @import "./footer.css";
+@import "./stories.css";
+@import "./menu.css";
+@import "./gatherings.css";
+@import "./visit.css";
 
 *, *::before, *::after {
   box-sizing: border-box;

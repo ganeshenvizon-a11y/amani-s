@@ -1,0 +1,327 @@
+/* ==========================================================================
+   AMANI — Visit page
+   Find us, live open/closed status, good-to-know details, and FAQs.
+   Shares the warm editorial system with Menu/Stories/Gatherings.
+   (Namespaced `.vst-*` to avoid clashing with the home preview's `.visit-*`.)
+   ========================================================================== */
+
+.visit-page {
+  overflow: clip;
+  background: var(--amani-canvas);
+  color: var(--amani-ink);
+}
+
+.vst-container {
+  width: min(var(--amani-max-width), calc(100% - (var(--amani-gutter) * 2)));
+  margin-inline: auto;
+}
+
+.vst-eyebrow {
+  margin: 0;
+  color: var(--amani-terracotta);
+  font-family: var(--amani-font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.visit-page h2 {
+  margin: 1rem 0 0;
+  font-family: var(--amani-font-display);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.visit-page h2 em { font-style: italic; color: var(--amani-maroon); }
+
+.vst-head { max-width: 56rem; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+
+/* Buttons ------------------------------------------------------------------ */
+
+.vst-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 0.95rem 1.5rem;
+  color: var(--amani-cream-on-dark);
+  background: var(--amani-maroon);
+  border: 1px solid var(--amani-maroon);
+  border-radius: var(--amani-radius-sm);
+  font-family: var(--amani-font-ui);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.vst-button span { transition: transform 0.28s ease; }
+.vst-button:hover,
+.vst-button:focus-visible { background: var(--amani-maroon-dark); outline: none; transform: translateY(-1px); }
+.vst-button:hover span,
+.vst-button:focus-visible span { transform: translateX(3px); }
+
+.vst-button--outline { color: var(--amani-ink); background: transparent; border-color: var(--amani-ink-faint); }
+.vst-button--outline:hover,
+.vst-button--outline:focus-visible { color: var(--amani-cream-on-dark); background: var(--amani-ink); border-color: var(--amani-ink); }
+
+/* ==========================================================================
+   01 — Hero
+   ========================================================================== */
+
+.vst-hero {
+  padding: clamp(8rem, 15vh, 12rem) 0 clamp(3.5rem, 7vw, 6rem);
+  text-align: center;
+}
+
+.vst-hero__inner { max-width: 52rem; margin-inline: auto; }
+
+.vst-hero h1 {
+  margin: 1.1rem 0 0;
+  color: var(--amani-ink);
+  font-family: 'Clash Display', var(--amani-font-display), sans-serif;
+  font-size: clamp(3rem, 7.5vw, 7rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.vst-hero h1 em { font-style: italic; color: var(--amani-maroon); }
+
+.vst-hero__lede {
+  max-width: 36rem;
+  margin: 1.5rem auto 0;
+  color: var(--amani-ink-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   02 — Find Us (live status + address + map)
+   ========================================================================== */
+
+.vst-find {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--amani-paper);
+  scroll-margin-top: 5rem;
+}
+
+.vst-find__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.vst-find h2 { color: var(--amani-ink); font-size: clamp(2.6rem, 5vw, 5rem); }
+
+.vst-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--amani-canvas);
+  border: 1px solid var(--amani-hairline);
+  border-radius: 999px;
+  font-family: var(--amani-font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.vst-status__dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--amani-ink-muted);
+  flex-shrink: 0;
+}
+
+.vst-status--open .vst-status__dot {
+  background: var(--amani-olive);
+  box-shadow: 0 0 0 4px rgba(109, 114, 84, 0.18);
+}
+
+.vst-status--open { color: var(--amani-olive); }
+.vst-status--closed { color: var(--amani-ink-soft); }
+.vst-status__detail { color: var(--amani-ink-muted); font-weight: 500; }
+
+.vst-find__address {
+  max-width: 24rem;
+  margin: 1.5rem 0 0;
+  color: var(--amani-ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.vst-find__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.8rem;
+}
+
+.vst-map {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--amani-radius-md);
+  border: 1px solid var(--amani-hairline);
+  background: var(--amani-sand);
+  aspect-ratio: 1.2 / 1;
+}
+
+.vst-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.35) contrast(1.02);
+}
+
+.vst-map__open {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  color: var(--amani-ink);
+  background: rgba(248, 242, 229, 0.94);
+  border: 1px solid var(--amani-hairline);
+  border-radius: 999px;
+  font-family: var(--amani-font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.vst-map__open:hover,
+.vst-map__open:focus-visible { background: #fff; transform: translateY(-1px); outline: none; }
+
+/* ==========================================================================
+   03 — Good to Know
+   ========================================================================== */
+
+.vst-info { padding: clamp(4.5rem, 9vw, 8rem) 0; }
+
+.vst-info__list { display: grid; gap: 0; }
+
+.vst-info__row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.3fr) minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 3rem);
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--amani-hairline);
+}
+
+.vst-info__row:first-child { border-top: 1px solid var(--amani-hairline); }
+
+.vst-info__label {
+  color: var(--amani-ink);
+  font-family: var(--amani-font-display);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+.vst-info__value { color: var(--amani-ink-muted); font-size: 0.98rem; line-height: 1.65; }
+.vst-info__value p { margin: 0; }
+
+.vst-hours { display: grid; gap: 0.4rem; }
+.vst-hours__row { display: flex; justify-content: space-between; gap: 1.5rem; max-width: 26rem; }
+.vst-hours__row--today { color: var(--amani-ink); font-weight: 600; }
+.vst-hours__day { letter-spacing: 0.01em; }
+
+/* ==========================================================================
+   04 — FAQ
+   ========================================================================== */
+
+.vst-faq { padding: clamp(4.5rem, 9vw, 8rem) 0; background: var(--amani-paper); }
+
+.vst-faq__list { display: grid; gap: 0; border-top: 1px solid var(--amani-hairline); }
+
+.vst-faq__item { border-bottom: 1px solid var(--amani-hairline); }
+
+.vst-faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.5rem 0;
+  color: var(--amani-ink);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--amani-font-display);
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.vst-faq__q:hover { color: var(--amani-maroon); }
+.vst-faq__q:focus-visible { outline: 2px solid var(--amani-maroon); outline-offset: 3px; }
+
+.vst-faq__icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vst-faq__icon::before,
+.vst-faq__icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.85rem;
+  height: 1.5px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+.vst-faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 0.3s ease; }
+.vst-faq__item[data-open='true'] .vst-faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+
+.vst-faq__a {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease;
+  opacity: 0;
+}
+.vst-faq__item[data-open='true'] .vst-faq__a { max-height: 20rem; opacity: 1; padding: 0 0 1.6rem; }
+
+.vst-faq__a p { margin: 0; max-width: 46rem; color: var(--amani-ink-muted); font-size: 1rem; line-height: 1.7; }
+.vst-faq__a a { color: var(--amani-maroon); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .vst-find__grid { grid-template-columns: 1fr; }
+  .vst-map { order: -1; aspect-ratio: 1.5 / 1; }
+}
+
+@media (max-width: 600px) {
+  .vst-hero h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
+  .vst-find h2 { font-size: clamp(2.4rem, 12vw, 3.4rem); }
+  .vst-info__row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .vst-find__actions .vst-button { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vst-button, .vst-faq__icon, .vst-faq__icon::after, .vst-faq__a, .vst-map__open { transition: none; }
+}
