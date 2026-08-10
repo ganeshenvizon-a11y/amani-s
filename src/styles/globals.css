@@ -1291,8 +1291,13 @@ body.image-lightbox-open { overflow: hidden; }
   }
 
   .home-hero--editorial .home-hero__title {
-    font-size: clamp(1.65rem, 7vw, 2.15rem);
-    line-height: 0.9;
+    font-size: clamp(2.35rem, 9.6vw, 3.05rem);
+    line-height: 0.92;
+  }
+
+  .home-hero__kicker {
+    font-size: clamp(0.78rem, 3vw, 0.95rem);
+    letter-spacing: 0.2em;
   }
 
   .home-hero__card-deck {
@@ -1301,54 +1306,86 @@ body.image-lightbox-open { overflow: hidden; }
     height: 100%;
   }
 
-  .home-hero__card {
-    bottom: -2rem;
-    width: clamp(5rem, calc(21vw * var(--hero-card-scale, 1)), 7rem);
-    padding: 0.24rem;
-  }
+}
 
-  .home-hero__card:nth-child(1) {
-    left: 0.75rem;
-    bottom: -1.5rem;
-    width: clamp(5.7rem, calc(24vw * var(--hero-card-scale, 1)), 7.8rem);
-  }
-
-  .home-hero__card:nth-child(2) {
-    left: 16%;
-    bottom: -0.8rem;
-    width: clamp(4.6rem, calc(18vw * var(--hero-card-scale, 1)), 6.1rem);
-  }
-
-  .home-hero__card:nth-child(3) {
-    left: 30%;
-    bottom: -2.4rem;
-    width: clamp(4.6rem, calc(19vw * var(--hero-card-scale, 1)), 6.3rem);
-  }
-
-  .home-hero__card:nth-child(4) {
-    left: 44%;
-    bottom: -0.9rem;
-    width: clamp(5.9rem, calc(24vw * var(--hero-card-scale, 1)), 8rem);
-  }
-
-  .home-hero__card:nth-child(5) {
-    right: 23%;
-    bottom: -2.2rem;
-    width: clamp(4.4rem, calc(18vw * var(--hero-card-scale, 1)), 5.9rem);
-  }
-
-  .home-hero__card:nth-child(6) {
-    right: 10%;
-    bottom: -0.8rem;
-    width: clamp(4.6rem, calc(19vw * var(--hero-card-scale, 1)), 6.3rem);
-  }
-
+/* ==========================================================================
+   Hero cards — mobile & tablet: three equal-height polaroids (matches ref)
+   Desktop (>=1024px) layout is untouched.
+   ========================================================================== */
+@media (max-width: 1023px) {
+  /* Keep only three cards visible */
+  .home-hero__card:nth-child(4),
+  .home-hero__card:nth-child(5),
+  .home-hero__card:nth-child(6),
   .home-hero__card:nth-child(7) {
-    right: 0.35rem;
-    bottom: -1.9rem;
-    width: clamp(5.2rem, calc(21vw * var(--hero-card-scale, 1)), 7.2rem);
+    display: none;
   }
 
+  /* Shared: anchor all cards to the horizontal centre and give them a
+     matching height (width follows the aspect-ratio). The sizing is repeated
+     on each :nth-child below because the desktop per-card rules have higher
+     specificity and would otherwise win. --m-card-w is the resulting width. */
+  .home-hero__card {
+    --m-card-h: clamp(11.5rem, 40vw, 19rem);
+    --m-card-w: calc(var(--m-card-h) * 0.78);
+    padding: clamp(0.24rem, 1vw, 0.42rem) clamp(0.24rem, 1vw, 0.42rem)
+      clamp(1rem, 4vw, 1.4rem);
+  }
+
+  /* Left — tilted, sits lower, behind */
+  .home-hero__card:nth-child(1) {
+    left: 50%;
+    right: auto;
+    height: var(--m-card-h);
+    width: auto;
+    aspect-ratio: 0.78;
+    margin-left: calc(var(--m-card-w) * -1.12);
+    bottom: 2svh;
+    z-index: 1;
+  }
+
+  /* Center — upright, prominent, in front */
+  .home-hero__card:nth-child(2) {
+    left: 50%;
+    right: auto;
+    height: var(--m-card-h);
+    width: auto;
+    aspect-ratio: 0.78;
+    margin-left: calc(var(--m-card-w) / -2);
+    bottom: 6svh;
+    z-index: 3;
+  }
+
+  /* Right — tilted, sits lower, behind */
+  .home-hero__card:nth-child(3) {
+    left: 50%;
+    right: auto;
+    height: var(--m-card-h);
+    width: auto;
+    aspect-ratio: 0.78;
+    margin-left: calc(var(--m-card-w) * 0.12);
+    bottom: 2svh;
+    z-index: 1;
+  }
+}
+
+/* Tablet only (768–1023px): larger hero title and taller images.
+   Mobile image height is intentionally left unchanged. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-hero--editorial .home-hero__title {
+    font-size: clamp(3.6rem, 7.8vw, 5.2rem);
+    line-height: 0.95;
+  }
+
+  .home-hero__kicker {
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    letter-spacing: 0.22em;
+  }
+
+  /* Taller cards on tablet — overrides the shared --m-card-h above */
+  .home-hero__card {
+    --m-card-h: clamp(18rem, 44vw, 26rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
