@@ -81,7 +81,7 @@ export function BrandStory() {
 
     const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      media.add('(min-width: 768px)', () => {
+      media.add('(min-width: 1024px)', () => {
         const heading = introRef.current?.querySelector<HTMLElement>('h2');
         const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 80);
         const pinDistance = () => Math.round(travel() * 1.08);
