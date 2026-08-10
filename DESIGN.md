@@ -52,9 +52,9 @@ Welcome to the central design and development specification document for **Amani
   --amani-hairline:        rgba(23, 20, 17, 0.12);
   --amani-hairline-dark:   rgba(244, 237, 223, 0.15);
 
-  /* Typography Families */
-  --amani-font-display:    'Clash Display', 'Cabinet Grotesk', -apple-system, sans-serif;
-  --amani-font-ui:         'Manrope', 'Tenor Sans', -apple-system, sans-serif;
+  /* Typography Families — Strict 2-Font System */
+  --amani-font-display:    'Clash Display', sans-serif;
+  --amani-font-ui:         'Manrope', sans-serif;
 }
 ```
 
@@ -62,40 +62,36 @@ Welcome to the central design and development specification document for **Amani
 
 ## 3. Exhaustive Typography System
 
-The typography system at Amani's is built around distinct font families, each serving a clear hierarchy and aesthetic role.
+The typography system at Amani's is built strictly around **two curated font families** governing the entire site without exception.
 
-### 3.1 Font Family Hierarchy & Fallback Stacks
+### 3.1 Font Family Hierarchy & Standards
 
 1. **Display & Editorial Headings (`--amani-font-display`)**:
-   - **Stack**: `'Clash Display'`, `'Cabinet Grotesk'`, `-apple-system`, `sans-serif`
-   - **Usage**: Main H1 titles, split hero lines, section headings, numbers, and editorial callouts.
-   - **Style Traits**: Medium (`500`) to regular (`400`) weight, tight line-heights (`0.84` – `0.98`), subtle negative letter-spacing (`-0.03em` to `-0.055em`), `-webkit-font-smoothing: antialiased`.
-2. **UI, Controls & Body Text (`--amani-font-ui`)**:
-   - **Stack**: `'Manrope'`, `'Tenor Sans'`, `-apple-system`, `BlinkMacSystemFont`, `'Segoe UI'`, `sans-serif`
-   - **Usage**: Body copy, kicker eyebrow tags, navigation links, button text, dietary labels.
-   - **Style Traits**: Regular (`400`) to bold (`700`) weight, generous line-height (`1.6` – `1.65`), neutral letter-spacing.
-3. **Monospace & Vintage Artifact Labels**:
-   - **Stack**: `'Courier New'`, `monospace`
-   - **Usage**: Rubber ink stamps (`.card-stamp`), retro card tags (`.card-tag`), card index captions (`.card-caption`), lightbox image captions (`figcaption`).
-   - **Style Traits**: All-caps, bold (`700`–`800` weight), letter-spacing `0.1em` – `0.14em`.
+   - **Font**: `'Clash Display', sans-serif`
+   - **Usage**: Main H1 titles, split hero lines, section headings, high-impact stats/numbers, and editorial callouts.
+   - **Style Traits**: Medium (`500`) to semi-bold (`600`/`700`) weights, tight line-heights (`0.84` – `0.98`), subtle negative letter-spacing (`-0.025em` to `-0.055em`), antialiased rendering.
+2. **UI, Controls, Body Copy & Artifact Labels (`--amani-font-ui`)**:
+   - **Font**: `'Manrope', sans-serif`
+   - **Usage**: All body copy, kicker eyebrow tags, navigation links, buttons, form controls, dietary tags, card stamps, retro captions, and lightbox meta text.
+   - **Style Traits**: Medium (`400`–`500`) for body/lead text, Bold (`600`–`800`) for eyebrows, stamps, and UI controls with generous letter-spacing (`0.08em` – `0.16em`).
 
 ---
 
-### 3.2 Typography Scale & CSS Fluid Variable Reference
+### 3.2 Typography Scale & CSS Variable Reference
 
 | Type Utility | CSS Variable / Class | Font Family | Size (Fluid Clamp / Rem) | Line Height | Letter Spacing | Color / Accent |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Hero Title** | `--font-hero` / `.text-hero` | `Clash Display` | `clamp(3.5rem, 8vw, 8.5rem)` | `0.92` | `-0.02em` | `var(--amani-ink)` / `#171411` |
-| **Hero Editorial** | `.home-hero__title` | `Clash Display` | `clamp(1.75rem, 6.1vw, 7.3rem)` | `0.88` | `-0.03em` | `#171411` with text shadow |
-| **Heading 1** | `--font-heading-1` / `.text-h1` | `Clash Display` | `clamp(2.5rem, 5.5vw, 5.5rem)` | `0.98` | `-0.015em` | `var(--amani-ink)` |
-| **Heading 2** | `--font-heading-2` / `.text-h2` | `Clash Display` | `clamp(1.85rem, 3.8vw, 3.8rem)` | `1.05` | `-0.01em` | `var(--amani-ink)` |
+| **Hero Title** | `--font-hero` / `.text-hero` | `Clash Display` | `clamp(3.5rem, 8vw, 8.5rem)` | `0.92` | `-0.025em` | `var(--amani-ink)` / `#171411` |
+| **Hero Editorial** | `.home-hero__title` | `Clash Display` | `clamp(1.75rem, 6.1vw, 7.3rem)` | `0.88` | `-0.03em` | `#171411` with soft text shadow |
+| **Heading 1** | `--font-heading-1` / `.text-h1` | `Clash Display` | `clamp(2.5rem, 5.5vw, 5.5rem)` | `0.98` | `-0.02em` | `var(--amani-ink)` |
+| **Heading 2** | `--font-heading-2` / `.text-h2` | `Clash Display` | `clamp(1.85rem, 3.8vw, 3.8rem)` | `1.05` | `-0.015em` | `var(--amani-ink)` |
 | **Heading 3** | `--font-heading-3` / `.text-h3` | `Clash Display` | `clamp(1.4rem, 2.2vw, 2.4rem)` | `1.15` | `0em` | `var(--amani-ink)` |
 | **Body Large** | `--font-body-lg` / `.text-body-lg`| `Manrope` | `clamp(1.05rem, 1.3vw, 1.35rem)`| `1.60` | `0em` | `var(--amani-ink-soft)` / `#403A34` |
 | **Body Standard** | `--font-body` / `.text-body` | `Manrope` | `clamp(0.95rem, 1.05vw, 1.1rem)` | `1.65` | `0em` | `var(--amani-ink-soft)` / `#403A34` |
 | **Body Caption** | `--font-caption` | `Manrope` | `clamp(0.85rem, 0.95vw, 0.95rem)`| `1.50` | `0em` | `var(--amani-ink-muted)` / `#746E66` |
 | **Eyebrow Tag** | `--font-eyebrow` / `.text-eyebrow`| `Manrope` | `11px` (`0.68rem`) | `1.20` | `0.16em` uppercase | `var(--amani-maroon)` / `#7A1F24` |
-| **Ink Stamp** | `.home-hero__card-stamp` | `Courier New` | `0.64rem` | `1.00` | `0.14em` uppercase | `rgba(150, 35, 25, 0.85)` |
-| **Retro Tag** | `.home-hero__card-tag` | `Courier New` | `0.60rem` | `1.00` | `0.10em` uppercase | `#5a4838` |
+| **Ink Stamp** | `.home-hero__card-stamp` | `Manrope` | `0.64rem` | `1.00` | `0.14em` uppercase | `rgba(150, 35, 25, 0.85)` |
+| **Retro Tag** | `.home-hero__card-tag` | `Manrope` | `0.60rem` | `1.00` | `0.10em` uppercase | `#5a4838` |
 
 ---
 
@@ -103,15 +99,15 @@ The typography system at Amani's is built around distinct font families, each se
 
 - **Spiced Accent Highlights (`.home-hero__word--fire`, `.menu-hero__word--spice`)**:
   - Color: `#A34A31` (Rich Terracotta Spice)
-  - Weight: Medium (`500`)
+  - Weight: Medium (`500`) in `Clash Display`
 - **Dynamic Cycling Word Reveal (`.home-hero__word--dynamic`, `.menu-hero__word--dynamic`)**:
   - Transition: `transform 650ms cubic-bezier(0.22, 1, 0.36, 1), opacity 650ms, filter 650ms`
   - `.is-idle`: `opacity: 1; transform: translateY(0); filter: blur(0);`
   - `.is-leaving`: `opacity: 0; transform: translateY(-10px); filter: blur(3px);`
   - `.is-entering`: `opacity: 0; transform: translateY(12px); filter: blur(3px);`
-- **Editorial Emphasized Italicization (`h1 em`, `h2 em`)**:
+- **Editorial Emphasized Highlights (`h1 em`, `h2 em`)**:
   - Color: `#d68767`
-  - Font Style: `normal` (styled via brand color distinction)
+  - Font Style: `normal` (distinct terracotta color accent)
 
 ---
 

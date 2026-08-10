@@ -1,7 +1,7 @@
 /**
  * Section 04 — Thali Experience
  * Compact, minimal UI dietary-choice panel with tactile hover reveal of the thali.
- * Uses Instrument Sans typography matching sections 01–03.
+ * Uses Manrope & Clash Display typography.
  */
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
