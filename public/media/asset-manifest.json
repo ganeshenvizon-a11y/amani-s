@@ -1,0 +1,96 @@
+{
+  "title": "Amani Stock Image Manifest",
+  "license": "Unsplash License (Free commercial & non-commercial use)",
+  "assets": [
+    {
+      "id": "hero-desktop",
+      "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1600&auto=format&fit=crop",
+      "alt": "Warm South Indian restaurant dining room interior at golden hour with teak tables and ambient light",
+      "credit": "Unsplash / Jason Leung"
+    },
+    {
+      "id": "mood-comfort",
+      "url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Steaming South Indian breakfast dish with chutneys and sambar",
+      "credit": "Unsplash / Shreyak Singh"
+    },
+    {
+      "id": "mood-lively",
+      "url": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Golden crispy Masala Dosa served on banana leaf with chutneys",
+      "credit": "Unsplash / Saveen K"
+    },
+    {
+      "id": "mood-spicy",
+      "url": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Rich South Indian spicy curry dish in clay bowl with roasted spices",
+      "credit": "Unsplash / Ratul Ghosh"
+    },
+    {
+      "id": "mood-share",
+      "url": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1200&auto=format&fit=crop",
+      "alt": "South Indian banana leaf thali meal with variety of bowls for sharing",
+      "credit": "Unsplash / Keralan Table"
+    },
+    {
+      "id": "dish-podi-idli",
+      "url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Ghee Podi Idli served with fresh coconut chutney",
+      "credit": "Unsplash / Shreyak Singh"
+    },
+    {
+      "id": "dish-masala-dosa",
+      "url": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Mysore Masala Dosa with golden griddle crispness and spiced potato masala",
+      "credit": "Unsplash / Saveen K"
+    },
+    {
+      "id": "dish-filter-coffee",
+      "url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1200&auto=format&fit=crop",
+      "alt": "South Indian filter coffee poured into brass davara and tumbler with froth",
+      "credit": "Unsplash / Coffee Ritual"
+    },
+    {
+      "id": "dish-elaneer-payasam",
+      "url": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Tender coconut Elaneer Payasam in stone bowl",
+      "credit": "Unsplash / Sweet Endings"
+    },
+    {
+      "id": "experience-craft",
+      "url": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Chef preparing dosa on hot iron griddle with focus and precision",
+      "credit": "Unsplash / Kitchen Craft"
+    },
+    {
+      "id": "experience-family",
+      "url": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Family and friends gathered around dining table enjoying food",
+      "credit": "Unsplash / Shared Table"
+    },
+    {
+      "id": "experience-gathering",
+      "url": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Atmospheric evening dining room setup for celebrations",
+      "credit": "Unsplash / Celebration Space"
+    },
+    {
+      "id": "inside-space",
+      "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Minimalist dining room with warm timber and soft lime-plaster architectural details",
+      "credit": "Unsplash / Space & Form"
+    },
+    {
+      "id": "inside-details",
+      "url": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Close-up detail of brass tableware, curry leaves, and spices",
+      "credit": "Unsplash / Material Texture"
+    },
+    {
+      "id": "visit-arrival",
+      "url": "https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?q=80&w=1200&auto=format&fit=crop",
+      "alt": "Warm exterior entrance of Amani restaurant framed with greenery and lantern light",
+      "credit": "Unsplash / Architectural Entry"
+    }
+  ]
+}

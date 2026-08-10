@@ -1,1 +1,79 @@
-/* Amani Typography Styles */
+/* ==========================================================================
+   AMANI — Typography System
+   ========================================================================== */
+
+:root {
+  --font-hero:         clamp(3.5rem, 8vw, 8.5rem);
+  --font-heading-1:    clamp(2.5rem, 5.5vw, 5.5rem);
+  --font-heading-2:    clamp(1.85rem, 3.8vw, 3.8rem);
+  --font-heading-3:    clamp(1.4rem, 2.2vw, 2.4rem);
+  --font-body-lg:      clamp(1.05rem, 1.3vw, 1.35rem);
+  --font-body:         clamp(0.95rem, 1.05vw, 1.1rem);
+  --font-caption:      clamp(0.85rem, 0.95vw, 0.95rem);
+  --font-eyebrow:      11px;
+}
+
+.font-display {
+  font-family: var(--amani-font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+}
+
+.font-ui {
+  font-family: var(--amani-font-ui);
+}
+
+.text-hero {
+  font-family: var(--amani-font-display);
+  font-size: var(--font-hero);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.text-h1 {
+  font-family: var(--amani-font-display);
+  font-size: var(--font-heading-1);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+.text-h2 {
+  font-family: var(--amani-font-display);
+  font-size: var(--font-heading-2);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.text-h3 {
+  font-family: var(--amani-font-display);
+  font-size: var(--font-heading-3);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.text-body-lg {
+  font-family: var(--amani-font-ui);
+  font-size: var(--font-body-lg);
+  line-height: 1.6;
+  color: var(--amani-ink-soft);
+}
+
+.text-body {
+  font-family: var(--amani-font-ui);
+  font-size: var(--font-body);
+  line-height: 1.65;
+  color: var(--amani-ink-soft);
+}
+
+.text-eyebrow {
+  font-family: var(--amani-font-ui);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--amani-maroon);
+}

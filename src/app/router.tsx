@@ -1,87 +1,83 @@
 /**
  * Amani — Root application router
- *
- * Flow on every page REFRESH:
- *   1. SiteLoader (GSAP logo animation) — loads on every refresh
- *   2. CinematicIntro (video scroll section from amani-new) — plays after loader
- *   3. When user clicks "View Restaurant" (or "View Menu"), main home/menu page comes!
- *
- * On internal navigation within the site:
- *   - SPA routes navigate cleanly within PublicLayout.
+ * The homepage is the immediate root experience. Secondary pages remain
+ * code-split, with a layout-stable fallback while their chunks load.
  */
 
-import { useState, useCallback } from 'react';
+import { useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
-  useNavigate,
+  useLocation,
 } from 'react-router-dom';
-import { SiteLoader }     from '../components/motion/SiteLoader';
-import { CinematicIntro } from '../components/motion/CinematicIntro';
-import { PublicLayout }   from '../layouts/PublicLayout';
+import { useLenis } from 'lenis/react';
+import { PublicLayout } from '../layouts/PublicLayout';
+import { HomePage } from '../pages/home/HomePage';
 
-// ── Lazy page imports ────────────────────────────────────────────────────────
-import { lazy, Suspense } from 'react';
-const HomePage        = lazy(() => import('../pages/home/HomePage').then(m => ({ default: m.HomePage })));
-const StoriesPage     = lazy(() => import('../pages/stories/StoriesPage').then(m => ({ default: m.StoriesPage })));
-const MenuPage        = lazy(() => import('../pages/menu/MenuPage').then(m => ({ default: m.MenuPage })));
-const GatheringsPage  = lazy(() => import('../pages/gatherings/GatheringsPage').then(m => ({ default: m.GatheringsPage })));
-const VisitPage       = lazy(() => import('../pages/visit/VisitPage').then(m => ({ default: m.VisitPage })));
-const NotFoundPage    = lazy(() => import('../pages/not-found/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+// ── Lazy page imports ─────────────────────────────────────────────────────────
+const StoriesPage    = lazy(() => import('../pages/stories/StoriesPage').then(m => ({ default: m.StoriesPage })));
+const MenuPage       = lazy(() => import('../pages/menu/MenuPage').then(m => ({ default: m.MenuPage })));
+const GatheringsPage = lazy(() => import('../pages/gatherings/GatheringsPage').then(m => ({ default: m.GatheringsPage })));
+const VisitPage      = lazy(() => import('../pages/visit/VisitPage').then(m => ({ default: m.VisitPage })));
+const NotFoundPage   = lazy(() => import('../pages/not-found/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
-// ── App shell ────────────────────────────────────────────────────────────────
+// ── AppShell ──────────────────────────────────────────────────────────────────
 function AppShell() {
-  const navigate = useNavigate();
-  const [loaderDone, setLoaderDone] = useState(false);
-  const [introDone, setIntroDone]   = useState(false);
+  const location = useLocation();
+  const lenis    = useLenis();
+  const previousLocation = useRef<string | undefined>(undefined);
 
-  const handleLoaderDone = useCallback(() => {
-    setLoaderDone(true);
+  // Always begin a non-hash route at its top. This runs before paint, avoiding
+  // a momentary footer-first render on reload or on a route transition.
+  useLayoutEffect(() => {
+    const locationKey = `${location.pathname}${location.search}${location.hash}`;
+    if (previousLocation.current === locationKey) return;
+    previousLocation.current = locationKey;
+    if (location.hash) return;
+
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [lenis, location.hash, location.pathname, location.search]);
+
+  // Refresh scroll-based layouts after fonts and image dimensions settle.
+  useEffect(() => {
+    const refreshScrollLayout = () => window.dispatchEvent(new Event('resize'));
+    const fontsReady = document.fonts?.ready;
+    fontsReady?.then(refreshScrollLayout).catch(() => undefined);
+    window.addEventListener('load', refreshScrollLayout, { once: true });
+    return () => window.removeEventListener('load', refreshScrollLayout);
   }, []);
 
-  const handleIntroDone = useCallback((destination: string) => {
-    setIntroDone(true);
-    navigate(destination);
-  }, [navigate]);
-
-  // Phase 1: Loader overlay on refresh
-  if (!loaderDone) {
-    return <SiteLoader onDone={handleLoaderDone} />;
-  }
-
-  // Phase 2: Cinematic video intro
-  if (!introDone) {
-    return <CinematicIntro onComplete={handleIntroDone} />;
-  }
-
-  // Phase 3: Main website
   return (
     <PublicLayout>
-      <Suspense fallback={<SiteLoader />}>
+      <Suspense fallback={<div className="route-loading" role="status"><span className="sr-only">Loading page</span></div>}>
         <Outlet />
       </Suspense>
     </PublicLayout>
   );
 }
 
-// ── Router definition ────────────────────────────────────────────────────────
+// ── Router definition ─────────────────────────────────────────────────────────
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AppShell />,
     errorElement: (
-      <Suspense fallback={<SiteLoader />}>
+      <Suspense fallback={null}>
         <NotFoundPage />
       </Suspense>
     ),
     children: [
-      { index: true,             element: <HomePage /> },
-      { path: 'stories/',        element: <StoriesPage /> },
-      { path: 'menu/',           element: <MenuPage /> },
-      { path: 'gatherings/',     element: <GatheringsPage /> },
-      { path: 'visit/',          element: <VisitPage /> },
-      { path: '*',               element: <NotFoundPage /> },
+      { index: true,         element: <HomePage /> },
+      { path: 'stories/',    element: <StoriesPage /> },
+      { path: 'menu/',       element: <MenuPage /> },
+      { path: 'gatherings/', element: <GatheringsPage /> },
+      { path: 'visit/',      element: <VisitPage /> },
+      { path: '*',           element: <NotFoundPage /> },
     ],
   },
 ]);

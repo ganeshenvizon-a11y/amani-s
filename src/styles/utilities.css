@@ -1,1 +1,53 @@
-/* Amani Utility Classes */
+/* ==========================================================================
+   AMANI — CSS Utilities & Micro-Interactions
+   ========================================================================== */
+
+/* Section Spacing */
+.section-padding {
+  padding-top: clamp(4rem, 11vw, 11rem);
+  padding-bottom: clamp(4rem, 11vw, 11rem);
+}
+
+.section-padding-sm {
+  padding-top: clamp(3rem, 6vw, 6rem);
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+/* Hairline Dividers */
+.hairline-b {
+  border-bottom: 1px solid var(--amani-hairline);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--amani-hairline);
+}
+
+.hairline-dark-b {
+  border-bottom: 1px solid var(--amani-hairline-dark);
+}
+
+.hairline-dark-t {
+  border-top: 1px solid var(--amani-hairline-dark);
+}
+
+/* Image reveal mask effect helper */
+.overflow-hidden-wrapper {
+  overflow: hidden;
+  display: block;
+}
+
+/* Smooth Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--amani-maroon);
+  outline-offset: 4px;
+}
+
+/* Reduced Motion Safety */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

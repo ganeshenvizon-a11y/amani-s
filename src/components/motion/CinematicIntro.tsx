@@ -36,7 +36,6 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
   const currentProgress = useRef(0);
   const hasScrolled    = useRef(false);
   const finalRevealed  = useRef(false);
-  const pendingTime    = useRef<number | null>(null);
   const animFrameId    = useRef<number | null>(null);
 
   useEffect(() => {
@@ -55,20 +54,16 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     // ── Seeking ────────────────────────────────────────────────────
     function seekTo(t: number) {
       if (!video) return;
-      if (video.seeking) { pendingTime.current = t; return; }
       if (Math.abs(video.currentTime - t) <= SEEK_THRESHOLD) return;
-      pendingTime.current = null;
-      video.currentTime = t;
+      try {
+        video.currentTime = t;
+      } catch {
+        /* noop */
+      }
     }
 
     function onSeeked() {
-      if (!video) return;
-      if (pendingTime.current === null) return;
-      const target = pendingTime.current;
-      pendingTime.current = null;
-      if (Math.abs(video.currentTime - target) > SEEK_THRESHOLD) {
-        video.currentTime = target;
-      }
+      // noop - direct assignment provides instant scrubbing without event lock
     }
 
     // ── Apply progress ─────────────────────────────────────────────
@@ -102,8 +97,8 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
 
       function step() {
         const diff = targetProgress.current - currentProgress.current;
-        if (Math.abs(diff) > 0.0001) {
-          currentProgress.current += diff * 0.08;
+        if (Math.abs(diff) > 0.0002) {
+          currentProgress.current += diff * 0.32;
           applyProgress(currentProgress.current);
           animFrameId.current = requestAnimationFrame(step);
         } else {
@@ -119,7 +114,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     // ── Wheel scrubbing ────────────────────────────────────────────
     function onWheel(e: WheelEvent) {
       e.preventDefault();
-      const delta = e.deltaY * (e.deltaMode === 1 ? 0.006 : 0.00012);
+      const delta = e.deltaY * (e.deltaMode === 1 ? 0.02 : 0.00045);
       targetProgress.current = clamp(targetProgress.current + delta, 0, 1);
       startSmoothLoop();
     }
@@ -133,7 +128,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     function onTouchMove(e: TouchEvent) {
       e.preventDefault();
       const touchY = e.touches[0].clientY;
-      const deltaY = (touchStartY - touchY) * 0.0006;
+      const deltaY = (touchStartY - touchY) * 0.0018;
       touchStartY = touchY;
       targetProgress.current = clamp(targetProgress.current + deltaY, 0, 1);
       startSmoothLoop();
@@ -143,11 +138,11 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     function onKeyDown(e: KeyboardEvent) {
       if (['ArrowDown', 'PageDown', 'Space'].includes(e.code)) {
         e.preventDefault();
-        targetProgress.current = clamp(targetProgress.current + 0.02, 0, 1);
+        targetProgress.current = clamp(targetProgress.current + 0.06, 0, 1);
         startSmoothLoop();
       } else if (['ArrowUp', 'PageUp'].includes(e.code)) {
         e.preventDefault();
-        targetProgress.current = clamp(targetProgress.current - 0.02, 0, 1);
+        targetProgress.current = clamp(targetProgress.current - 0.06, 0, 1);
         startSmoothLoop();
       }
     }
@@ -206,7 +201,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
     <section
       className="cinematic-section"
       id="cinematicSection"
-      aria-label="Amani restaurant introduction"
+      aria-label="Amani's restaurant introduction"
     >
       <div className="cinematic-stage" id="cinematicStage">
         {/* Scrubbed video — muted, no autoplay */}
@@ -237,7 +232,7 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
         <div className="final-layer" id="finalLayer" ref={finalLayerRef}>
           <div className="final-overlay" />
           <div className="final-content">
-            <h1 className="final-title">Welcome to Amani</h1>
+            <h1 className="final-title">Welcome to Amani's</h1>
             <p className="final-subtitle">What would you like to explore?</p>
             <nav className="final-actions" aria-label="Choose where to go">
               <button
