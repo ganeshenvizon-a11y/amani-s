@@ -203,10 +203,10 @@
 }
 
 .final-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Clash Display', sans-serif;
   font-size: clamp(24px, 4vw, 40px);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
   margin-bottom: 12px;
 }
 

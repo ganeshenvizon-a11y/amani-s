@@ -53,7 +53,7 @@ Welcome to the central design and development specification document for **Amani
   --amani-hairline-dark:   rgba(244, 237, 223, 0.15);
 
   /* Typography Families */
-  --amani-font-display:    'Clash Display', 'Cormorant Garamond', Georgia, serif;
+  --amani-font-display:    'Clash Display', 'Cabinet Grotesk', -apple-system, sans-serif;
   --amani-font-ui:         'Manrope', 'Tenor Sans', -apple-system, sans-serif;
 }
 ```
@@ -62,12 +62,12 @@ Welcome to the central design and development specification document for **Amani
 
 ## 3. Exhaustive Typography System
 
-The typography system at Amani's is built around three distinct font families, each serving a clear hierarchy and aesthetic role.
+The typography system at Amani's is built around distinct font families, each serving a clear hierarchy and aesthetic role.
 
 ### 3.1 Font Family Hierarchy & Fallback Stacks
 
 1. **Display & Editorial Headings (`--amani-font-display`)**:
-   - **Stack**: `'Clash Display'`, `'Cormorant Garamond'`, `Georgia`, `serif`
+   - **Stack**: `'Clash Display'`, `'Cabinet Grotesk'`, `-apple-system`, `sans-serif`
    - **Usage**: Main H1 titles, split hero lines, section headings, numbers, and editorial callouts.
    - **Style Traits**: Medium (`500`) to regular (`400`) weight, tight line-heights (`0.84` – `0.98`), subtle negative letter-spacing (`-0.03em` to `-0.055em`), `-webkit-font-smoothing: antialiased`.
 2. **UI, Controls & Body Text (`--amani-font-ui`)**:
@@ -338,7 +338,7 @@ src/
 │   ├── gatherings/               # Gatherings & private dining
 │   ├── visit/                    # Location, hours & reservations
 │   └── not-found/                # 404 error page
-├── sections/
+├── sections/          
 │   ├── home/
 │   │   └── Hero.tsx              # Home editorial physics hero section
 │   └── menu/

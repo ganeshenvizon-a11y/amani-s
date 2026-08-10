@@ -3057,21 +3057,21 @@ body.image-lightbox-open { overflow: hidden; }
 }
 
 .amani-stories-heading-script {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: 'Clash Display', 'Cabinet Grotesk', sans-serif;
+  font-style: normal;
+  font-weight: 500;
   color: #18372F;
   font-size: clamp(3rem, 5.5vw, 5.5rem);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .amani-stories-heading-main {
-  font-family: 'Cormorant Garamond', 'Clash Display', Georgia, serif;
+  font-family: 'Clash Display', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   color: #18372F;
   font-size: clamp(2.4rem, 5.2vw, 5.2rem);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
   margin-top: 0.12em;
 }
 

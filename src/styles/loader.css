@@ -1,78 +1,129 @@
 /* ==========================================================================
-   AMANI — Site Loader
-   Fullscreen brand loader: continuously-spinning outer ring + logo entrance.
+   AMANI — Stagger Loader (Anime.js Reveal)
+   7–10 vertical rectangular panels covering the viewport.
+   Center-outward-upward reveal of hero section underneath.
    ========================================================================== */
 
-/* ── Keyframe: outer ring spins continuously ─────────────────────────────── */
-@keyframes amani-ring-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* ── Root container ──────────────────────────────────────────────────────── */
 .site-loader {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--amani-canvas, #F8F2E5);
-  will-change: opacity;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  pointer-events: auto;
+  user-select: none;
 }
 
-/* ── Logo wrapper (animated by GSAP — starts invisible) ─────────────────── */
-.site-loader__logo {
+/* Container for 9 vertical strips */
+.site-loader__strips {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Individual vertical strip */
+.site-loader__strip {
+  flex: 1 1 0%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transform: translateY(0%);
+  will-change: transform;
+  backface-visibility: hidden;
+  border-right: 1px solid rgba(248, 242, 229, 0.04);
+}
+
+.site-loader__strip:last-child {
+  border-right: none;
+}
+
+/* Warm Amani brand palette distribution across 9 strips */
+/* Center strip (index 4) has a warm deep terracotta tone; adjacent strips vary gracefully */
+.site-loader__strip:nth-child(1),
+.site-loader__strip:nth-child(9) {
+  background-color: var(--amani-terracotta-dark, #2E130B);
+}
+
+.site-loader__strip:nth-child(2),
+.site-loader__strip:nth-child(8) {
+  background-color: #34150C;
+}
+
+.site-loader__strip:nth-child(3),
+.site-loader__strip:nth-child(7) {
+  background-color: #3B180E;
+}
+
+.site-loader__strip:nth-child(4),
+.site-loader__strip:nth-child(6) {
+  background-color: #441B10;
+}
+
+.site-loader__strip:nth-child(5) {
+  /* Center panel */
+  background-color: #4D1E12;
+}
+
+/* Centered Logo Stage */
+.site-loader__brand-stage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  justify-content: center;
+  gap: 0.85rem;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
   opacity: 0;
   will-change: transform, opacity;
 }
 
-/* ── SVG container ───────────────────────────────────────────────────────── */
-.site-loader__mark {
+.site-loader__logo-wrapper {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.site-loader__svg {
+.site-loader__logo-img {
   display: block;
-  width: clamp(100px, 10vw, 140px);
+  width: clamp(140px, 16vw, 210px);
   height: auto;
-  color: var(--amani-maroon, #7B2D2D);
-  shape-rendering: geometricPrecision;
-  overflow: visible;
+  object-fit: contain;
+  filter: brightness(0) invert(0.96) sepia(0.12) saturate(1.2);
 }
 
-/* ── Outer dashed ring — continuously spins via CSS ─────────────────────── */
-.site-loader__ring-outer {
-  transform-box: fill-box;
-  transform-origin: center center;
-  animation: amani-ring-spin 2s linear infinite;
-  opacity: 0.55;
-}
-
-/* ── Inner static ring ───────────────────────────────────────────────────── */
-.site-loader__ring-inner {
-  opacity: 0.35;
-}
-
-/* ── Brand wordmark below the mark ──────────────────────────────────────── */
-.site-loader__wordmark {
-  font-family: var(--amani-font-serif, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  color: var(--amani-ink, #1C1412);
+.site-loader__wordmark-text {
+  font-family: 'Clash Display', var(--amani-font-display), sans-serif;
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--amani-cream-on-dark, #F4EDDF);
   line-height: 1;
-  user-select: none;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
 }
 
-/* ── Accessibility: screen-reader only ───────────────────────────────────── */
+.site-loader__kicker-text {
+  font-family: 'Instrument Sans', var(--amani-font-ui), sans-serif;
+  font-size: clamp(0.7rem, 1vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: rgba(244, 237, 223, 0.65);
+  text-transform: uppercase;
+}
+
+/* Accessibility screen reader */
 .site-loader__sr-only {
   position: absolute;
   width: 1px;
@@ -85,15 +136,10 @@
   border: 0;
 }
 
-/* ── Prevent scroll while loader is active ──────────────────────────────── */
+/* Prevent scrolling while loader is active */
 html.is-loading,
 body.is-loading {
-  overflow: hidden;
+  overflow: hidden !important;
+  touch-action: none;
 }
 
-/* ── Respect reduced-motion: pause spin ─────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .site-loader__ring-outer {
-    animation: none;
-  }
-}
