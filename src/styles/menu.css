@@ -228,7 +228,7 @@
   width: 100%;
   margin: 0;
   color: #171411;
-  font-family: 'Clash Display', sans-serif;
+  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
   font-size: clamp(2.6rem, 6.1vw, 7.3rem);
   font-weight: 500;
   line-height: 0.88;

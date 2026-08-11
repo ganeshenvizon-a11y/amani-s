@@ -13,6 +13,7 @@ import { SignatureDishes } from '../../sections/home/SignatureDishes';
 import { GuestReviews } from '../../sections/home/GuestReviews';
 import { VisitPreview } from '../../sections/home/VisitPreview';
 import { GatheringsPreview } from '../../sections/home/GatheringsPreview';
+import { ContactForm } from '../../sections/home/ContactForm';
 import { SEO_CONFIG, getRestaurantJsonLd } from '../../config/seo';
 import { useEffect } from 'react';
 
@@ -68,6 +69,9 @@ export function HomePage() {
 
         {/* Section 09: Gatherings Preview & Final Reservation Invitation */}
         <GatheringsPreview />
+
+        {/* Section 10: Contact Form */}
+        <ContactForm />
       </div>
     </>
   );

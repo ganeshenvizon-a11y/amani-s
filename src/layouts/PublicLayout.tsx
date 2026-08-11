@@ -18,7 +18,8 @@ export function PublicLayout({ children }: PublicLayoutProps) {
   const isStoriesPage = location.pathname.startsWith('/stories');
   const isGatheringsPage = location.pathname.startsWith('/gatherings');
   const isVisitPage = location.pathname.startsWith('/visit');
-  const isHeroBleedPage = isHomePage || isStoriesPage || isGatheringsPage || isVisitPage;
+  const isFranchisePage = location.pathname.startsWith('/franchise');
+  const isHeroBleedPage = isHomePage || isStoriesPage || isGatheringsPage || isVisitPage || isFranchisePage;
 
   useEffect(() => {
     document.documentElement.classList.add('amani-loaded');

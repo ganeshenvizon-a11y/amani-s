@@ -20,6 +20,7 @@ const StoriesPage    = lazy(() => import('../pages/stories/StoriesPage').then(m 
 const MenuPage       = lazy(() => import('../pages/menu/MenuPage').then(m => ({ default: m.MenuPage })));
 const GatheringsPage = lazy(() => import('../pages/gatherings/GatheringsPage').then(m => ({ default: m.GatheringsPage })));
 const VisitPage      = lazy(() => import('../pages/visit/VisitPage').then(m => ({ default: m.VisitPage })));
+const FranchisePage  = lazy(() => import('../pages/franchise/FranchisePage').then(m => ({ default: m.FranchisePage })));
 const NotFoundPage   = lazy(() => import('../pages/not-found/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 // ── AppShell ──────────────────────────────────────────────────────────────────
@@ -81,6 +82,8 @@ const router = createBrowserRouter([
       { path: 'gatherings/', element: <GatheringsPage /> },
       { path: 'visit',       element: <VisitPage /> },
       { path: 'visit/',      element: <VisitPage /> },
+      { path: 'franchise',   element: <FranchisePage /> },
+      { path: 'franchise/',  element: <FranchisePage /> },
       { path: '*',           element: <NotFoundPage /> },
     ],
   },

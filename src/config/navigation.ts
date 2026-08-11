@@ -15,6 +15,7 @@ export const PRIMARY_OPEN_NAV_LINKS: NavLinkItem[] = [
   { label: 'STORIES',    path: '/stories/' },
   { label: 'GATHERINGS', path: '/gatherings/' },
   { label: 'VISIT',      path: '/visit/' },
+  { label: 'FRANCHISE',  path: '/franchise/' },
 ];
 
 export const SECONDARY_OPEN_NAV_LINKS: NavLinkItem[] = [
@@ -31,6 +32,7 @@ export const MAIN_NAV_LINKS: NavLinkItem[] = [
   { label: 'STORIES', path: '/stories/' },
   { label: 'GATHERINGS', path: '/gatherings/' },
   { label: 'VISIT', path: '/visit/' },
+  { label: 'FRANCHISE', path: '/franchise/' },
   { label: 'INSTAGRAM ↗', path: 'https://instagram.com', isExternal: true },
   { label: 'GET DIRECTIONS ↗', path: '/visit/#location', isExternal: false },
 ];
@@ -46,5 +48,6 @@ export const FOOTER_NAV_LINKS: NavLinkItem[] = [
   { label: 'Stories',    path: '/stories/' },
   { label: 'Gatherings', path: '/gatherings/' },
   { label: 'Visit',      path: '/visit/' },
+  { label: 'Franchise',  path: '/franchise/' },
   { label: 'Reservations', path: '/visit/#reserve' },
 ];
