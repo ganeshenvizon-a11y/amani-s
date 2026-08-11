@@ -15,7 +15,6 @@ export function Gallery() {
     <section id="gallery" className="gath-gallery" aria-labelledby="gath-gallery-title">
       <div className="gath-container">
         <Reveal className="gath-head">
-          <p className="gath-eyebrow">Gallery / 02</p>
           <h2 id="gath-gallery-title">Moments we&rsquo;ve <em>hosted.</em></h2>
           <p>A few of the celebrations Amani has been part of.</p>
         </Reveal>

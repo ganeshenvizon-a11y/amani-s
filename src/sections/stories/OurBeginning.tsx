@@ -18,13 +18,16 @@ export function OurBeginning() {
     }, section);
     return () => ctx.revert();
   }, []);
+
   return (
     <section ref={sectionRef} className="stories-beginning" aria-labelledby="beginning-title">
       <div className="stories-container">
         <div className="stories-beginning__intro">
-          <p className="stories-eyebrow">Our Beginning / 03</p>
-          <h2 id="beginning-title">Our <em>beginning.</em></h2>
-          <p>The family behind Amani didn&rsquo;t set out to open a restaurant. They set out to recreate a kitchen they missed — a home kitchen in Hyderabad, and the Andhra cooking that came out of it.</p>
+          <div className="stories-beginning__title-wrap">
+            <p className="stories-eyebrow">OUR BEGINNING / 03</p>
+            <h2 id="beginning-title">Our <em>beginning.</em></h2>
+          </div>
+          <p className="stories-beginning__summary">The family behind Amani didn&rsquo;t set out to open a restaurant. They set out to recreate a kitchen they missed — a home kitchen in Hyderabad, and the Andhra cooking that came out of it.</p>
         </div>
         <div className="stories-beginning__collage">
           <figure className="stories-beginning__image stories-beginning__image--main"><img src="/media/images/grandma-cooking-stone-1.png" alt="A grandmother preparing food on a traditional stone grinder" loading="lazy" /></figure>

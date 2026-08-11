@@ -30,8 +30,8 @@ export function StoriesPage() {
 
       {/* 05 — A Day at Amani */}
       <ADayAtAmani />
-
-      {/* Closing — Some visits become traditions */}
     </div>
   );
 }
+
+

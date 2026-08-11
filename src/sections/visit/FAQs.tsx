@@ -43,7 +43,6 @@ export function FAQs() {
     <section id="faq" className="vst-faq" aria-labelledby="vst-faq-title">
       <div className="vst-container">
         <Reveal className="vst-head">
-          <p className="vst-eyebrow">FAQ / 04</p>
           <h2 id="vst-faq-title">Frequently asked <em>questions.</em></h2>
         </Reveal>
 

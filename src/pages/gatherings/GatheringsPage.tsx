@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Hero } from '../../sections/gatherings/Hero';
+import { Occasions } from '../../sections/gatherings/Occasions';
 import { Gallery } from '../../sections/gatherings/Gallery';
 import { PlanningProcess } from '../../sections/gatherings/PlanningProcess';
 import { EnquiryForm } from '../../sections/gatherings/EnquiryForm';
@@ -15,8 +16,11 @@ export function GatheringsPage() {
 
   return (
     <div className="gatherings-page">
-      {/* 01 — Hero + occasions */}
+      {/* 01 — Hero */}
       <Hero />
+
+      {/* Occasions */}
+      <Occasions />
 
       {/* 02 — Gallery of hosted moments */}
       <Gallery />

@@ -5,6 +5,10 @@
    (Namespaced `.gath-*` to avoid clashing with the home preview's `.gatherings-*`.)
    ========================================================================== */
 
+#main-content:has(.gatherings-page) {
+  padding-top: 0 !important;
+}
+
 .gatherings-page {
   overflow: clip;
   background: var(--amani-canvas);
@@ -29,11 +33,25 @@
 
 .gath-eyebrow--light { color: rgba(244, 237, 223, 0.78); }
 
-.gath-head { max-width: 60rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.gath-head--center { margin-inline: auto; text-align: center; }
+.gath-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.gath-head--center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  text-align: center;
+}
 
 .gatherings-page h2 {
-  margin: 1rem 0 0;
+  margin: 0;
   font-family: var(--amani-font-display);
   font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
   font-weight: 400;
@@ -43,14 +61,17 @@
 
 .gatherings-page h2 em { font-style: italic; color: var(--amani-maroon); }
 
-.gath-head p:not(.gath-eyebrow) {
-  max-width: 40rem;
-  margin: 1.35rem 0 0;
+.gath-head p {
+  max-width: 32rem;
+  margin: 0;
   color: var(--amani-ink-muted);
   font-size: 1.02rem;
   line-height: 1.7;
 }
-.gath-head--center p:not(.gath-eyebrow) { margin-inline: auto; }
+.gath-head--center p {
+  margin-inline: auto;
+  margin-top: 1rem;
+}
 
 /* Buttons ------------------------------------------------------------------ */
 
@@ -86,37 +107,124 @@
    ========================================================================== */
 
 .gath-hero {
-  padding: clamp(8rem, 15vh, 12rem) 0 clamp(4rem, 8vw, 7rem);
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6.5rem, 14vh, 9rem) var(--amani-gutter) clamp(3.5rem, 6vh, 5rem);
+  text-align: center;
+  color: var(--amani-cream-on-dark);
+  background: var(--amani-void);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.gath-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+  filter: saturate(0.95) brightness(0.88) contrast(1.03);
+}
+
+.gath-hero__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(16, 9, 6, 0.55) 0%, rgba(15, 7, 5, 0.72) 100%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.gath-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.gath-hero__inner { max-width: 60rem; margin-inline: auto; }
+.gath-hero__content {
+  max-width: 60rem;
+  margin-inline: auto;
+  text-align: center;
+}
 
 .gath-hero h1 {
   margin: 1.1rem 0 0;
-  color: var(--amani-ink);
+  color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(3.5rem, 8vw, 8.5rem));
+  font-size: var(--font-hero, clamp(3.2rem, 7.5vw, 8rem));
   font-weight: 500;
-  line-height: 0.9;
+  line-height: 0.92;
   letter-spacing: -0.04em;
+  text-align: center;
 }
 
-.gath-hero h1 em { font-style: italic; color: var(--amani-maroon); }
+.gath-hero h1 span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.gath-hero h1 em {
+  display: inline-block;
+  font-style: italic;
+  color: #f4c478;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
 
 .gath-hero__lede {
   max-width: 38rem;
   margin: 1.5rem auto 0;
-  color: var(--amani-ink-muted);
-  font-size: 1.08rem;
-  line-height: 1.7;
+  color: rgba(244, 237, 223, 0.92);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.gath-hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gath-hero__actions .gath-button {
+  background: var(--amani-maroon);
+  border-color: var(--amani-maroon);
+  color: var(--amani-cream-on-dark);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.gath-hero__actions .gath-button:hover {
+  background: var(--amani-maroon-dark);
+  border-color: var(--amani-maroon-dark);
+}
+
+
+.gath-occasions-section {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background: var(--amani-canvas);
 }
 
 .gath-occasions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 1.5rem);
-  margin-top: clamp(3rem, 6vw, 4.5rem);
   text-align: left;
 }
 
@@ -262,7 +370,7 @@
 .gath-enquiry h2 { color: var(--amani-cream-on-dark); font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem)); }
 .gath-enquiry h2 em { color: #e3a079; }
 
-.gath-enquiry__intro p:not(.gath-eyebrow) {
+.gath-enquiry__intro p {
   max-width: 26rem;
   margin: 1.4rem 0 0;
   color: var(--amani-cream-muted);
@@ -364,6 +472,14 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
+  .gath-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .gath-head p {
+    max-width: 100%;
+  }
   .gath-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gath-enquiry__grid { grid-template-columns: 1fr; }
   .gath-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -371,13 +487,18 @@
 }
 
 @media (max-width: 600px) {
+  .gath-hero {
+    min-height: 520px;
+    padding-top: clamp(5.5rem, 12vh, 7rem);
+    padding-bottom: 4.5rem;
+  }
+  .gath-hero h1 { font-size: clamp(2.5rem, 11vw, 4.2rem); }
   .gath-occasions { grid-template-columns: 1fr; }
   .gath-steps { grid-template-columns: 1fr; }
   .gath-form__grid { grid-template-columns: 1fr; }
   .gath-form__actions { flex-direction: column; align-items: stretch; text-align: center; }
   .gath-gallery__grid { grid-template-columns: 1fr; grid-auto-rows: 12rem; }
   .gath-gallery__item--tall, .gath-gallery__item--wide { grid-row: auto; grid-column: auto; }
-  .gath-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
   .gatherings-page h2 { font-size: clamp(2.1rem, 9vw, 3.4rem); }
 }
 

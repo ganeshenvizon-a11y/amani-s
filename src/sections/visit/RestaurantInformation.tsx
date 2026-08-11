@@ -15,7 +15,6 @@ export function RestaurantInformation() {
     <section id="info" className="vst-info" aria-labelledby="vst-info-title">
       <div className="vst-container">
         <Reveal className="vst-head">
-          <p className="vst-eyebrow">Restaurant information / 03</p>
           <h2 id="vst-info-title">Good to <em>know.</em></h2>
         </Reveal>
 

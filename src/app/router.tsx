@@ -73,9 +73,13 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true,         element: <HomePage /> },
+      { path: 'stories',     element: <StoriesPage /> },
       { path: 'stories/',    element: <StoriesPage /> },
+      { path: 'menu',        element: <MenuPage /> },
       { path: 'menu/',       element: <MenuPage /> },
+      { path: 'gatherings',  element: <GatheringsPage /> },
       { path: 'gatherings/', element: <GatheringsPage /> },
+      { path: 'visit',       element: <VisitPage /> },
       { path: 'visit/',      element: <VisitPage /> },
       { path: '*',           element: <NotFoundPage /> },
     ],

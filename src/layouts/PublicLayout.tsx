@@ -15,6 +15,10 @@ interface PublicLayoutProps {
 export function PublicLayout({ children }: PublicLayoutProps) {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isStoriesPage = location.pathname.startsWith('/stories');
+  const isGatheringsPage = location.pathname.startsWith('/gatherings');
+  const isVisitPage = location.pathname.startsWith('/visit');
+  const isHeroBleedPage = isHomePage || isStoriesPage || isGatheringsPage || isVisitPage;
 
   useEffect(() => {
     document.documentElement.classList.add('amani-loaded');
@@ -32,7 +36,7 @@ export function PublicLayout({ children }: PublicLayoutProps) {
       <main
         id="main-content"
         tabIndex={-1}
-        className={`flex-1 w-full outline-none ${isHomePage ? '' : 'pt-24 md:pt-28'}`}
+        className={`flex-1 w-full outline-none ${isHeroBleedPage ? '' : 'pt-24 md:pt-28'}`}
       >
         {children}
       </main>

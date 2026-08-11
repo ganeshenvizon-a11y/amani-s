@@ -42,7 +42,6 @@ export function EnquiryForm() {
     <section id="enquiry" className="gath-enquiry" aria-labelledby="gath-enquiry-title">
       <div className="gath-container gath-enquiry__grid">
         <Reveal className="gath-enquiry__intro">
-          <p className="gath-eyebrow gath-eyebrow--light">Enquiry / 04</p>
           <h2 id="gath-enquiry-title">Start <em>planning.</em></h2>
           <p>Tell us a little about what you&rsquo;re celebrating, and we&rsquo;ll take it from there.</p>
         </Reveal>

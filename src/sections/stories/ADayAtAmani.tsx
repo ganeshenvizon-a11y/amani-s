@@ -10,30 +10,32 @@ const scenes = [
 export function ADayAtAmani() {
   const reduceMotion = useReducedMotion();
   return (
-    <section className="stories-day" aria-labelledby="day-title"><div className="stories-container">
-      <div className="stories-day__head">
-        <div>
-          <p className="stories-eyebrow stories-eyebrow--light">A Day at Amani / 05</p>
-          <h2 id="day-title">A day at <em>Amani.</em></h2>
+    <section className="stories-day" aria-labelledby="day-title">
+      <div className="stories-container">
+        <div className="stories-day__head">
+          <div className="stories-day__title-wrap">
+            <p className="stories-eyebrow stories-eyebrow--light">A DAY AT AMANI / 05</p>
+            <h2 id="day-title">A day at <em>Amani.</em></h2>
+          </div>
+          <p className="stories-day__intro">Long before the first guest arrives, the day has already started.</p>
         </div>
-        <p>Long before the first guest arrives, the day has already started.</p>
+        <ol className="stories-day__scenes">
+          {scenes.map((scene, index) => (
+            <motion.li
+              key={scene.label}
+              className="stories-scene"
+              initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="stories-scene__time">{scene.time}</span>
+              <h3 className="stories-scene__label">{scene.label}</h3>
+              <p className="stories-scene__text">{scene.text}</p>
+            </motion.li>
+          ))}
+        </ol>
       </div>
-      <ol className="stories-day__scenes">
-        {scenes.map((scene, index) => (
-          <motion.li
-            key={scene.label}
-            className="stories-scene"
-            initial={reduceMotion ? false : { opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="stories-scene__time">{scene.time}</span>
-            <h3 className="stories-scene__label">{scene.label}</h3>
-            <p className="stories-scene__text">{scene.text}</p>
-          </motion.li>
-        ))}
-      </ol>
-    </div></section>
+    </section>
   );
 }

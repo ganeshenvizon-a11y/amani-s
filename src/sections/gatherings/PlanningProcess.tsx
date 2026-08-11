@@ -12,7 +12,6 @@ export function PlanningProcess() {
     <section id="process" className="gath-process" aria-labelledby="gath-process-title">
       <div className="gath-container">
         <Reveal className="gath-head">
-          <p className="gath-eyebrow">Process / 03</p>
           <h2 id="gath-process-title">How it <em>works.</em></h2>
         </Reveal>
         <div className="gath-steps">

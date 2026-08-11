@@ -19,7 +19,6 @@ export function LiveStatus() {
     <section id="reserve" className="vst-find" aria-labelledby="vst-find-title">
       <div className="vst-container vst-find__grid">
         <Reveal>
-          <p className="vst-eyebrow">Live status / 02</p>
           <h2 id="vst-find-title">Find <em>us.</em></h2>
 
           <p className={`vst-status ${status.isOpen ? 'vst-status--open' : 'vst-status--closed'}`}>
