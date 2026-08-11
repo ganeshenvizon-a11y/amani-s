@@ -28,6 +28,21 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+span {
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+}
+
+h1 span,
+h2 span,
+h3 span,
+h4 span,
+h5 span,
+h6 span,
+.font-display span,
+[class*="display"] span {
+  font-family: inherit;
+}
+
 #root {
   width: 100%;
   min-height: 100vh;

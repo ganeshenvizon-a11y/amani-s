@@ -13,6 +13,7 @@ type ThaliChoice = {
   title: string;
   description: string;
   items: string[];
+  image: string;
 };
 
 const THALI_CHOICES: ThaliChoice[] = [
@@ -29,6 +30,7 @@ const THALI_CHOICES: ThaliChoice[] = [
       'Fresh Coconut & Tomato Chutneys',
       'Crisp Appalam & Elaneer Payasam',
     ],
+    image: '/media/images/thali/south-indian-thali.png',
   },
   {
     id: 'non-vegetarian',
@@ -43,6 +45,7 @@ const THALI_CHOICES: ThaliChoice[] = [
       'House Special Sambar & Egg Gravy',
       'Malabar Parotta & Payasam',
     ],
+    image: '/media/images/thali/non-veg-thali.png',
   },
   {
     id: 'jain',
@@ -57,6 +60,7 @@ const THALI_CHOICES: ThaliChoice[] = [
       'Cumin Pepper Rasam & Curd',
       'Crisp Appalam & Traditional Payasam',
     ],
+    image: '/media/images/thali/jain-thali.png',
   },
 ];
 
@@ -290,7 +294,20 @@ export function ThaliExperience() {
               })}
         >
           <img className="thali-reveal-stage__image" src="/media/images/thali/empty-plate.png" alt="" />
-          <img className="thali-reveal-stage__image thali-reveal-stage__image--full" src="/media/images/thali/south-indian-thali.png" alt="" />
+          {THALI_CHOICES.map((choice) => (
+            <img
+              key={choice.id}
+              className={`thali-reveal-stage__image thali-reveal-stage__image--full ${
+                choice.id === activeChoice.id ? 'is-active-dish' : ''
+              }`}
+              src={choice.image}
+              alt={choice.title}
+              style={{
+                opacity: choice.id === activeChoice.id ? 1 : 0,
+                transition: 'opacity 0.3s ease',
+              }}
+            />
+          ))}
           {canHover && <span className="thali-reveal-stage__lens" aria-hidden="true" />}
           <p className="thali-reveal-stage__hint">
             <span className="thali-reveal-stage__hint-icon" aria-hidden="true">+</span>

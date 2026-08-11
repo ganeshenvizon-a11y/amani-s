@@ -35,6 +35,7 @@
 .gatherings-page h2 {
   margin: 1rem 0 0;
   font-family: var(--amani-font-display);
+  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
   font-weight: 400;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -94,8 +95,8 @@
 .gath-hero h1 {
   margin: 1.1rem 0 0;
   color: var(--amani-ink);
-  font-family: 'Clash Display', var(--amani-font-display), sans-serif;
-  font-size: clamp(2.9rem, 7vw, 6.6rem);
+  font-family: var(--amani-font-display);
+  font-size: var(--font-hero, clamp(3.5rem, 8vw, 8.5rem));
   font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -258,7 +259,7 @@
   align-items: start;
 }
 
-.gath-enquiry h2 { color: var(--amani-cream-on-dark); font-size: clamp(2.8rem, 5vw, 5rem); }
+.gath-enquiry h2 { color: var(--amani-cream-on-dark); font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem)); }
 .gath-enquiry h2 em { color: #e3a079; }
 
 .gath-enquiry__intro p:not(.gath-eyebrow) {
@@ -377,6 +378,7 @@
   .gath-gallery__grid { grid-template-columns: 1fr; grid-auto-rows: 12rem; }
   .gath-gallery__item--tall, .gath-gallery__item--wide { grid-row: auto; grid-column: auto; }
   .gath-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+  .gatherings-page h2 { font-size: clamp(2.1rem, 9vw, 3.4rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

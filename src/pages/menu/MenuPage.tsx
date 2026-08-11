@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Hero } from '../../sections/menu/Hero';
-import { StickyCategories } from '../../sections/menu/StickyCategories';
 import { MenuIntroduction } from '../../sections/menu/MenuIntroduction';
 import { MoodFinder } from '../../sections/menu/MoodFinder';
 import { MenuCategories } from '../../sections/menu/MenuCategories';
@@ -22,25 +21,22 @@ export function MenuPage() {
       {/* Section 01: Hero (Editorial Physics Card Deck matching Home Page architecture) */}
       <Hero />
 
-      {/* Section 02: Sticky Category Navigation */}
-      <StickyCategories />
-
-      {/* Section 03: Menu Introduction */}
+      {/* Section 02: Menu Introduction */}
       <MenuIntroduction />
 
-      {/* Section 04: Mood Finder */}
+      {/* Section 03: Mood Finder */}
       <MoodFinder />
 
-      {/* Section 05: Full Menu Categories */}
+      {/* Section 04: Full Menu Categories */}
       <MenuCategories />
 
-      {/* Section 06: Dietary Information */}
+      {/* Section 05: Dietary Information */}
       <DietaryInformation />
 
-      {/* Section 07: Signature Dish Highlight */}
+      {/* Section 06: Signature Dish Highlight */}
       <DishDetailExperience />
 
-      {/* Section 08: In-Restaurant QR Ordering */}
+      {/* Section 07: In-Restaurant QR Ordering */}
       <QROrdering />
 
     </div>

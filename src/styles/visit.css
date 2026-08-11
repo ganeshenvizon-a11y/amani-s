@@ -30,6 +30,7 @@
 .visit-page h2 {
   margin: 1rem 0 0;
   font-family: var(--amani-font-display);
+  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
   font-weight: 400;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -85,8 +86,8 @@
 .vst-hero h1 {
   margin: 1.1rem 0 0;
   color: var(--amani-ink);
-  font-family: 'Clash Display', var(--amani-font-display), sans-serif;
-  font-size: clamp(3rem, 7.5vw, 7rem);
+  font-family: var(--amani-font-display);
+  font-size: var(--font-hero, clamp(3.5rem, 8vw, 8.5rem));
   font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -119,7 +120,7 @@
   align-items: center;
 }
 
-.vst-find h2 { color: var(--amani-ink); font-size: clamp(2.6rem, 5vw, 5rem); }
+.vst-find h2 { color: var(--amani-ink); font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem)); }
 
 .vst-status {
   display: inline-flex;
@@ -316,8 +317,8 @@
 }
 
 @media (max-width: 600px) {
-  .vst-hero h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
-  .vst-find h2 { font-size: clamp(2.4rem, 12vw, 3.4rem); }
+  .vst-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+  .visit-page h2, .vst-find h2 { font-size: clamp(2.1rem, 9vw, 3.4rem); }
   .vst-info__row { grid-template-columns: 1fr; gap: 0.5rem; }
   .vst-find__actions .vst-button { flex: 1 1 auto; }
 }
