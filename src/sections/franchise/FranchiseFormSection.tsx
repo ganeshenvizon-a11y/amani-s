@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
 import { Button } from '../../components/actions/Button';
 import { ContactCard } from '../../components/editorial/ContactCard';
 import { Input } from '../../components/forms/Input';
@@ -8,6 +7,7 @@ import { ReCaptchaWrapper } from '../../components/forms/ReCaptchaWrapper';
 import { Select } from '../../components/forms/Select';
 import { Textarea } from '../../components/forms/Textarea';
 import { Container } from '../../components/layout/Container';
+import { Reveal } from '../../components/motion/Reveal';
 
 type FranchiseFormFields = {
   name: string;
@@ -45,7 +45,6 @@ const OPEN_DATE_OPTIONS = [
 ];
 
 export function FranchiseFormSection() {
-  const reduceMotion = useReducedMotion();
   const [fields, setFields] = useState<FranchiseFormFields>(INITIAL_FIELDS);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -76,53 +75,41 @@ export function FranchiseFormSection() {
   };
 
   return (
-    <section id="franchise-form" className="franchise-form-section py-20 lg:py-28 bg-[#230E07] text-[var(--amani-cream-on-dark)] border-t border-[rgba(244,237,223,0.08)] relative">
+    <section id="franchise-form" className="franchise-form-section py-20 lg:py-28 bg-[var(--amani-paper)] text-[var(--amani-ink)] border-t border-[var(--amani-hairline)] relative">
       <Container size="wide">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold tracking-widest text-[var(--amani-turmeric)] uppercase mb-3 block">
-            — START YOUR FRANCHISE JOURNEY
+        <Reveal direction="up" className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[11px] font-semibold tracking-[0.16em] text-[var(--amani-maroon)] uppercase mb-4 block">
+            — Start your franchise journey
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-[var(--amani-cream-on-dark)]">
-            Apply for an Amani&apos;s Outlet
+          <h2 className="font-display text-[clamp(2.2rem,4.5vw,3.8rem)] font-normal leading-[1.05] tracking-[-0.015em] mb-4 text-[var(--amani-ink)]">
+            Apply for an <em className="italic font-normal text-[var(--amani-maroon)]">Amani&apos;s outlet.</em>
           </h2>
-          <p className="text-sm sm:text-base text-[var(--amani-cream-muted)] leading-relaxed font-sans">
+          <p className="text-[clamp(0.95rem,1.1vw,1.15rem)] text-[var(--amani-ink-soft)] leading-relaxed">
             Please fill out the comprehensive franchise application form below. Our expansion committee reviews every submission carefully and will get back to you within 48 hours.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* Left Sidebar: GET IN TOUCH ContactCard */}
-          <motion.div
-            className="lg:col-span-4"
-            initial={reduceMotion ? false : { opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <ContactCard />
-          </motion.div>
+          <Reveal direction="up" className="lg:col-span-4">
+            <ContactCard tone="light" />
+          </Reveal>
 
           {/* Right Column: Form Container */}
-          <motion.div
-            className="lg:col-span-8 p-6 sm:p-10 rounded-2xl bg-[rgba(255,255,255,0.02)] border border-[rgba(216,199,170,0.15)] backdrop-blur-sm"
-            initial={reduceMotion ? false : { opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <Reveal direction="up" delay={0.15} className="lg:col-span-8 p-6 sm:p-10 rounded-2xl bg-[var(--amani-canvas)] border border-[var(--amani-hairline)] shadow-[0_10px_30px_rgba(23,20,17,0.05)]">
             {submitted ? (
               <div className="text-center py-12 px-4" role="status" aria-live="polite">
-                <div className="w-16 h-16 rounded-full bg-[rgba(201,151,50,0.15)] border-2 border-[var(--amani-turmeric)] text-[var(--amani-turmeric)] flex items-center justify-center text-3xl mx-auto mb-6">
+                <div className="w-16 h-16 rounded-full bg-[var(--amani-olive)] text-white flex items-center justify-center text-3xl mx-auto mb-6">
                   ✓
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[var(--amani-cream-on-dark)] mb-3">
+                <h3 className="font-display text-2xl sm:text-3xl font-normal text-[var(--amani-ink)] mb-3">
                   Franchise Application Submitted
                 </h3>
-                <p className="text-sm sm:text-base text-[var(--amani-cream-muted)] max-w-lg mx-auto leading-relaxed mb-8 font-sans">
+                <p className="text-sm sm:text-base text-[var(--amani-ink-soft)] max-w-lg mx-auto leading-relaxed mb-8">
                   Thank you, <strong>{fields.name}</strong>! We have received your application for interest in <strong>{fields.interestedLocation || 'your location'}</strong>. Our franchise evaluation team will review your details and contact you at <strong>{fields.email}</strong> or <strong>{fields.mobile}</strong> within 48 hours.
                 </p>
-                <Button variant="gold" onClick={handleReset}>
+                <Button variant="primary" onClick={handleReset}>
                   Submit Another Application
                 </Button>
               </div>
@@ -132,6 +119,7 @@ export function FranchiseFormSection() {
                   {/* Name */}
                   <Input
                     id="franchise-name"
+                    tone="light"
                     name="name"
                     label="Name"
                     required
@@ -143,6 +131,7 @@ export function FranchiseFormSection() {
                   {/* Mobile Number */}
                   <Input
                     id="franchise-mobile"
+                    tone="light"
                     name="mobile"
                     type="tel"
                     label="Mobile Number"
@@ -155,6 +144,7 @@ export function FranchiseFormSection() {
                   {/* Email Address */}
                   <Input
                     id="franchise-email"
+                    tone="light"
                     name="email"
                     type="email"
                     label="Email Address"
@@ -167,6 +157,7 @@ export function FranchiseFormSection() {
                   {/* Interested Location */}
                   <Input
                     id="franchise-location"
+                    tone="light"
                     name="interestedLocation"
                     label="Interested Location"
                     required
@@ -178,6 +169,7 @@ export function FranchiseFormSection() {
                   {/* Source of Capital */}
                   <Input
                     id="franchise-capital"
+                    tone="light"
                     name="sourceOfCapital"
                     label="Source of Capital"
                     required
@@ -189,6 +181,7 @@ export function FranchiseFormSection() {
                   {/* Monthly Salary Income (₹) */}
                   <Input
                     id="franchise-salary-income"
+                    tone="light"
                     name="monthlySalaryIncome"
                     type="number"
                     label="Monthly Salary Income (₹)"
@@ -201,6 +194,7 @@ export function FranchiseFormSection() {
                   {/* Other Monthly Income (₹) */}
                   <Input
                     id="franchise-other-income"
+                    tone="light"
                     name="otherMonthlyIncome"
                     type="number"
                     label="Other Monthly Income (₹)"
@@ -212,6 +206,7 @@ export function FranchiseFormSection() {
                   {/* Desired Store Open Date */}
                   <Select
                     id="franchise-open-date"
+                    tone="light"
                     name="desiredStoreOpenDate"
                     label="Desired Store Open Date"
                     required
@@ -225,6 +220,7 @@ export function FranchiseFormSection() {
                 {/* Radio group: Franchise Experience */}
                 <div className="pt-2">
                   <RadioGroup
+                    tone="light"
                     label="Have You Previously Owned, Or Do You Currently Own A Franchise?"
                     name="franchiseExperience"
                     required
@@ -237,6 +233,7 @@ export function FranchiseFormSection() {
                 {/* Textarea 1: Describe Your Management Experience */}
                 <Textarea
                   id="franchise-management-experience"
+                  tone="light"
                   name="managementExperience"
                   label="Describe Your Management Experience In The Food & Beverage Industry"
                   required
@@ -249,6 +246,7 @@ export function FranchiseFormSection() {
                 {/* Textarea 2: How Did You Hear About Us? Why Do You Want To Franchise Amani's */}
                 <Textarea
                   id="franchise-why-amanis"
+                  tone="light"
                   name="howHeardAndWhy"
                   label="How Did You Hear About Us? Why Do You Want To Franchise Amani's Restaurant?"
                   required
@@ -259,27 +257,27 @@ export function FranchiseFormSection() {
                 />
 
                 {/* reCAPTCHA Notice */}
-                <ReCaptchaWrapper />
+                <ReCaptchaWrapper tone="light" />
 
                 {/* Submit Action */}
-                <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                   <Button
                     type="submit"
                     variant="primary"
-                    size="lg"
+                    size="md"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto"
+                    className="w-full sm:w-auto sm:flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'SUBMITTING APPLICATION...' : 'SUBMIT FRANCHISE APPLICATION'}
                     {!isSubmitting && <span className="ml-2" aria-hidden="true">&rarr;</span>}
                   </Button>
-                  <p className="text-xs text-[var(--amani-cream-muted)] text-center sm:text-right font-sans">
+                  <p className="text-xs text-[var(--amani-ink-muted)] text-center sm:text-left leading-snug">
                     Strictly confidential. Your financial and business information is protected.
                   </p>
                 </div>
               </form>
             )}
-          </motion.div>
+          </Reveal>
         </div>
       </Container>
     </section>

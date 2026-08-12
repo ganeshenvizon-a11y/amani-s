@@ -20,7 +20,6 @@ export function TheAmaniWay() {
 
         {/* Section Header */}
         <Reveal className="max-w-3xl mb-16">
-          <span className="text-eyebrow mb-3 block">{AMANI_WAY_CONTENT.label}</span>
           <h2 className="text-h1 mb-6 font-serif">{AMANI_WAY_CONTENT.heading}</h2>
           <p className="text-body-lg leading-relaxed">{AMANI_WAY_CONTENT.body}</p>
         </Reveal>

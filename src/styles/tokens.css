@@ -35,9 +35,9 @@
   --amani-hairline-dark:  rgba(244, 237, 223, 0.15);
 
   /* Typography Families — Primary Font System */
-  --amani-font-primary:   'Cormorant Garamond', serif;
-  --amani-font-display:   'Cormorant Garamond', serif;
-  --amani-font-ui:        'Cormorant Garamond', serif;
+  --amani-font-primary:   'Manrope', sans-serif;                /* Body / UI text */
+  --amani-font-display:   'Cormorant Garamond', serif;          /* Headings only */
+  --amani-font-ui:        'Manrope', sans-serif;                /* Body / UI text */
 
   /* Layout & Spacing */
   --amani-max-width:      1600px;

@@ -103,7 +103,6 @@ export function VisitPreview() {
         <Reveal direction="right" className="visit-floating-card">
           {/* Brand & Restaurant Highlight Header */}
           <div className="flex items-center justify-between gap-3 mb-4">
-            <span className="visit-eyebrow">{VISIT_PREVIEW_CONTENT.label}</span>
             <span className="visit-rating-badge">
               <span className="visit-star">★</span> {RESTAURANT_CONFIG.googleRating} · Jubilee Hills
             </span>

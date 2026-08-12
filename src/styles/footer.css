@@ -25,6 +25,7 @@
     transparent 55%
   ), var(--footer-bg);
   color: var(--footer-cream);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   --mx: 50%;
   --my: 50%;
   display: flex;

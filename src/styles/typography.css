@@ -10,7 +10,6 @@
   --font-body-lg:      clamp(1.05rem, 1.3vw, 1.35rem);
   --font-body:         clamp(0.95rem, 1.05vw, 1.1rem);
   --font-caption:      clamp(0.85rem, 0.95vw, 0.95rem);
-  --font-eyebrow:      11px;
 }
 
 p, span {
@@ -84,11 +83,3 @@ h6 span,
   color: var(--amani-ink-soft);
 }
 
-.text-eyebrow {
-  font-family: var(--amani-font-ui);
-  font-size: var(--font-eyebrow);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--amani-maroon);
-}

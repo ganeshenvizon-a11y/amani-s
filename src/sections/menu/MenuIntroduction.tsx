@@ -6,9 +6,6 @@ export function MenuIntroduction() {
       <div className="menu-container">
         <div className="menu-intro__head">
           <div className="menu-intro__title-wrap">
-            <Reveal>
-              <p className="menu-eyebrow">Our menu / 01</p>
-            </Reveal>
             <Reveal delay={0.06}>
               <h2 id="menu-intro-title">
                 Food you know.<br />Flavours you <em>remember.</em>

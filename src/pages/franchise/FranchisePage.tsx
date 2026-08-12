@@ -13,7 +13,7 @@ export function FranchisePage() {
   }, []);
 
   return (
-    <div className="franchise-page bg-[var(--amani-void)] min-h-screen text-[var(--amani-cream-on-dark)]">
+    <div className="franchise-page bg-[var(--amani-canvas)] min-h-screen text-[var(--amani-ink)]">
       {/* 01 — Hero Section */}
       <FranchiseHero />
 

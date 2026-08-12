@@ -16,17 +16,6 @@
   margin-inline: auto;
 }
 
-.vst-eyebrow {
-  margin: 0;
-  color: var(--amani-terracotta);
-  font-family: var(--amani-font-ui);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
 .visit-page h2 {
   margin: 1rem 0 0;
   font-family: var(--amani-font-display);
@@ -155,11 +144,6 @@
   max-width: 48rem;
   margin-inline: auto;
   text-align: center;
-}
-
-.vst-hero .vst-eyebrow {
-  color: var(--amani-turmeric);
-  letter-spacing: 0.18em;
 }
 
 .vst-hero h1 {
@@ -368,24 +352,53 @@
   padding: clamp(4.5rem, 9vw, 8rem) 0;
 }
 
-.vst-info__list {
+/* Editorial split: the "Good to know" heading anchors the top-left, the Hours
+   sit beside it, and the remaining facts run as a full-width row beneath. */
+.vst-info__split {
   display: grid;
-  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(2rem, 4vw, 3.5rem);
+  row-gap: clamp(2.75rem, 6vw, 5rem);
+  align-items: start;
 }
 
-.vst-info__row {
+/* Extra breathing room between the heading and the timings beside it. */
+.vst-info__hours {
+  padding-left: clamp(1.5rem, 5vw, 4.5rem);
+}
+
+.vst-info__anchor {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.vst-info__hours {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.vst-info__bottom {
+  grid-column: 1 / -1;
+  grid-row: 2;
   display: grid;
-  grid-template-columns: minmax(10rem, 0.3fr) minmax(0, 1fr);
-  gap: clamp(1rem, 4vw, 3rem);
-  padding-block: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(2rem, 4vw, 3.5rem);
+  border-top: 1px solid var(--amani-hairline);
   border-bottom: 1px solid var(--amani-hairline);
 }
 
-.vst-info__row:first-child {
-  border-top: 1px solid var(--amani-hairline);
+.vst-info__cell {
+  padding-block: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.vst-info__cell + .vst-info__cell {
+  padding-left: clamp(2rem, 4vw, 3.5rem);
+  border-left: 1px solid var(--amani-hairline);
 }
 
 .vst-info__label {
+  display: block;
+  margin-bottom: 0.9rem;
   color: var(--amani-ink);
   font-family: var(--amani-font-display);
   font-size: clamp(1.35rem, 2vw, 1.75rem);
@@ -539,6 +552,24 @@
     order: -1;
     aspect-ratio: 1.5 / 1;
   }
+
+  /* Stack the split: heading, then hours, then the facts row. */
+  .vst-info__split {
+    grid-template-columns: 1fr;
+  }
+
+  .vst-info__anchor,
+  .vst-info__hours {
+    grid-column: 1;
+  }
+
+  .vst-info__hours {
+    padding-left: 0;
+  }
+
+  .vst-info__anchor { grid-row: 1; }
+  .vst-info__hours { grid-row: 2; }
+  .vst-info__bottom { grid-row: 3; }
 }
 
 @media (max-width: 600px) {
@@ -562,9 +593,14 @@
     font-size: clamp(2.1rem, 9vw, 3.4rem);
   }
 
-  .vst-info__row {
+  .vst-info__bottom {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+  }
+
+  .vst-info__cell + .vst-info__cell {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--amani-hairline);
   }
 
   .vst-find__actions .vst-button {

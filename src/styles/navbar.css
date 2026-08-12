@@ -56,6 +56,7 @@
   border-radius: var(--amani-nav-radius);
   transition: top 480ms cubic-bezier(0.76, 0, 0.24, 1),
               height 480ms cubic-bezier(0.76, 0, 0.24, 1),
+              width 480ms cubic-bezier(0.76, 0, 0.24, 1),
               background-color 480ms cubic-bezier(0.76, 0, 0.24, 1),
               border-color 480ms cubic-bezier(0.76, 0, 0.24, 1),
               box-shadow 480ms cubic-bezier(0.76, 0, 0.24, 1),
@@ -65,7 +66,7 @@
   overflow: hidden;
 }
 
-/* Closed State — Black & Glass Theme */
+/* Closed State — Previous Dark Glass Theme */
 .restaurant-header--closed {
   top: var(--amani-nav-top-closed);
   height: var(--amani-nav-height-closed);
@@ -97,37 +98,149 @@
   -webkit-backdrop-filter: none;
 }
 
+/* Desktop Floating Bar Sizing (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .restaurant-header {
+    width: min(1180px, calc(100vw - 48px));
+    height: 60px;
+    border-radius: 12px;
+  }
+
+  .restaurant-header--closed {
+    top: 20px;
+    background: var(--amani-nav-bg-closed);
+    backdrop-filter: blur(28px) saturate(155%) contrast(1.04);
+    -webkit-backdrop-filter: blur(28px) saturate(155%) contrast(1.04);
+  }
+
+  .restaurant-header--closed.restaurant-header--scrolled {
+    background: var(--amani-nav-bg-closed-scrolled);
+  }
+
+  .restaurant-header--open {
+    top: 20px;
+  }
+}
+
+.restaurant-desktop-logo img {
+  height: 36px;
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* Desktop Navbar Navigation Components */
+.restaurant-desktop-link {
+  font-family: var(--amani-font-ui, 'Cormorant Garamond', serif);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #eae5d8;
+  text-decoration: none;
+  padding: 6px 12px;
+  transition: color 220ms ease, opacity 220ms ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+.restaurant-desktop-link:hover {
+  color: #ffffff;
+}
+
+.restaurant-desktop-link.is-active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.restaurant-desktop-link.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background-color: #ffffff;
+  border-radius: 1px;
+}
+
+.restaurant-desktop-divider {
+  width: 1px;
+  height: 16px;
+  background-color: rgba(255, 255, 255, 0.22);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.restaurant-desktop-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  margin-left: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 6px;
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--amani-font-ui, 'Cormorant Garamond', serif);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.restaurant-desktop-cta:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.restaurant-desktop-cta-arrow {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.restaurant-desktop-cta:hover .restaurant-desktop-cta-arrow {
+  transform: translateX(4px);
+}
+
 /* Inner 3-Column Layout */
 .restaurant-header__inner {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 0 var(--amani-nav-inline-padding);
+  padding: 0 16px;
   box-sizing: border-box;
 }
 
 /* Left Reservation Button (Closed State) */
 .restaurant-header__reserve {
-  grid-column: 1;
   height: 100%;
-  min-height: 0;
-  padding: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border: 0;
   background: transparent;
-  color: var(--amani-cream-on-dark);
+  color: var(--amani-cream-on-dark, #eae5d8);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 650;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: color 220ms ease, transform 220ms ease;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  transition: color 220ms ease, opacity 220ms ease;
   white-space: nowrap;
   user-select: none;
   width: fit-content;
@@ -135,7 +248,6 @@
 }
 
 .restaurant-header__reserve:hover {
-  transform: translateY(-1px);
   color: #ffffff;
 }
 
@@ -147,7 +259,6 @@
 /* Open State Left Reservation Button */
 .restaurant-header--open .restaurant-header__reserve {
   height: 100%;
-  min-height: 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -156,7 +267,6 @@
 
 .restaurant-header--open .restaurant-header__reserve:hover {
   color: #000000;
-  transform: translateY(-1px);
 }
 
 .restaurant-header--open .restaurant-header__reserve:focus-visible {
@@ -175,6 +285,9 @@
   justify-content: center;
   text-decoration: none;
   color: #f6f0e6;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   transition: color 480ms ease, opacity 200ms ease;
   user-select: none;
 }
@@ -198,13 +311,13 @@
 }
 
 .restaurant-header__logo-img {
-  height: 24px;
-  max-height: 26px;
+  height: 22px;
+  max-height: 24px;
   width: auto;
   object-fit: contain;
   display: block;
   transition: filter 480ms ease, opacity 220ms ease, transform 220ms ease;
-  filter: brightness(1);
+  filter: brightness(0) invert(1);
 }
 
 .restaurant-header--open .restaurant-header__logo-img {
@@ -213,12 +326,10 @@
 
 .restaurant-header__brand:hover .restaurant-header__logo-img {
   opacity: 0.85;
-  transform: translateY(-0.5px);
 }
 
 /* Right Control Toggle Button */
 .restaurant-header__toggle {
-  grid-column: 3;
   height: 100%;
   display: flex;
   align-items: center;
@@ -227,6 +338,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
+  margin: 0;
   position: relative;
   flex-shrink: 0;
 }
@@ -239,17 +351,19 @@
 
 /* Hamburger lines in Closed State */
 .restaurant-header__hamburger {
-  width: 50px;
+  width: 32px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   transition: opacity 300ms ease;
 }
 

@@ -12,7 +12,6 @@ export function FromKitchenToTable() {
       <div className="stories-container">
         <div className="stories-kitchen__heading">
           <div className="stories-kitchen__title-wrap">
-            <p className="stories-eyebrow stories-eyebrow--light">FROM KITCHEN TO TABLE / 04</p>
             <h2 id="kitchen-title">From kitchen<br /> <em>to table.</em></h2>
           </div>
           <p className="stories-kitchen__intro">Every dish here passes through more hands, and more time, than a menu can show you. Nothing is rushed into being ready.</p>

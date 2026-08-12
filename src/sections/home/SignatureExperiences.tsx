@@ -21,9 +21,6 @@ export function SignatureExperiences() {
         {/* Section Header */}
         <header className="flex items-end justify-between border-b border-[var(--amani-hairline)] pb-4 lg:pb-5">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[var(--amani-maroon)] font-bold block mb-1">
-              {EXPERIENCES_CONTENT.label}
-            </span>
             <h2 className="text-2xl lg:text-3xl font-sans font-semibold text-[var(--amani-ink)] tracking-tight">
               {EXPERIENCES_CONTENT.heading}
             </h2>

@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { MENU_SECTIONS, type MenuDish } from '../../content/menu';
 import { DietarySymbol } from '../../components/restaurant/DietarySymbol';
@@ -64,13 +65,80 @@ function getDishDescription(dish: MenuDish, categoryTitle: string): string {
 
 type DietaryFilter = 'all' | 'veg' | 'non_veg' | 'egg';
 export function MenuCategories() {
+  const [searchParams] = useSearchParams();
   // Selected category section state (starts on 'starters-soups', or 'search-all' when searching)
   const [activeSectionId, setActiveSectionId] = useState<string>(MENU_SECTIONS[0]?.id || 'starters-soups');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [dietaryFilter, setDietaryFilter] = useState<DietaryFilter>('all');
   const [itemLimits, setItemLimits] = useState<Record<string, number>>({});
-  
+  // Mobile catbar auto-hide: only reveal when the user scrolls up (search intent)
+  const [isCatbarVisible, setIsCatbarVisible] = useState<boolean>(false);
+
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const lastScrollY = useRef<number>(0);
+
+  // Reveal the mobile category/search bar on scroll-up, hide it on scroll-down.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 991px)');
+    if (!mq.matches) return;
+
+    lastScrollY.current = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      if (currentY < 120) {
+        setIsCatbarVisible(false);
+      } else if (delta > 6) {
+        setIsCatbarVisible(false);
+      } else if (delta < -6) {
+        setIsCatbarVisible(true);
+      }
+
+      lastScrollY.current = currentY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sectionParam = searchParams.get('section');
+    const dietaryParam = searchParams.get('dietary') as DietaryFilter | null;
+
+    if (sectionParam && MENU_SECTIONS.some((s) => s.id === sectionParam)) {
+      setActiveSectionId(sectionParam);
+    }
+    if (dietaryParam && ['all', 'veg', 'non_veg', 'egg'].includes(dietaryParam)) {
+      setDietaryFilter(dietaryParam);
+    }
+
+    if (sectionParam || dietaryParam) {
+      const timer = setTimeout(() => {
+        const menuEl = document.getElementById('menu-categories');
+        if (menuEl) {
+          const navOffset = 90;
+          const elementPosition = menuEl.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams]);
 
   const handleClearSearch = () => {
     setSearchQuery('');
@@ -162,7 +230,10 @@ export function MenuCategories() {
       <div className="menu-container">
         
         {/* MOBILE STICKY HORIZONTAL CATEGORY BAR (< 992px) */}
-        <nav className="menu-mobile-catbar" aria-label="Mobile Menu Categories">
+        <nav
+          className={`menu-mobile-catbar ${isCatbarVisible || isSearchAllMode || searchQuery ? 'is-visible' : 'is-hidden'}`}
+          aria-label="Mobile Menu Categories"
+        >
           <div className="menu-mobile-catbar__inner">
             <div className={`menu-mobile-catbar__search-wrap ${isSearchAllMode || searchQuery ? 'is-active' : ''}`}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -332,11 +403,6 @@ export function MenuCategories() {
                   aria-label="All Menu Search Results"
                 >
                   <header className="menu-section-group__header">
-                    <div className="menu-section-group__eyebrow">
-                      <span>ALL MENU CATEGORIES</span>
-                      <span className="menu-section-group__eyebrow-sep">/</span>
-                      <span>SEARCH MODE</span>
-                    </div>
                     <div className="menu-section-group__title-row">
                       <h2>
                         {hasSearchQuery ? (
@@ -451,11 +517,6 @@ export function MenuCategories() {
                 >
                   {/* Category Header */}
                   <header className="menu-section-group__header">
-                    <div className="menu-section-group__eyebrow">
-                      <span>{activeSection.number}</span>
-                      <span className="menu-section-group__eyebrow-sep">/</span>
-                      <span>MENU CATEGORY</span>
-                    </div>
                     <div className="menu-section-group__title-row">
                       <h2 id={`heading-${activeSection.id}`}>{activeSection.title}</h2>
                       <span className="menu-section-group__badge">{activeSectionTotalCount} items</span>

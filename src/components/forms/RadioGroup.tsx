@@ -10,6 +10,7 @@ export interface RadioGroupProps {
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
+  tone?: 'light' | 'dark';
   className?: string;
 }
 
@@ -20,12 +21,28 @@ export function RadioGroup({
   value,
   onChange,
   required = false,
+  tone = 'dark',
   className = '',
 }: RadioGroupProps) {
+  const isLight = tone === 'light';
+  const legendColor = isLight ? 'text-[var(--amani-ink-soft)]' : 'text-[var(--amani-cream-on-dark)]';
+  const asteriskColor = isLight ? 'text-[var(--amani-maroon)]' : 'text-[var(--amani-turmeric)]';
+
+  const selectedClass = isLight
+    ? 'bg-[var(--amani-maroon-tint)] border-[var(--amani-maroon)] text-[var(--amani-ink)]'
+    : 'bg-[rgba(201,151,50,0.15)] border-[var(--amani-turmeric)] text-[var(--amani-cream-on-dark)]';
+  const unselectedClass = isLight
+    ? 'bg-white border-[rgba(23,20,17,0.16)] text-[var(--amani-ink-soft)] hover:border-[var(--amani-maroon)]'
+    : 'bg-[rgba(255,255,255,0.04)] border-[rgba(216,199,170,0.2)] text-[var(--amani-cream-muted)] hover:border-[rgba(216,199,170,0.4)]';
+
+  const dotSelectedRing = isLight ? 'border-[var(--amani-maroon)] bg-[var(--amani-maroon)]' : 'border-[var(--amani-turmeric)] bg-[var(--amani-turmeric)]';
+  const dotUnselectedRing = isLight ? 'border-[rgba(23,20,17,0.3)]' : 'border-[rgba(216,199,170,0.4)]';
+  const dotInner = isLight ? 'bg-white' : 'bg-[#2E130B]';
+
   return (
     <fieldset className={`franchise-field flex flex-col gap-2 ${className}`}>
-      <legend className="text-xs sm:text-sm font-semibold tracking-wider text-[var(--amani-cream-on-dark)] uppercase mb-1">
-        {label} {required && <span className="text-[var(--amani-turmeric)]">*</span>}
+      <legend className={`text-xs sm:text-sm font-semibold tracking-wider uppercase mb-1 ${legendColor}`}>
+        {label} {required && <span className={asteriskColor}>*</span>}
       </legend>
       <div className="flex flex-wrap items-center gap-6">
         {options.map((opt) => {
@@ -36,10 +53,8 @@ export function RadioGroup({
           return (
             <label
               key={val}
-              className={`inline-flex items-center gap-3 px-5 py-3 rounded-lg border transition-all cursor-pointer select-none text-sm font-medium ${
-                isSelected
-                  ? 'bg-[rgba(201,151,50,0.15)] border-[var(--amani-turmeric)] text-[var(--amani-cream-on-dark)]'
-                  : 'bg-[rgba(255,255,255,0.04)] border-[rgba(216,199,170,0.2)] text-[var(--amani-cream-muted)] hover:border-[rgba(216,199,170,0.4)]'
+              className={`inline-flex items-center gap-3 px-5 py-3 rounded-md border transition-all cursor-pointer select-none text-sm font-medium ${
+                isSelected ? selectedClass : unselectedClass
               }`}
             >
               <input
@@ -53,10 +68,10 @@ export function RadioGroup({
               />
               <span
                 className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
-                  isSelected ? 'border-[var(--amani-turmeric)] bg-[var(--amani-turmeric)]' : 'border-[rgba(216,199,170,0.4)]'
+                  isSelected ? dotSelectedRing : dotUnselectedRing
                 }`}
               >
-                {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#2E130B]" />}
+                {isSelected && <span className={`w-1.5 h-1.5 rounded-full ${dotInner}`} />}
               </span>
               <span>{lbl}</span>
             </label>

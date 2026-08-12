@@ -10,6 +10,7 @@ import { ThaliExperience } from '../../sections/home/ThaliExperience';
 import { AmaniNumbers } from '../../sections/home/AmaniNumbers';
 import { BrandStory } from '../../sections/home/BrandStory';
 import { SignatureDishes } from '../../sections/home/SignatureDishes';
+import { MenuDiscovery } from '../../sections/home/MenuDiscovery';
 import { GuestReviews } from '../../sections/home/GuestReviews';
 import { VisitPreview } from '../../sections/home/VisitPreview';
 import { GatheringsPreview } from '../../sections/home/GatheringsPreview';
@@ -60,6 +61,9 @@ export function HomePage() {
 
         {/* Section 06: Signature Dishes */}
         <SignatureDishes />
+
+        {/* Section 06.5: Menu Discovery */}
+        <MenuDiscovery />
 
         {/* Section 07: Guest Reviews */}
         <GuestReviews />

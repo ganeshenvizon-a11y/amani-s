@@ -103,7 +103,6 @@ export const HERO_CONTENT = {
 };
 
 export const MOOD_FINDER_CONTENT = {
-  label: '01 / CHOOSE BY FEELING',
   heading: 'What feels right today?',
   description: 'Start with the mood. We will bring forward the flavours and dishes that belong to the moment.',
   moods: [
@@ -183,7 +182,6 @@ export const MOOD_FINDER_CONTENT = {
 };
 
 export const EXPERIENCES_CONTENT = {
-  label: '02 / SIGNATURE EXPERIENCES',
   heading: 'Different ways to feel at home',
   intro: 'Every visit brings its own rhythm—from quiet cravings to shared family celebrations.',
   experiences: [
@@ -226,7 +224,6 @@ export const EXPERIENCES_CONTENT = {
 };
 
 export const SIGNATURE_DISHES_CONTENT = {
-  label: '03 / FROM THE KITCHEN',
   heading: 'Flavours that stay with you',
   intro: 'A small selection of dishes that express the kitchen’s point of view—familiar at heart, prepared with intention and made for the present moment.',
   dishes: [
@@ -278,7 +275,6 @@ export const SIGNATURE_DISHES_CONTENT = {
 };
 
 export const AMANI_WAY_CONTENT = {
-  label: "04 / THE AMANI'S WAY",
   heading: 'Thoughtful in every detail',
   body: 'We believe hospitality is felt in the details: food prepared with attention, a welcome that feels natural, thoughtful recommendations and a room where every table can find its own rhythm.',
   principles: [
@@ -303,7 +299,6 @@ export const AMANI_WAY_CONTENT = {
 };
 
 export const INSIDE_AMANI_CONTENT = {
-  label: "05 / INSIDE AMANI'S",
   heading: 'Where the atmosphere takes shape',
   body: 'Light, texture, movement and the quiet energy of a room coming alive—from the first table prepared to the final conversation of the evening.',
   gallery: [
@@ -353,7 +348,6 @@ export const INSIDE_AMANI_CONTENT = {
 };
 
 export const VISIT_PREVIEW_CONTENT = {
-  label: "VISIT AMANI'S",
   heading: 'Come find your table.',
   description: 'Find us in Jubilee Hills. Check today’s hours, get directions or call before you arrive.',
   image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop',
@@ -361,7 +355,6 @@ export const VISIT_PREVIEW_CONTENT = {
 };
 
 export const GATHERINGS_PREVIEW_CONTENT = {
-  label: 'GATHERINGS',
   heading: 'Made to gather.',
   body: 'From family dinners to meaningful celebrations, we make room for the moments worth sharing.',
   occasions: [

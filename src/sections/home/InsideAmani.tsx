@@ -47,7 +47,6 @@ export function InsideAmani() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-10">
         {/* Section Header */}
         <Reveal className="max-w-2xl mb-12">
-          <span className="text-eyebrow mb-3 block">{INSIDE_AMANI_CONTENT.label}</span>
           <h2 className="text-h1 mb-4 font-serif">{INSIDE_AMANI_CONTENT.heading}</h2>
           <p className="text-body-lg">{INSIDE_AMANI_CONTENT.body}</p>
         </Reveal>

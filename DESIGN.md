@@ -72,8 +72,8 @@ The typography system at Amani's is built strictly around **two curated font fam
    - **Style Traits**: Medium (`500`) to semi-bold (`600`/`700`) weights, tight line-heights (`0.84` – `0.98`), subtle negative letter-spacing (`-0.025em` to `-0.055em`), antialiased rendering.
 2. **UI, Controls, Body Copy & Artifact Labels (`--amani-font-ui`)**:
    - **Font**: `'Manrope', sans-serif`
-   - **Usage**: All body copy, kicker eyebrow tags, navigation links, buttons, form controls, dietary tags, card stamps, retro captions, and lightbox meta text.
-   - **Style Traits**: Medium (`400`–`500`) for body/lead text, Bold (`600`–`800`) for eyebrows, stamps, and UI controls with generous letter-spacing (`0.08em` – `0.16em`).
+   - **Usage**: All body copy, navigation links, buttons, form controls, dietary tags, card stamps, retro captions, and lightbox meta text.
+   - **Style Traits**: Medium (`400`–`500`) for body/lead text, Bold (`600`–`800`) for stamps and UI controls with generous letter-spacing (`0.08em` – `0.16em`).
 
 ---
 
@@ -89,7 +89,6 @@ The typography system at Amani's is built strictly around **two curated font fam
 | **Body Large** | `--font-body-lg` / `.text-body-lg`| `Manrope` | `clamp(1.05rem, 1.3vw, 1.35rem)`| `1.60` | `0em` | `var(--amani-ink-soft)` / `#403A34` |
 | **Body Standard** | `--font-body` / `.text-body` | `Manrope` | `clamp(0.95rem, 1.05vw, 1.1rem)` | `1.65` | `0em` | `var(--amani-ink-soft)` / `#403A34` |
 | **Body Caption** | `--font-caption` | `Manrope` | `clamp(0.85rem, 0.95vw, 0.95rem)`| `1.50` | `0em` | `var(--amani-ink-muted)` / `#746E66` |
-| **Eyebrow Tag** | `--font-eyebrow` / `.text-eyebrow`| `Manrope` | `11px` (`0.68rem`) | `1.20` | `0.16em` uppercase | `var(--amani-maroon)` / `#7A1F24` |
 | **Ink Stamp** | `.home-hero__card-stamp` | `Manrope` | `0.64rem` | `1.00` | `0.14em` uppercase | `rgba(150, 35, 25, 0.85)` |
 | **Retro Tag** | `.home-hero__card-tag` | `Manrope` | `0.60rem` | `1.00` | `0.10em` uppercase | `#5a4838` |
 
@@ -231,7 +230,6 @@ The Hero experience established on the **Home Page** serves as the core architec
 │                                                                        │
 │ ┌────────────────────────────────────────────────────────────────────┐ │
 │ │ .hero__content (GSAP Split Title Reveal)                           │ │
-│ │   • Kicker Eyebrow Tag                                             │ │
 │ │   • H1 Title Line 1: Accent Word Highlight (.word--fire / --spice) │ │
 │ │   • H1 Title Line 2: Dynamic Cycling Words (.word--dynamic)        │ │
 │ └────────────────────────────────────────────────────────────────────┘ │

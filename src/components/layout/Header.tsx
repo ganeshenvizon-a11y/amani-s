@@ -288,8 +288,94 @@ export function Header() {
         }`}
         aria-label="Main Site Header"
       >
-        <div className="restaurant-header__inner">
-          {/* Left Booking Link */}
+        {/* Desktop Header Layout — Matching Reference Image */}
+        <div className="restaurant-header__desktop hidden lg:flex items-center justify-between w-full h-full px-6 py-2">
+          {/* Left Navigation Links */}
+          <div className="flex items-center">
+            <NavLink
+              to="/menu/"
+              className={({ isActive }) =>
+                `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
+              }
+            >
+              MENU
+            </NavLink>
+
+            <span className="restaurant-desktop-divider" aria-hidden="true" />
+
+            <NavLink
+              to="/stories/"
+              className={({ isActive }) =>
+                `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
+              }
+            >
+              STORIES
+            </NavLink>
+
+            <span className="restaurant-desktop-divider" aria-hidden="true" />
+
+            <NavLink
+              to="/gatherings/"
+              className={({ isActive }) =>
+                `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
+              }
+            >
+              GATHERINGS
+            </NavLink>
+          </div>
+
+          {/* Center Logo */}
+          <NavLink
+            to="/"
+            onClick={() => isOpen && handleClose()}
+            className="restaurant-desktop-logo group flex items-center justify-center mx-6"
+            aria-label="Amani's Restaurant Home"
+          >
+            <img
+              src={BRAND_CONFIG.logoWordmarkPng}
+              alt="Amani's"
+              className="h-9 md:h-10 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85"
+            />
+          </NavLink>
+
+          {/* Right Navigation Links & CTA */}
+          <div className="flex items-center">
+            <span className="restaurant-desktop-divider" aria-hidden="true" />
+
+            <NavLink
+              to="/franchise/"
+              className={({ isActive }) =>
+                `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
+              }
+            >
+              FRANCHISE
+            </NavLink>
+
+            <span className="restaurant-desktop-divider" aria-hidden="true" />
+
+            <NavLink
+              to="/visit/"
+              className={({ isActive }) =>
+                `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
+              }
+            >
+              VISIT
+            </NavLink>
+
+            {/* Book Table CTA Button */}
+            <NavLink
+              to={CTA_NAV_LINK.path}
+              onClick={() => isOpen && handleClose()}
+              className="restaurant-desktop-cta group"
+            >
+              <span>BOOK TABLE</span>
+            </NavLink>
+          </div>
+        </div>
+
+        {/* Mobile / Tablet Responsive Inner Layout */}
+        <div className="restaurant-header__inner flex lg:hidden items-center justify-between w-full h-full">
+          {/* Left: Book Table */}
           <NavLink
             to={CTA_NAV_LINK.path}
             onClick={() => isOpen && handleClose()}
@@ -298,7 +384,7 @@ export function Header() {
             BOOK TABLE
           </NavLink>
 
-          {/* Centered Editorial Wordmark */}
+          {/* Center: Brand Logo */}
           <NavLink
             to="/"
             onClick={() => isOpen && handleClose()}
@@ -312,7 +398,7 @@ export function Header() {
             />
           </NavLink>
 
-          {/* Right Hamburger / Close Control */}
+          {/* Right: Hamburger / Close Toggle */}
           <button
             ref={toggleBtnRef}
             onClick={handleToggle}

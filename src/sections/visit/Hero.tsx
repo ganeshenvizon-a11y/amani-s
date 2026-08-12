@@ -28,11 +28,6 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
-
-      <a className="vst-hero__scroll-badge" href="#reserve" aria-label="Scroll down to details">
-        <span>Scroll to Explore</span>
-        <span aria-hidden="true">↓</span>
-      </a>
     </section>
   );
 }

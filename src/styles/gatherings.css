@@ -20,21 +20,6 @@
   margin-inline: auto;
 }
 
-.gath-eyebrow {
-  margin: 0;
-  color: var(--amani-terracotta);
-  font-family: var(--amani-font-ui);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.gath-eyebrow--light {
-  color: rgba(244, 237, 223, 0.78);
-}
-
 .gath-head {
   display: flex;
   align-items: flex-end;
@@ -58,8 +43,10 @@
   font-family: var(--amani-font-display);
   font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
   font-weight: 400;
-  line-height: 0.9;
+  line-height: 1.05;
   letter-spacing: -0.04em;
+  padding-top: 0.1em;
+  padding-bottom: 0.05em;
 }
 
 .gatherings-page h2 em {

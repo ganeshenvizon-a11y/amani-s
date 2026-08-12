@@ -5,7 +5,6 @@ export function DietaryInformation() {
     <section id="dietary" className="menu-dietary" aria-labelledby="dietary-title">
       <div className="menu-container menu-dietary__grid">
         <div>
-          <p className="menu-eyebrow">Good to know / 03</p>
           <h2 id="dietary-title">
             Made for every<br />
             <em>place at the table.</em>

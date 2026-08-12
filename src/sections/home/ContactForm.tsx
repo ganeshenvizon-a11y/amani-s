@@ -63,13 +63,22 @@ export function ContactForm() {
       <div className="home-contact-container">
         {/* Left Column: Editorial Information */}
         <Reveal direction="up" className="home-contact-info">
-          <span className="home-contact-eyebrow">GET IN TOUCH</span>
+          <img
+            src="/media/images/hologram.svg"
+            alt=""
+            className="home-contact-monogram"
+            aria-hidden="true"
+          />
           <h2 id="home-contact-heading" className="home-contact-title">
             We&rsquo;d love to <em>connect.</em>
           </h2>
           <p className="home-contact-description">
             Have a question about our menu, special dietary options, table reservations, or private dining? Send us a message and our team will respond within 24 hours.
           </p>
+          <div className="home-contact-quote">
+            <span className="quote-mark" aria-hidden="true">&ldquo;</span>
+            <p className="quote-text">Every memorable culinary journey begins with a thoughtful conversation.</p>
+          </div>
         </Reveal>
 
         {/* Right Column: Contact Form Card */}

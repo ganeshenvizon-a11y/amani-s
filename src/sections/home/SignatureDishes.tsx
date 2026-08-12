@@ -118,7 +118,6 @@ export function SignatureDishes() {
     <section ref={sectionRef} className="signature-stack" aria-labelledby="signature-stack-heading">
       <div className="signature-stack__shell">
         <header className="signature-stack__intro">
-          <p>06 / Signature dishes</p>
           <div className="signature-stack__headline-group">
             <h2 id="signature-stack-heading">
               <span>From our <em>fire</em></span>

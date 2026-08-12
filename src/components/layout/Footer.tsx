@@ -295,6 +295,11 @@ export function Footer() {
                     <path d="M50 24 L76 50 L50 76 L24 50 Z" />
                     <circle cx="50" cy="50" r="7" fill="currentColor" />
                   </svg>
+                  <NavLink to="/" className="footer-nav-link">
+                    HOME
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/menu/" className="footer-nav-link">
                     MENU
                   </NavLink>
@@ -307,6 +312,11 @@ export function Footer() {
                 <li>
                   <NavLink to="/gatherings/" className="footer-nav-link">
                     GATHERINGS
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/franchise/" className="footer-nav-link">
+                    FRANCHISE
                   </NavLink>
                 </li>
                 <li>

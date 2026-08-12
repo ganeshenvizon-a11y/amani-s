@@ -4,7 +4,6 @@ export function WhyAmani() {
   return (
     <section id="why-amani" className="stories-why" aria-labelledby="why-amani-title">
       <div className="stories-container stories-why__statement">
-        <Reveal><p className="stories-eyebrow">Why Amani? / 02</p></Reveal>
         <Reveal delay={0.06}>
           <h2 id="why-amani-title">Why <em>&ldquo;Amani&rdquo;</em>?</h2>
         </Reveal>

@@ -24,7 +24,6 @@ export function OurBeginning() {
       <div className="stories-container">
         <div className="stories-beginning__intro">
           <div className="stories-beginning__title-wrap">
-            <p className="stories-eyebrow">OUR BEGINNING / 03</p>
             <h2 id="beginning-title">Our <em>beginning.</em></h2>
           </div>
           <p className="stories-beginning__summary">The family behind Amani didn&rsquo;t set out to open a restaurant. They set out to recreate a kitchen they missed — a home kitchen in Hyderabad, and the Andhra cooking that came out of it.</p>

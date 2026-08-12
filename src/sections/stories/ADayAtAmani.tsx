@@ -14,7 +14,6 @@ export function ADayAtAmani() {
       <div className="stories-container">
         <div className="stories-day__head">
           <div className="stories-day__title-wrap">
-            <p className="stories-eyebrow stories-eyebrow--light">A DAY AT AMANI / 05</p>
             <h2 id="day-title">A day at <em>Amani.</em></h2>
           </div>
           <p className="stories-day__intro">Long before the first guest arrives, the day has already started.</p>

@@ -126,7 +126,6 @@ export function GatheringsPreview() {
       <div className="gatherings-container">
         <div className="gatherings-content">
           <Reveal direction="up">
-            <span className="gatherings-eyebrow">{GATHERINGS_PREVIEW_CONTENT.label}</span>
             <h2 id="gatherings-heading" className="gatherings-heading">
               <span className="gatherings-heading__line">Made to</span>
               <span className="gatherings-heading__line gatherings-heading__line--dynamic">

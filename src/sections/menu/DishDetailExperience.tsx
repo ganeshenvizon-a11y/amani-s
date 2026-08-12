@@ -13,7 +13,6 @@ export function DishDetailExperience() {
           />
         </Reveal>
         <Reveal className="menu-feature__copy" delay={0.1}>
-          <p className="menu-eyebrow menu-eyebrow--light">From the kitchen / South Indian curry</p>
           <h2 id="menu-feature-title">
             Natukodi<br />
             <em>Pulusu</em>

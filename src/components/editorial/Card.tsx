@@ -21,10 +21,10 @@ export function Card({ numberTag, title, description, icon, className = '' }: Ca
           </div>
         )}
         {icon && <div className="mb-4 text-[var(--amani-turmeric)]">{icon}</div>}
-        <h3 className="font-display text-xl sm:text-2xl font-bold text-[var(--amani-cream-on-dark)] mb-3 group-hover:text-[var(--amani-turmeric)] transition-colors">
+        <h3 className="font-display text-2xl sm:text-3xl font-normal text-[var(--amani-cream-on-dark)] mb-3 group-hover:text-[var(--amani-turmeric)] transition-colors">
           {title}
         </h3>
-        <p className="text-sm sm:text-base text-[var(--amani-cream-muted)] leading-relaxed font-sans">
+        <p className="text-sm sm:text-base text-[var(--amani-cream-muted)] leading-relaxed">
           {description}
         </p>
       </div>

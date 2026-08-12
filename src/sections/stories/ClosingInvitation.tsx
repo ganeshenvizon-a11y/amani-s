@@ -7,7 +7,6 @@ export function ClosingInvitation() {
       <img src="/media/images/testimonials/testimonial-grand-family.jpg" alt="A smiling family enjoying their time together at Amani's" loading="lazy" />
       <div className="stories-closing__overlay" aria-hidden="true" />
       <Reveal className="stories-closing__content">
-        <p className="stories-eyebrow stories-eyebrow--light">The table is set</p>
         <h2 id="closing-title">Some visits become<br /><em>traditions.</em></h2>
         <p>We hope every first visit becomes the beginning of many more.</p>
         <div className="stories-closing__actions">

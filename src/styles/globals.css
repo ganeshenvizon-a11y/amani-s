@@ -12,6 +12,7 @@
 @import "./menu.css";
 @import "./gatherings.css";
 @import "./visit.css";
+@import "./franchise.css";
 
 *,
 *::before,
@@ -304,30 +305,52 @@ h6 span,
   grid-row: 2;
   align-self: end;
   max-width: 23rem;
+  padding: 1.4rem 1.5rem 1.35rem;
+  border-radius: 16px;
+  background: rgba(9, 9, 11, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   font-family: var(--amani-font-ui);
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: none;
   transform: translateZ(0);
   will-change: transform, opacity;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.home-gathering-statement__text-group:hover .home-gathering-statement__note {
+  background: rgba(9, 9, 11, 0.8);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .home-gathering-statement__note p {
-  margin: 0 0 1.75rem;
+  margin: 0 0 1.35rem;
   font-size: clamp(1rem, 1.2vw, 1.18rem);
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 1.4;
   letter-spacing: -0.018em;
+  color: rgba(255, 255, 255, 0.94);
 }
 
 .home-gathering-statement__link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.82);
   font-family: var(--amani-font-ui);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-decoration: none;
   text-transform: uppercase;
+  transition: color 200ms ease;
+}
+
+.home-gathering-statement__link:hover,
+.home-gathering-statement__link:focus-visible {
+  color: rgba(255, 255, 255, 0.98);
 }
 
 .home-gathering-statement__link::after {
@@ -1540,17 +1563,6 @@ body.image-lightbox-open {
   max-width: 760px;
 }
 
-/* Eyebrow — Manrope 11–13px, 0.16em spacing, terracotta caps. */
-.thali-experience__eyebrow {
-  margin: 0 0 clamp(20px, 2.5vh, 26px) 0;
-  color: var(--amani-maroon);
-  font-family: var(--amani-font-ui);
-  font-size: clamp(11px, 0.8vw, 13px);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
 .thali-experience__heading {
   margin: 0;
   padding-bottom: 64px;
@@ -2031,15 +2043,6 @@ body.image-lightbox-open {
   pointer-events: none;
 }
 
-.brand-story__eyebrow {
-  margin: 0 0 0.7rem;
-  color: rgba(248, 242, 229, 0.68);
-  font-family: var(--amani-font-ui);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
 
 .brand-story__intro h2 {
   max-width: 31rem;
@@ -3180,15 +3183,6 @@ body.image-lightbox-open {
   padding: 0 1rem;
 }
 
-.amani-stories-eyebrow {
-  font-family: var(--amani-font-ui), system-ui, sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #98513B;
-  margin-bottom: 0.75rem;
-}
 
 .amani-stories-heading {
   display: flex;
@@ -3647,17 +3641,6 @@ body.image-lightbox-open {
   justify-content: center;
 }
 
-.gatherings-eyebrow {
-  display: block;
-  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--amani-terracotta, #A2553E);
-  margin-bottom: 22px;
-}
-
 .gatherings-heading {
   display: flex;
   flex-direction: column;
@@ -3665,30 +3648,37 @@ body.image-lightbox-open {
   font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
   font-weight: 400;
   font-size: clamp(64px, 6.2vw, 108px);
-  line-height: 0.88;
-  letter-spacing: -0.055em;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
   color: #181512;
   margin: 0 0 clamp(24px, 3vh, 30px) 0;
+  padding-top: 0.12em;
+  padding-bottom: 0.08em;
   text-transform: none;
 }
 
 .gatherings-heading__line {
   display: block;
+  overflow: visible;
 }
 
 .gatherings-heading__line--dynamic {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
-  gap: 0.03em;
+  gap: 0.02em;
+  overflow: visible;
 }
 
 .gatherings-dynamic-wrap {
-  display: inline-block;
+  display: inline-flex;
+  align-items: baseline;
   position: relative;
   overflow: hidden;
   vertical-align: bottom;
-  padding-bottom: 0.04em;
-  margin-bottom: -0.04em;
+  padding-top: 0.18em;
+  padding-bottom: 0.22em;
+  margin-top: -0.18em;
+  margin-bottom: -0.22em;
 }
 
 .gatherings-word--red {
@@ -3697,6 +3687,7 @@ body.image-lightbox-open {
   font-weight: 400;
   transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 380ms ease;
   will-change: transform, opacity;
+  padding-right: 0.03em;
 }
 
 .gatherings-word--red.is-idle {
@@ -4348,16 +4339,6 @@ body.image-lightbox-open {
   pointer-events: auto;
 }
 
-.visit-eyebrow {
-  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--amani-terracotta, #A2553E);
-  display: block;
-}
-
 .visit-rating-badge {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: 11px;
@@ -4542,52 +4523,58 @@ body.image-lightbox-open {
 .home-contact-section {
   position: relative;
   width: 100%;
-  padding: clamp(3.5rem, 7vw, 6.5rem) var(--amani-gutter, clamp(1rem, 4vw, 3rem));
+  padding: clamp(2.25rem, 4.5vw, 3.75rem) var(--amani-gutter, clamp(1rem, 4vw, 3rem));
   background-color: var(--amani-paper, #EFE5D4);
   color: var(--amani-ink, #171411);
   border-top: 1px solid var(--amani-hairline, rgba(23, 20, 17, 0.12));
+  overflow: hidden;
 }
 
 .home-contact-container {
-  max-width: var(--amani-max-width, 1600px);
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: clamp(2.5rem, 6vw, 6rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  gap: clamp(2rem, 4.5vw, 4.5rem);
+  align-items: center;
 }
 
 @media (max-width: 960px) {
   .home-contact-container {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2.25rem;
   }
 }
 
 /* Info Column */
 .home-contact-info {
+  position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 
-.home-contact-eyebrow {
-  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--amani-maroon, #7A1F24);
-  margin-bottom: 0.75rem;
+.home-contact-monogram {
+  position: absolute;
+  top: -2.5rem;
+  left: -2rem;
+  width: clamp(14rem, 24vw, 22rem);
+  height: auto;
+  opacity: 0.075;
+  filter: brightness(0) saturate(100%) invert(18%) sepia(48%) saturate(1682%) hue-rotate(320deg) brightness(88%) contrast(92%);
+  user-select: none;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .home-contact-title {
   font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.015em;
   color: var(--amani-ink, #171411);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
 }
 
 .home-contact-title em {
@@ -4598,11 +4585,37 @@ body.image-lightbox-open {
 
 .home-contact-description {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  font-size: clamp(0.95rem, 1.05vw, 1.1rem);
   line-height: 1.65;
   color: var(--amani-ink-soft, #403A34);
-  margin-bottom: 2.5rem;
-  max-width: 520px;
+  margin-bottom: 1.75rem;
+  max-width: 480px;
+}
+
+.home-contact-quote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--amani-hairline, rgba(23, 20, 17, 0.12));
+  max-width: 460px;
+}
+
+.home-contact-quote .quote-mark {
+  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
+  font-size: 2.2rem;
+  line-height: 0.8;
+  color: var(--amani-maroon, #7A1F24);
+  margin-top: 0.1rem;
+}
+
+.home-contact-quote .quote-text {
+  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
+  font-size: 1.08rem;
+  font-style: italic;
+  color: var(--amani-ink-soft, #403A34);
+  line-height: 1.45;
+  margin: 0;
 }
 
 .home-contact-details {
@@ -4839,3 +4852,211 @@ a.home-contact-detail-value:hover {
 .home-contact-reset-btn:hover {
   background: var(--amani-maroon-tint, rgba(122, 31, 36, 0.1));
 }
+
+/* ==========================================================================
+   Menu Discovery Section — Home Page
+   ========================================================================== */
+
+.menu-discovery {
+  position: relative;
+  width: 100%;
+  background-color: var(--amani-void, #2E130B);
+  color: var(--amani-cream-on-dark, #F4EDDF);
+  padding: clamp(3.5rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  box-sizing: border-box;
+}
+
+.menu-discovery::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(248, 242, 229, 0.7), transparent);
+}
+
+.menu-discovery__shell {
+  position: relative;
+  z-index: 2;
+  max-width: var(--amani-max-width, 1400px);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.menu-discovery__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 3rem);
+  flex-wrap: wrap;
+  margin-bottom: clamp(2rem, 3.5vw, 3.25rem);
+}
+
+.menu-discovery__heading-group {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.menu-discovery__label {
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amani-cream-muted, rgba(244, 237, 223, 0.7));
+  margin: 0 0 0.85rem 0;
+}
+
+.menu-discovery__title {
+  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--amani-cream-on-dark, #F4EDDF);
+  margin: 0 0 1rem 0;
+}
+
+.menu-discovery__divider {
+  width: 54px;
+  height: 1px;
+  background-color: var(--amani-terracotta, #A2553E);
+  opacity: 0.65;
+  margin-bottom: 1.15rem;
+}
+
+.menu-discovery__subtitle {
+  flex: 0 1 auto;
+  max-width: 28ch;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  color: var(--amani-cream-muted, rgba(244, 237, 223, 0.7));
+  text-align: right;
+  margin: 0 0 0.35rem 0;
+}
+
+/* Category Cards Grid (4 cols desktop, 2 cols tablet, 1 col mobile) */
+.menu-discovery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: var(--amani-hairline-dark, rgba(244, 237, 223, 0.15));
+  border: 1px solid var(--amani-hairline-dark, rgba(244, 237, 223, 0.15));
+  margin-bottom: clamp(2rem, 3vw, 2.75rem);
+}
+
+.menu-discovery__card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 96px;
+  padding: clamp(1.4rem, 2vw, 2rem) clamp(1.25rem, 1.8vw, 1.75rem);
+  background-color: var(--amani-dark-warm, #3A190E);
+  text-decoration: none;
+  transition: background-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  cursor: pointer;
+}
+
+.menu-discovery__card-text {
+  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--amani-cream-on-dark, #F4EDDF);
+  transition: color 0.2s ease;
+}
+
+.menu-discovery__card:hover {
+  background-color: var(--amani-void, #2E130B);
+}
+
+.menu-discovery__card:hover .menu-discovery__card-text {
+  color: var(--amani-terracotta, #A2553E);
+}
+
+/* Highlighted 8th Card ("More from Our Kitchen") */
+.menu-discovery__card--highlight {
+  background-color: var(--amani-dark-warm, #3A190E);
+}
+
+.menu-discovery__card--highlight .menu-discovery__card-text {
+  color: var(--amani-terracotta, #A2553E);
+}
+
+.menu-discovery__card--highlight:hover {
+  background-color: var(--amani-void, #2E130B);
+}
+
+.menu-discovery__card--highlight:hover .menu-discovery__card-text {
+  color: var(--amani-cream-on-dark, #F4EDDF);
+}
+
+/* Footer Button */
+.menu-discovery__footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.menu-discovery__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--amani-maroon, #7A1F24);
+  color: var(--amani-cream-on-dark, #F4EDDF);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: 1px solid var(--amani-maroon, #7A1F24);
+  border-radius: var(--amani-radius-sm, 4px);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.menu-discovery__btn:hover {
+  background-color: var(--amani-terracotta, #A2553E);
+  border-color: var(--amani-terracotta, #A2553E);
+  color: var(--amani-cream-on-dark, #F4EDDF);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1023px) {
+  .menu-discovery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-discovery__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+
+  .menu-discovery__subtitle {
+    max-width: none;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .menu-discovery__footer {
+    justify-content: stretch;
+  }
+
+  .menu-discovery__btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 599px) {
+  .menu-discovery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-discovery__card {
+    min-height: 72px;
+  }
+}
