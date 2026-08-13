@@ -1,0 +1,650 @@
+/* ==========================================================================
+   AMANI — Catering page
+   The Warmth of Amani's, Brought to Your Occasion.
+   Shares the warm editorial design system with Gatherings/Menu/Stories.
+   (Namespaced `.cater-*` to mirror `.gath-*` conventions.)
+   ========================================================================== */
+
+#main-content:has(.catering-page) {
+  padding-top: 0 !important;
+}
+
+.catering-page {
+  overflow: clip;
+  background: var(--amani-canvas);
+  color: var(--amani-ink);
+}
+
+.cater-container {
+  width: min(var(--amani-max-width), calc(100% - (var(--amani-gutter) * 2)));
+  margin-inline: auto;
+}
+
+.cater-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.cater-head--center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.catering-page h2 {
+  margin: 0;
+  font-family: var(--amani-font-display);
+  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  padding-top: 0.1em;
+  padding-bottom: 0.05em;
+}
+
+.catering-page h2 em {
+  font-style: italic;
+  color: var(--amani-maroon);
+}
+
+.cater-head p {
+  max-width: 32rem;
+  margin: 0;
+  color: var(--amani-ink-muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.cater-head--center p {
+  margin-inline: auto;
+  margin-top: 1rem;
+}
+
+/* Buttons ------------------------------------------------------------------ */
+
+.cater-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem 1.6rem;
+  color: var(--amani-cream-on-dark);
+  background: var(--amani-maroon);
+  border: 1px solid var(--amani-maroon);
+  border-radius: var(--amani-radius-sm);
+  font-family: var(--amani-font-ui);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.cater-button span {
+  transition: transform 0.28s ease;
+}
+
+.cater-button:hover,
+.cater-button:focus-visible {
+  background: var(--amani-maroon-dark);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.cater-button:hover span,
+.cater-button:focus-visible span {
+  transform: translateX(4px);
+}
+
+.cater-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cater-button--outline {
+  background: transparent;
+  border-color: var(--amani-cream-on-dark);
+  color: var(--amani-cream-on-dark);
+}
+
+.cater-button--outline:hover {
+  background: rgba(244, 237, 223, 0.1);
+  border-color: var(--amani-cream-on-dark);
+}
+
+/* ==========================================================================
+   01 — Hero
+   ========================================================================== */
+
+.cater-hero {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6.5rem, 14vh, 9rem) var(--amani-gutter) clamp(3.5rem, 6vh, 5rem);
+  text-align: center;
+  color: var(--amani-cream-on-dark);
+  background: var(--amani-void);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cater-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+  filter: saturate(0.95) brightness(0.88) contrast(1.03);
+}
+
+.cater-hero__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(16, 9, 6, 0.55) 0%, rgba(15, 7, 5, 0.72) 100%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.cater-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cater-hero__content {
+  max-width: 60rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.cater-hero h1 {
+  margin: 1.1rem 0 0;
+  color: var(--amani-cream-on-dark);
+  font-family: var(--amani-font-display);
+  font-size: var(--font-hero, clamp(3.2rem, 7.5vw, 8rem));
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.cater-hero h1 span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cater-hero h1 em {
+  display: inline-block;
+  font-style: italic;
+  color: #f4c478;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.cater-hero__lede {
+  max-width: 38rem;
+  margin: 1.5rem auto 0;
+  color: rgba(244, 237, 223, 0.92);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.cater-hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cater-hero__actions .cater-button {
+  background: var(--amani-maroon);
+  border-color: var(--amani-maroon);
+  color: var(--amani-cream-on-dark);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cater-hero__actions .cater-button:hover {
+  background: var(--amani-maroon-dark);
+  border-color: var(--amani-maroon-dark);
+}
+
+/* ==========================================================================
+   02 — Occasions We Cater
+   ========================================================================== */
+
+.cater-occasions-section {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background: var(--amani-canvas);
+}
+
+.cater-occasions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  text-align: left;
+}
+
+.cater-occasion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 2.5vw, 2.1rem);
+  background: var(--amani-paper);
+  border: 1px solid var(--amani-hairline);
+  border-radius: var(--amani-radius-md);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cater-occasion:hover {
+  border-color: rgba(122, 31, 36, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2.4rem rgba(75, 50, 28, 0.1);
+}
+
+.cater-occasion__index {
+  color: var(--amani-terracotta);
+  font-family: var(--amani-font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.cater-occasion h3 {
+  margin: 0;
+  color: var(--amani-ink);
+  font-family: var(--amani-font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2.05rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.cater-occasion p {
+  margin: 0;
+  color: var(--amani-ink-muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   03 — Menus & Formats
+   ========================================================================== */
+
+.cater-menus-section {
+  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  background: var(--amani-paper);
+}
+
+.cater-menus__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.cater-menu-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: clamp(1.5rem, 2.5vw, 2.2rem);
+  background: var(--amani-canvas);
+  border: 1px solid var(--amani-hairline);
+  border-radius: var(--amani-radius-md);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cater-menu-card:hover {
+  border-color: rgba(122, 31, 36, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2.4rem rgba(75, 50, 28, 0.1);
+}
+
+.cater-menu-card__tag {
+  color: var(--amani-terracotta);
+  font-family: var(--amani-font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cater-menu-card h3 {
+  margin: 0;
+  color: var(--amani-ink);
+  font-family: var(--amani-font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.cater-menu-card p {
+  margin: 0;
+  color: var(--amani-ink-muted);
+  font-size: 0.93rem;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   04 — How Planning Works
+   ========================================================================== */
+
+.cater-process {
+  padding: clamp(4.5rem, 9vw, 8rem) 0;
+}
+
+.cater-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  counter-reset: cater-step;
+}
+
+.cater-step {
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--amani-hairline);
+}
+
+.cater-step__num {
+  display: block;
+  color: var(--amani-terracotta);
+  font-family: var(--amani-font-display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1;
+}
+
+.cater-step h3 {
+  margin: 1rem 0 0.6rem;
+  color: var(--amani-ink);
+  font-family: var(--amani-font-display);
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.cater-step p {
+  margin: 0;
+  color: var(--amani-ink-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   05 — Quote Enquiry form
+   ========================================================================== */
+
+.cater-enquiry {
+  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  background: var(--amani-void);
+  color: var(--amani-cream-on-dark);
+}
+
+.cater-enquiry__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.cater-enquiry h2 {
+  color: var(--amani-cream-on-dark);
+  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
+}
+
+.cater-enquiry h2 em {
+  color: #e3a079;
+}
+
+.cater-enquiry__intro p {
+  max-width: 26rem;
+  margin: 1.4rem 0 0;
+  color: var(--amani-cream-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.cater-form {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--amani-canvas);
+  border-radius: var(--amani-radius-md);
+  color: var(--amani-ink);
+}
+
+.cater-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+
+.cater-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cater-field--full {
+  grid-column: 1 / -1;
+}
+
+.cater-field label {
+  color: var(--amani-ink-soft);
+  font-family: var(--amani-font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cater-field label span {
+  color: var(--amani-ink-muted);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.cater-field input,
+.cater-field select,
+.cater-field textarea {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  color: var(--amani-ink);
+  background: #fff;
+  border: 1px solid var(--amani-hairline);
+  border-radius: var(--amani-radius-sm);
+  font-family: var(--amani-font-ui);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cater-field textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+}
+
+.cater-field input:focus,
+.cater-field select:focus,
+.cater-field textarea:focus {
+  outline: none;
+  border-color: var(--amani-maroon);
+  box-shadow: 0 0 0 3px var(--amani-maroon-tint);
+}
+
+.cater-form__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.cater-form__note {
+  margin: 0;
+  color: var(--amani-ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.cater-form__success {
+  display: grid;
+  gap: 0.75rem;
+  padding: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.cater-form__success-mark {
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  color: #fff;
+  background: var(--amani-olive);
+  border-radius: 50%;
+  font-size: 1.4rem;
+}
+
+.cater-form__success h3 {
+  margin: 0;
+  color: var(--amani-ink);
+  font-family: var(--amani-font-display);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 400;
+}
+
+.cater-form__success p {
+  margin: 0;
+  color: var(--amani-ink-muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   06 — Restaurant Hosting CTA Section
+   ========================================================================== */
+
+.cater-cta-section {
+  padding: clamp(4.5rem, 9vw, 7rem) 0;
+  background: var(--amani-paper);
+  border-top: 1px solid var(--amani-hairline);
+  text-align: center;
+}
+
+.cater-cta-inner {
+  max-width: 42rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cater-cta-section p {
+  margin-top: 1.2rem;
+  color: var(--amani-ink-muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.cater-cta-actions {
+  margin-top: 2rem;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .cater-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .cater-head p {
+    max-width: 100%;
+  }
+
+  .cater-menus__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cater-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cater-enquiry__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cater-hero {
+    min-height: 520px;
+    padding-top: clamp(5.5rem, 12vh, 7rem);
+    padding-bottom: 4.5rem;
+  }
+
+  .cater-hero h1 {
+    font-size: clamp(2.5rem, 11vw, 4.2rem);
+  }
+
+  .cater-occasions {
+    grid-template-columns: 1fr;
+  }
+
+  .cater-menus__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cater-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .cater-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cater-form__actions {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .catering-page h2 {
+    font-size: clamp(2.1rem, 9vw, 3.4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cater-occasion,
+  .cater-menu-card,
+  .cater-button {
+    transition: none;
+  }
+}

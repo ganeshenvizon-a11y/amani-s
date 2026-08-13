@@ -306,12 +306,17 @@ export function Footer() {
                 </li>
                 <li>
                   <NavLink to="/stories/" className="footer-nav-link">
-                    STORIES
+                    OUR STORY
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/gatherings/" className="footer-nav-link">
                     GATHERINGS
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/catering/" className="footer-nav-link">
+                    CATERING
                   </NavLink>
                 </li>
                 <li>

@@ -288,9 +288,23 @@ export function Header() {
         }`}
         aria-label="Main Site Header"
       >
-        {/* Desktop Header Layout — Matching Reference Image */}
+        {/* Desktop Header Layout — Logo on left, page links & CTA on right */}
         <div className="restaurant-header__desktop hidden lg:flex items-center justify-between w-full h-full px-6 py-2">
-          {/* Left Navigation Links */}
+          {/* Left Logo */}
+          <NavLink
+            to="/"
+            onClick={() => isOpen && handleClose()}
+            className="restaurant-desktop-logo group flex items-center justify-center mr-6"
+            aria-label="Amani's Restaurant Home"
+          >
+            <img
+              src={BRAND_CONFIG.logoWordmarkPng}
+              alt="Amani's"
+              className="h-9 md:h-10 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85"
+            />
+          </NavLink>
+
+          {/* Right Navigation Links & CTA */}
           <div className="flex items-center">
             <NavLink
               to="/menu/"
@@ -309,7 +323,7 @@ export function Header() {
                 `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
               }
             >
-              STORIES
+              OUR STORY
             </NavLink>
 
             <span className="restaurant-desktop-divider" aria-hidden="true" />
@@ -322,24 +336,18 @@ export function Header() {
             >
               GATHERINGS
             </NavLink>
-          </div>
 
-          {/* Center Logo */}
-          <NavLink
-            to="/"
-            onClick={() => isOpen && handleClose()}
-            className="restaurant-desktop-logo group flex items-center justify-center mx-6"
-            aria-label="Amani's Restaurant Home"
-          >
-            <img
-              src={BRAND_CONFIG.logoWordmarkPng}
-              alt="Amani's"
-              className="h-9 md:h-10 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85"
-            />
-          </NavLink>
+            <span className="restaurant-desktop-divider" aria-hidden="true" />
 
-          {/* Right Navigation Links & CTA */}
-          <div className="flex items-center">
+            <NavLink
+              to="/catering/"
+              className={({ isActive }) =>
+                `restaurant-desktop-link ${isActive ? 'is-active' : ''}`
+              }
+            >
+              CATERING
+            </NavLink>
+
             <span className="restaurant-desktop-divider" aria-hidden="true" />
 
             <NavLink

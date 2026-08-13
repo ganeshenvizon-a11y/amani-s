@@ -12,10 +12,11 @@ export interface NavLinkItem {
 export const PRIMARY_OPEN_NAV_LINKS: NavLinkItem[] = [
   { label: 'HOME',       path: '/' },
   { label: 'MENU',       path: '/menu/' },
-  { label: 'STORIES',    path: '/stories/' },
+  { label: 'OUR STORY',  path: '/stories/' },
   { label: 'GATHERINGS', path: '/gatherings/' },
-  { label: 'VISIT',      path: '/visit/' },
+  { label: 'CATERING',   path: '/catering/' },
   { label: 'FRANCHISE',  path: '/franchise/' },
+  { label: 'VISIT',      path: '/visit/' },
 ];
 
 export const SECONDARY_OPEN_NAV_LINKS: NavLinkItem[] = [
@@ -29,10 +30,11 @@ export const SECONDARY_OPEN_NAV_LINKS: NavLinkItem[] = [
 export const MAIN_NAV_LINKS: NavLinkItem[] = [
   { label: 'HOME', path: '/' },
   { label: 'MENU', path: '/menu/' },
-  { label: 'STORIES', path: '/stories/' },
+  { label: 'OUR STORY', path: '/stories/' },
   { label: 'GATHERINGS', path: '/gatherings/' },
-  { label: 'VISIT', path: '/visit/' },
+  { label: 'CATERING', path: '/catering/' },
   { label: 'FRANCHISE', path: '/franchise/' },
+  { label: 'VISIT', path: '/visit/' },
   { label: 'INSTAGRAM ↗', path: 'https://instagram.com', isExternal: true },
   { label: 'GET DIRECTIONS ↗', path: '/visit/#location', isExternal: false },
 ];
@@ -45,9 +47,10 @@ export const CTA_NAV_LINK: NavLinkItem = {
 
 export const FOOTER_NAV_LINKS: NavLinkItem[] = [
   { label: 'Menu',       path: '/menu/' },
-  { label: 'Stories',    path: '/stories/' },
+  { label: 'Our Story',  path: '/stories/' },
   { label: 'Gatherings', path: '/gatherings/' },
-  { label: 'Visit',      path: '/visit/' },
+  { label: 'Catering',   path: '/catering/' },
   { label: 'Franchise',  path: '/franchise/' },
+  { label: 'Visit',      path: '/visit/' },
   { label: 'Reservations', path: '/visit/#reserve' },
 ];

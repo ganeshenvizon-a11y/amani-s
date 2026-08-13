@@ -355,7 +355,47 @@ export const VISIT_PREVIEW_CONTENT = {
 };
 
 export const GATHERINGS_PREVIEW_CONTENT = {
-  heading: 'Made to gather.',
+  heading: 'How Would You Like to Gather?',
+  subheading: 'Select an option to reserve a table, plan a gathering, or request catering for your occasion.',
+  choices: [
+    {
+      id: 'dine',
+      number: '01',
+      title: 'Dine',
+      description: 'South Indian flavours and a table ready for you.',
+      image: '/media/images/happy-south-indian-dining.png',
+      imageAlt: "Dining table at Amani's",
+      tags: ['Reserve a Table', 'Dine-In Experience'],
+      ctaText: 'Book a Table',
+      ctaLink: '/visit/#home-contact',
+      formType: 'Table Reservation Form',
+    },
+    {
+      id: 'celebrate',
+      number: '02',
+      title: 'Celebrate',
+      description: "Host your occasion, birthday or milestone at Amani's.",
+      image: '/media/images/gathering-interior-05.webp',
+      imageAlt: "Private celebration space at Amani's",
+      tags: ['Private Gatherings', 'Event Enquiry'],
+      ctaText: 'Plan a Gathering',
+      ctaLink: '/gatherings/#enquiry',
+      formType: 'Event Enquiry Form',
+    },
+    {
+      id: 'cater',
+      number: '03',
+      title: 'Cater',
+      description: "Bring Amani's food and hospitality to your venue.",
+      image: '/media/images/catering-hero.jpg',
+      imageAlt: 'Outdoor catering setup',
+      tags: ['Outdoor Catering', 'Request a Quote'],
+      ctaText: 'Request a Quote',
+      ctaLink: '/catering/#enquiry',
+      formType: 'Catering Quote Form',
+    },
+  ],
+  eyebrow: 'FINAL CHOICE',
   body: 'From family dinners to meaningful celebrations, we make room for the moments worth sharing.',
   occasions: [
     { label: 'Family celebrations', path: '/gatherings/#family' },
@@ -375,3 +415,4 @@ export const GATHERINGS_PREVIEW_CONTENT = {
     ctaLink: '/visit/#reserve',
   },
 };
+

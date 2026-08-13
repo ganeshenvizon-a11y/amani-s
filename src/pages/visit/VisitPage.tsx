@@ -3,6 +3,7 @@ import { Hero } from '../../sections/visit/Hero';
 import { LiveStatus } from '../../sections/visit/LiveStatus';
 import { RestaurantInformation } from '../../sections/visit/RestaurantInformation';
 import { FAQs } from '../../sections/visit/FAQs';
+import { ContactForm } from '../../sections/home/ContactForm';
 
 export function VisitPage() {
   useEffect(() => {
@@ -26,6 +27,9 @@ export function VisitPage() {
 
       {/* 04 — FAQ */}
       <FAQs />
+
+      {/* 05 — Table Reservation & Contact Form */}
+      <ContactForm />
     </div>
   );
 }

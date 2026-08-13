@@ -60,6 +60,8 @@ export function ContactForm() {
 
   return (
     <section id="home-contact" className="home-contact-section" aria-labelledby="home-contact-heading">
+      <div id="contact" />
+      <div id="reserve" />
       <div className="home-contact-container">
         {/* Left Column: Editorial Information */}
         <Reveal direction="up" className="home-contact-info">

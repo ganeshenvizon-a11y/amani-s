@@ -76,6 +76,8 @@ export function FranchiseFormSection() {
 
   return (
     <section id="franchise-form" className="franchise-form-section py-20 lg:py-28 bg-[var(--amani-paper)] text-[var(--amani-ink)] border-t border-[var(--amani-hairline)] relative">
+      <div id="apply" />
+      <div id="form" />
       <Container size="wide">
         {/* Section Header */}
         <Reveal direction="up" className="text-center max-w-3xl mx-auto mb-16">
