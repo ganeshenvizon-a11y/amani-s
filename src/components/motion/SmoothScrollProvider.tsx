@@ -50,9 +50,9 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         autoRaf: false,
         smoothWheel: true,
         syncTouch: false,
-        lerp: 0.04,
-        wheelMultiplier: 0.55,
-        touchMultiplier: 1.2,
+        lerp: 0.18,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.0,
       }}
     >
       {children}

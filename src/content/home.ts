@@ -349,7 +349,7 @@ export const INSIDE_AMANI_CONTENT = {
 
 export const VISIT_PREVIEW_CONTENT = {
   heading: 'Come find your table.',
-  description: 'Find us in Jubilee Hills. Check today’s hours, get directions or call before you arrive.',
+  description: 'Find us in Jubilee Hills. Check today’s hours, get directions, and explore our accessible amenities.',
   image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop',
   primaryCta: 'GET DIRECTIONS',
 };

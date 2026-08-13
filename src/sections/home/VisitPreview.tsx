@@ -112,42 +112,95 @@ export function VisitPreview() {
           <h2 className="visit-heading">{VISIT_PREVIEW_CONTENT.heading}</h2>
           <p className="visit-description">{VISIT_PREVIEW_CONTENT.description}</p>
 
-          {/* Compact Live Status Row */}
-          <div className="visit-status-row">
-            <span
-              className={`visit-status-dot ${
-                status.isOpen ? 'visit-status-dot--open' : 'visit-status-dot--closed'
-              }`}
-              aria-hidden="true"
-            />
-            <span>{openStatusText}</span>
+          {/* Compact Live Status Row with Round Call Button */}
+          <div className="visit-status-header">
+            <div className="visit-status-row">
+              <span
+                className={`visit-status-dot ${
+                  status.isOpen ? 'visit-status-dot--open' : 'visit-status-dot--closed'
+                }`}
+                aria-hidden="true"
+              />
+              <span>{openStatusText}</span>
+            </div>
+
+            <a
+              href={`tel:${RESTAURANT_CONFIG.contact.phoneRaw}`}
+              className="visit-call-btn"
+              title={`Call Amani's at ${RESTAURANT_CONFIG.contact.phone}`}
+              aria-label={`Call Amani's at ${RESTAURANT_CONFIG.contact.phone}`}
+            >
+              <svg
+                className="visit-call-btn__icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </a>
           </div>
 
-          {/* Address, Parking & Phone Info Grid */}
+          {/* Address, Parking, Wheelchair & Highchair Info Grid */}
           <div className="visit-contact-grid">
             <div>
-              <span className="visit-label">ADDRESS /</span>
+              <span className="visit-label">
+                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                ADDRESS /
+              </span>
               <p className="visit-value">
                 {RESTAURANT_CONFIG.address.street}, {RESTAURANT_CONFIG.address.area}<br />
                 {RESTAURANT_CONFIG.address.city}, {RESTAURANT_CONFIG.address.state} {RESTAURANT_CONFIG.address.postalCode}
               </p>
             </div>
             <div>
-              <span className="visit-label">PARKING /</span>
+              <span className="visit-label">
+                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="4" />
+                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
+                </svg>
+                PARKING /
+              </span>
               <p className="visit-value">
                 Valet Parking<br />
                 <span className="visit-subvalue">Dedicated On-Site Valet</span>
               </p>
             </div>
             <div>
-              <span className="visit-label">CALL /</span>
+              <span className="visit-label">
+                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="4" r="2" />
+                  <path d="M12 6v7h5l1.5 5" />
+                  <path d="M6.5 13.5a5.5 5.5 0 1 0 8.5 4.5" />
+                </svg>
+                WHEELCHAIR /
+              </span>
               <p className="visit-value">
-                <a
-                  href={`tel:${RESTAURANT_CONFIG.contact.phoneRaw}`}
-                  aria-label={`Call Amani's at ${RESTAURANT_CONFIG.contact.phone}`}
-                >
-                  {RESTAURANT_CONFIG.contact.phone}
-                </a>
+                Fully Accessible<br />
+                <span className="visit-subvalue">Ramp & Elevator Access</span>
+              </p>
+            </div>
+            <div>
+              <span className="visit-label">
+                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 3v8h8V3" />
+                  <path d="M6 11h12" />
+                  <path d="M8 11l-2 10" />
+                  <path d="M16 11l2 10" />
+                  <path d="M7.5 16h9" />
+                </svg>
+                HIGHCHAIRS /
+              </span>
+              <p className="visit-value">
+                Highchairs Available<br />
+                <span className="visit-subvalue">For Toddlers & Infants</span>
               </p>
             </div>
           </div>
