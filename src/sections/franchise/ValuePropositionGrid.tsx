@@ -65,11 +65,11 @@ export function ValuePropositionGrid() {
               <span className="inline-block w-8 h-px bg-[var(--amani-turmeric)]" />
               Why franchise with Amani&apos;s
             </span>
-            <h2 className="font-display text-[clamp(1.9rem,3.4vw,3.2rem)] font-normal leading-[1.12] tracking-[-0.01em] text-[var(--amani-cream-on-dark)]">
+            <h2 className="font-display text-[length:var(--font-heading-1)] font-medium leading-[1.12] tracking-[-0.01em] text-[var(--amani-cream-on-dark)]">
               Partner with us to bring authentic, rich culinary experiences to food lovers everywhere &mdash; and grow{' '}
-              <em className="italic font-normal text-[var(--amani-turmeric)]">a brand people keep coming back for.</em>
+              <em className="not-italic font-medium text-[var(--amani-turmeric)]">a brand people keep coming back for.</em>
             </h2>
-            <p className="mt-6 text-sm sm:text-base text-[var(--amani-cream-muted)] leading-relaxed max-w-md">
+            <p className="mt-6 text-[length:var(--font-body)] text-[var(--amani-cream-muted)] leading-relaxed max-w-md">
               Six pillars of partnership, built from years of running kitchens that stay full &mdash; each one working
               behind you from your first plate to your fifth outlet.
             </p>

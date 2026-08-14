@@ -332,7 +332,7 @@ export interface QrOrderingStep {
 export const QR_ORDERING_CONTENT = {
   headingScript: 'Scan, order and',
   headingMain: 'RELAX.',
-  body: 'Settle in, scan the little code on your table and the whole menu opens on your phone. Browse dishes, customise your thali, call a waiter or ask for the bill — all without waiting to catch an eye.',
+  body: "Scan your table's code to browse, customise your thali and call for the bill.",
   image: '/media/images/qr-ordering-app.png',
   imageAlt: "Amani's QR-based table ordering app open on a phone, showing today's thali deals and popular picks",
   steps: [
@@ -370,18 +370,18 @@ export const GATHERINGS_PREVIEW_CONTENT = {
     {
       id: 'catering',
       title: "The warmth of Amani's, brought to your occasion.",
-      description: 'South Indian menus prepared and served at the place you are celebrating.',
-      image: '/media/images/catering-hero.jpg',
-      imageAlt: "Amani's South Indian catering spread served at a venue",
+      description: 'South Indian menus prepared and served at your venue for weddings, corporate events & milestones.',
+      image: '/media/images/catering-minimal.jpg',
+      imageAlt: "Amani's authentic South Indian minimal catering display",
       ctaText: 'Request a Catering Quote',
       ctaLink: '/catering/#enquiry',
     },
     {
       id: 'gatherings',
       title: "Bring your occasion to the Amani's table.",
-      description: 'Birthdays, family milestones and small celebrations hosted inside the restaurant.',
-      image: '/media/images/gathering-welcoming-table.jpg',
-      imageAlt: "A welcoming table set for a gathering inside Amani's restaurant",
+      description: 'Gatherings for birthdays, anniversaries and family milestones, hosted with custom menus at our table.',
+      image: '/media/images/gatherings-minimal.jpg',
+      imageAlt: "A welcoming dining room table set for a gathering inside Amani's restaurant",
       ctaText: 'Plan a Gathering',
       ctaLink: '/gatherings/#enquiry',
     },

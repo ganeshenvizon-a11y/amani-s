@@ -3,13 +3,36 @@
    ========================================================================== */
 
 :root {
-  --font-hero:         clamp(3.5rem, 8vw, 8.5rem);
-  --font-heading-1:    clamp(2.5rem, 5.5vw, 5.5rem);
+  /* Values below are sourced directly from the Home page's rendered
+     typography (globals.css) so every page shares one heading/body scale
+     instead of inventing its own. */
+  --font-hero:         clamp(1.75rem, 6.1vw, 7.3rem);
+  --font-heading-1:    clamp(2rem, 3.4vw, 3.8rem);
   --font-heading-2:    clamp(1.85rem, 3.8vw, 3.8rem);
   --font-heading-3:    clamp(1.4rem, 2.2vw, 2.4rem);
   --font-body-lg:      clamp(1.05rem, 1.3vw, 1.35rem);
   --font-body:         clamp(0.95rem, 1.05vw, 1.1rem);
   --font-caption:      clamp(0.85rem, 0.95vw, 0.95rem);
+}
+
+/* Home's hero/section-heading breakpoints, mirrored here so every page
+   using var(--font-hero) / var(--font-heading-1) resizes identically. */
+@media (max-width: 1023px) {
+  :root {
+    --font-heading-1: clamp(2.1rem, 7vw, 3.5rem);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-hero: clamp(2.35rem, 9.6vw, 3.05rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --font-hero: clamp(3.6rem, 7.8vw, 5.2rem);
+  }
 }
 
 p,
@@ -21,6 +44,15 @@ select,
 button,
 ::placeholder {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Quicksand', var(--amani-font-display, sans-serif);
 }
 
 h1 span,
@@ -35,7 +67,7 @@ h6 span,
 }
 
 .font-display {
-  font-family: var(--amani-font-display, 'Clash Display', sans-serif);
+  font-family: var(--amani-font-display, 'Quicksand', sans-serif);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.015em;
@@ -45,18 +77,22 @@ h6 span,
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }
 
-.text-hero {
+.text-hero,
+.home-hero__title,
+.home-hero--editorial .home-hero__title,
+.stories-hero h1,
+.menu-hero h1,
+.gath-hero h1,
+.cater-hero h1,
+.vst-hero h1 {
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-weight: 700 !important;
 }
 
 .text-h1 {
   font-family: var(--amani-font-display);
   font-size: var(--font-heading-1);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 0.98;
   letter-spacing: -0.015em;
 }
@@ -64,7 +100,7 @@ h6 span,
 .text-h2 {
   font-family: var(--amani-font-display);
   font-size: var(--font-heading-2);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
@@ -72,7 +108,7 @@ h6 span,
 .text-h3 {
   font-family: var(--amani-font-display);
   font-size: var(--font-heading-3);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.15;
 }
 

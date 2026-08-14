@@ -84,10 +84,10 @@ export function FranchiseFormSection() {
           <span className="text-[11px] font-semibold tracking-[0.16em] text-[var(--amani-maroon)] uppercase mb-4 block">
             — Start your franchise journey
           </span>
-          <h2 className="font-display text-[clamp(2.2rem,4.5vw,3.8rem)] font-normal leading-[1.05] tracking-[-0.015em] mb-4 text-[var(--amani-ink)]">
-            Apply for an <em className="italic font-normal text-[var(--amani-maroon)]">Amani&apos;s outlet.</em>
+          <h2 className="font-display text-[length:var(--font-heading-1)] font-medium leading-[1.05] tracking-[-0.015em] mb-4 text-[var(--amani-ink)]">
+            Apply for an <em className="not-italic font-medium text-[var(--amani-maroon)]">Amani&apos;s outlet.</em>
           </h2>
-          <p className="text-[clamp(0.95rem,1.1vw,1.15rem)] text-[var(--amani-ink-soft)] leading-relaxed">
+          <p className="text-[length:var(--font-body)] text-[var(--amani-ink-soft)] leading-relaxed">
             Please fill out the comprehensive franchise application form below. Our expansion committee reviews every submission carefully and will get back to you within 48 hours.
           </p>
         </Reveal>

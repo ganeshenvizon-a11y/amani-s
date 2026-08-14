@@ -16,20 +16,6 @@ export function QrOrdering() {
       className="qr-ordering-section relative overflow-hidden"
       aria-labelledby="qr-ordering-heading"
     >
-      {/* Background pattern texture, matching the stories section */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-25 mix-blend-multiply z-0"
-        aria-hidden="true"
-      >
-        <img
-          src="/media/images/hero-pattern.png"
-          alt=""
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-
       <div className="qr-ordering-container relative z-10">
         {/* Left — Editorial copy */}
         <Reveal direction="right" className="qr-ordering-copy">

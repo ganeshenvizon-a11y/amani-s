@@ -20,13 +20,14 @@
 .menu-page h2 {
   margin: 0;
   font-family: var(--amani-font-display);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.04em;
 }
 
 .menu-page h2 em {
-  font-style: italic;
+  font-style: normal;
+  font-weight: 500;
   color: var(--amani-maroon);
 }
 
@@ -211,7 +212,7 @@
   margin: 1.1rem 0 0;
   color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(3.2rem, 7.5vw, 8rem));
+  font-size: var(--font-hero, clamp(1.75rem, 6.1vw, 7.3rem));
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -225,7 +226,7 @@
 
 .menu-hero h1 em {
   display: inline-block;
-  font-style: italic;
+  font-style: normal;
   color: #f4c478;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
@@ -293,9 +294,6 @@
     padding-bottom: 4.5rem;
   }
 
-  .menu-hero h1 {
-    font-size: clamp(2.5rem, 11vw, 4.2rem);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -392,14 +390,14 @@
   margin: 0;
   color: var(--amani-ink);
   font-family: var(--amani-font-display);
-  font-size: clamp(3.2rem, 6.2vw, 6.2rem);
-  font-weight: 400;
+  font-size: var(--font-heading-1);
+  font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 0.92;
 }
 
 .menu-intro h2 em {
-  font-style: italic;
+  font-style: normal;
   color: var(--amani-maroon);
 }
 
@@ -409,7 +407,7 @@
   margin: 0;
   color: var(--amani-ink-muted);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  font-size: var(--font-body);
   line-height: 1.55;
   align-self: flex-end;
 }
@@ -434,7 +432,7 @@
 .menu-mood h2 {
   margin-top: 0.9rem;
   color: var(--amani-ink);
-  font-size: clamp(2.6rem, 5vw, 5rem);
+  font-size: var(--font-heading-1);
 }
 
 .menu-mood__options {
@@ -1334,7 +1332,7 @@
 .menu-dietary h2 {
   margin-top: 0.9rem;
   color: var(--amani-ink);
-  font-size: clamp(2.4rem, 4.6vw, 4.6rem);
+  font-size: var(--font-heading-1);
 }
 
 .menu-dietary__list {
@@ -1425,7 +1423,7 @@
 .menu-feature h2 {
   margin: 0.9rem 0 0;
   color: var(--amani-cream-on-dark);
-  font-size: clamp(2.8rem, 5.4vw, 5.6rem);
+  font-size: var(--font-heading-1);
 }
 
 .menu-feature h2 em {
@@ -1490,7 +1488,7 @@
 .menu-qr h2 {
   margin: 0.9rem 0 0;
   color: var(--amani-ink);
-  font-size: clamp(2.8rem, 5.4vw, 5.6rem);
+  font-size: var(--font-heading-1);
 }
 
 .menu-qr h2 em {
@@ -1572,7 +1570,7 @@
 .menu-closing h2 {
   margin: 0.9rem 0 0;
   color: var(--amani-cream-on-dark);
-  font-size: clamp(3.4rem, 7vw, 7rem);
+  font-size: var(--font-heading-1);
 }
 
 .menu-closing h2 em {
@@ -1582,7 +1580,7 @@
 .menu-closing__copy p {
   margin: 1.4rem 0 2rem;
   color: rgba(244, 237, 223, 0.86);
-  font-size: 1.05rem;
+  font-size: var(--font-body);
   line-height: 1.6;
 }
 
@@ -1634,21 +1632,6 @@
 }
 
 @media (max-width: 600px) {
-
-  .menu-intro h2,
-  .menu-mood h2,
-  .menu-dietary h2 {
-    font-size: clamp(2.4rem, 12vw, 3.6rem);
-  }
-
-  .menu-feature h2,
-  .menu-qr h2 {
-    font-size: clamp(2.6rem, 12vw, 3.8rem);
-  }
-
-  .menu-closing h2 {
-    font-size: clamp(3rem, 15vw, 4.6rem);
-  }
 
   .menu-group__head {
     grid-template-columns: 1fr;

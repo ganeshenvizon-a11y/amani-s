@@ -41,8 +41,8 @@
 .catering-page h2 {
   margin: 0;
   font-family: var(--amani-font-display);
-  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
-  font-weight: 400;
+  font-size: var(--font-heading-1, clamp(2rem, 3.4vw, 3.8rem));
+  font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.04em;
   padding-top: 0.1em;
@@ -50,7 +50,8 @@
 }
 
 .catering-page h2 em {
-  font-style: italic;
+  font-style: normal;
+  font-weight: 500;
   color: var(--amani-maroon);
 }
 
@@ -58,7 +59,7 @@
   max-width: 32rem;
   margin: 0;
   color: var(--amani-ink-muted);
-  font-size: 1.02rem;
+  font-size: var(--font-body);
   line-height: 1.7;
 }
 
@@ -186,7 +187,7 @@
   margin: 1.1rem 0 0;
   color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(3.2rem, 7.5vw, 8rem));
+  font-size: var(--font-hero, clamp(1.75rem, 6.1vw, 7.3rem));
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -200,7 +201,7 @@
 
 .cater-hero h1 em {
   display: inline-block;
-  font-style: italic;
+  font-style: normal;
   color: #f4c478;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
@@ -289,7 +290,7 @@
 .cater-occasion p {
   margin: 0;
   color: var(--amani-ink-muted);
-  font-size: 0.94rem;
+  font-size: var(--font-body);
   line-height: 1.6;
 }
 
@@ -415,7 +416,7 @@
 
 .cater-enquiry h2 {
   color: var(--amani-cream-on-dark);
-  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
+  font-size: var(--font-heading-1, clamp(2rem, 3.4vw, 3.8rem));
 }
 
 .cater-enquiry h2 em {
@@ -426,7 +427,7 @@
   max-width: 26rem;
   margin: 1.4rem 0 0;
   color: var(--amani-cream-muted);
-  font-size: 1rem;
+  font-size: var(--font-body);
   line-height: 1.7;
 }
 
@@ -609,10 +610,6 @@
     padding-bottom: 4.5rem;
   }
 
-  .cater-hero h1 {
-    font-size: clamp(2.5rem, 11vw, 4.2rem);
-  }
-
   .cater-occasions {
     grid-template-columns: 1fr;
   }
@@ -633,10 +630,6 @@
     flex-direction: column;
     align-items: stretch;
     text-align: center;
-  }
-
-  .catering-page h2 {
-    font-size: clamp(2.1rem, 9vw, 3.4rem);
   }
 }
 

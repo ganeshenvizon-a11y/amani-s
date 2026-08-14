@@ -38,8 +38,8 @@
   --amani-hairline-dark:  rgba(244, 237, 223, 0.15);
 
   /* Typography Families — Primary Font System */
-  --amani-font-primary:   'Clash Display', sans-serif;                /* Primary font */
-  --amani-font-display:   'Clash Display', sans-serif;                /* Headings / Display font */
+  --amani-font-primary:   'Quicksand', sans-serif;                /* Primary font */
+  --amani-font-display:   'Quicksand', sans-serif;                /* Headings / Display font */
   --amani-font-ui:        'Manrope', sans-serif;                      /* Body / UI text (p, span, label, placeholders) */
 
   /* Layout & Spacing */

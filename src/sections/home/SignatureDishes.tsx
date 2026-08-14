@@ -28,26 +28,11 @@ const SIGNATURE_DISHES = [
     note: 'A fragrant coastal rice',
     image: '/media/images/signatures/bhimavaram-mixed-pulav.webp',
   },
-  {
-    name: 'Bommidala Pulusu',
-    note: 'Tangy coastal fish curry',
-    image: '/media/images/signatures/bommidala-pulusu.webp',
-  },
-  {
-    name: 'Chicken Biryani',
-    note: 'Dum rice and spiced chicken',
-    image: '/media/images/signatures/chicken-biryani.webp',
-  },
-  {
-    name: 'Gongura Mutton Curry',
-    note: 'Slow-cooked mutton and sorrel',
-    image: '/media/images/signatures/gongura-mutton-curry.webp',
-  },
 ] as const;
 
 // Each card keeps a distinct resting angle so the reveal feels like a casually
 // placed pile of printed menus, rather than perfectly aligned panels.
-const CARD_TILTS = [-3.4, 2.6, -1.9, 3.1, -2.5, 1.8, -3.0] as const;
+const CARD_TILTS = [-3.4, 2.6, -1.9, 3.1] as const;
 
 export function SignatureDishes() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,8 +59,8 @@ export function SignatureDishes() {
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${Math.round(window.innerHeight * (SIGNATURE_DISHES.length - 0.1))}`,
-            scrub: 1.1,
+            end: () => `+=${Math.round(window.innerHeight * 1.1)}`,
+            scrub: 0.5,
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
@@ -95,15 +80,14 @@ export function SignatureDishes() {
               yPercent: 0,
               rotation: CARD_TILTS[incomingIndex],
               scale: 1,
-              duration: 0.9,
-              ease: 'power3.out',
+              duration: 1,
+              ease: 'power2.out',
               onStart: () => gsap.set(card, { zIndex: incomingIndex + 1 }),
             },
             position,
           );
         });
 
-        timeline.to({}, { duration: 0.32 });
         return () => timeline.kill();
       });
     }, section);
@@ -125,7 +109,7 @@ export function SignatureDishes() {
             </h2>
             <RangoliPattern className="signature-stack__motif" size="68" color="currentColor" strokeWidth={1.2} />
           </div>
-          <p className="signature-stack__summary">Seven plates worth returning for.</p>
+          <p className="signature-stack__summary">Four plates worth returning for.</p>
           <NavLink to="/menu/" className="signature-stack__menu-link">
             Explore the menu
           </NavLink>

@@ -4,6 +4,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const STORY_CHAPTERS = [
   {
@@ -137,7 +138,12 @@ export function BrandStory() {
       <div className="brand-story__viewport">
         <div ref={railRef} className="brand-story__rail">
           {STORY_CHAPTERS.map((chapter) => (
-            <article className="brand-story-card" key={chapter.number}>
+            <NavLink
+              to="/stories/"
+              className="brand-story-card"
+              key={chapter.number}
+              aria-label={`Read story: ${chapter.title}`}
+            >
               <img
                 className="brand-story-card__image"
                 src={chapter.image}
@@ -148,8 +154,13 @@ export function BrandStory() {
               <div className="brand-story-card__veil" aria-hidden="true" />
               <div className="brand-story-card__copy">
                 <h3>{chapter.title}</h3>
+                <span className="brand-story-card__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 18 18" fill="none">
+                    <path d="M5 13 13 5M7 5h6v6" />
+                  </svg>
+                </span>
               </div>
-            </article>
+            </NavLink>
           ))}
         </div>
       </div>

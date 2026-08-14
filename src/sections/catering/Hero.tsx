@@ -21,7 +21,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 id="cater-hero-title">
-            <span>The Warmth of Amani&rsquo;s,</span> <em>Brought to Your Occasion.</em>
+            <span>Our Warmth,</span> <em>Your Occasion.</em>
           </h1>
           <p className="cater-hero__lede">
             Amani&rsquo;s catering brings authentic South Indian menus, thoughtful planning, and warm service to weddings, family ceremonies, and corporate events across Hyderabad.

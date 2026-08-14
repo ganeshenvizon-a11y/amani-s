@@ -19,14 +19,15 @@
 .visit-page h2 {
   margin: 1rem 0 0;
   font-family: var(--amani-font-display);
-  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
-  font-weight: 400;
+  font-size: var(--font-heading-1, clamp(2rem, 3.4vw, 3.8rem));
+  font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.04em;
 }
 
 .visit-page h2 em {
-  font-style: italic;
+  font-style: normal;
+  font-weight: 500;
   color: var(--amani-maroon);
 }
 
@@ -150,7 +151,7 @@
   margin: 1.1rem 0 0;
   color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(3.2rem, 7.5vw, 8rem));
+  font-size: var(--font-hero, clamp(1.75rem, 6.1vw, 7.3rem));
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -158,7 +159,7 @@
 }
 
 .vst-hero h1 em {
-  font-style: italic;
+  font-style: normal;
   color: #f4c478;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
@@ -240,7 +241,7 @@
 
 .vst-find h2 {
   color: var(--amani-ink);
-  font-size: var(--font-heading-1, clamp(2.5rem, 5.5vw, 5.5rem));
+  font-size: var(--font-heading-1, clamp(2rem, 3.4vw, 3.8rem));
 }
 
 .vst-status {
@@ -287,7 +288,7 @@
   max-width: 24rem;
   margin: 1.5rem 0 0;
   color: var(--amani-ink-soft);
-  font-size: 1.05rem;
+  font-size: var(--font-body);
   line-height: 1.6;
 }
 
@@ -580,17 +581,8 @@
     padding: clamp(5.5rem, 12vh, 7rem) var(--amani-gutter) 3.5rem;
   }
 
-  .vst-hero h1 {
-    font-size: clamp(2.6rem, 11vw, 4.2rem);
-  }
-
   .vst-hero__scroll-badge {
     bottom: 1.2rem;
-  }
-
-  .visit-page h2,
-  .vst-find h2 {
-    font-size: clamp(2.1rem, 9vw, 3.4rem);
   }
 
   .vst-info__bottom {

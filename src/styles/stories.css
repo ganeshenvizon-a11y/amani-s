@@ -6,8 +6,10 @@
 .stories-text-link { color: var(--amani-ink); border-bottom: 1px solid currentColor; padding-bottom: .6rem; }.stories-text-link--light { color: var(--amani-cream-on-dark); }.stories-text-link span { transition: transform .28s ease; }.stories-text-link:hover span { transform: translateY(4px); }
 .stories-hero { isolation: isolate; height: 100vh; height: 100dvh; min-height: 600px; position: relative; display: flex; align-items: center; justify-content: center; padding: clamp(6.5rem,14vh,9rem) var(--amani-gutter) clamp(3.5rem,6vh,5rem); text-align: center; background: var(--amani-void); color: var(--amani-cream-on-dark); overflow: hidden; }
 .stories-hero__image,.stories-hero__wash { position: absolute; inset: 0; width: 100%; height: 100%; }.stories-hero__image { object-fit: cover; object-position: center; filter: saturate(.74) contrast(1.04) sepia(.12) brightness(.9); transform: scale(1.015); }.stories-hero__wash { z-index: 1; background: linear-gradient(180deg,rgba(16,9,6,.55) 0%,rgba(15,7,5,.72) 100%),radial-gradient(ellipse at center,rgba(0,0,0,.2) 0%,rgba(0,0,0,.6) 100%); }.stories-hero__inner { position: relative; z-index: 2; width: 100%; max-width: 64rem; margin-inline: auto; display: flex; flex-direction: column; align-items: center; }.stories-hero__content { max-width: 60rem; margin-inline: auto; text-align: center; }
-.stories-hero h1,.stories-philosophy h2,.stories-section-head h2,.stories-beginning h2,.stories-people h2,.stories-kitchen h2,.stories-day h2,.stories-closing h2 { margin: 0; font-family: var(--amani-font-display); font-size: clamp(3.2rem,6.2vw,6.2rem); font-weight: 400; letter-spacing: -.04em; line-height: .92; }
-.stories-hero h1 em,.stories-philosophy em,.stories-section-head em,.stories-beginning em,.stories-people em,.stories-kitchen em,.stories-day em,.stories-closing em { font-weight: 400; font-style: italic; }
+.stories-hero h1 { margin: 0; font-family: var(--amani-font-display); font-size: var(--font-hero); font-weight: 500; letter-spacing: -.04em; line-height: .92; }
+.stories-philosophy h2,.stories-section-head h2,.stories-beginning h2,.stories-people h2,.stories-kitchen h2,.stories-day h2,.stories-closing h2 { margin: 0; font-family: var(--amani-font-display); font-size: var(--font-heading-1); font-weight: 500; letter-spacing: -.04em; line-height: .92; }
+.stories-hero h1 em { font-weight: 500; font-style: normal; }
+.stories-philosophy em,.stories-section-head em,.stories-beginning em,.stories-people em,.stories-kitchen em,.stories-day em,.stories-closing em { font-weight: 500; font-style: normal; }
 .stories-hero h1 { text-align: center; }.stories-hero h1 em { display: inline-block; color: #f4c478; text-shadow: 0 2px 12px rgba(0,0,0,.35); }.stories-hero__lede { max-width: 38rem; margin: 1.5rem auto 0; color: rgba(244,237,223,.92); font-size: clamp(1rem,1.3vw,1.15rem); line-height: 1.65; text-shadow: 0 1px 6px rgba(0,0,0,.4); text-align: center; }.stories-hero__actions { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; }.stories-button { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; padding: 1rem 1.6rem; color: var(--amani-cream-on-dark); background: var(--amani-maroon); border: 1px solid var(--amani-maroon); border-radius: var(--amani-radius-sm); font-family: var(--amani-font-ui); font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,.3); transition: background-color .25s ease, transform .25s ease; }.stories-button span { transition: transform .28s ease; }.stories-button:hover,.stories-button:focus-visible { background: var(--amani-maroon-dark); border-color: var(--amani-maroon-dark); outline: none; transform: translateY(-1px); }.stories-button:hover span,.stories-button:focus-visible span { transform: translateY(4px); }.stories-hero__note { position: absolute; z-index: 2; right: var(--amani-gutter); bottom: clamp(2.2rem,5vw,4.5rem); margin: 0; color: rgba(244,237,223,.72); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; writing-mode: vertical-rl; }.stories-hero__note span { color: var(--amani-turmeric); margin: .5rem 0; }
 
 .stories-why { padding: clamp(5.5rem,10vw,9rem) 0 clamp(6.5rem,12vw,11rem); }
@@ -15,16 +17,16 @@
 .stories-beginning__intro { border-bottom: 1px solid var(--amani-hairline); }
 .stories-kitchen__heading, .stories-day__head { border-bottom: 1px solid rgba(244,237,223,.12); }
 
-.stories-beginning__summary, .stories-kitchen__intro, .stories-day__intro { max-width: 320px; margin: 0; font-family: var(--amani-font-ui, 'Manrope', sans-serif); font-size: clamp(.92rem,1.1vw,1.02rem); line-height: 1.55; align-self: flex-end; }
+.stories-beginning__summary, .stories-kitchen__intro, .stories-day__intro { max-width: 320px; margin: 0; font-family: var(--amani-font-ui, 'Manrope', sans-serif); font-size: var(--font-body); line-height: 1.55; align-self: flex-end; }
 .stories-beginning__summary { color: var(--amani-ink-muted); }
 .stories-kitchen__intro, .stories-day__intro { color: rgba(244,237,223,.72); }
 
 /* 02 — Why "Amani"? — centred editorial statement */
 .stories-why__statement { max-width: 60rem; margin-inline: auto; text-align: center; }
-.stories-why__statement h2 { margin: 0; color: var(--amani-ink); font-family: var(--amani-font-display); font-size: clamp(3.2rem,7vw,7rem); font-weight: 400; letter-spacing: -.05em; line-height: .85; }
-.stories-why__statement h2 em { color: var(--amani-maroon); font-style: italic; }
-.stories-why__lede { max-width: 46rem; margin: 2rem auto 0; color: var(--amani-ink); font-family: var(--amani-font-ui, 'Manrope', sans-serif); font-size: clamp(1.5rem,2.8vw,2.4rem); font-weight: 400; font-style: italic; line-height: 1.28; letter-spacing: -.02em; }
-.stories-why__body { max-width: 42rem; margin: 1.75rem auto 0; color: var(--amani-ink-muted); font-size: clamp(1rem,1.15vw,1.12rem); line-height: 1.8; }
+.stories-why__statement h2 { margin: 0; color: var(--amani-ink); font-family: var(--amani-font-display); font-size: var(--font-heading-1); font-weight: 500; letter-spacing: -.05em; line-height: .85; }
+.stories-why__statement h2 em { color: var(--amani-maroon); font-style: normal; }
+.stories-why__lede { max-width: 46rem; margin: 2rem auto 0; color: var(--amani-ink); font-family: var(--amani-font-ui, 'Manrope', sans-serif); font-size: clamp(1.5rem,2.8vw,2.4rem); font-weight: 400; font-style: normal; line-height: 1.28; letter-spacing: -.02em; }
+.stories-why__body { max-width: 42rem; margin: 1.75rem auto 0; color: var(--amani-ink-muted); font-size: var(--font-body); line-height: 1.8; }
 
 .stories-beginning { background: var(--amani-paper); padding: clamp(5.5rem,11vw,10rem) 0; }
 .stories-beginning h2 { color: var(--amani-ink); }
@@ -47,7 +49,7 @@
 .stories-people h2 { color: var(--amani-ink); }
 .stories-people h2 em { color: var(--amani-terracotta); }
 .stories-people__copy > p:not(.stories-people__signature) { max-width: 410px; margin-top: 1.6rem; font-size: 1rem; }
-.stories-people__signature { margin: 2rem 0 0; color: var(--amani-maroon); font-family: var(--amani-font-display); font-size: 1.8rem; font-style: italic; }
+.stories-people__signature { margin: 2rem 0 0; color: var(--amani-maroon); font-family: var(--amani-font-display); font-size: 1.8rem; font-style: normal; }
 
 .stories-kitchen { padding: clamp(5.5rem,10vw,9rem) 0; background: var(--amani-void); color: var(--amani-cream-on-dark); }
 .stories-kitchen h2 { color: var(--amani-cream-on-dark, #F5F0EB); }
@@ -64,7 +66,7 @@
 
 .stories-day { padding: clamp(5.5rem,11vw,10rem) 0; background: var(--amani-canvas); color: var(--amani-ink); }
 .stories-day h2 { color: var(--amani-ink); }
-.stories-day h2 em { color: var(--amani-maroon); font-style: italic; }
+.stories-day h2 em { color: var(--amani-maroon); font-style: normal; }
 .stories-day__head { border-bottom-color: var(--amani-hairline); }
 .stories-day__intro { color: var(--amani-ink-muted); }
 
@@ -79,7 +81,6 @@
 .stories-closing > img { object-fit: cover; object-position: center 43%; filter: saturate(.72) sepia(.1); }
 .stories-closing__overlay { background: rgba(43,14,7,.61); }
 .stories-closing__content { position: relative; z-index: 1; display: grid; justify-items: center; }
-.stories-closing h2 { font-size: clamp(3.5rem,7.4vw,7.8rem); }
 .stories-closing h2 em { color: #E29578; }
 .stories-closing__content > p { max-width: 380px; margin: 1.55rem 0 2rem; color: rgba(244,237,223,.84); font-size: 1rem; line-height: 1.6; }
 .stories-closing__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .9rem; }
@@ -105,5 +106,5 @@
   .stories-kitchen__feature { height:84vw; min-height:340px; }
 }
 @media (max-width:560px) { .stories-day__scenes { grid-template-columns: 1fr; gap: 1.6rem; }.stories-closing__actions { flex-direction: column; width: 100%; max-width: 20rem; }.stories-button { justify-content: center; } }
-@media (max-width:460px) { .stories-hero { min-height:520px; padding-top:clamp(5.5rem,12vh,7rem); padding-bottom:4.5rem; }.stories-hero h1 { font-size:clamp(3rem,13vw,4.6rem); } }
+@media (max-width:460px) { .stories-hero { min-height:520px; padding-top:clamp(5.5rem,12vh,7rem); padding-bottom:4.5rem; } }
 

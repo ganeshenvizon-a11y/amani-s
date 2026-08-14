@@ -19,34 +19,31 @@ interface PanelData {
 
 const PANELS_DATA: PanelData[] = [
   {
-    number: '07',
-    marker: 'DISHES /',
-    mainPhrase: ['SEVEN PLATES', 'WORTH RETURNING'],
-    microCopy: 'From our fire to your table.',
-    metadataLeft: "AMANI'S SIGNATURES",
+    number: '01',
+    marker: 'HERITAGE /',
+    mainPhrase: ['ONE HOME KITCHEN,', 'EVERY RECIPE'],
+    metadataLeft: 'OUR BEGINNING',
     metadataRight: '',
     tone: 'green',
-    cardHeightPct: 52,
+    cardHeightPct: 56,
+  },
+  {
+    number: '02',
+    marker: 'DIETARY /',
+    mainPhrase: ['VEGETARIAN,', 'NON-VEG & JAIN'],
+    metadataLeft: 'THOUGHTFUL DINING',
+    metadataRight: '',
+    tone: 'terracotta',
+    cardHeightPct: 72,
   },
   {
     number: '03',
-    marker: 'CHOICES /',
-    mainPhrase: ['VEGETARIAN', 'NON-VEG', 'JAIN'],
-    microCopy: 'Three ways. One shared table.',
-    metadataLeft: 'MADE FOR EVERY TABLE',
-    metadataRight: '',
-    tone: 'terracotta',
-    cardHeightPct: 69,
-  },
-  {
-    number: '01',
-    marker: 'TOGETHER /',
-    mainPhrase: ['ONE TABLE.', 'YOUR WAY.'],
-    microCopy: 'Food, memory and warmth — shared.',
+    marker: 'EXPERIENCES /',
+    mainPhrase: ['DINE IN, CATERING', '& PRIVATE TABLES'],
     metadataLeft: 'THE AMANI WAY',
     metadataRight: '',
     tone: 'turmeric',
-    cardHeightPct: 84,
+    cardHeightPct: 88,
   },
 ];
 
@@ -168,9 +165,9 @@ export function AmaniNumbers() {
           <div className="amani-numbers__col-bottom">
             <div className="amani-numbers__editorial-support">
               <p className="amani-numbers__support-text">
-                Seven signatures.<br />
-                Three ways to eat.<br />
-                One table that brings it together.
+                One heritage recipe.<br />
+                Two distinct dining experiences.<br />
+                Three thalis made for every guest.
               </p>
               <NavLink to="/menu/" className="amani-numbers__cta">
                 <span>EXPLORE THE MENU</span>
