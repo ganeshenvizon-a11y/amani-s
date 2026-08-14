@@ -19,8 +19,11 @@
   --amani-maroon:         #7A1F24; /* Deep Amani maroon - CTAs/accents */
   --amani-maroon-dark:    #551317; /* Deep maroon hover/active */
   --amani-maroon-tint:    rgba(122, 31, 36, 0.1);
-  --amani-terracotta:     #A2553E; /* Muted terracotta */
-  --amani-terracotta-dark: #2E130B; /* Deep dark terracotta brown variant */
+  --amani-terracotta:     #A34A31; /* Primary brand terracotta rust */
+  --amani-terracotta-dark: #4B1C10; /* Deep dark terracotta brown variant */
+  --amani-brand-glass:    rgba(163, 74, 49, 0.25);
+  --amani-brand-glass-dark: rgba(163, 74, 49, 0.38);
+  --amani-brand-glass-deep: rgba(163, 74, 49, 0.48);
   --amani-olive:          #6D7254; /* Banana-leaf olive */
   --amani-turmeric:       #C99732; /* Restrained turmeric accent */
 
@@ -35,9 +38,9 @@
   --amani-hairline-dark:  rgba(244, 237, 223, 0.15);
 
   /* Typography Families — Primary Font System */
-  --amani-font-primary:   'Manrope', sans-serif;                /* Body / UI text */
-  --amani-font-display:   'Cormorant Garamond', serif;          /* Headings only */
-  --amani-font-ui:        'Manrope', sans-serif;                /* Body / UI text */
+  --amani-font-primary:   'Clash Display', sans-serif;                /* Primary font */
+  --amani-font-display:   'Clash Display', sans-serif;                /* Headings / Display font */
+  --amani-font-ui:        'Manrope', sans-serif;                      /* Body / UI text (p, span, label, placeholders) */
 
   /* Layout & Spacing */
   --amani-max-width:      1600px;

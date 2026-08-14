@@ -116,7 +116,7 @@ export function SignatureExperiences() {
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(23,20,17,0.7)] via-transparent to-transparent z-10 pointer-events-none" />
 
               {/* Floating Caption Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 lg:right-6 p-4 bg-[rgba(23,20,17,0.85)] backdrop-blur-md text-[var(--amani-cream-on-dark)] rounded-xl border border-[rgba(244,237,223,0.12)] z-20 flex items-center justify-between">
+              <div className="absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 lg:right-6 p-4 bg-[rgba(163,74,49,0.32)] backdrop-blur-xl text-[var(--amani-cream-on-dark)] rounded-xl border border-[rgba(255,255,255,0.25)] z-20 flex items-center justify-between shadow-xl">
                 <div>
                   <span className="text-[var(--amani-terracotta)] font-mono text-[10px] lg:text-xs font-bold uppercase tracking-wider block mb-0.5">
                     {activeExp.number} — SIGNATURE EXPERIENCE

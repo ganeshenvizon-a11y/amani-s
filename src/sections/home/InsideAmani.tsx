@@ -106,7 +106,7 @@ export function InsideAmani() {
           role="dialog"
           aria-modal="true"
           aria-label={activeImage.title}
-          className="fixed inset-0 z-[600] bg-[rgba(17,16,14,0.92)] backdrop-blur-md flex items-center justify-center p-6"
+          className="fixed inset-0 z-[600] bg-[rgba(163,74,49,0.22)] backdrop-blur-xl flex items-center justify-center p-6"
           onClick={() => {
             setActiveImage(null);
             triggerRef.current?.focus();

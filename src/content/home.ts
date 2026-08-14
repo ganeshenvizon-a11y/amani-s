@@ -56,7 +56,7 @@ export interface HeroSlideItem {
 }
 
 export const HERO_CONTENT = {
-  headline: 'FLAVOUR FROM FIRE.\nMEMORY FROM HOME.',
+  headline: 'SOUTH AT HEART.\nSERVED WITH WARMTH.',
   image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
   slides: [
     {
@@ -108,74 +108,50 @@ export const MOOD_FINDER_CONTENT = {
   moods: [
     {
       id: 'comfort',
-      title: 'Comfort from home',
+      title: 'Homely Food',
       description: 'Gentle, familiar flavours made for an easy and unhurried meal.',
-      image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1200&auto=format&fit=crop',
+      image: '/media/images/idly.png',
       dishes: ['Steaming Ven Pongal', 'Ghee Podi Idli', 'Classic Sambar Vadai'],
       menuLink: '/menu/#tiffin',
     },
     {
       id: 'lively',
       title: 'Crisp and lively',
-      description: 'Dosas, vadas and bright accompaniments with texture and freshness.',
-      image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=1200&auto=format&fit=crop',
-      dishes: ['Mysore Masala Dosa', 'Paper Roast Dosa', 'Golden Medu Vadai'],
+      description: 'Golden pooris, dosas and bright accompaniments with texture and freshness.',
+      image: '/media/images/poori.png',
+      dishes: ['Poori Masala', 'Mysore Masala Dosa', 'Golden Medu Vadai'],
       menuLink: '/menu/#dosas',
     },
     {
       id: 'spicy',
       title: 'Bold and spicy',
-      description: 'Deeper heat, roasted spices and flavours with a little more energy.',
-      image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=84&w=1400&auto=format&fit=crop',
-      dishes: ['Chettinad Spice Roast', 'Kara Podi Dosa', 'Pepper Roasted Mushroom'],
+      description: 'Deeper heat, roasted spices and aromatic chicken rice with rich energy.',
+      image: '/media/images/chicken_rice.png',
+      dishes: ['Chettinad Chicken Rice', 'Kara Podi Dosa', 'Pepper Chicken Roast'],
       menuLink: '/menu/#curries',
+    },
+    {
+      id: 'tiffin',
+      title: 'Evening Kaapi',
+      description: 'Aromatic filter coffee, golden vadas and hot savory tiffin for a slow afternoon.',
+      image: '/media/images/coffee.png',
+      dishes: ['Filter Coffee', 'Golden Medu Vadai', 'Rava Onion Dosa'],
+      menuLink: '/menu/#beverages',
     },
     {
       id: 'share',
       title: 'Made to share',
       description: 'Plates for passing, tasting and bringing everyone into the meal.',
-      image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=84&w=1400&auto=format&fit=crop',
+      image: '/media/images/happy-south-indian-dining.png',
       dishes: ["Amani's Banana Leaf Feast", 'Family Tiffin Platter', 'Shared Curry Bowls'],
       menuLink: '/menu/#feasts',
     },
     {
-      id: 'first',
-      title: "My first time at Amani's",
-      description: "A considered introduction to the dishes that represent Amani's best.",
-      image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=84&w=1400&auto=format&fit=crop',
-      dishes: ['Ghee Podi Idli', 'Mysore Masala Dosa', 'Filter Coffee'],
-      menuLink: '/menu/#signatures',
-    },
-    {
-      id: 'tiffin',
-      title: 'Evening Tiffin & Kaapi',
-      description: 'Aromatic filter coffee, golden vadas and hot savory tiffin for a slow afternoon.',
-      image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=1200&auto=format&fit=crop',
-      dishes: ['Filter Coffee', 'Golden Medu Vadai', 'Rava Onion Dosa'],
-      menuLink: '/menu/#beverages',
-    },
-    {
-      id: 'curries',
-      title: 'Slow-cooked Curries',
-      description: 'Rich coconut stew, roasted Malabar spices and layered coin parottas.',
-      image: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?q=80&w=1200&auto=format&fit=crop',
-      dishes: ['Kerala Coconut Stew', 'Malabar Coin Parotta', 'Avial Platter'],
-      menuLink: '/menu/#curries',
-    },
-    {
-      id: 'desserts',
-      title: 'Sweet & Nostalgic',
-      description: 'Warm payasam, tender coconut and traditional sweets to close the meal.',
-      image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1200&auto=format&fit=crop',
-      dishes: ['Elaneer Payasam', 'Badam Halwa', 'Filter Coffee Ice Cream'],
-      menuLink: '/menu/#desserts',
-    },
-    {
-      id: 'feast',
-      title: 'Sunday Family Feast',
-      description: 'An expansive spread served on fresh banana leaves for the whole family.',
-      image: 'https://images.unsplash.com/photo-1617692855027-33b14f061079?q=80&w=1200&auto=format&fit=crop',
-      dishes: ['Royal Sadya Feast', 'Ghee Rice & Kurma', 'Pineapple Rasam'],
+      id: 'thali',
+      title: 'Traditional Thali',
+      description: 'An expansive spread served on traditional platters for the whole family.',
+      image: '/media/images/thali/south-indian-thali.png',
+      dishes: ['South Indian Thali', 'Ghee Rice & Kurma', 'Elaneer Payasam'],
       menuLink: '/menu/#feasts',
     },
   ] as MoodItem[],
@@ -347,6 +323,39 @@ export const INSIDE_AMANI_CONTENT = {
   ctaLink: '/visit/',
 };
 
+export interface QrOrderingStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export const QR_ORDERING_CONTENT = {
+  headingScript: 'Scan, order and',
+  headingMain: 'RELAX.',
+  body: 'Settle in, scan the little code on your table and the whole menu opens on your phone. Browse dishes, customise your thali, call a waiter or ask for the bill — all without waiting to catch an eye.',
+  image: '/media/images/qr-ordering-app.png',
+  imageAlt: "Amani's QR-based table ordering app open on a phone, showing today's thali deals and popular picks",
+  steps: [
+    {
+      number: '01',
+      title: 'Scan the table QR',
+      description: 'Every table carries its own code. One scan opens the live menu — no app to download.',
+    },
+    {
+      number: '02',
+      title: 'Order at your pace',
+      description: 'Browse by mood, filter veg or non-veg and customise each dish before it reaches the kitchen.',
+    },
+    {
+      number: '03',
+      title: 'Call a waiter or pay',
+      description: 'Need a hand or the bill? Tap once and we come to you — the table stays yours until the last kaapi.',
+    },
+  ] as QrOrderingStep[],
+  ctaText: 'See how it works',
+  ctaLink: '/menu/',
+};
+
 export const VISIT_PREVIEW_CONTENT = {
   heading: 'Come find your table.',
   description: 'Find us in Jubilee Hills. Check today’s hours, get directions, and explore our accessible amenities.',
@@ -359,40 +368,22 @@ export const GATHERINGS_PREVIEW_CONTENT = {
   subheading: 'Select an option to reserve a table, plan a gathering, or request catering for your occasion.',
   choices: [
     {
-      id: 'dine',
-      number: '01',
-      title: 'Dine',
-      description: 'South Indian flavours and a table ready for you.',
-      image: '/media/images/happy-south-indian-dining.png',
-      imageAlt: "Dining table at Amani's",
-      tags: ['Reserve a Table', 'Dine-In Experience'],
-      ctaText: 'Book a Table',
-      ctaLink: '/visit/#home-contact',
-      formType: 'Table Reservation Form',
+      id: 'catering',
+      title: "The warmth of Amani's, brought to your occasion.",
+      description: 'South Indian menus prepared and served at the place you are celebrating.',
+      image: '/media/images/catering-hero.jpg',
+      imageAlt: "Amani's South Indian catering spread served at a venue",
+      ctaText: 'Request a Catering Quote',
+      ctaLink: '/catering/#enquiry',
     },
     {
-      id: 'celebrate',
-      number: '02',
-      title: 'Celebrate',
-      description: "Host your occasion, birthday or milestone at Amani's.",
-      image: '/media/images/gathering-interior-05.webp',
-      imageAlt: "Private celebration space at Amani's",
-      tags: ['Private Gatherings', 'Event Enquiry'],
+      id: 'gatherings',
+      title: "Bring your occasion to the Amani's table.",
+      description: 'Birthdays, family milestones and small celebrations hosted inside the restaurant.',
+      image: '/media/images/gathering-welcoming-table.jpg',
+      imageAlt: "A welcoming table set for a gathering inside Amani's restaurant",
       ctaText: 'Plan a Gathering',
       ctaLink: '/gatherings/#enquiry',
-      formType: 'Event Enquiry Form',
-    },
-    {
-      id: 'cater',
-      number: '03',
-      title: 'Cater',
-      description: "Bring Amani's food and hospitality to your venue.",
-      image: '/media/images/catering-hero.jpg',
-      imageAlt: 'Outdoor catering setup',
-      tags: ['Outdoor Catering', 'Request a Quote'],
-      ctaText: 'Request a Quote',
-      ctaLink: '/catering/#enquiry',
-      formType: 'Catering Quote Form',
     },
   ],
   eyebrow: 'FINAL CHOICE',

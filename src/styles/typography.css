@@ -12,8 +12,15 @@
   --font-caption:      clamp(0.85rem, 0.95vw, 0.95rem);
 }
 
-p, span {
-  font-family: var(--amani-font-ui, 'Cormorant Garamond', serif);
+p,
+span,
+label,
+input,
+textarea,
+select,
+button,
+::placeholder {
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }
 
 h1 span,
@@ -28,14 +35,14 @@ h6 span,
 }
 
 .font-display {
-  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
+  font-family: var(--amani-font-display, 'Clash Display', sans-serif);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.015em;
 }
 
 .font-ui {
-  font-family: var(--amani-font-ui, 'Cormorant Garamond', serif);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }
 
 .text-hero {

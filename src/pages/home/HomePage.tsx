@@ -11,6 +11,7 @@ import { AmaniNumbers } from '../../sections/home/AmaniNumbers';
 import { BrandStory } from '../../sections/home/BrandStory';
 import { SignatureDishes } from '../../sections/home/SignatureDishes';
 import { GuestReviews } from '../../sections/home/GuestReviews';
+import { QrOrdering } from '../../sections/home/QrOrdering';
 import { VisitPreview } from '../../sections/home/VisitPreview';
 import { GatheringsPreview } from '../../sections/home/GatheringsPreview';
 import { ContactForm } from '../../sections/home/ContactForm';
@@ -63,6 +64,9 @@ export function HomePage() {
 
         {/* Section 07: Guest Reviews */}
         <GuestReviews />
+
+        {/* Section 07b: QR-Based Table Ordering */}
+        <QrOrdering />
 
         {/* Section 08: Visit Preview */}
         <VisitPreview />

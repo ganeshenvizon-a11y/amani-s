@@ -1,5 +1,5 @@
 /**
- * Gatherings preview — Heading and content on top, reference cards grid at bottom.
+ * Gatherings preview — Heading and content on top, two image-backed cards below.
  */
 import { NavLink } from 'react-router-dom';
 import { GATHERINGS_PREVIEW_CONTENT } from '../../content/home';
@@ -21,46 +21,28 @@ export function GatheringsPreview() {
           </div>
         </Reveal>
 
-        {/* BOTTOM: THE CARDS GRID */}
-        <div className="gatherings-cards-grid">
+        {/* BOTTOM: TWO IMAGE-BACKED CARDS */}
+        <div className="gatherings-duo">
           {GATHERINGS_PREVIEW_CONTENT.choices.map((choice, index) => (
-            <Reveal key={choice.id} direction="up" delay={index * 0.12}>
-              <NavLink
-                to={choice.ctaLink}
-                className="gath-ref-card"
-                aria-label={`${choice.title} — ${choice.description}`}
-              >
-                <div className="gath-ref-card__media">
-                  <img
-                    src={choice.image}
-                    alt={choice.imageAlt}
-                    className="gath-ref-card__image"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="gath-ref-card__overlay" />
-                </div>
+            <Reveal key={choice.id} direction="up" delay={index * 0.12} className="gath-duo-card">
+              <div className="gath-duo-card__media" aria-hidden="true">
+                <img
+                  src={choice.image}
+                  alt=""
+                  className="gath-duo-card__image"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="gath-duo-card__overlay" />
+              </div>
 
-                <div className="gath-ref-card__content">
-                  <span className="gath-ref-card__number">{choice.number}</span>
-                  <h3 className="gath-ref-card__title">{choice.title}</h3>
-                  <p className="gath-ref-card__desc">{choice.description}</p>
-
-                  <div className="gath-ref-card__footer">
-                    <div className="gath-ref-card__tags">
-                      {choice.tags.map((tag) => (
-                        <span key={tag} className="gath-ref-card__tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="gath-ref-card__arrow" aria-hidden="true">
-                      ↗
-                    </div>
-                  </div>
-                </div>
-              </NavLink>
+              <div className="gath-duo-card__content">
+                <h3 className="gath-duo-card__title">{choice.title}</h3>
+                <NavLink to={choice.ctaLink} className="gath-duo-card__cta">
+                  <span>{choice.ctaText}</span>
+                  <span className="gath-duo-card__cta-line" aria-hidden="true" />
+                </NavLink>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -68,4 +50,3 @@ export function GatheringsPreview() {
     </section>
   );
 }
-

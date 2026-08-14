@@ -136,7 +136,7 @@
 }
 
 .footer-title {
-  font-family: var(--amani-font-display, 'Cormorant Garamond', serif);
+  font-family: var(--amani-font-display, 'Clash Display', sans-serif);
   font-weight: 400;
   font-size: clamp(74px, 8vw, 138px);
   line-height: 0.86;

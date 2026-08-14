@@ -1,11 +1,9 @@
 /**
  * Section 05 — Amani Brand Story
- * A scroll-pinned, right-to-left editorial timeline built from tactile photo cards.
+ * An editorial timeline card gallery with button traversal.
  */
 
-import { useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { gsap } from '../../lib/gsap';
+import { useEffect, useRef, useState } from 'react';
 
 const STORY_CHAPTERS = [
   {
@@ -67,56 +65,73 @@ const STORY_CHAPTERS = [
 ];
 
 export function BrandStory() {
-  const sectionRef = useRef<HTMLElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
-  const introRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollState = () => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const { scrollLeft, scrollWidth, clientWidth } = rail;
+    setCanScrollLeft(scrollLeft > 10);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
 
   useEffect(() => {
-    const section = sectionRef.current;
     const rail = railRef.current;
-    if (!section || !rail) return;
+    if (!rail) return;
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) return;
-
-    const media = gsap.matchMedia();
-    const ctx = gsap.context(() => {
-      media.add('(min-width: 1024px)', () => {
-        const heading = introRef.current?.querySelector<HTMLElement>('h2');
-        const travel = () => Math.max(0, rail.scrollWidth - window.innerWidth + 80);
-        const pinDistance = () => Math.round(travel() * 1.08);
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end: () => `+=${pinDistance()}`,
-            scrub: 0.6,
-            pin: true,
-            pinSpacing: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        timeline.to(rail, { x: () => -travel(), duration: 1, ease: 'none' }, 0);
-        if (heading) {
-          timeline.to(heading, { scale: 0.7, autoAlpha: 0.6, duration: 1, ease: 'none' }, 0);
-        }
-
-        return () => timeline.kill();
-      });
-    }, section);
+    checkScrollState();
+    rail.addEventListener('scroll', checkScrollState, { passive: true });
+    window.addEventListener('resize', checkScrollState);
 
     return () => {
-      media.revert();
-      ctx.revert();
+      rail.removeEventListener('scroll', checkScrollState);
+      window.removeEventListener('resize', checkScrollState);
     };
   }, []);
 
+  const handleScroll = (direction: 'left' | 'right') => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const firstCard = rail.querySelector<HTMLElement>('.brand-story-card');
+    const cardWidth = firstCard ? firstCard.offsetWidth : 320;
+    const gap = 24;
+    const scrollAmount = (cardWidth + gap) * (direction === 'left' ? -1 : 1);
+    rail.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
   return (
-    <section ref={sectionRef} className="brand-story" aria-labelledby="brand-story-heading">
-      <div ref={introRef} className="brand-story__intro">
-        <h2 id="brand-story-heading">A table built<br />by Grandma.</h2>
+    <section className="brand-story" aria-labelledby="brand-story-heading">
+      <div className="brand-story__header">
+        <div className="brand-story__intro">
+          <h2 id="brand-story-heading">A table built<br />by Grandma.</h2>
+        </div>
+
+        <div className="brand-story__controls">
+          <button
+            type="button"
+            className="brand-story__nav-btn"
+            onClick={() => handleScroll('left')}
+            disabled={!canScrollLeft}
+            aria-label="Scroll left"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="brand-story__nav-btn"
+            onClick={() => handleScroll('right')}
+            disabled={!canScrollRight}
+            aria-label="Scroll right"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div className="brand-story__viewport">
@@ -132,16 +147,7 @@ export function BrandStory() {
               />
               <div className="brand-story-card__veil" aria-hidden="true" />
               <div className="brand-story-card__copy">
-                <p className="brand-story-card__index">{chapter.number} <span>{chapter.label}</span></p>
                 <h3>{chapter.title}</h3>
-                <div className="brand-story-card__footer">
-                  <p>{chapter.body}</p>
-                  <NavLink to="/stories/" className="brand-story-card__link" aria-label={`Read more about ${chapter.label}`}>
-                    <svg aria-hidden="true" viewBox="0 0 18 18" fill="none">
-                      <path d="M5 13 13 5M7 5h6v6" />
-                    </svg>
-                  </NavLink>
-                </div>
               </div>
             </article>
           ))}

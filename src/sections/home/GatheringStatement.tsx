@@ -10,39 +10,32 @@ import {
   useRef,
   useState,
 } from 'react';
-import { NavLink } from 'react-router-dom';
-import { HERO_CONTENT } from '../../content/home';
 import { gsap } from '../../lib/gsap';
 
 type SwipeStart = { x: number; y: number };
 
-const GATHERING_SLIDE_IMAGES = [
+const GATHERING_SLIDES = [
   {
-    image: '/media/images/gathering-interior-01.webp',
-    alt: "Sunlit Amani's dining room with warm wood, brass accents, and lush plants",
+    image: '/media/images/gathering-family-dining.jpg',
+    alt: 'Comfortable family dining at Amani South Indian restaurant',
+    titleLines: ['Comfortable family', 'dining'],
   },
   {
-    image: '/media/images/gathering-interior-02.webp',
-    alt: "Amani's dining room with warm arched wood details and softly lit pendant lamps",
+    image: '/media/images/gathering-children-elders.jpg',
+    alt: 'Thoughtful support for children and elders with comfortable seating at Amani',
+    titleLines: ['Thoughtful support for', 'children and elders'],
   },
   {
-    image: '/media/images/gathering-interior-03.webp',
-    alt: "An intimate Amani's banquette with brass, wood, and hand-finished details",
+    image: '/media/images/gathering-attentive-service.jpg',
+    alt: 'Attentive, unintrusive service at Amani South Indian restaurant',
+    titleLines: ['Attentive, unintrusive', 'service'],
   },
   {
     image: '/media/images/gathering-interior-04.webp',
-    alt: "Amani's restaurant interior with a warm open kitchen and handcrafted lighting",
-  },
-  {
-    image: '/media/images/gathering-interior-05.webp',
-    alt: "Amani's dining room with arched windows, warm wood beams, and brass lanterns",
+    alt: "Amani's dining room interior with warm wood, arched details and soft lighting",
+    titleLines: ['A welcoming table', 'for every generation'],
   },
 ] as const;
-
-const GATHERING_SLIDES = HERO_CONTENT.slides.map((slide, index) => ({
-  ...slide,
-  ...GATHERING_SLIDE_IMAGES[index],
-}));
 
 export function GatheringStatement() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -527,36 +520,32 @@ export function GatheringStatement() {
             }`}
             aria-hidden={index !== activeSlide}
           >
-            <h2
-              id={index === 0 ? 'gathering-statement-heading' : undefined}
-              className="home-gathering-statement__title"
-            >
-              {slide.titleLines.map((line, lineIndex) => (
-                <span key={lineIndex} className="home-gathering-statement__title-line-mask">
-                  <span
-                    ref={(element) => {
-                      if (!titleLineRefs.current[index]) {
-                        titleLineRefs.current[index] = [];
-                      }
-                      titleLineRefs.current[index][lineIndex] = element;
-                    }}
-                    className="home-gathering-statement__title-line"
-                  >
-                    {line}
-                  </span>
-                </span>
-              ))}
-            </h2>
             <div
               ref={(element) => {
                 noteRefs.current[index] = element;
               }}
               className="home-gathering-statement__note"
             >
-              <p>{slide.description}</p>
-              <NavLink to={slide.ctaLink} className="home-gathering-statement__link">
-                {slide.ctaText}
-              </NavLink>
+              <h2
+                id={index === 0 ? 'gathering-statement-heading' : undefined}
+                className="home-gathering-statement__title"
+              >
+                {slide.titleLines.map((line, lineIndex) => (
+                  <span key={lineIndex} className="home-gathering-statement__title-line-mask">
+                    <span
+                      ref={(element) => {
+                        if (!titleLineRefs.current[index]) {
+                          titleLineRefs.current[index] = [];
+                        }
+                        titleLineRefs.current[index][lineIndex] = element;
+                      }}
+                      className="home-gathering-statement__title-line"
+                    >
+                      {line}
+                    </span>
+                  </span>
+                ))}
+              </h2>
             </div>
           </div>
         ))}

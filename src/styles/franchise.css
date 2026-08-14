@@ -2,8 +2,8 @@
    AMANI — FRANCHISE PAGE
    ========================================================================== */
 
-/* Body & UI copy on the franchise page uses Manrope for clean, readable
-   text, while headings keep the Cormorant Garamond display serif. */
+/* Body & UI copy on the franchise page uses Clash Display for clean, readable
+   text. */
 .franchise-page p,
 .franchise-page a,
 .franchise-page label,
@@ -12,10 +12,10 @@
 .franchise-page select,
 .franchise-page textarea,
 .franchise-page button {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }
 
 .franchise-page input::placeholder,
 .franchise-page textarea::placeholder {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }

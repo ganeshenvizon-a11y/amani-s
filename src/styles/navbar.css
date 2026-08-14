@@ -132,7 +132,7 @@
 
 /* Desktop Navbar Navigation Components */
 .restaurant-desktop-link {
-  font-family: var(--amani-font-ui, 'Cormorant Garamond', serif);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -183,7 +183,7 @@
   border-radius: 6px;
   background: transparent;
   color: #ffffff;
-  font-family: var(--amani-font-ui, 'Cormorant Garamond', serif);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;

@@ -71,8 +71,8 @@ type CardMotion = {
   bounds: { minX: number; maxX: number; minY: number; maxY: number };
 };
 
-const DYNAMIC_WORDS = ['Home', 'Love', 'Care'] as const;
-const WORD_DELAYS = [3200, 2600, 2600] as const;
+const DYNAMIC_WORDS = ['Warmth', 'Memory', 'Comfort'] as const;
+const WORD_DELAYS = [2800, 2800, 2800] as const;
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
@@ -387,16 +387,16 @@ export function Hero() {
         />
       </div>
       <div className="home-hero__content">
-        <p className="home-hero__kicker">A table shaped by warmth and memory</p>
+        <p className="home-hero__kicker">South Indian Dining & Catering · Jubilee Hills, Hyderabad</p>
         <h1 className="home-hero__title" data-split="true">
           <span className="home-hero__title-line">
             <span className="home-hero__title-line-inner">
-              Flavour from <span className="home-hero__word home-hero__word--fire">Fire</span>.
+              South at Heart.
             </span>
           </span>
           <span className="home-hero__title-line">
             <span className="home-hero__title-line-inner">
-              Memory from{' '}
+              Served with{' '}
               <span className="home-hero__dynamic-wrap">
                 <span className={`home-hero__word home-hero__word--dynamic is-${wordState}`}>
                   {DYNAMIC_WORDS[wordIndex]}
