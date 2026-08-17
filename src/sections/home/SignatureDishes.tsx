@@ -113,20 +113,31 @@ export function SignatureDishes() {
     };
   }, []);
 
-  // Track scroll position on mobile for active card indicator
+  // Track scroll position on mobile/tablet for 3 active card tracker dots
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
 
     const handleScroll = () => {
       if (window.innerWidth >= 900) return;
-      const cardWidth = stage.firstElementChild ? (stage.firstElementChild as HTMLElement).offsetWidth : 300;
-      const index = Math.round(stage.scrollLeft / (cardWidth + 16));
-      setActiveIndex(Math.min(Math.max(0, index), SIGNATURE_DISHES.length - 1));
+      const maxScrollLeft = stage.scrollWidth - stage.clientWidth;
+      if (maxScrollLeft <= 0) {
+        setActiveIndex(0);
+        return;
+      }
+
+      const progress = stage.scrollLeft / maxScrollLeft;
+      const dotIndex = Math.round(progress * 2);
+      setActiveIndex(Math.min(Math.max(0, dotIndex), 2));
     };
 
+    handleScroll();
     stage.addEventListener('scroll', handleScroll, { passive: true });
-    return () => stage.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      stage.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   // Pointer/Touch drag handlers for drag-to-scroll on mobile and desktop
@@ -157,13 +168,13 @@ export function SignatureDishes() {
     isDraggingRef.current = false;
   };
 
-  const scrollToCard = (index: number) => {
+  const scrollToDot = (dotIndex: number) => {
     const stage = stageRef.current;
     if (!stage) return;
-    const card = stage.children[index] as HTMLElement;
-    if (card) {
-      card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-    }
+    const maxScrollLeft = stage.scrollWidth - stage.clientWidth;
+    if (maxScrollLeft <= 0) return;
+    const targetScrollLeft = (dotIndex / 2) * maxScrollLeft;
+    stage.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
   };
 
   return (
@@ -234,15 +245,15 @@ export function SignatureDishes() {
           ))}
         </div>
 
-        {/* Mobile Swipe Pagination Dots */}
+        {/* Mobile/Tablet Swipe Pagination Dots (3 Dots) */}
         <div className="signature-stack__dots" aria-hidden="true">
-          {SIGNATURE_DISHES.map((dish, index) => (
+          {[0, 1, 2].map((dotIndex) => (
             <button
-              key={dish.name}
+              key={dotIndex}
               type="button"
-              className={`signature-stack__dot ${activeIndex === index ? 'is-active' : ''}`}
-              onClick={() => scrollToCard(index)}
-              aria-label={`Go to ${dish.name}`}
+              className={`signature-stack__dot ${activeIndex === dotIndex ? 'is-active' : ''}`}
+              onClick={() => scrollToDot(dotIndex)}
+              aria-label={`Go to slide ${dotIndex + 1}`}
             />
           ))}
         </div>

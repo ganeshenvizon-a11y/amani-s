@@ -19,7 +19,7 @@ describe('Homepage Content Structure', () => {
 
   it('should have mood options in Mood Finder', () => {
     expect(MOOD_FINDER_CONTENT.moods.length).toBeGreaterThanOrEqual(5);
-    expect(MOOD_FINDER_CONTENT.moods[0].title).toBe('Comfort from home');
+    expect(MOOD_FINDER_CONTENT.moods[0].title).toBe('Homely Food');
   });
 
   it('should have 4 signature experiences', () => {

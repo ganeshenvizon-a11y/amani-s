@@ -15,6 +15,11 @@ export function GatheringsPreview() {
             <h2 id="gatherings-heading" className="gatherings-title">
               {GATHERINGS_PREVIEW_CONTENT.heading}
             </h2>
+            {GATHERINGS_PREVIEW_CONTENT.subheading && (
+              <p className="gatherings-subheading">
+                {GATHERINGS_PREVIEW_CONTENT.subheading}
+              </p>
+            )}
           </div>
         </Reveal>
 
@@ -38,26 +43,26 @@ export function GatheringsPreview() {
                 </div>
 
                 <div className="gath-duo-card__content">
-                  <span className="gath-duo-card__tag">
-                    {choice.id === 'catering' ? 'Catering' : 'Gatherings'}
-                  </span>
-
-                  <div className="gath-duo-card__title-row">
-                    <h3 className="gath-duo-card__title">{choice.title}</h3>
-                    <span className="gath-duo-card__circle-btn">
-                      <svg aria-hidden="true" viewBox="0 0 18 18" fill="none">
-                        <path
-                          d="M5 13 13 5M7 5h6v6"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                  <div className="gath-duo-card__header">
+                    <span className="gath-duo-card__tag">
+                      {choice.id === 'catering' ? 'Catering' : 'Gatherings'}
                     </span>
+                    <h3 className="gath-duo-card__title">{choice.title}</h3>
+                    <p className="gath-duo-card__desc">{choice.description}</p>
                   </div>
 
-                  <p className="gath-duo-card__desc">{choice.description}</p>
+                  <div className="gath-duo-card__cta-btn">
+                    <span>{choice.ctaText}</span>
+                    <svg aria-hidden="true" viewBox="0 0 18 18" fill="none" className="gath-duo-card__cta-arrow">
+                      <path
+                        d="M3.75 9h10.5M9.75 4.5l4.5 4.5-4.5 4.5"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </NavLink>
             </Reveal>
