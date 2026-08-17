@@ -309,7 +309,7 @@ h6 span,
 }
 
 .home-gathering-statement__note {
-  max-width: min(44rem, 76vw);
+  max-width: min(44rem, calc(100% - 18rem));
   padding: clamp(1.5rem, 2.5vw, 2.25rem) clamp(1.75rem, 3vw, 2.5rem);
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(163, 74, 49, 0.32), rgba(23, 20, 17, 0.48));
@@ -428,25 +428,31 @@ h6 span,
   }
 
   .home-gathering-statement__text-group {
-    padding: 1.5rem 1rem 1.75rem;
+    padding: 1.25rem 1rem clamp(4.75rem, 11vh, 5.5rem) 1rem;
     justify-content: flex-end;
+    align-items: center;
   }
 
   .home-gathering-statement__title {
     max-width: 100%;
-    font-size: clamp(1.65rem, 7.5vw, 2.75rem);
-    line-height: 0.98;
+    font-size: clamp(1.4rem, 6.8vw, 2.25rem) !important;
+    line-height: 1.05;
+    text-align: center;
   }
 
   .home-gathering-statement__note {
-    max-width: 100%;
-    padding: 1.25rem 1.25rem;
+    width: 100%;
+    max-width: min(32rem, 100%);
+    padding: clamp(1rem, 3.5vw, 1.25rem);
+    border-radius: 16px;
+    text-align: center;
   }
 
   .home-gathering-statement__navigation {
-    right: 1rem;
-    bottom: 1.25rem;
-    left: auto;
+    left: 50%;
+    right: auto;
+    bottom: 1rem;
+    transform: translateX(-50%);
     gap: 0.5rem;
     padding: 0.4rem 0.65rem;
   }
@@ -2545,6 +2551,10 @@ body.image-lightbox-open {
   transform: translateX(2px);
 }
 
+.signature-stack__dots {
+  display: none;
+}
+
 .signature-stack__stage {
   --signature-card-safe-inset: clamp(1.25rem, 2vw, 1.75rem);
   position: relative;
@@ -2585,6 +2595,9 @@ body.image-lightbox-open {
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
   transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -2723,7 +2736,8 @@ body.image-lightbox-open {
   .signature-stack__stage {
     display: flex;
     gap: 1rem;
-    width: auto;
+    width: calc(100% + 2.5rem);
+    max-width: none;
     height: auto;
     /* Bleed the rail out to the section edges so cards scroll edge-to-edge and
        the peeking card is cropped by the screen, not by an empty margin. The
@@ -2732,9 +2746,18 @@ body.image-lightbox-open {
     margin: 0 -1.25rem;
     padding: 1.25rem 1.25rem 2rem;
     overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+  }
+
+  .signature-stack__stage:active {
+    cursor: grabbing;
   }
 
   .signature-stack__stage::-webkit-scrollbar {
@@ -2748,6 +2771,34 @@ body.image-lightbox-open {
     width: min(84vw, 22rem);
     min-height: min(30rem, 82svh);
     scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    touch-action: pan-x pan-y;
+    user-select: none;
+  }
+
+  .signature-stack__dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.25rem;
+  }
+
+  .signature-stack__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 0;
+    cursor: pointer;
+    background: rgba(68, 45, 30, 0.25);
+    border: none;
+    border-radius: 50%;
+    transition: background-color 200ms ease, transform 200ms ease, width 200ms ease;
+  }
+
+  .signature-stack__dot.is-active {
+    width: 1.25rem;
+    background: var(--amani-maroon);
+    border-radius: 1rem;
   }
 }
 
