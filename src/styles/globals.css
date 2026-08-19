@@ -3305,12 +3305,18 @@ body.image-lightbox-open {
   min-height: 100vh;
   min-height: 100dvh;
   padding: 5rem 1.5rem;
-  background-color: #F3EBDD;
+  background-color: var(--amani-void, #2E130B);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   isolation: isolate;
+}
+
+.amani-stories-bg-pattern {
+  opacity: 0.06;
+  filter: brightness(0) invert(1);
+  mix-blend-mode: screen;
 }
 
 .amani-stories-container {
@@ -3351,7 +3357,7 @@ body.image-lightbox-open {
   font-family: var(--amani-font-display, 'Clash Display', sans-serif);
   font-style: normal;
   font-weight: 500;
-  color: #18372F;
+  color: var(--amani-cream-on-dark, #F4EDDF);
   font-size: clamp(3rem, 5.5vw, 5.5rem);
   letter-spacing: -0.025em;
 }
@@ -3360,7 +3366,7 @@ body.image-lightbox-open {
   font-family: var(--amani-font-display, 'Clash Display', sans-serif);
   font-weight: 700;
   text-transform: uppercase;
-  color: #18372F;
+  color: var(--amani-cream-on-dark, #F4EDDF);
   font-size: clamp(2.4rem, 5.2vw, 5.2rem);
   letter-spacing: -0.035em;
   margin-top: 0.12em;
@@ -3370,8 +3376,8 @@ body.image-lightbox-open {
   font-family: var(--amani-font-ui), system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.5;
-  color: #18372F;
-  opacity: 0.55;
+  color: var(--amani-cream-muted, rgba(244, 237, 223, 0.75));
+  opacity: 0.85;
   max-width: 280px;
   text-align: center;
   margin-top: 1.25rem;

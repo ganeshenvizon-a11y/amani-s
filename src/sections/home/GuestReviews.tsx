@@ -273,7 +273,7 @@ export function GuestReviews() {
       aria-label="Stories from the table — Guest Testimonials"
     >
       {/* Hero Background Pattern Texture Overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-35 mix-blend-multiply z-0" aria-hidden="true">
+      <div className="amani-stories-bg-pattern absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <img
           src="/media/images/hero-pattern.png"
           alt=""
