@@ -391,7 +391,7 @@ export function Hero() {
         <h1 className="home-hero__title" data-split="true">
           <span className="home-hero__title-line">
             <span className="home-hero__title-line-inner">
-              South at Heart.
+              South at Heart
             </span>
           </span>
           <span className="home-hero__title-line">
@@ -401,7 +401,6 @@ export function Hero() {
                 <span className={`home-hero__word home-hero__word--dynamic is-${wordState}`}>
                   {DYNAMIC_WORDS[wordIndex]}
                 </span>
-                <span className="home-hero__period">.</span>
               </span>
             </span>
           </span>

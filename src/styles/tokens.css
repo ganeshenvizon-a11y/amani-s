@@ -4,47 +4,68 @@
 
 :root {
   /* Canvases */
-  --amani-canvas:         #F8F2E5; /* Warm rice canvas (primary) */
-  --amani-paper:          #EFE5D4; /* Soft paper tint */
-  --amani-sand:           #D8C7AA; /* Natural sand background */
-  --amani-canvas-dim:     #EDE4D0; /* Cream -8% lightness */
+  --amani-canvas: #F8F2E5;
+  /* Warm rice canvas (primary) */
+  --amani-paper: #EFE5D4;
+  /* Soft paper tint */
+  --amani-sand: #D8C7AA;
+  /* Natural sand background */
+  --amani-canvas-dim: #EDE4D0;
+  /* Cream -8% lightness */
 
   /* Ink & Typography Colors */
-  --amani-ink:            #171411; /* Main ink - primary headings/body */
-  --amani-ink-soft:       #403A34; /* Soft ink - body copy */
-  --amani-ink-muted:      #746E66; /* Muted text - captions/labels */
-  --amani-ink-faint:      rgba(23, 20, 17, 0.25);
+  --amani-ink: #171411;
+  /* Main ink - primary headings/body */
+  --amani-ink-soft: #403A34;
+  /* Soft ink - body copy */
+  --amani-ink-muted: #746E66;
+  /* Muted text - captions/labels */
+  --amani-ink-faint: rgba(23, 20, 17, 0.25);
 
   /* Brand Accents */
-  --amani-maroon:         #7A1F24; /* Deep Amani maroon - CTAs/accents */
-  --amani-maroon-dark:    #551317; /* Deep maroon hover/active */
-  --amani-maroon-tint:    rgba(122, 31, 36, 0.1);
-  --amani-terracotta:     #A34A31; /* Primary brand terracotta rust */
-  --amani-terracotta-dark: #4B1C10; /* Deep dark terracotta brown variant */
-  --amani-brand-glass:    rgba(163, 74, 49, 0.25);
+  --amani-maroon: #742F1C;
+  /* Deep Amani maroon - CTAs/accents */
+  --amani-maroon-dark: #c8a762;
+  /* Deep maroon hover/active (Gold) */
+  --amani-gold: #c8a762;
+  /* Signature Amani gold */
+  --amani-maroon-tint: rgba(116, 47, 28, 0.1);
+  --amani-terracotta: #A34A31;
+  /* Primary brand terracotta rust */
+  --amani-terracotta-dark: #4B1C10;
+  /* Deep dark terracotta brown variant */
+  --amani-brand-glass: rgba(163, 74, 49, 0.25);
   --amani-brand-glass-dark: rgba(163, 74, 49, 0.38);
   --amani-brand-glass-deep: rgba(163, 74, 49, 0.48);
-  --amani-olive:          #6D7254; /* Banana-leaf olive */
-  --amani-turmeric:       #C99732; /* Restrained turmeric accent */
+  --amani-olive: #6D7254;
+  /* Banana-leaf olive */
+  --amani-turmeric: #C99732;
+  /* Restrained turmeric accent */
 
   /* Dark Editorial Scenes */
-  --amani-void:           #2E130B; /* Deep terracotta brown dark background */
-  --amani-dark-warm:      #3A190E; /* Warm dark terracotta surface */
-  --amani-cream-on-dark:  #F4EDDF; /* Warm ivory text on dark */
-  --amani-cream-muted:    rgba(244, 237, 223, 0.7);
+  --amani-void: #742F1C;
+  /* Deep terracotta brown dark background */
+  --amani-dark-warm: #3A190E;
+  /* Warm dark terracotta surface */
+  --amani-cream-on-dark: #F4EDDF;
+  /* Warm ivory text on dark */
+  --amani-cream-muted: rgba(244, 237, 223, 0.7);
 
   /* Hairlines & Borders */
-  --amani-hairline:       rgba(23, 20, 17, 0.12);
-  --amani-hairline-dark:  rgba(244, 237, 223, 0.15);
+  --amani-hairline: rgba(23, 20, 17, 0.12);
+  --amani-hairline-dark: rgba(244, 237, 223, 0.15);
 
   /* Typography Families — Primary Font System */
-  --amani-font-primary:   'Quicksand', sans-serif;                /* Primary font */
-  --amani-font-display:   'Quicksand', sans-serif;                /* Headings / Display font */
-  --amani-font-ui:        'Manrope', sans-serif;                      /* Body / UI text (p, span, label, placeholders) */
+  --amani-font-primary: 'Balery', 'Quicksand', sans-serif;
+  /* Primary font */
+  --amani-font-display: 'Balery', 'Quicksand', sans-serif;
+  /* Headings / Display font */
+  --amani-font-ui: 'Manrope', sans-serif;
+  /* Body / UI text (p, span, label, placeholders) */
 
   /* Layout & Spacing */
-  --amani-max-width:      1600px;
-  --amani-gutter:         clamp(1rem, 4vw, 3rem);
-  --amani-radius-sm:      4px;
-  --amani-radius-md:      8px;
+  --amani-max-width: 1600px;
+  --amani-gutter: clamp(1rem, 4vw, 3rem);
+  --amani-radius-sm: 4px;
+  --amani-radius-md: 8px;
 }

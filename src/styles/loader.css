@@ -47,7 +47,7 @@
 /* Center strip (index 4) has a warm deep terracotta tone; adjacent strips vary gracefully */
 .site-loader__strip:nth-child(1),
 .site-loader__strip:nth-child(9) {
-  background-color: var(--amani-terracotta-dark, #2E130B);
+  background-color: var(--amani-terracotta-dark, #742F1C);
 }
 
 .site-loader__strip:nth-child(2),
@@ -104,7 +104,7 @@
 }
 
 .site-loader__wordmark-text {
-  font-family: var(--amani-font-display, 'Clash Display', sans-serif);
+  font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-size: clamp(1.4rem, 2.8vw, 2.1rem);
   font-weight: 500;
   letter-spacing: 0.16em;

@@ -37,7 +37,7 @@ export function RadioGroup({
 
   const dotSelectedRing = isLight ? 'border-[var(--amani-maroon)] bg-[var(--amani-maroon)]' : 'border-[var(--amani-turmeric)] bg-[var(--amani-turmeric)]';
   const dotUnselectedRing = isLight ? 'border-[rgba(23,20,17,0.3)]' : 'border-[rgba(216,199,170,0.4)]';
-  const dotInner = isLight ? 'bg-white' : 'bg-[#2E130B]';
+  const dotInner = isLight ? 'bg-white' : 'bg-[#742F1C]';
 
   return (
     <fieldset className={`franchise-field flex flex-col gap-2 ${className}`}>
@@ -53,9 +53,8 @@ export function RadioGroup({
           return (
             <label
               key={val}
-              className={`inline-flex items-center gap-3 px-5 py-3 rounded-md border transition-all cursor-pointer select-none text-sm font-medium ${
-                isSelected ? selectedClass : unselectedClass
-              }`}
+              className={`inline-flex items-center gap-3 px-5 py-3 rounded-md border transition-all cursor-pointer select-none text-sm font-medium ${isSelected ? selectedClass : unselectedClass
+                }`}
             >
               <input
                 type="radio"
@@ -67,9 +66,8 @@ export function RadioGroup({
                 className="sr-only"
               />
               <span
-                className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
-                  isSelected ? dotSelectedRing : dotUnselectedRing
-                }`}
+                className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${isSelected ? dotSelectedRing : dotUnselectedRing
+                  }`}
               >
                 {isSelected && <span className={`w-1.5 h-1.5 rounded-full ${dotInner}`} />}
               </span>

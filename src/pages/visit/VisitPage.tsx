@@ -15,21 +15,23 @@ export function VisitPage() {
   }, []);
 
   return (
-    <div className="visit-page">
-      {/* 01 — Hero */}
-      <Hero />
+    <>
+      <div className="visit-page">
+        {/* 01 — Hero */}
+        <Hero />
 
-      {/* 02 — Find Us: live status, address, directions & map */}
-      <LiveStatus />
+        {/* 02 — Find Us: live status, address, directions & map */}
+        <LiveStatus />
 
-      {/* 03 — Good to Know */}
-      <RestaurantInformation />
+        {/* 03 — Good to Know */}
+        <RestaurantInformation />
 
-      {/* 04 — FAQ */}
-      <FAQs />
+        {/* 04 — FAQ */}
+        <FAQs />
+      </div>
 
       {/* 05 — Table Reservation & Contact Form */}
       <ContactForm />
-    </div>
+    </>
   );
 }

@@ -212,9 +212,9 @@
   margin: 1.1rem 0 0;
   color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(1.75rem, 6.1vw, 7.3rem));
+  font-size: var(--font-hero);
   font-weight: 500;
-  line-height: 0.92;
+  line-height: 1.15;
   letter-spacing: -0.04em;
   text-align: center;
 }
@@ -276,8 +276,9 @@
 
 .menu-hero__button:hover,
 .menu-hero__button:focus-visible {
-  background: var(--amani-maroon-dark);
-  border-color: var(--amani-maroon-dark);
+  background: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
+  color: var(--amani-ink, #171411);
   outline: none;
   transform: translateY(-1px);
 }
@@ -357,9 +358,9 @@
 
 .menu-category-nav a:hover,
 .menu-category-nav a:focus-visible {
-  color: var(--amani-cream-on-dark);
-  background: var(--amani-maroon);
-  border-color: var(--amani-maroon);
+  color: var(--amani-ink, #171411);
+  background: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
   outline: none;
 }
 
@@ -468,7 +469,7 @@
 
 .menu-mood__options button:hover,
 .menu-mood__options button:focus-visible {
-  border-color: var(--amani-maroon);
+  border-color: var(--amani-gold, #c8a762);
   transform: translateX(4px);
   outline: none;
 }
@@ -864,9 +865,17 @@
   display: inline-block;
 }
 
-.menu-diet-chip .dot--veg { background: #0F8A48; }
-.menu-diet-chip .dot--non_veg { background: #B91C1C; }
-.menu-diet-chip .dot--egg { background: #B45309; }
+.menu-diet-chip .dot--veg {
+  background: #0F8A48;
+}
+
+.menu-diet-chip .dot--non_veg {
+  background: #B91C1C;
+}
+
+.menu-diet-chip .dot--egg {
+  background: #B45309;
+}
 
 .menu-diet-chip:hover {
   border-color: var(--amani-maroon);
@@ -1046,10 +1055,10 @@
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(122, 31, 36, 0.08);
   transition: color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .menu-see-more-btn svg {
@@ -1284,7 +1293,8 @@
   }
 
   .menu-sidebar {
-    display: none; /* Mobile uses horizontal sticky bar */
+    display: none;
+    /* Mobile uses horizontal sticky bar */
   }
 
   .menu-subgroup__grid {
@@ -1315,10 +1325,10 @@
 
 /* ==========================================================================
    Section 06 — Dietary information
-   ========================================================================== */============= */
+   ========================================================================== */
 
 .menu-dietary {
-  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  padding: clamp(4.5rem, 9vw, 8rem) var(--amani-gutter);
   background: var(--amani-paper);
 }
 
@@ -1347,7 +1357,7 @@
   grid-template-columns: subgrid;
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: start;
-  padding-block: 1.35rem;
+  padding-block: 1.5rem;
   border-bottom: 1px solid var(--amani-hairline);
 }
 
@@ -1355,7 +1365,7 @@
   padding-top: 0;
 }
 
-.menu-dietary__list article > span {
+.menu-dietary__list article>span {
   display: inline-flex;
   align-items: center;
   height: 1.25rem;

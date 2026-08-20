@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-  --footer-bg: #2E130B;
+  --footer-bg: #742F1C;
   --footer-bg-deep: #1E0C07;
   --footer-cream: #F4EDDF;
   --footer-terracotta: #98513B;
@@ -19,11 +19,9 @@
   width: 100%;
   overflow: hidden;
   isolation: isolate;
-  background: radial-gradient(
-    circle at 40% 30%,
-    rgba(162, 85, 62, 0.22),
-    transparent 55%
-  ), var(--footer-bg);
+  background: radial-gradient(circle at 40% 30%,
+      rgba(162, 85, 62, 0.22),
+      transparent 55%), var(--footer-bg);
   color: var(--footer-cream);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   --mx: 50%;
@@ -64,12 +62,10 @@
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 10, 6, 0.48) 0%,
-    rgba(26, 10, 6, 0.62) 55%,
-    rgba(26, 10, 6, 0.78) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(26, 10, 6, 0.48) 0%,
+      rgba(26, 10, 6, 0.62) 55%,
+      rgba(26, 10, 6, 0.78) 100%);
 }
 
 /* Pointer Spotlight Reveal Layer */
@@ -79,13 +75,11 @@
   pointer-events: none;
   z-index: -1;
   transition: opacity 300ms ease;
-  background: radial-gradient(
-    circle 380px at var(--mx) var(--my),
-    rgba(26, 10, 6, 0.02) 0%,
-    rgba(26, 10, 6, 0.12) 30%,
-    rgba(26, 10, 6, 0.45) 60%,
-    rgba(26, 10, 6, 0.78) 100%
-  );
+  background: radial-gradient(circle 380px at var(--mx) var(--my),
+      rgba(26, 10, 6, 0.02) 0%,
+      rgba(26, 10, 6, 0.12) 30%,
+      rgba(26, 10, 6, 0.45) 60%,
+      rgba(26, 10, 6, 0.78) 100%);
 }
 
 /* Micro Film Grain */
@@ -136,11 +130,11 @@
 }
 
 .footer-title {
-  font-family: var(--amani-font-display, 'Clash Display', sans-serif);
-  font-weight: 400;
-  font-size: clamp(74px, 8vw, 138px);
-  line-height: 0.86;
-  letter-spacing: -0.055em;
+  font-family: var(--amani-font-display, 'Balery', sans-serif);
+  font-weight: 500;
+  font-size: clamp(2.7rem, 4.95vw, 4.95rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
   color: var(--footer-cream);
   margin: 0;
   text-rendering: optimizeLegibility;
@@ -449,7 +443,9 @@
   stroke-width: 1.25;
 }
 
-.footer-scroll-top__track { stroke: rgba(244, 237, 223, 0.24); }
+.footer-scroll-top__track {
+  stroke: rgba(244, 237, 223, 0.24);
+}
 
 .footer-scroll-top__progress {
   stroke: currentColor;
@@ -477,11 +473,10 @@
 }
 
 .footer-bottom-bar {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1rem 1.5rem;
   margin-bottom: clamp(6px, 1.2vh, 14px);
   font-size: 10px;
   letter-spacing: 0.08em;
@@ -489,10 +484,21 @@
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }
 
-.footer-meta-links {
+.footer-copyright {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(244, 237, 223, 0.65);
+  font-weight: 500;
+  justify-self: start;
+}
+
+.footer-meta-center {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  justify-content: center;
+  gap: 1.5rem 2rem;
+  justify-self: center;
+  text-align: center;
 }
 
 .footer-meta-link {
@@ -504,6 +510,43 @@
 .footer-meta-link:hover,
 .footer-meta-link:focus-visible {
   color: rgba(244, 237, 223, 0.85);
+}
+
+.footer-meta-motto {
+  color: rgba(244, 237, 223, 0.48);
+  letter-spacing: 0.08em;
+}
+
+/* Envizon Studio Credit Tag — Exact Typography Lockup */
+.footer-envizon-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: 13px;
+  line-height: 1.2;
+  text-decoration: none;
+  justify-self: end;
+  transition: opacity 200ms ease;
+}
+
+.footer-envizon-tag__muted {
+  color: rgba(244, 237, 223, 0.48);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.footer-envizon-tag__bold {
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 200ms ease;
+}
+
+.footer-envizon-tag:hover,
+.footer-envizon-tag:focus-visible {
+  opacity: 0.82;
+  outline: none;
 }
 
 /* Responsive Breakpoints */
@@ -520,8 +563,8 @@
   }
 
   .footer-title {
-    font-size: clamp(54px, 15vw, 76px);
-    line-height: 0.88;
+    font-size: clamp(2.16rem, 6.3vw, 3.15rem);
+    line-height: 0.92;
   }
 
   .footer-info-sidebar {
@@ -553,9 +596,16 @@
   }
 
   .footer-bottom-bar {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 0.75rem;
+  }
+
+  .footer-copyright,
+  .footer-envizon-tag {
+    justify-self: center;
   }
 }
 
@@ -569,9 +619,11 @@
   .footer-reveal {
     background: rgba(26, 10, 6, 0.60) !important;
   }
+
   .footer-media img {
     transform: none !important;
   }
+
   .footer-cta__text,
   .footer-cta__line,
   .footer-nav-link {

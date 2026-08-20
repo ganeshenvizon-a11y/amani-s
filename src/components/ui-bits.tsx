@@ -41,9 +41,8 @@ export function Display({ children, className = '', id }: DisplayProps) {
   return (
     <h2
       id={id}
-      className={`font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight text-current ${
-        className.includes('rule-brass') ? 'relative pb-3 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[2px] after:bg-[#f4c478]' : ''
-      } ${className}`}
+      className={`font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight text-current ${className.includes('rule-brass') ? 'relative pb-3 after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[2px] after:bg-[#f4c478]' : ''
+        } ${className}`}
     >
       {children}
     </h2>
@@ -74,13 +73,13 @@ interface CtaProps {
 
 export function Cta({ to, href, variant = 'primary', children, className = '', onClick }: CtaProps) {
   let baseStyle = 'inline-flex items-center justify-center min-h-12 px-6 py-3 rounded-sm font-sans text-xs uppercase font-bold tracking-widest transition-all duration-300 ';
-  
+
   if (variant === 'outline') {
     baseStyle += 'border border-[oklch(0.97_0.014_85)] text-[oklch(0.97_0.014_85)] hover:bg-[oklch(0.97_0.014_85)] hover:text-[#1a0f0a]';
   } else if (variant === 'solid') {
     baseStyle += 'bg-[oklch(0.97_0.014_85)] text-[#1a0f0a] hover:bg-white';
   } else {
-    baseStyle += 'bg-[var(--amani-maroon)] text-white hover:bg-[var(--amani-maroon-dark)] shadow-md';
+    baseStyle += 'bg-[var(--amani-maroon)] text-white hover:bg-[var(--amani-gold,#c8a762)] hover:text-[var(--amani-ink,#171411)] shadow-md';
   }
 
   if (to) {

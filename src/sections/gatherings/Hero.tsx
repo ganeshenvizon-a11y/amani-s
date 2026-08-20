@@ -20,7 +20,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 id="gath-hero-title">
-            <span>Whatever you&rsquo;re</span> <em>celebrating.</em>
+            <span>Whatever you&rsquo;re</span> <em>celebrating</em>
           </h1>
           <p className="gath-hero__lede">A private table, a full room, or the whole restaurant — we set the table, cook the food, and look after the day so you can be a guest at your own celebration.</p>
           <div className="gath-hero__actions">

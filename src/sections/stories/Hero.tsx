@@ -20,17 +20,15 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 id="stories-hero-title">The story behind<br /><em>every return.</em></h1>
+          <h1 id="stories-hero-title">The story behind<br /><em>every return</em></h1>
           <p className="stories-hero__lede">Amani means spring in Telugu — the season that always comes back. This is why that felt like the right name for a restaurant.</p>
           <div className="stories-hero__actions">
-            <a className="stories-button" href="#why-amani">
+            <a className="stories-hero__button" href="#why-amani">
               Read our story <span aria-hidden="true">↓</span>
             </a>
           </div>
         </motion.div>
       </div>
-
-      <p className="stories-hero__note">Jubilee Hills, Hyderabad <span>•</span> Since 2018</p>
     </section>
   );
 }

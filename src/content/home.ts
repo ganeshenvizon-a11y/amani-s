@@ -56,7 +56,7 @@ export interface HeroSlideItem {
 }
 
 export const HERO_CONTENT = {
-  headline: 'SOUTH AT HEART.\nSERVED WITH WARMTH.',
+  headline: 'SOUTH AT HEART\nSERVED WITH WARMTH',
   image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=85&w=2000&auto=format&fit=crop',
   slides: [
     {
@@ -110,49 +110,49 @@ export const MOOD_FINDER_CONTENT = {
       id: 'comfort',
       title: 'Homely Food',
       description: 'Gentle, familiar flavours made for an easy and unhurried meal.',
-      image: '/media/images/idly.png',
-      dishes: ['Steaming Ven Pongal', 'Ghee Podi Idli', 'Classic Sambar Vadai'],
-      menuLink: '/menu/#tiffin',
-    },
-    {
-      id: 'lively',
-      title: 'Crisp and lively',
-      description: 'Golden pooris, dosas and bright accompaniments with texture and freshness.',
-      image: '/media/images/poori.png',
-      dishes: ['Poori Masala', 'Mysore Masala Dosa', 'Golden Medu Vadai'],
-      menuLink: '/menu/#dosas',
-    },
-    {
-      id: 'spicy',
-      title: 'Bold and spicy',
-      description: 'Deeper heat, roasted spices and aromatic chicken rice with rich energy.',
-      image: '/media/images/chicken_rice.png',
-      dishes: ['Chettinad Chicken Rice', 'Kara Podi Dosa', 'Pepper Chicken Roast'],
+      image: '/media/images/special dishes/Perugu Chicken.png',
+      dishes: ['Perugu Chicken'],
       menuLink: '/menu/#curries',
     },
     {
-      id: 'tiffin',
-      title: 'Evening Kaapi',
-      description: 'Aromatic filter coffee, golden vadas and hot savory tiffin for a slow afternoon.',
-      image: '/media/images/coffee.png',
-      dishes: ['Filter Coffee', 'Golden Medu Vadai', 'Rava Onion Dosa'],
-      menuLink: '/menu/#beverages',
+      id: 'lively',
+      title: 'Crisp & Fiery',
+      description: 'Golden fried chicken with vibrant Rayalaseema spices and roasted curry leaves.',
+      image: '/media/images/special dishes/Rayalaseema Chicken Fry.png',
+      dishes: ['Rayalaseema Chicken Fry'],
+      menuLink: '/menu/#starters',
     },
     {
-      id: 'share',
-      title: 'Made to share',
-      description: 'Plates for passing, tasting and bringing everyone into the meal.',
-      image: '/media/images/happy-south-indian-dining.png',
-      dishes: ["Amani's Banana Leaf Feast", 'Family Tiffin Platter', 'Shared Curry Bowls'],
-      menuLink: '/menu/#feasts',
+      id: 'spicy',
+      title: 'Bold & Spicy',
+      description: 'Deeper heat, rich roasted spices and indulgent ghee-laden chicken.',
+      image: '/media/images/special dishes/Chicken Ghee Roast.png',
+      dishes: ['Chicken Ghee Roast'],
+      menuLink: '/menu/#starters',
     },
     {
-      id: 'thali',
-      title: 'Traditional Thali',
-      description: 'An expansive spread served on traditional platters for the whole family.',
-      image: '/media/images/thali/south-indian-thali.png',
-      dishes: ['South Indian Thali', 'Ghee Rice & Kurma', 'Elaneer Payasam'],
-      menuLink: '/menu/#feasts',
+      id: 'pulav',
+      title: 'Aromatic Pulav',
+      description: 'Fragrant Chitti Muthyalu rice slow-cooked with spiced succulent chicken.',
+      image: '/media/images/special dishes/Chicken Chitti Muthyalu Pulav.png',
+      dishes: ['Chicken Chitti Muthyalu Pulav'],
+      menuLink: '/menu/#biryani',
+    },
+    {
+      id: 'traditional',
+      title: 'Rustic & Hearty',
+      description: 'Nutritious soft ragi mudda served alongside rich, spicy village kodi kura.',
+      image: '/media/images/special dishes/Ragi Mudda – Kodi Kura.png',
+      dishes: ['Ragi Mudda – Kodi Kura'],
+      menuLink: '/menu/#curries',
+    },
+    {
+      id: 'coastal',
+      title: 'Coastal Delights',
+      description: 'Steaming white rice served with thick, tangy Korameenu fish iguru.',
+      image: '/media/images/special dishes/White Rice – Korameenu Iguru.png',
+      dishes: ['White Rice – Korameenu Iguru'],
+      menuLink: '/menu/#curries',
     },
   ] as MoodItem[],
 };
@@ -331,7 +331,7 @@ export interface QrOrderingStep {
 
 export const QR_ORDERING_CONTENT = {
   headingScript: 'Scan, order and',
-  headingMain: 'RELAX.',
+  headingMain: 'Relax.',
   body: "Scan your table's code to browse, customise your thali and call for the bill.",
   image: '/media/images/qr-ordering-app.png',
   imageAlt: "Amani's QR-based table ordering app open on a phone, showing today's thali deals and popular picks",
@@ -357,15 +357,14 @@ export const QR_ORDERING_CONTENT = {
 };
 
 export const VISIT_PREVIEW_CONTENT = {
-  heading: 'Come find your table.',
+  heading: 'Come find your Table.',
   description: 'Find us in Jubilee Hills. Check today’s hours, get directions, and explore our accessible amenities.',
   image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1200&auto=format&fit=crop',
   primaryCta: 'GET DIRECTIONS',
 };
 
 export const GATHERINGS_PREVIEW_CONTENT = {
-  heading: 'How Would You Like to Gather?',
-  subheading: 'Select an option to reserve a table, plan a gathering, or request catering for your occasion.',
+  heading: 'How would you like to Gather?',
   choices: [
     {
       id: 'catering',

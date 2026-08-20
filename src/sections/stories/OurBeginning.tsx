@@ -30,7 +30,7 @@ export function OurBeginning() {
         </div>
         <div className="stories-beginning__collage">
           <figure className="stories-beginning__image stories-beginning__image--main"><img src="/media/images/grandma-cooking-stone-1.png" alt="A grandmother preparing food on a traditional stone grinder" loading="lazy" /></figure>
-          <figure className="stories-beginning__image stories-beginning__image--small"><img src="/media/images/story/amani-story-02-first-room.webp" alt="The first warmly dressed Amani dining room" loading="lazy" /></figure>
+          <figure className="stories-beginning__image stories-beginning__image--small"><img src="/media/images/story/2.png" alt="The first warmly dressed Amani dining room" loading="lazy" /></figure>
           <div className="stories-beginning__stamp" aria-hidden="true">FROM OUR<br />HOME TO YOURS</div>
         </div>
         <ol className="stories-timeline">{moments.map((moment) => <li className="stories-timeline__item" key={moment.year}><span>{moment.year}</span><p>{moment.text}</p></li>)}</ol>

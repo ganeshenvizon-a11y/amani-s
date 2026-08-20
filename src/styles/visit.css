@@ -64,7 +64,9 @@
 
 .vst-button:hover,
 .vst-button:focus-visible {
-  background: var(--amani-maroon-dark);
+  background: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
+  color: var(--amani-ink, #171411);
   outline: none;
   transform: translateY(-1px);
 }
@@ -151,9 +153,9 @@
   margin: 1.1rem 0 0;
   color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(1.75rem, 6.1vw, 7.3rem));
+  font-size: var(--font-hero);
   font-weight: 500;
-  line-height: 0.92;
+  line-height: 1.15;
   letter-spacing: -0.04em;
   text-align: center;
 }
@@ -190,8 +192,9 @@
 }
 
 .vst-hero__actions .vst-button:hover {
-  background: var(--amani-maroon-dark);
-  border-color: var(--amani-maroon-dark);
+  background: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
+  color: var(--amani-ink, #171411);
 }
 
 .vst-hero__scroll-badge {
@@ -392,7 +395,7 @@
   padding-block: clamp(1.75rem, 3vw, 2.5rem);
 }
 
-.vst-info__cell + .vst-info__cell {
+.vst-info__cell+.vst-info__cell {
   padding-left: clamp(2rem, 4vw, 3.5rem);
   border-left: 1px solid var(--amani-hairline);
 }
@@ -444,6 +447,11 @@
 .vst-faq {
   padding: clamp(4.5rem, 9vw, 8rem) 0;
   background: var(--amani-paper);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+}
+
+.vst-faq h2 {
+  font-family: 'Balery', var(--amani-font-display, sans-serif);
 }
 
 .vst-faq__list {
@@ -467,7 +475,7 @@
   background: transparent;
   border: 0;
   cursor: pointer;
-  font-family: var(--amani-font-display);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: clamp(1.25rem, 2vw, 1.7rem);
   font-weight: 400;
   letter-spacing: -0.02em;
@@ -568,9 +576,17 @@
     padding-left: 0;
   }
 
-  .vst-info__anchor { grid-row: 1; }
-  .vst-info__hours { grid-row: 2; }
-  .vst-info__bottom { grid-row: 3; }
+  .vst-info__anchor {
+    grid-row: 1;
+  }
+
+  .vst-info__hours {
+    grid-row: 2;
+  }
+
+  .vst-info__bottom {
+    grid-row: 3;
+  }
 }
 
 @media (max-width: 600px) {
@@ -589,7 +605,7 @@
     grid-template-columns: 1fr;
   }
 
-  .vst-info__cell + .vst-info__cell {
+  .vst-info__cell+.vst-info__cell {
     padding-left: 0;
     border-left: 0;
     border-top: 1px solid var(--amani-hairline);

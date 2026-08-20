@@ -19,7 +19,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 id="vst-hero-title">Visit <em>Amani.</em></h1>
+          <h1 id="vst-hero-title">Visit <em>Amani</em></h1>
           <p className="vst-hero__lede">Whether it&rsquo;s breakfast before work, dinner with family, or a quiet cup of filter coffee — we&rsquo;d love to welcome you.</p>
           <div className="vst-hero__actions">
             <a className="vst-button" href="#reserve">

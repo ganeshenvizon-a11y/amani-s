@@ -23,7 +23,7 @@ export function Button({
   const baseStyles = 'inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 focus:outline-none cursor-pointer';
 
   const variantStyles = {
-    primary: 'bg-[var(--amani-maroon)] hover:bg-[var(--amani-maroon-dark)] text-[#F8F2E5] shadow-md hover:shadow-lg',
+    primary: 'bg-[var(--amani-maroon)] hover:bg-[var(--amani-gold,#c8a762)] hover:text-[var(--amani-ink,#171411)] text-[#F8F2E5] shadow-md hover:shadow-lg',
     secondary: 'bg-[var(--amani-sand)] text-[var(--amani-ink)] hover:bg-[#c9b493]',
     outline: 'border border-[var(--amani-turmeric)] text-[var(--amani-cream-on-dark)] hover:bg-[var(--amani-turmeric)] hover:text-[var(--amani-ink)]',
     gold: 'bg-[var(--amani-turmeric)] text-[var(--amani-ink)] hover:bg-[#b08226] font-semibold',

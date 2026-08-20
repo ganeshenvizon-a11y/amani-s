@@ -41,7 +41,7 @@ export const MAIN_NAV_LINKS: NavLinkItem[] = [
 
 export const CTA_NAV_LINK: NavLinkItem = {
   label: 'RESERVE A TABLE',
-  path: '/visit/#reserve',
+  path: '/#home-contact',
   isPrimary: true,
 };
 

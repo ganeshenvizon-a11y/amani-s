@@ -4,10 +4,30 @@
 import { NavLink } from 'react-router-dom';
 import { GATHERINGS_PREVIEW_CONTENT } from '../../content/home';
 import { Reveal } from '../../components/motion/Reveal';
+import { RangoliPattern } from '../../components/motion/RangoliPattern';
 
 export function GatheringsPreview() {
   return (
     <section className="gatherings-section" aria-labelledby="gatherings-heading">
+      {/* Background Pattern Texture Overlay */}
+      <div className="gatherings-section__bg-pattern" aria-hidden="true">
+        <img
+          src="/media/images/hero-pattern.png"
+          alt=""
+          className="gatherings-section__bg-pattern-img"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      {/* Rangoli Watermark Motifs */}
+      <div className="gatherings-section__motif gatherings-section__motif--left" aria-hidden="true">
+        <RangoliPattern size={420} color="var(--amani-gold, #c8a762)" strokeWidth={0.8} />
+      </div>
+      <div className="gatherings-section__motif gatherings-section__motif--right" aria-hidden="true">
+        <RangoliPattern size={420} color="var(--amani-gold, #c8a762)" strokeWidth={0.8} />
+      </div>
+
       <div className="gatherings-container">
         {/* TOP: HEADING AND CONTENT */}
         <Reveal direction="up" className="w-full">
@@ -15,11 +35,6 @@ export function GatheringsPreview() {
             <h2 id="gatherings-heading" className="gatherings-title">
               {GATHERINGS_PREVIEW_CONTENT.heading}
             </h2>
-            {GATHERINGS_PREVIEW_CONTENT.subheading && (
-              <p className="gatherings-subheading">
-                {GATHERINGS_PREVIEW_CONTENT.subheading}
-              </p>
-            )}
           </div>
         </Reveal>
 

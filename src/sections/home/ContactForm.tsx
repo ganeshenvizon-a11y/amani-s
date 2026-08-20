@@ -72,7 +72,8 @@ export function ContactForm() {
             aria-hidden="true"
           />
           <h2 id="home-contact-heading" className="home-contact-title">
-            We&rsquo;d love to <em>connect.</em>
+            We&rsquo;d love to <br />
+            <em>Connect.</em>
           </h2>
           <p className="home-contact-description">
             Have a question about our menu, special dietary options, table reservations, or private dining? Send us a message and our team will respond within 24 hours.

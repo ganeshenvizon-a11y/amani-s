@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } fr
 import { NavLink } from 'react-router-dom';
 
 type ThaliChoice = {
-  id: 'vegetarian' | 'non-vegetarian' | 'jain';
+  id: 'vegetarian' | 'non-vegetarian';
   label: string;
   title: string;
   description: string;
@@ -46,21 +46,6 @@ const THALI_CHOICES: ThaliChoice[] = [
       'Malabar Parotta & Payasam',
     ],
     image: '/media/images/thali/non-veg-thali.png',
-  },
-  {
-    id: 'jain',
-    label: 'JAIN',
-    title: 'Thoughtfully prepared.',
-    description: 'Made without onion or garlic, with equal generosity, warmth and texture.',
-    items: [
-      'Fragrant Steamed Basmati Rice',
-      'Tuvar Dal Sambar (No Onion/Garlic)',
-      'Raw Banana & Beans Poriyal',
-      'Fresh Coconut & Curry Leaf Chutney',
-      'Cumin Pepper Rasam & Curd',
-      'Crisp Appalam & Traditional Payasam',
-    ],
-    image: '/media/images/thali/jain-thali.png',
   },
 ];
 

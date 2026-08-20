@@ -4,7 +4,7 @@ const shots = [
   { src: '/media/images/gathering-interior-01.webp', alt: 'A warmly lit private dining room set for a celebration', span: 'tall' },
   { src: '/media/images/testimonials/testimonial-grand-family.jpg', alt: 'A large family gathered around a shared meal' },
   { src: '/media/images/gathering-interior-02.webp', alt: 'Tables arranged for a group event at Amani' },
-  { src: '/media/images/story/amani-story-03-family-table.webp', alt: 'Friends sharing dishes across a full table', span: 'wide' },
+  { src: '/media/images/story/3.png', alt: 'Friends sharing dishes across a full table', span: 'wide' },
   { src: '/media/images/gathering-interior-04.webp', alt: 'An intimate corner set for a small gathering' },
   { src: '/media/images/gathering-interior-05.webp', alt: 'The dining room dressed for an evening celebration' },
   { src: '/media/images/happy-south-indian-dining.png', alt: 'Guests enjoying a South Indian feast together' },

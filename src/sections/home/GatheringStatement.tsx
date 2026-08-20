@@ -18,22 +18,22 @@ const GATHERING_SLIDES = [
   {
     image: '/media/images/gathering-family-dining.jpg',
     alt: 'Comfortable family dining at Amani South Indian restaurant',
-    titleLines: ['Comfortable family', 'dining'],
+    titleLines: ['Family', 'Dining'],
   },
   {
     image: '/media/images/gathering-children-elders.jpg',
     alt: 'Thoughtful support for children and elders with comfortable seating at Amani',
-    titleLines: ['Thoughtful support for', 'children and elders'],
+    titleLines: ['Thoughtful', 'Care'],
   },
   {
     image: '/media/images/gathering-attentive-service.jpg',
     alt: 'Attentive, unintrusive service at Amani South Indian restaurant',
-    titleLines: ['Attentive, unintrusive', 'service'],
+    titleLines: ['Attentive', 'Service'],
   },
   {
     image: '/media/images/gathering-interior-04.webp',
     alt: "Amani's dining room interior with warm wood, arched details and soft lighting",
-    titleLines: ['A welcoming table', 'for every generation'],
+    titleLines: ['Welcoming', 'Ambience'],
   },
 ] as const;
 
@@ -552,21 +552,6 @@ export function GatheringStatement() {
       </div>
 
       <div className="home-gathering-statement__navigation" aria-label="Banner controls">
-        <button
-          type="button"
-          className="home-gathering-statement__arrow"
-          aria-label="Show previous banner image"
-          onClick={() => {
-            userClickedRef.current = true;
-            lastAdvanceRef.current = Date.now();
-            showPreviousSlide();
-          }}
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 6l-6 6 6 6" />
-          </svg>
-        </button>
-
         <div className="home-gathering-statement__pagination" aria-label="Choose a banner image">
           {GATHERING_SLIDES.map((slide, index) => (
             <button
@@ -585,21 +570,6 @@ export function GatheringStatement() {
             </button>
           ))}
         </div>
-
-        <button
-          type="button"
-          className="home-gathering-statement__arrow"
-          aria-label="Show next banner image"
-          onClick={() => {
-            userClickedRef.current = true;
-            lastAdvanceRef.current = Date.now();
-            showNextSlide();
-          }}
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 6l6 6-6 6" />
-          </svg>
-        </button>
       </div>
     </section>
   );

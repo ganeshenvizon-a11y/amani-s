@@ -21,10 +21,10 @@ export function FranchiseHero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 id="franchise-hero-title">
-            <span>Serve happiness.</span> <em>Build your future.</em>
+            <span>Serve happiness</span> <em>Build your future</em>
           </h1>
           <p className="gath-hero__lede">
-            Every plate we serve creates memories. Every guest who walks in becomes family. Now it&rsquo;s your turn to create those memories while building a successful business with Amani&rsquo;s Restaurant.
+            Every plate creates memories. Now it&rsquo;s your turn to build a thriving business with Amani&rsquo;s.
           </p>
           <div className="gath-hero__actions">
             <a className="gath-button" href="#franchise-form">

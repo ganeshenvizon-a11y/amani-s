@@ -288,7 +288,7 @@ export function GuestReviews() {
         <div className="amani-stories-center-box">
           <h2 className="amani-stories-heading">
             <span className="amani-stories-heading-script">Stories from</span>
-            <span className="amani-stories-heading-main">THE TABLE.</span>
+            <span className="amani-stories-heading-main">The Table.</span>
           </h2>
 
           <p className="amani-stories-subcopy">Some meals stay with you.</p>

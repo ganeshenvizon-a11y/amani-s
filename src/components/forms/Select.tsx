@@ -34,8 +34,8 @@ export function Select({
   const fieldClass = isLight
     ? 'w-full px-4 py-3 rounded-md bg-white border border-[rgba(23,20,17,0.16)] text-[var(--amani-ink)] focus:outline-none focus:border-[var(--amani-maroon)] focus:ring-2 focus:ring-[var(--amani-maroon-tint)] transition-all text-sm sm:text-base appearance-none pr-10 cursor-pointer'
     : 'w-full px-4 py-3 rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(216,199,170,0.2)] text-[var(--amani-cream-on-dark)] focus:outline-none focus:border-[var(--amani-turmeric)] focus:ring-1 focus:ring-[var(--amani-turmeric)] transition-all text-sm sm:text-base appearance-none pr-10 cursor-pointer';
-  const optionClass = isLight ? 'bg-white text-[var(--amani-ink)]' : 'bg-[#2E130B] text-[var(--amani-cream-on-dark)]';
-  const placeholderClass = isLight ? 'bg-white text-[var(--amani-ink-muted)]' : 'bg-[#2E130B] text-[rgba(244,237,223,0.5)]';
+  const optionClass = isLight ? 'bg-white text-[var(--amani-ink)]' : 'bg-[#742F1C] text-[var(--amani-cream-on-dark)]';
+  const placeholderClass = isLight ? 'bg-white text-[var(--amani-ink-muted)]' : 'bg-[#742F1C] text-[rgba(244,237,223,0.5)]';
   const chevronColor = isLight ? 'text-[var(--amani-maroon)]' : 'text-[var(--amani-turmeric)]';
 
   return (

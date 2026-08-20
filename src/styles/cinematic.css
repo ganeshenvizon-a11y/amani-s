@@ -6,7 +6,7 @@
    ========================================================================== */
 
 :root {
-  --amani-maroon:  #7A1F24;
+  --amani-maroon:  #742F1C;
   --amani-cream:   #F8F2E5;
   --ease-premium:  cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -203,7 +203,7 @@
 }
 
 .final-title {
-  font-family: var(--amani-font-display, 'Clash Display', sans-serif);
+  font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-size: clamp(24px, 4vw, 40px);
   font-weight: 600;
   letter-spacing: -0.015em;
@@ -252,9 +252,9 @@
 
 .final-btn:hover,
 .final-btn:focus-visible {
-  background-color: var(--amani-cream);
-  color: var(--amani-maroon);
-  border-color: var(--amani-cream);
+  background-color: var(--amani-gold, #c8a762);
+  color: var(--amani-ink, #171411);
+  border-color: var(--amani-gold, #c8a762);
   outline: none;
 }
 

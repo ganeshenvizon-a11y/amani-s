@@ -151,6 +151,24 @@ export function Header() {
     }
   };
 
+  // Book Table CTA click handler to navigate/scroll smoothly to #home-contact
+  const handleBookTableClick = useCallback(() => {
+    if (isOpen) {
+      handleClose();
+    }
+    if (location.pathname === '/') {
+      const element = document.getElementById('home-contact');
+      if (element) {
+        if (lenis) {
+          lenis.scrollTo(element, { offset: -80, duration: 1.2 });
+        } else {
+          const top = element.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    }
+  }, [isOpen, handleClose, location.pathname, lenis]);
+
   // GSAP animation when menu is mounted & opened
   useEffect(() => {
     if (!isOpen || !isMounted || !menuRef.current) return;
@@ -281,11 +299,9 @@ export function Header() {
     <div ref={containerRef} className="restaurant-nav-shell">
       {/* 1. Rectangular Header Bar */}
       <header
-        className={`restaurant-header ${
-          isOpen ? 'restaurant-header--open' : 'restaurant-header--closed'
-        } ${isScrolled ? 'restaurant-header--scrolled' : ''} ${
-          isNavHidden && !isOpen ? 'restaurant-header--hidden' : ''
-        }`}
+        className={`restaurant-header ${isOpen ? 'restaurant-header--open' : 'restaurant-header--closed'
+          } ${isScrolled ? 'restaurant-header--scrolled' : ''} ${isNavHidden && !isOpen ? 'restaurant-header--hidden' : ''
+          }`}
         aria-label="Main Site Header"
       >
         {/* Desktop Header Layout — Logo on left, page links & CTA on right */}
@@ -370,13 +386,15 @@ export function Header() {
               VISIT
             </NavLink>
 
+            <span className="restaurant-desktop-divider" aria-hidden="true" />
+
             {/* Book Table CTA Button */}
             <NavLink
               to={CTA_NAV_LINK.path}
-              onClick={() => isOpen && handleClose()}
+              onClick={handleBookTableClick}
               className="restaurant-desktop-cta group"
             >
-              <span>BOOK TABLE</span>
+              <span>BOOK A TABLE</span>
             </NavLink>
           </div>
         </div>
@@ -386,10 +404,10 @@ export function Header() {
           {/* Left: Book Table */}
           <NavLink
             to={CTA_NAV_LINK.path}
-            onClick={() => isOpen && handleClose()}
+            onClick={handleBookTableClick}
             className="restaurant-header__reserve"
           >
-            BOOK TABLE
+            BOOK A TABLE
           </NavLink>
 
           {/* Center: Brand Logo */}
@@ -456,7 +474,7 @@ export function Header() {
                   {link.label}
                 </NavLink>
               );
-            })} 
+            })}
           </div>
 
           {/* Secondary External Links */}

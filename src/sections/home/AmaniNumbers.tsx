@@ -30,7 +30,7 @@ const PANELS_DATA: PanelData[] = [
   {
     number: '02',
     marker: 'DIETARY /',
-    mainPhrase: ['VEGETARIAN,', 'NON-VEG & JAIN'],
+    mainPhrase: ['VEGETARIAN,', 'NON-VEGETARIAN'],
     metadataLeft: 'THOUGHTFUL DINING',
     metadataRight: '',
     tone: 'terracotta',
@@ -39,7 +39,7 @@ const PANELS_DATA: PanelData[] = [
   {
     number: '03',
     marker: 'EXPERIENCES /',
-    mainPhrase: ['DINE IN, CATERING', '& PRIVATE TABLES'],
+    mainPhrase: ['DINE IN,', 'GATHERINGS', '& CATERING'],
     metadataLeft: 'THE AMANI WAY',
     metadataRight: '',
     tone: 'turmeric',

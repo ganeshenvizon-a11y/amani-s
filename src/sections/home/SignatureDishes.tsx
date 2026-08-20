@@ -183,8 +183,8 @@ export function SignatureDishes() {
         <header className="signature-stack__intro">
           <div className="signature-stack__headline-group">
             <h2 id="signature-stack-heading">
-              <span>From our <em>fire</em></span>
-              <span>to your table.</span>
+              <span>From our <em>Fire</em></span>
+              <span>to your Table.</span>
             </h2>
             <RangoliPattern className="signature-stack__motif" size="68" color="currentColor" strokeWidth={1.2} />
           </div>

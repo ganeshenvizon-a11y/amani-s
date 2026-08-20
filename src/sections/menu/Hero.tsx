@@ -20,7 +20,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1 id="menu-hero-title">
-            <span>Recipes from</span> <em>fire.</em>
+            <span>Recipes from</span> <em>fire</em>
           </h1>
           <p className="menu-hero__lede">Andhra curries, dum biryanis, and grand thalis — every dish slow-cooked from regional recipes and handed down through generations. Explore the full menu.</p>
           <div className="menu-hero__actions">

@@ -3,7 +3,7 @@ import { useState } from 'react';
 const moods = [
   { name: 'Something comforting', suggestion: "Amani's South Veg Thali", image: '/media/images/thali/south-indian-thali.png' },
   { name: 'Bring the heat', suggestion: 'Chilli Chicken with Masala Cola', image: '/media/images/dish-chicken-majestic.jpg' },
-  { name: 'Share the table', suggestion: 'Chicken Dum Biryani for the table', image: '/media/images/story/amani-story-03-family-table.webp' },
+  { name: 'Share the table', suggestion: 'Chicken Dum Biryani for the table', image: '/media/images/story/3.png' },
 ];
 
 export function MoodFinder() {

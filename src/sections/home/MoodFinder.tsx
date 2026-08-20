@@ -6,18 +6,22 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MOOD_FINDER_CONTENT } from '../../content/home';
+import { RangoliPattern } from '../../components/motion/RangoliPattern';
 
 export function MoodFinder() {
   const railRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [hasOverflow, setHasOverflow] = useState(false);
 
   const checkScrollState = () => {
     const rail = railRef.current;
     if (!rail) return;
     const { scrollLeft, scrollWidth, clientWidth } = rail;
-    setCanScrollLeft(scrollLeft > 10);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    const isOverflowing = scrollWidth > clientWidth + 10;
+    setHasOverflow(isOverflowing);
+    setCanScrollLeft(isOverflowing && scrollLeft > 10);
+    setCanScrollRight(isOverflowing && scrollLeft < scrollWidth - clientWidth - 10);
   };
 
   useEffect(() => {
@@ -25,10 +29,13 @@ export function MoodFinder() {
     if (!rail) return;
 
     checkScrollState();
+    const timer = setTimeout(checkScrollState, 100);
+
     rail.addEventListener('scroll', checkScrollState, { passive: true });
     window.addEventListener('resize', checkScrollState);
 
     return () => {
+      clearTimeout(timer);
       rail.removeEventListener('scroll', checkScrollState);
       window.removeEventListener('resize', checkScrollState);
     };
@@ -49,41 +56,64 @@ export function MoodFinder() {
       className="home-mood-journey"
       aria-labelledby="mood-journey-heading"
     >
+      {/* Background Pattern Texture Overlay */}
+      <div className="home-mood-journey__bg-pattern" aria-hidden="true">
+        <img
+          src="/media/images/hero-pattern.png"
+          alt=""
+          className="home-mood-journey__bg-pattern-img"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      {/* Rangoli Watermark Motifs */}
+      <div className="home-mood-journey__motif home-mood-journey__motif--left" aria-hidden="true">
+        <RangoliPattern size={420} color="var(--amani-gold, #c8a762)" strokeWidth={0.8} />
+      </div>
+      <div className="home-mood-journey__motif home-mood-journey__motif--right" aria-hidden="true">
+        <RangoliPattern size={420} color="var(--amani-gold, #c8a762)" strokeWidth={0.8} />
+      </div>
+
       <div className="home-mood-journey__header">
         <div className="home-mood-journey__intro">
-          <h2 id="mood-journey-heading">The dishes our tables return for.</h2>
+          <h2 id="mood-journey-heading">
+            What Are You<br />
+            in the Mood For?
+          </h2>
         </div>
 
-        <div className="home-mood-journey__controls">
-          <button
-            type="button"
-            className="home-mood-journey__nav-btn"
-            onClick={() => handleScroll('left')}
-            disabled={!canScrollLeft}
-            aria-label="Scroll left"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="home-mood-journey__nav-btn"
-            onClick={() => handleScroll('right')}
-            disabled={!canScrollRight}
-            aria-label="Scroll right"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
+        {hasOverflow && (
+          <div className="home-mood-journey__controls">
+            <button
+              type="button"
+              className="home-mood-journey__nav-btn"
+              onClick={() => handleScroll('left')}
+              disabled={!canScrollLeft}
+              aria-label="Scroll left"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="home-mood-journey__nav-btn"
+              onClick={() => handleScroll('right')}
+              disabled={!canScrollRight}
+              aria-label="Scroll right"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="home-mood-journey__viewport">
         <div ref={railRef} className="home-mood-journey__rail">
           {MOOD_FINDER_CONTENT.moods.map((mood, index) => {
-            const titleParts = mood.title.split('&');
             return (
               <article className="mood-journey-card" key={mood.id}>
                 <img
@@ -95,23 +125,13 @@ export function MoodFinder() {
                 />
                 <div className="mood-journey-card__veil" aria-hidden="true" />
                 <div className="mood-journey-card__content">
-                  <h3 className="mood-journey-card__title">
-                    {titleParts.length > 1 ? (
-                      <>
-                        {titleParts[0].trim()}
-                        <br />
-                        &amp; {titleParts[1].trim()}
-                      </>
-                    ) : (
-                      mood.title
-                    )}
-                  </h3>
+                  <h3 className="mood-journey-card__title">{mood.title}</h3>
                   <div className="mood-journey-card__footer">
                     <div
                       className="mood-journey-card__tags"
-                      aria-label={`Suggested dishes for ${mood.title}`}
+                      aria-label={`Suggested dish for ${mood.title}`}
                     >
-                      {mood.dishes.slice(0, 2).map((dish) => (
+                      {mood.dishes.slice(0, 1).map((dish) => (
                         <span className="mood-journey-card__tag" key={dish}>
                           {dish}
                         </span>

@@ -96,7 +96,9 @@
 
 .gath-button:hover,
 .gath-button:focus-visible {
-  background: var(--amani-maroon-dark);
+  background: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
+  color: var(--amani-ink, #171411);
   outline: none;
   transform: translateY(-1px);
 }
@@ -176,9 +178,9 @@
   margin: 1.1rem 0 0;
   color: var(--amani-cream-on-dark);
   font-family: var(--amani-font-display);
-  font-size: var(--font-hero, clamp(1.75rem, 6.1vw, 7.3rem));
+  font-size: var(--font-hero);
   font-weight: 500;
-  line-height: 0.92;
+  line-height: 1.15;
   letter-spacing: -0.04em;
   text-align: center;
 }
@@ -221,8 +223,9 @@
 }
 
 .gath-hero__actions .gath-button:hover {
-  background: var(--amani-maroon-dark);
-  border-color: var(--amani-maroon-dark);
+  background: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
+  color: var(--amani-ink, #171411);
 }
 
 

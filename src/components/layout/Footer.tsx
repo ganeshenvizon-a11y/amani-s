@@ -202,11 +202,11 @@ export function Footer() {
           <div className="footer-title-wrap">
             <div className="footer-title-line">
               <h2 className="footer-title footer-title-inner">
-                Come <span className="terracotta">home</span>
+                Come <span className="terracotta">Home</span>
               </h2>
             </div>
             <div className="footer-title-line">
-              <h2 className="footer-title footer-title-inner">to the table.</h2>
+              <h2 className="footer-title footer-title-inner">to the Table</h2>
             </div>
 
             {/* Editorial CTA Pattern */}
@@ -380,17 +380,30 @@ export function Footer() {
 
           {/* Bottom Legal Row */}
           <div className="footer-bottom-bar">
-            <div>© {new Date().getFullYear()} AMANI'S</div>
+            <div className="footer-copyright">
+              © {new Date().getFullYear()} AMANI'S SOUTH INDIAN KITCHEN. ALL RIGHTS RESERVED.
+            </div>
 
-            <div className="footer-meta-links">
+            <div className="footer-meta-center">
               <NavLink to="/privacy/" className="footer-meta-link">
                 PRIVACY
               </NavLink>
               <NavLink to="/terms/" className="footer-meta-link">
                 TERMS
               </NavLink>
-              <span>MADE WITH WARMTH</span>
+              <span className="footer-meta-motto">MADE WITH WARMTH</span>
             </div>
+
+            <a
+              href="https://www.envizonstudio.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-envizon-tag"
+              aria-label="Designed by Envizon Studio"
+            >
+              <span className="footer-envizon-tag__muted">Designed By</span>{' '}
+              <strong className="footer-envizon-tag__bold">Envizon Studio</strong>
+            </a>
           </div>
         </div>
       </div>

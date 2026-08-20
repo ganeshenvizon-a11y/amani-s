@@ -6,37 +6,31 @@ import { RangoliPattern } from '../../components/motion/RangoliPattern';
 const VALUE_PROPOSITIONS = [
   {
     number: '01',
-    tag: 'Kitchen',
     title: 'Authentic Heritage',
     description: 'Traditional recipes that guests know, love, and return for.',
   },
   {
     number: '02',
-    tag: 'Launch',
     title: 'Strategic Location Assistance',
     description: 'Helping you choose the right location for maximum business potential.',
   },
   {
     number: '03',
-    tag: 'Growth',
     title: 'Training & Operations',
     description: 'Comprehensive staff training and proven operating systems.',
   },
   {
     number: '04',
-    tag: 'Brand',
     title: 'Trusted Brand',
     description: 'A loyal customer base built on consistent quality.',
   },
   {
     number: '05',
-    tag: 'Support',
     title: 'Complete Franchise Support',
     description: 'Expert guidance from planning to grand opening.',
   },
   {
     number: '06',
-    tag: 'Scale',
     title: 'Long-Term Business Growth',
     description: 'Continuous support to help your outlet perform and expand.',
   },
@@ -61,17 +55,12 @@ export function ValuePropositionGrid() {
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-y-14 lg:gap-x-16">
           {/* Section Header — sticky editorial column */}
           <Reveal direction="up" className="lg:col-span-5 lg:sticky lg:top-28 self-start">
-            <span className="text-[11px] font-semibold tracking-[0.16em] text-[var(--amani-turmeric)] uppercase mb-5 flex items-center gap-3">
-              <span className="inline-block w-8 h-px bg-[var(--amani-turmeric)]" />
-              Why franchise with Amani&apos;s
-            </span>
             <h2 className="font-display text-[length:var(--font-heading-1)] font-medium leading-[1.12] tracking-[-0.01em] text-[var(--amani-cream-on-dark)]">
-              Partner with us to bring authentic, rich culinary experiences to food lovers everywhere &mdash; and grow{' '}
+              Bring authentic culinary experiences everywhere &mdash; and grow{' '}
               <em className="not-italic font-medium text-[var(--amani-turmeric)]">a brand people keep coming back for.</em>
             </h2>
             <p className="mt-6 text-[length:var(--font-body)] text-[var(--amani-cream-muted)] leading-relaxed max-w-md">
-              Six pillars of partnership, built from years of running kitchens that stay full &mdash; each one working
-              behind you from your first plate to your fifth outlet.
+              Six pillars of partnership built from years of experience &mdash; backing your journey from day one.
             </p>
           </Reveal>
 
@@ -86,12 +75,9 @@ export function ValuePropositionGrid() {
                     aria-hidden="true"
                   />
 
-                  <div className="flex items-baseline justify-between mb-6">
+                  <div className="mb-6">
                     <span className="font-display text-4xl sm:text-5xl leading-none text-[rgba(244,237,223,0.16)] transition-colors duration-300 group-hover:text-[var(--amani-turmeric)]">
                       {prop.number}
-                    </span>
-                    <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--amani-turmeric)]">
-                      {prop.tag}
                     </span>
                   </div>
 

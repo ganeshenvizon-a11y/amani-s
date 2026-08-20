@@ -10,7 +10,7 @@ Welcome to the central design and development specification document for **Amani
 
 ### Core Design Pillars
 1. **Tactile Editorial Craft**: High-contrast typography, vintage paper textures, organic torn edges, frosted scotch tape, rubber ink stamps, and physical card deck physics.
-2. **Generous Dining & Memory**: Warm, atmospheric visual tones, rich dark void scenes (`#2E130B`), rice/paper canvases (`#F8F2E5`), and deep terracotta/maroon accents (`#7A1F24`, `#A34A31`).
+2. **Generous Dining & Memory**: Warm, atmospheric visual tones, rich dark void scenes (`#742F1C`), rice/paper canvases (`#F8F2E5`), and deep terracotta/maroon accents (`#742F1C`, `#A34A31`).
 3. **Smooth Micro-Interactions**: Critically damped spring physics, organic gravity drops, inertia-driven drag and throwing loops, dynamic cycling word reveals, and zero-snapping settling algorithms.
 
 ---
@@ -34,16 +34,16 @@ Welcome to the central design and development specification document for **Amani
   --amani-ink-faint:       rgba(23, 20, 17, 0.25);
 
   /* Brand Accents */
-  --amani-maroon:          #7A1F24; /* Primary Amani maroon */
+  --amani-maroon:          #742F1C; /* Primary Amani maroon */
   --amani-maroon-dark:     #551317; /* Active/hover maroon */
   --amani-maroon-tint:     rgba(122, 31, 36, 0.1);
   --amani-terracotta:      #A2553E; /* Muted terracotta accent */
-  --amani-terracotta-dark: #2E130B; /* Deep terracotta brown shade */
+  --amani-terracotta-dark: #742F1C; /* Deep terracotta brown shade */
   --amani-olive:           #6D7254; /* Banana-leaf olive green */
   --amani-turmeric:        #C99732; /* Restrained turmeric yellow */
 
   /* Dark Editorial Scenes */
-  --amani-void:            #2E130B; /* Deep terracotta dark background */
+  --amani-void:            #742F1C; /* Deep terracotta dark background */
   --amani-dark-warm:       #3A190E; /* Surface dark warm container */
   --amani-cream-on-dark:   #F4EDDF; /* Ivory text on dark void */
   --amani-cream-muted:     rgba(244, 237, 223, 0.7);
@@ -82,7 +82,7 @@ The typography system at Amani's is built strictly around **two curated font fam
 | Type Utility | CSS Variable / Class | Font Family | Size (Fluid Clamp / Rem) | Line Height | Letter Spacing | Color / Accent |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Hero Title** | `--font-hero` / `.text-hero` | `Clash Display` | `clamp(3.5rem, 8vw, 8.5rem)` | `0.92` | `-0.025em` | `var(--amani-ink)` / `#171411` |
-| **Hero Editorial** | `.home-hero__title` | `Clash Display` | `clamp(1.75rem, 6.1vw, 7.3rem)` | `0.88` | `-0.03em` | `#171411` with soft text shadow |
+| **Hero Editorial** | `.home-hero__title` | `Clash Display` | `clamp(1.575rem, 5.49vw, 6.57rem)` | `0.88` | `-0.03em` | `#171411` with soft text shadow |
 | **Heading 1** | `--font-heading-1` / `.text-h1` | `Clash Display` | `clamp(2.5rem, 5.5vw, 5.5rem)` | `0.98` | `-0.02em` | `var(--amani-ink)` |
 | **Heading 2** | `--font-heading-2` / `.text-h2` | `Clash Display` | `clamp(1.85rem, 3.8vw, 3.8rem)` | `1.05` | `-0.015em` | `var(--amani-ink)` |
 | **Heading 3** | `--font-heading-3` / `.text-h3` | `Clash Display` | `clamp(1.4rem, 2.2vw, 2.4rem)` | `1.15` | `0em` | `var(--amani-ink)` |
