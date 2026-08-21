@@ -4,6 +4,7 @@
  */
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { NavLink } from 'react-router-dom';
 import { gsap } from '../../lib/gsap';
 
 const HERO_CARDS = [
@@ -192,9 +193,14 @@ export function Hero() {
         { yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.12, delay: 0.15, ease: 'power4.out' },
       );
       gsap.fromTo(
-        '.home-hero__kicker',
-        { y: 16, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 0.1, ease: 'power3.out' }
+        '.home-hero__subtitle',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.35, ease: 'power3.out' }
+      );
+      gsap.fromTo(
+        '.home-hero__actions',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.45, ease: 'power3.out' }
       );
     }, hero);
 
@@ -387,7 +393,6 @@ export function Hero() {
         />
       </div>
       <div className="home-hero__content">
-        <p className="home-hero__kicker">South Indian Dining & Catering · Jubilee Hills, Hyderabad</p>
         <h1 className="home-hero__title" data-split="true">
           <span className="home-hero__title-line">
             <span className="home-hero__title-line-inner">
@@ -405,6 +410,14 @@ export function Hero() {
             </span>
           </span>
         </h1>
+        <p className="home-hero__subtitle">
+          Familiar South Indian flavours, generous tables and thoughtful hospitality
+        </p>
+        <div className="home-hero__actions">
+          <NavLink to="/menu" className="restaurant-desktop-cta home-hero__btn">
+            <span>Explore the Menu</span>
+          </NavLink>
+        </div>
       </div>
 
       <div className="home-hero__card-deck" aria-label="Draggable Amani's visual introduction">

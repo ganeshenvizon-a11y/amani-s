@@ -34,8 +34,8 @@ const STORY_CARDS: GuestStoryCard[] = [
     alt: 'Couple sharing a warm South Indian fish curry meal in a softly lit dining room',
     quote: 'The fish curry and warm hospitality made our anniversary dinner feel so intimate and special.',
     author: 'Gurpreet & Harpreet',
-    sizeClass: 'w-[160px] md:w-[180px] lg:w-[195px] xl:w-[205px]',
-    desktopPosClasses: 'top-[10%] left-[3%]',
+    sizeClass: 'w-[140px] sm:w-[155px] md:w-[165px] lg:w-[190px] xl:w-[205px]',
+    desktopPosClasses: 'top-[8%] left-[2%] lg:left-[3%]',
     rotation: '-2.5deg',
     badgePosition: 'bottom-right',
     cloudSide: 'right',
@@ -50,8 +50,8 @@ const STORY_CARDS: GuestStoryCard[] = [
     alt: 'Multi-generational South Indian family gathered around a central thali feast',
     quote: 'Passing platters across three generations — it felt just like our Sunday home gatherings.',
     author: 'The Sundaram Family',
-    sizeClass: 'w-[170px] md:w-[190px] lg:w-[210px] xl:w-[220px]',
-    desktopPosClasses: 'top-[5%] left-[72%]',
+    sizeClass: 'w-[145px] sm:w-[165px] md:w-[175px] lg:w-[200px] xl:w-[220px]',
+    desktopPosClasses: 'top-[4%] left-[66%] md:left-[68%] lg:left-[72%]',
     rotation: '1.5deg',
     badgePosition: 'bottom-left',
     cloudSide: 'left',
@@ -66,8 +66,8 @@ const STORY_CARDS: GuestStoryCard[] = [
     alt: 'Golden crisp Mysore masala dosa served with coconut chutneys',
     quote: 'Simple, warm and familiar — the kind of food you don’t need to explain.',
     author: 'Sriram',
-    sizeClass: 'w-[150px] md:w-[170px] lg:w-[185px] xl:w-[195px]',
-    desktopPosClasses: 'top-[44%] left-[2%]',
+    sizeClass: 'w-[135px] sm:w-[150px] md:w-[160px] lg:w-[180px] xl:w-[195px]',
+    desktopPosClasses: 'top-[42%] left-[1.5%] lg:left-[2%]',
     rotation: '2.2deg',
     badgePosition: 'bottom-right',
     cloudSide: 'right',
@@ -82,8 +82,8 @@ const STORY_CARDS: GuestStoryCard[] = [
     alt: 'South Indian filter coffee poured into traditional brass tumbler',
     quote: 'We finished lunch and still sat around for another brass davara filter coffee.',
     author: 'Keerthi',
-    sizeClass: 'w-[145px] md:w-[165px] lg:w-[180px] xl:w-[190px]',
-    desktopPosClasses: 'top-[72%] left-[5%]',
+    sizeClass: 'w-[130px] sm:w-[145px] md:w-[155px] lg:w-[175px] xl:w-[190px]',
+    desktopPosClasses: 'top-[72%] left-[3%] lg:left-[5%]',
     rotation: '-1.5deg',
     badgePosition: 'bottom-right',
     cloudSide: 'right',
@@ -98,8 +98,8 @@ const STORY_CARDS: GuestStoryCard[] = [
     alt: 'South Indian family sharing dishes on fresh banana leaf',
     quote: 'The rasam and slow-simmered curries brought back memories of home.',
     author: 'Ananya & Family',
-    sizeClass: 'w-[160px] md:w-[180px] lg:w-[195px] xl:w-[205px]',
-    desktopPosClasses: 'top-[68%] left-[76%]',
+    sizeClass: 'w-[140px] sm:w-[155px] md:w-[165px] lg:w-[190px] xl:w-[205px]',
+    desktopPosClasses: 'top-[68%] left-[68%] md:left-[70%] lg:left-[75%]',
     rotation: '2.5deg',
     badgePosition: 'bottom-left',
     cloudSide: 'left',
@@ -114,8 +114,8 @@ const STORY_CARDS: GuestStoryCard[] = [
     alt: 'Chettinad roasted curry with aromatic spices',
     quote: 'Freshly ground masalas and vibrant heat. Everyone ended up sharing from each other’s plate.',
     author: 'Nikhil',
-    sizeClass: 'w-[155px] md:w-[175px] lg:w-[190px] xl:w-[200px]',
-    desktopPosClasses: 'top-[38%] left-[80%]',
+    sizeClass: 'w-[135px] sm:w-[150px] md:w-[160px] lg:w-[185px] xl:w-[200px]',
+    desktopPosClasses: 'top-[36%] left-[70%] md:left-[72%] lg:left-[77%]',
     rotation: '-2.2deg',
     badgePosition: 'bottom-left',
     cloudSide: 'left',
@@ -169,7 +169,7 @@ function DraggableStoryCard({ card }: { card: GuestStoryCard }) {
       }`}
       style={{
         transform: `translate3d(${offset.x}px, ${offset.y}px, 0) rotate(${card.rotation})`,
-        touchAction: 'none',
+        touchAction: isDragging ? 'none' : 'pan-y',
       }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -208,6 +208,66 @@ function DraggableStoryCard({ card }: { card: GuestStoryCard }) {
 
 export function GuestReviews() {
   const sectionRef = useRef<HTMLElement>(null);
+  const mobileCarouselRef = useRef<HTMLDivElement>(null);
+  const isDraggingMobileRef = useRef(false);
+  const startXMobileRef = useRef(0);
+  const scrollLeftMobileRef = useRef(0);
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+
+  // Track scroll position on mobile for active card indicator dots
+  useEffect(() => {
+    const carousel = mobileCarouselRef.current;
+    if (!carousel) return;
+
+    const handleScroll = () => {
+      if (window.innerWidth >= 768) return;
+      const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+      if (maxScrollLeft <= 0) {
+        setActiveMobileIndex(0);
+        return;
+      }
+      const progress = carousel.scrollLeft / maxScrollLeft;
+      const dotIndex = Math.round(progress * (STORY_CARDS.length - 1));
+      setActiveMobileIndex(Math.min(Math.max(0, dotIndex), STORY_CARDS.length - 1));
+    };
+
+    handleScroll();
+    carousel.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      carousel.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  const handleMobilePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const carousel = mobileCarouselRef.current;
+    if (!carousel) return;
+    isDraggingMobileRef.current = true;
+    startXMobileRef.current = e.clientX;
+    scrollLeftMobileRef.current = carousel.scrollLeft;
+  };
+
+  const handleMobilePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingMobileRef.current) return;
+    const carousel = mobileCarouselRef.current;
+    if (!carousel) return;
+    const dx = e.clientX - startXMobileRef.current;
+    carousel.scrollLeft = scrollLeftMobileRef.current - dx;
+  };
+
+  const handleMobilePointerUpOrLeave = () => {
+    isDraggingMobileRef.current = false;
+  };
+
+  const scrollToMobileDot = (index: number) => {
+    const carousel = mobileCarouselRef.current;
+    if (!carousel) return;
+    const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+    if (maxScrollLeft <= 0) return;
+    const targetScrollLeft = (index / (STORY_CARDS.length - 1)) * maxScrollLeft;
+    carousel.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -333,13 +393,21 @@ export function GuestReviews() {
         </div>
 
         {/* Mobile UX Carousel (<768px) */}
-        <div className="md:hidden w-full mt-8 overflow-x-auto snap-x snap-mandatory flex gap-4 px-4 pb-6 scrollbar-none">
+        <div
+          ref={mobileCarouselRef}
+          className="md:hidden w-full mt-6 overflow-x-auto snap-x snap-mandatory flex gap-4 px-4 pt-2 pb-6 scrollbar-none touch-pan-x touch-pan-y cursor-grab active:cursor-grabbing select-none"
+          onPointerDown={handleMobilePointerDown}
+          onPointerMove={handleMobilePointerMove}
+          onPointerUp={handleMobilePointerUpOrLeave}
+          onPointerLeave={handleMobilePointerUpOrLeave}
+          onPointerCancel={handleMobilePointerUpOrLeave}
+        >
           {STORY_CARDS.map((card) => (
             <div
               key={`mobile-${card.id}`}
-              className="snap-center flex-shrink-0 w-[80vw] max-w-[310px]"
+              className="snap-center flex-shrink-0 w-[82vw] max-w-[300px]"
             >
-              <div className="amani-story-card-inner relative">
+              <div className="amani-story-card-inner relative w-full">
                 <div className="amani-story-image-box w-full aspect-[1.25/1]">
                   <img src={card.image} alt={card.alt} loading="lazy" decoding="async" />
 
@@ -357,6 +425,21 @@ export function GuestReviews() {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Mobile Pagination Indicator Dots */}
+        <div className="md:hidden flex items-center justify-center gap-2 mt-2 pb-4" aria-hidden="true">
+          {STORY_CARDS.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`h-2 rounded-full transition-all duration-300 ${
+                activeMobileIndex === idx ? 'w-6 bg-[var(--amani-maroon,#A34A31)]' : 'w-2 bg-black/20'
+              }`}
+              onClick={() => scrollToMobileDot(idx)}
+              aria-label={`Go to testimonial ${idx + 1}`}
+            />
           ))}
         </div>
       </div>

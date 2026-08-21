@@ -7,7 +7,6 @@ import { Hero } from '../../sections/home/Hero';
 import { GatheringStatement } from '../../sections/home/GatheringStatement';
 import { MoodFinder } from '../../sections/home/MoodFinder';
 import { ThaliExperience } from '../../sections/home/ThaliExperience';
-import { AmaniNumbers } from '../../sections/home/AmaniNumbers';
 import { BrandStory } from '../../sections/home/BrandStory';
 import { SignatureDishes } from '../../sections/home/SignatureDishes';
 import { GuestReviews } from '../../sections/home/GuestReviews';
@@ -52,9 +51,6 @@ export function HomePage() {
 
         {/* Section 04: Dietary Thali Experience */}
         <ThaliExperience />
-
-        {/* Section 05: Amani By The Numbers */}
-        <AmaniNumbers />
 
         {/* Section 05: Amani Brand Story */}
         <BrandStory />

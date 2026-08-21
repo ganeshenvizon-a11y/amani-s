@@ -251,13 +251,11 @@ h6 span,
   display: block;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse at bottom left,
-    rgba(15, 8, 5, 0.72) 0%,
-    rgba(15, 8, 5, 0.45) 22%,
-    rgba(15, 8, 5, 0.16) 42%,
-    rgba(15, 8, 5, 0) 67%
-  );
+  background: radial-gradient(ellipse at bottom left,
+      rgba(15, 8, 5, 0.72) 0%,
+      rgba(15, 8, 5, 0.45) 22%,
+      rgba(15, 8, 5, 0.16) 42%,
+      rgba(15, 8, 5, 0) 67%);
 }
 
 .home-gathering-statement__content {
@@ -627,23 +625,13 @@ h6 span,
 .mood-journey-card__veil {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
-  background:
-    linear-gradient(180deg,
-      rgba(0, 0, 0, 0.03) 25%,
-      rgba(0, 0, 0, 0.72) 100%),
-    linear-gradient(to top,
-      rgba(18, 15, 12, 0.94) 0%,
-      rgba(18, 15, 12, 0.74) 35%,
-      rgba(18, 15, 12, 0.22) 68%,
-      transparent 100%);
+  background: linear-gradient(to top, rgba(15, 10, 8, 0.62) 0%, rgba(15, 10, 8, 0.22) 35%, transparent 65%);
   transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mood-journey-card:hover .mood-journey-card__veil {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .mood-journey-card__content {
@@ -695,6 +683,7 @@ h6 span,
   overflow: hidden;
   text-overflow: ellipsis;
   color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .mood-journey-card__footer {
@@ -980,24 +969,14 @@ h6 span,
 
 .home-hero--editorial .home-hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   top: auto;
   left: auto;
   width: min(92rem, calc(100% - 12vw));
   margin-inline: auto;
   transform: translateY(-11vh);
   text-align: center;
-  pointer-events: auto;
-}
-
-.home-hero__kicker {
-  margin: 0 0 0.85rem;
-  color: var(--amani-maroon, #742F1C);
-  font-family: var(--amani-font-ui);
-  font-size: clamp(0.64rem, 0.82vw, 0.78rem);
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .home-hero--editorial .home-hero__title {
@@ -1032,6 +1011,59 @@ h6 span,
   text-align: center;
   white-space: nowrap;
 }
+
+.home-hero__subtitle {
+  max-width: 36rem;
+  margin: 1.25rem auto 0;
+  color: var(--amani-maroon, #742F1C);
+  font-family: var(--amani-font-ui, 'Manrope', sans-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  opacity: 0.92;
+}
+
+.home-hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  pointer-events: auto;
+}
+
+.home-hero__btn {
+  margin-left: 0;
+  padding: 14px 28px;
+  font-size: 13px;
+  background-color: var(--amani-maroon, #742F1C);
+  color: #FAF6EE;
+  border-color: var(--amani-maroon, #742F1C);
+  box-shadow: 0 4px 14px rgba(116, 47, 28, 0.25);
+  transition: all 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-hero__btn:hover,
+.home-hero__btn:focus-visible {
+  background-color: var(--amani-gold, #c8a762);
+  border-color: var(--amani-gold, #c8a762);
+  color: #171411;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 167, 98, 0.4);
+}
+
+@media (max-width: 640px) {
+  .home-hero__subtitle {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    padding-inline: 1rem;
+  }
+
+  .home-hero__actions {
+    margin-top: 1.5rem;
+  }
+}
+
 
 /* Terracotta Semantic Word Highlights in Clash Display */
 .home-hero__word--fire {
@@ -1225,7 +1257,7 @@ body.image-lightbox-open {
   z-index: 1;
   left: clamp(1.25rem, 5.5vw, 6.5rem);
   bottom: 0.3svh;
-  width: clamp(8.8rem, calc(13.5vw * var(--hero-card-scale, 1)), 16.5rem);
+  width: clamp(10.1rem, calc(15.5vw * var(--hero-card-scale, 1)), 19rem);
   aspect-ratio: 0.76;
 }
 
@@ -1248,8 +1280,8 @@ body.image-lightbox-open {
 .home-hero__card:nth-child(4) {
   z-index: 3;
   left: 50%;
-  bottom: 3.3svh;
-  width: clamp(9.4rem, calc(14.2vw * var(--hero-card-scale, 1)), 17.5rem);
+  bottom: -1.5svh;
+  width: clamp(8.4rem, calc(12.5vw * var(--hero-card-scale, 1)), 15.5rem);
   aspect-ratio: 0.77;
 }
 
@@ -1273,7 +1305,7 @@ body.image-lightbox-open {
   z-index: 1;
   right: clamp(1.25rem, 4.2vw, 5.5rem);
   bottom: -0.2svh;
-  width: clamp(8.2rem, calc(12.8vw * var(--hero-card-scale, 1)), 15.5rem);
+  width: clamp(9.4rem, calc(14.7vw * var(--hero-card-scale, 1)), 17.8rem);
   aspect-ratio: 0.78;
 }
 
@@ -1503,11 +1535,6 @@ body.image-lightbox-open {
     line-height: 0.92;
   }
 
-  .home-hero__kicker {
-    font-size: clamp(0.78rem, 3vw, 0.95rem);
-    letter-spacing: 0.2em;
-  }
-
   .home-hero__card-deck {
     inset: 0;
     width: 100%;
@@ -1583,11 +1610,6 @@ body.image-lightbox-open {
   .home-hero--editorial .home-hero__title {
     font-size: var(--font-hero);
     line-height: 0.95;
-  }
-
-  .home-hero__kicker {
-    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-    letter-spacing: 0.22em;
   }
 
   /* Taller cards on tablet — overrides the shared --m-card-h above */
@@ -2564,6 +2586,7 @@ body.image-lightbox-open {
 
   .brand-story__copy {
     max-width: 100%;
+    text-align: justify;
   }
 
   .brand-story__intro h2 {
@@ -2613,7 +2636,7 @@ body.image-lightbox-open {
   position: relative;
   z-index: 5;
   height: 100svh;
-  min-height: 44rem;
+  min-height: 42rem;
   overflow: hidden;
   color: var(--amani-ink);
   background:
@@ -2626,10 +2649,10 @@ body.image-lightbox-open {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(26rem, 1.08fr) minmax(22rem, 0.92fr);
-  gap: clamp(2rem, 4vw, 5rem);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(1.5rem, 3.5vw, 5rem);
   align-items: center;
-  width: min(91rem, calc(100% - clamp(3rem, 9vw, 9rem)));
+  width: min(91rem, calc(100% - clamp(2.5rem, 7vw, 9rem)));
   height: 100%;
   margin: 0 auto;
 }
@@ -2640,14 +2663,14 @@ body.image-lightbox-open {
   align-items: flex-start;
   width: min(100%, 47rem);
   max-width: none;
-  transform: translateY(-3vh);
+  transform: translateY(-2vh);
 }
 
 .signature-stack__intro>p {
-  margin: 0 0 clamp(1.5rem, 2vw, 2rem);
+  margin: 0 0 clamp(1.25rem, 2vw, 2rem);
   color: var(--amani-maroon);
   font-family: var(--amani-font-ui);
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 0.85vw, 0.8rem);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2661,9 +2684,9 @@ body.image-lightbox-open {
 .signature-stack__intro h2 {
   margin: 0;
   font-family: var(--amani-font-display, 'Balery', sans-serif);
-  font-size: clamp(3.75rem, 5.3vw, 6.4rem);
+  font-size: clamp(2.8rem, 4.8vw, 6.4rem);
   font-weight: 500;
-  line-height: 0.88;
+  line-height: 0.9;
   letter-spacing: -0.04em;
   text-transform: none;
 }
@@ -2683,7 +2706,7 @@ body.image-lightbox-open {
   position: absolute;
   top: 57%;
   right: -4.5rem;
-  width: clamp(3.25rem, 4vw, 4.25rem);
+  width: clamp(2.75rem, 3.5vw, 4.25rem);
   height: auto;
   color: var(--amani-maroon);
   opacity: 0.26;
@@ -2692,11 +2715,11 @@ body.image-lightbox-open {
 }
 
 .signature-stack__summary {
-  max-width: 18rem;
-  margin: clamp(1.8rem, 2.5vw, 2.25rem) 0 0 !important;
+  max-width: 22rem;
+  margin: clamp(1.4rem, 2.2vw, 2.25rem) 0 0 !important;
   color: rgba(24, 20, 17, 0.64);
   font-family: var(--amani-font-ui);
-  font-size: clamp(1.06rem, 1.35vw, 1.31rem) !important;
+  font-size: clamp(0.98rem, 1.25vw, 1.31rem) !important;
   font-weight: 400 !important;
   letter-spacing: -0.018em !important;
   line-height: 1.45;
@@ -2707,10 +2730,10 @@ body.image-lightbox-open {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: clamp(1.9rem, 2.4vw, 2.25rem);
+  margin-top: clamp(1.5rem, 2.2vw, 2.25rem);
   color: var(--amani-ink);
   font-family: var(--amani-font-ui);
-  font-size: 0.78rem;
+  font-size: clamp(0.72rem, 0.8vw, 0.78rem);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-decoration: none;
@@ -2743,7 +2766,7 @@ body.image-lightbox-open {
 }
 
 .signature-stack__stage {
-  --signature-card-safe-inset: clamp(1.25rem, 2vw, 1.75rem);
+  --signature-card-safe-inset: clamp(1rem, 1.8vw, 1.75rem);
   position: relative;
   justify-self: end;
   width: min(100%, 37rem);
@@ -2753,7 +2776,7 @@ body.image-lightbox-open {
 }
 
 .signature-stack-card {
-  --signature-card-radius: 1.15rem;
+  --signature-card-radius: clamp(0.85rem, 1.4vw, 1.15rem);
   position: absolute;
   inset: var(--signature-card-safe-inset);
   display: grid;
@@ -2795,10 +2818,10 @@ body.image-lightbox-open {
 .signature-stack-card__copy {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: clamp(0.8rem, 1.7vw, 1.3rem);
+  gap: clamp(0.6rem, 1.4vw, 1.3rem);
   align-items: center;
-  min-height: clamp(6.1rem, 12vh, 7.6rem);
-  padding: clamp(1rem, 1.8vw, 1.35rem) clamp(1.05rem, 2.2vw, 1.8rem);
+  min-height: clamp(5.2rem, 11vh, 7.6rem);
+  padding: clamp(0.85rem, 1.6vw, 1.35rem) clamp(0.95rem, 2vw, 1.8rem);
   border-top: 1px solid rgba(68, 45, 30, 0.13);
   border-radius: 0 0 var(--signature-card-radius) var(--signature-card-radius);
 }
@@ -2808,47 +2831,51 @@ body.image-lightbox-open {
   padding-top: 0.12rem;
   color: var(--amani-maroon);
   font-family: var(--amani-font-ui);
-  font-size: 0.64rem;
+  font-size: clamp(0.6rem, 0.75vw, 0.64rem);
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
-.signature-stack-card__copy p {
-  margin: 0 0 0.32rem;
-  color: rgba(24, 20, 17, 0.55);
-  font-family: var(--amani-font-ui);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.signature-stack-card__copy h3 {
+  margin: 0 0 0.35rem;
+  color: var(--amani-ink);
+  font-family: var(--amani-font-display, 'Balery', serif);
+  font-size: clamp(1.1rem, 1.45vw, 1.65rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.signature-stack-card__copy h3 {
+.signature-stack-card__copy p {
   margin: 0;
-  color: var(--amani-ink);
+  color: rgba(24, 20, 17, 0.65);
   font-family: var(--amani-font-ui);
-  font-size: clamp(1.35rem, 2.05vw, 2.15rem);
+  font-size: clamp(0.72rem, 0.8vw, 0.82rem);
   font-weight: 400;
-  line-height: 0.96;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .signature-stack-card__copy a {
   display: grid;
-  width: 2.7rem;
-  height: 2.7rem;
+  width: clamp(2.35rem, 2.6vw, 2.7rem);
+  height: clamp(2.35rem, 2.6vw, 2.7rem);
   color: var(--amani-ink);
   text-decoration: none;
   border: 1px solid rgba(24, 20, 17, 0.32);
   border-radius: 50%;
   place-items: center;
+  flex-shrink: 0;
   transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease;
 }
 
 .signature-stack-card__copy a svg {
-  width: 1rem;
-  height: 1rem;
+  width: 0.95rem;
+  height: 0.95rem;
   stroke: currentColor;
   stroke-width: 1.55;
   stroke-linecap: round;
@@ -2873,13 +2900,12 @@ body.image-lightbox-open {
 
 @media (max-width: 899px) {
   .signature-stack {
-    --sig-stack-padding-x: clamp(1.5rem, 5vw, 3.5rem);
+    --sig-stack-padding-x: clamp(1.25rem, 4vw, 3rem);
     height: auto;
     min-height: 0;
-    padding: clamp(3.5rem, 7vw, 5.25rem) var(--sig-stack-padding-x) 3rem;
+    padding: clamp(3rem, 6vw, 4.5rem) 0 2.5rem;
     overflow: hidden;
   }
-
 
   .signature-stack__shell {
     display: block;
@@ -2888,13 +2914,14 @@ body.image-lightbox-open {
   }
 
   .signature-stack__intro {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
+    padding: 0 var(--sig-stack-padding-x);
     transform: none;
   }
 
   .signature-stack__intro h2 {
-    font-size: clamp(2.7rem, 10.8vw, 4.85rem);
-    line-height: 0.91;
+    font-size: clamp(2.4rem, 8.5vw, 4.2rem);
+    line-height: 0.92;
   }
 
   .signature-stack__intro h2>span {
@@ -2902,18 +2929,18 @@ body.image-lightbox-open {
   }
 
   .signature-stack__headline-group {
-    padding-bottom: 1.85rem;
+    padding-bottom: 1.5rem;
   }
 
   .signature-stack__summary {
-    margin-top: 1.5rem !important;
+    margin-top: 1.25rem !important;
   }
 
   .signature-stack__motif {
     top: auto;
     right: 0;
     bottom: 0;
-    width: clamp(2.5rem, 9vw, 3.25rem);
+    width: clamp(2.25rem, 8vw, 3rem);
     transform: none;
   }
 
@@ -2924,7 +2951,8 @@ body.image-lightbox-open {
     max-width: 100%;
     height: auto;
     margin: 0;
-    padding: 1.25rem 0 2rem;
+    padding: 1.25rem var(--sig-stack-padding-x) 2rem;
+    scroll-padding-inline: var(--sig-stack-padding-x);
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
@@ -2949,7 +2977,7 @@ body.image-lightbox-open {
     inset: auto;
     flex: 0 0 auto;
     width: min(84vw, 22rem);
-    min-height: min(30rem, 82svh);
+    min-height: min(28rem, 68svh);
     scroll-snap-align: start;
     scroll-snap-stop: normal;
     touch-action: pan-x pan-y;
@@ -2961,7 +2989,8 @@ body.image-lightbox-open {
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    margin-top: 1.25rem;
+    margin-top: 1rem;
+    padding: 0 var(--sig-stack-padding-x);
   }
 
   .signature-stack__dot {
@@ -2982,28 +3011,84 @@ body.image-lightbox-open {
   }
 }
 
-/* Portrait tablets card sizing for 3-step swipe rail */
+/* Portrait & landscape tablets card sizing (600px - 899px) */
 @media (min-width: 600px) and (max-width: 899px) {
   .signature-stack-card {
-    width: min(52vw, 22rem);
+    width: min(48vw, 22rem);
+    min-height: min(28rem, 65svh);
   }
 }
 
+/* Small mobile screens (< 520px) */
 @media (max-width: 520px) {
   .signature-stack__intro h2 {
-    font-size: clamp(2.55rem, 10.8vw, 3.55rem);
+    font-size: clamp(2.1rem, 9vw, 3.2rem);
   }
 
   .signature-stack-card {
-    min-height: 28rem;
+    width: min(85vw, 20rem);
+    min-height: min(26rem, 65svh);
+  }
+
+  .signature-stack-card__copy {
+    padding: 0.85rem 1rem;
+    gap: 0.75rem;
   }
 
   .signature-stack-card__copy h3 {
-    font-size: 1.45rem;
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    line-height: 1.08;
   }
 
   .signature-stack-card__copy p {
-    font-size: 0.61rem;
+    font-size: 0.62rem;
+  }
+
+  .signature-stack-card__copy a {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+}
+
+/* Extra small mobile (< 360px) */
+@media (max-width: 360px) {
+  .signature-stack-card {
+    width: min(88vw, 18rem);
+    min-height: min(24rem, 60svh);
+  }
+
+  .signature-stack-card__copy {
+    padding: 0.75rem 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .signature-stack-card__copy h3 {
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+  }
+}
+
+/* Short height / landscape mode devices */
+@media (max-height: 600px) and (max-width: 899px) {
+  .signature-stack-card {
+    min-height: 18rem;
+  }
+
+  .signature-stack-card__image-wrap {
+    min-height: 10rem;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 900px) {
+  .signature-stack {
+    min-height: 38rem;
+  }
+
+  .signature-stack__stage {
+    height: min(68svh, 36rem);
+  }
+
+  .signature-stack__intro h2 {
+    font-size: clamp(2.6rem, 4.2vw, 4.5rem);
   }
 }
 
@@ -3243,6 +3328,14 @@ body.image-lightbox-open {
   width: 72px;
 }
 
+.amani-numbers-card .amani-numbers__cta {
+  color: inherit;
+}
+
+.amani-numbers-card .amani-numbers__cta-line {
+  background-color: currentColor;
+}
+
 @media (max-width: 767px) {
   .amani-numbers {
     height: auto;
@@ -3370,6 +3463,8 @@ body.image-lightbox-open {
   .amani-numbers__col-bottom:has(.amani-numbers__editorial-title) {
     grid-column: 1 / 4;
     grid-row: 1;
+    display: flex;
+    align-items: center;
     padding: 0 2.5rem 1.75rem 0;
     border-bottom: 1px solid rgba(24, 21, 18, 0.16);
   }
@@ -3377,6 +3472,8 @@ body.image-lightbox-open {
   .amani-numbers__col-bottom:has(.amani-numbers__editorial-support) {
     grid-column: 4 / 7;
     grid-row: 1;
+    display: flex;
+    align-items: center;
     padding: 0 0 1.75rem 0;
     border-bottom: 1px solid rgba(24, 21, 18, 0.16);
   }
@@ -3487,7 +3584,7 @@ body.image-lightbox-open {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 5rem 1.5rem;
+  padding: clamp(3rem, 6vh, 5rem) 1rem;
   background-color: var(--amani-canvas, #F8F2E5);
   overflow: hidden;
   display: flex;
@@ -3505,7 +3602,7 @@ body.image-lightbox-open {
   position: relative;
   width: 100%;
   max-width: 1440px;
-  min-height: clamp(580px, 82vh, 920px);
+  min-height: clamp(480px, 76vh, 900px);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -3525,7 +3622,6 @@ body.image-lightbox-open {
   padding: 0 1rem;
 }
 
-
 .amani-stories-heading {
   display: flex;
   flex-direction: column;
@@ -3540,7 +3636,7 @@ body.image-lightbox-open {
   font-style: normal;
   font-weight: 500;
   color: var(--amani-terracotta, #A34A31);
-  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-size: clamp(2.4rem, 4.8vw, 5.5rem);
   letter-spacing: -0.025em;
 }
 
@@ -3548,20 +3644,20 @@ body.image-lightbox-open {
   font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-weight: 700;
   color: var(--amani-void, #742F1C);
-  font-size: clamp(2.4rem, 5.2vw, 5.2rem);
+  font-size: clamp(2.1rem, 4.5vw, 5.2rem);
   letter-spacing: -0.035em;
   margin-top: 0.12em;
 }
 
 .amani-stories-subcopy {
   font-family: var(--amani-font-ui), system-ui, sans-serif;
-  font-size: 15px;
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
   line-height: 1.5;
   color: var(--amani-ink-soft, #403A34);
   opacity: 0.85;
   max-width: 280px;
   text-align: center;
-  margin-top: 1.25rem;
+  margin-top: clamp(1rem, 2vh, 1.25rem);
 }
 
 .amani-google-review-card {
@@ -3569,10 +3665,10 @@ body.image-lightbox-open {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
-  gap: 12px;
+  gap: clamp(8px, 1.2vw, 12px);
   width: min(100%, 25.5rem);
-  margin-top: 1.6rem;
-  padding: 14px 16px;
+  margin-top: clamp(1.2rem, 2.2vh, 1.6rem);
+  padding: clamp(10px, 1.4vw, 14px) clamp(12px, 1.8vw, 16px);
   color: #181512;
   text-align: left;
   text-decoration: none;
@@ -3587,8 +3683,8 @@ body.image-lightbox-open {
 
 .amani-google-review-card__mark {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: clamp(30px, 2.8vw, 36px);
+  height: clamp(30px, 2.8vw, 36px);
   place-items: center;
   flex: 0 0 auto;
   background: transparent;
@@ -3604,7 +3700,7 @@ body.image-lightbox-open {
 
 .amani-google-review-card__eyebrow {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 10px;
+  font-size: clamp(9px, 0.75vw, 10px);
   font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1.2;
@@ -3615,7 +3711,7 @@ body.image-lightbox-open {
 .amani-google-review-card__title {
   overflow: hidden;
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 15px;
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 500;
   line-height: 1.25;
   color: #181512;
@@ -3628,7 +3724,7 @@ body.image-lightbox-open {
   align-items: center;
   gap: 4px;
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 14px;
+  font-size: clamp(12px, 1vw, 14px);
   line-height: 1;
   color: #181512;
   white-space: nowrap;
@@ -3640,13 +3736,13 @@ body.image-lightbox-open {
 
 .amani-google-review-card__star {
   color: #E67E22;
-  font-size: 14px;
+  font-size: clamp(12px, 1vw, 14px);
 }
 
 .amani-google-review-card__arrow {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: clamp(30px, 2.8vw, 36px);
+  height: clamp(30px, 2.8vw, 36px);
   place-items: center;
   flex: 0 0 auto;
   color: #181512;
@@ -3699,7 +3795,7 @@ body.image-lightbox-open {
 .amani-story-card-inner {
   position: relative;
   display: inline-block;
-  border-radius: 18px;
+  border-radius: clamp(14px, 1.4vw, 18px);
   overflow: visible;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -3715,7 +3811,7 @@ body.image-lightbox-open {
 .amani-story-image-box {
   position: relative;
   aspect-ratio: 1.25 / 1;
-  border-radius: 18px;
+  border-radius: clamp(14px, 1.4vw, 18px);
   overflow: hidden;
   box-shadow: 0 10px 30px -8px rgba(35, 24, 17, 0.14);
   background-color: #E6DCCB;
@@ -3740,10 +3836,10 @@ body.image-lightbox-open {
   position: absolute;
   top: 50%;
   z-index: 45;
-  width: clamp(210px, 16vw, 245px);
+  width: clamp(190px, 15vw, 245px);
   background: #FFFDF9;
-  border-radius: 18px;
-  padding: 14px 16px;
+  border-radius: 16px;
+  padding: 12px 14px;
   box-shadow: 0 16px 36px -6px rgba(24, 21, 18, 0.2), 0 4px 14px rgba(24, 21, 18, 0.08);
   border: 1px solid rgba(23, 20, 17, 0.08);
   opacity: 0;
@@ -3756,7 +3852,7 @@ body.image-lightbox-open {
 
 /* Right-side cloud */
 .amani-story-cloud--right {
-  left: calc(100% + 14px);
+  left: calc(100% + 12px);
   transform: translateY(-50%) translateX(-12px) scale(0.92);
 }
 
@@ -3780,7 +3876,7 @@ body.image-lightbox-open {
 
 /* Left-side cloud */
 .amani-story-cloud--left {
-  right: calc(100% + 14px);
+  right: calc(100% + 12px);
   transform: translateY(-50%) translateX(12px) scale(0.92);
 }
 
@@ -3804,7 +3900,7 @@ body.image-lightbox-open {
 
 .amani-story-cloud-quote {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
-  font-size: 12px;
+  font-size: clamp(11px, 0.9vw, 12px);
   line-height: 1.45;
   color: var(--amani-ink, #171411);
   font-weight: 500;
@@ -3836,7 +3932,7 @@ body.image-lightbox-open {
 
 .amani-story-quote {
   font-family: var(--amani-font-ui), system-ui, sans-serif;
-  font-size: 0.82rem;
+  font-size: clamp(0.78rem, 3.2vw, 0.85rem);
   line-height: 1.35;
   color: #F5EEE2;
   margin: 0 0 0.4rem;
@@ -3846,7 +3942,7 @@ body.image-lightbox-open {
 
 .amani-story-author {
   font-family: var(--amani-font-ui), system-ui, sans-serif;
-  font-size: 0.72rem;
+  font-size: clamp(0.68rem, 2.8vw, 0.74rem);
   font-weight: 600;
   color: rgba(245, 238, 226, 0.75);
   letter-spacing: 0.04em;
@@ -3859,10 +3955,10 @@ body.image-lightbox-open {
   z-index: 15;
   display: inline-flex;
   align-items: center;
-  padding: 9px 15px;
+  padding: clamp(7px, 1vw, 9px) clamp(11px, 1.4vw, 15px);
   border-radius: 999px;
   font-family: var(--amani-font-ui), system-ui, sans-serif;
-  font-size: 13px;
+  font-size: clamp(11px, 1vw, 13px);
   font-weight: 500;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -3911,7 +4007,7 @@ body.image-lightbox-open {
 
 @media (max-width: 767px) {
   .amani-stories-section {
-    padding: 3.5rem 0;
+    padding: 3rem 0;
   }
 
   .amani-stories-container {
@@ -3920,9 +4016,42 @@ body.image-lightbox-open {
     flex-direction: column;
   }
 
+  .amani-stories-center-box {
+    padding: 0 1rem;
+  }
+
   .amani-google-review-card {
-    width: min(100%, 21.5rem);
-    margin-top: 1.35rem;
+    width: min(calc(100vw - 2.5rem), 21.5rem);
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .amani-google-review-card {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .amani-google-review-card__mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .amani-google-review-card__title {
+    font-size: 12px;
+  }
+
+  .amani-google-review-card__eyebrow {
+    font-size: 8px;
+  }
+
+  .amani-google-review-card__rating {
+    font-size: 11px;
+  }
+
+  .amani-google-review-card__arrow {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -3945,68 +4074,49 @@ body.image-lightbox-open {
 
 .gatherings-section {
   position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  height: 100svh;
+  max-height: 100vh;
   overflow: hidden;
-  background-color: var(--amani-void, #1F0D07);
-  color: var(--amani-cream-on-dark, #F4EDDF);
-  border-bottom: 1px solid var(--amani-hairline-dark, rgba(244, 237, 223, 0.15));
-  padding: clamp(3.5rem, 6vh, 5.5rem) var(--amani-gutter, clamp(1.25rem, 4vw, 3.5rem));
-  min-height: 100vh;
-  min-height: 100dvh;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: #F3EBDD;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-.gatherings-section__bg-pattern {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.05;
-}
-
-.gatherings-section__bg-pattern-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  mix-blend-mode: overlay;
-  filter: contrast(1.15) brightness(0.95);
-}
-
-.gatherings-section__motif {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.07;
-  color: var(--amani-gold, #c8a762);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.gatherings-section__motif--left {
-  top: -12%;
-  left: -100px;
-  transform: rotate(-15deg);
-}
-
-.gatherings-section__motif--right {
-  bottom: -18%;
-  right: -100px;
-  transform: rotate(25deg);
-}
-
-@media (max-width: 960px) {
+@media (max-width: 767px) {
   .gatherings-section {
-    padding: clamp(3rem, 5vh, 4.5rem) var(--amani-gutter, clamp(1rem, 4vw, 3rem));
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 3rem 1.25rem 3.5rem;
   }
+}
+
+/* Must come after the base .gatherings-section rule above so this reset wins
+   the cascade at equal specificity — mirrors the .amani-numbers tablet-portrait
+   override, which .gatherings-section shares markup with but otherwise loses to
+   the unconditional height:100vh/overflow:hidden rule above. */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .gatherings-section {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 3.5rem 2rem 4rem;
+  }
+}
+
+.gatherings-card__desc {
+  text-transform: none !important;
+  font-size: clamp(0.78rem, 0.9vw, 0.94rem) !important;
+  line-height: 1.45 !important;
+  opacity: 0.85 !important;
+  margin-top: 0.6rem !important;
 }
 
 .gatherings-container {
@@ -4240,7 +4350,7 @@ body.image-lightbox-open {
   font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-weight: 500;
   color: black;
-  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  font-size: clamp(2.2rem, 4.4vw, 3.7rem);
   letter-spacing: -0.025em;
 }
 
@@ -4382,7 +4492,6 @@ body.image-lightbox-open {
 .visit-section-fullmap {
   position: relative;
   width: 100%;
-  min-height: 100svh;
   height: clamp(680px, 90vh, 900px);
   overflow: hidden;
   background-color: #EAE4D7;
@@ -4915,6 +5024,16 @@ body.image-lightbox-open {
 .visit-cta-btn:hover .visit-cta-btn__line {
   width: 56px;
   background-color: #F8F2E5;
+}
+
+@media (max-width: 380px) {
+  .visit-cta-btn {
+    justify-content: center;
+  }
+
+  .visit-cta-btn__line {
+    display: none;
+  }
 }
 
 /* ==========================================================================

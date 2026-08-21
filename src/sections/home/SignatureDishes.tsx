@@ -1,5 +1,5 @@
 /**
- * Signature dishes — a scroll-pinned stack of Amani's most-loved plates.
+ * Signature section — pinned stack of Amani's ambiance and atmosphere details.
  * Supports smooth GSAP pinned stack on desktop (>= 900px) and buttery, touch/mouse-swipeable rail on mobile (< 900px).
  */
 
@@ -8,31 +8,31 @@ import { NavLink } from 'react-router-dom';
 import { gsap } from '../../lib/gsap';
 import { RangoliPattern } from '../../components/motion/RangoliPattern';
 
-const SIGNATURE_DISHES = [
+const SIGNATURE_CARDS = [
   {
-    name: 'Naatu Kodi Pulusu',
-    note: 'Slow-cooked country chicken',
-    image: '/media/images/signatures/naatu-kodi-pulusu.webp',
+    headline: 'Warmth You Can Settle Into',
+    supportingLine: 'Comfortable tables, warm lighting and spaces designed for meals that are never rushed.',
+    image: '/media/images/ambiance/1.png',
   },
   {
-    name: 'Paneer Tikka',
-    note: 'Charred paneer from the grill',
-    image: '/media/images/signatures/paneer-tikka.webp',
+    headline: 'The South, Painted in Memory',
+    supportingLine: 'Narrative artworks honour everyday rituals, from the chaata and rolu to hands measuring grain with instinct.',
+    image: '/media/images/ambiance/2.png',
   },
   {
-    name: 'Avakai Biryani',
-    note: 'Mango pickle biryani',
-    image: '/media/images/signatures/avakai-biryani.webp',
+    headline: 'Objects That Remember Home',
+    supportingLine: 'Brass vessels, ceramic jars, stone grinders, woven textures and wooden utensils bring familiar memories into the room.',
+    image: '/media/images/ambiance/3.png',
   },
   {
-    name: 'Bhimavaram Mixed Pulav',
-    note: 'A fragrant coastal rice',
-    image: '/media/images/signatures/bhimavaram-mixed-pulav.webp',
+    headline: 'Every Table Made to Welcome',
+    supportingLine: 'For everyday meals, family conversations and occasions that bring generations together.',
+    image: '/media/images/ambiance/4.png',
   },
 ] as const;
 
 // Each card keeps a distinct resting angle so the reveal feels like a casually
-// placed pile of printed menus, rather than perfectly aligned panels.
+// placed pile of printed cards, rather than perfectly aligned panels.
 const CARD_TILTS = [-3.4, 2.6, -1.9, 3.1] as const;
 
 export function SignatureDishes() {
@@ -113,7 +113,7 @@ export function SignatureDishes() {
     };
   }, []);
 
-  // Track scroll position on mobile/tablet for 3 active card tracker dots
+  // Track scroll position on mobile/tablet for active card tracker dots
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
@@ -127,8 +127,8 @@ export function SignatureDishes() {
       }
 
       const progress = stage.scrollLeft / maxScrollLeft;
-      const dotIndex = Math.round(progress * 2);
-      setActiveIndex(Math.min(Math.max(0, dotIndex), 2));
+      const dotIndex = Math.round(progress * (SIGNATURE_CARDS.length - 1));
+      setActiveIndex(Math.min(Math.max(0, dotIndex), SIGNATURE_CARDS.length - 1));
     };
 
     handleScroll();
@@ -173,7 +173,7 @@ export function SignatureDishes() {
     if (!stage) return;
     const maxScrollLeft = stage.scrollWidth - stage.clientWidth;
     if (maxScrollLeft <= 0) return;
-    const targetScrollLeft = (dotIndex / 2) * maxScrollLeft;
+    const targetScrollLeft = (dotIndex / (SIGNATURE_CARDS.length - 1)) * maxScrollLeft;
     stage.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
   };
 
@@ -183,39 +183,41 @@ export function SignatureDishes() {
         <header className="signature-stack__intro">
           <div className="signature-stack__headline-group">
             <h2 id="signature-stack-heading">
-              <span>From our <em>Fire</em></span>
-              <span>to your Table.</span>
+              <span>Familiar in</span>
+              <span>every <em>detail.</em></span>
             </h2>
             <RangoliPattern className="signature-stack__motif" size="68" color="currentColor" strokeWidth={1.2} />
           </div>
-          <p className="signature-stack__summary">Four plates worth returning for.</p>
-          <NavLink to="/menu/" className="signature-stack__menu-link">
-            Explore the menu
+          <p className="signature-stack__summary">
+            From the glow of brass to the stories painted on our walls, every detail carries a quiet memory of the South.
+          </p>
+          <NavLink to="/visit/" className="signature-stack__menu-link">
+            STEP INSIDE →
           </NavLink>
         </header>
 
         <div
           ref={stageRef}
           className="signature-stack__stage"
-          aria-label="Amani's signature dishes"
+          aria-label="Familiar in every detail gallery"
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUpOrLeave}
           onPointerLeave={handlePointerUpOrLeave}
           onPointerCancel={handlePointerUpOrLeave}
         >
-          {SIGNATURE_DISHES.map((dish, index) => (
+          {SIGNATURE_CARDS.map((card, index) => (
             <article
               className="signature-stack-card"
-              key={dish.name}
+              key={card.headline}
               ref={(element) => {
                 if (element) cardRefs.current[index] = element;
               }}
             >
               <div className="signature-stack-card__image-wrap">
                 <img
-                  src={dish.image}
-                  alt={dish.name}
+                  src={card.image}
+                  alt={card.headline}
                   loading={index < 2 ? 'eager' : 'lazy'}
                   decoding="async"
                   draggable={false}
@@ -224,12 +226,12 @@ export function SignatureDishes() {
               <div className="signature-stack-card__copy">
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <div>
-                  <p>{dish.note}</p>
-                  <h3>{dish.name}</h3>
+                  <h3>{card.headline}</h3>
+                  <p>{card.supportingLine}</p>
                 </div>
                 <NavLink
-                  to="/menu/"
-                  aria-label={`View ${dish.name} on the menu`}
+                  to="/visit/"
+                  aria-label={`Step inside: ${card.headline}`}
                   onClick={(e) => {
                     if (hasDraggedRef.current) {
                       e.preventDefault();
@@ -245,15 +247,15 @@ export function SignatureDishes() {
           ))}
         </div>
 
-        {/* Mobile/Tablet Swipe Pagination Dots (3 Dots) */}
+        {/* Mobile/Tablet Swipe Pagination Dots */}
         <div className="signature-stack__dots" aria-hidden="true">
-          {[0, 1, 2].map((dotIndex) => (
+          {SIGNATURE_CARDS.map((_, dotIndex) => (
             <button
               key={dotIndex}
               type="button"
               className={`signature-stack__dot ${activeIndex === dotIndex ? 'is-active' : ''}`}
               onClick={() => scrollToDot(dotIndex)}
-              aria-label={`Go to slide ${dotIndex + 1}`}
+              aria-label={`Go to card ${dotIndex + 1}`}
             />
           ))}
         </div>
@@ -261,4 +263,3 @@ export function SignatureDishes() {
     </section>
   );
 }
-

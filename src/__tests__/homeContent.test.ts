@@ -26,9 +26,9 @@ describe('Homepage Content Structure', () => {
     expect(EXPERIENCES_CONTENT.experiences).toHaveLength(5);
   });
 
-  it('should have 4 signature dishes', () => {
+  it('should have 4 signature cards', () => {
     expect(SIGNATURE_DISHES_CONTENT.dishes).toHaveLength(4);
-    expect(SIGNATURE_DISHES_CONTENT.dishes[0].name).toBe('Ghee Podi Idli');
+    expect(SIGNATURE_DISHES_CONTENT.dishes[0].name).toBe('Warmth You Can Settle Into');
   });
 
   it('should have 3 principles in Amani Way', () => {

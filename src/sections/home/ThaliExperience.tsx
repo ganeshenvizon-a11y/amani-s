@@ -20,30 +20,31 @@ const THALI_CHOICES: ThaliChoice[] = [
   {
     id: 'vegetarian',
     label: 'VEGETARIAN',
-    title: 'A generous garden table.',
+    title: 'A Generous Vegetarian Table ',
     description: 'Seasonal vegetables, slow-cooked dal, sambar and fresh chutneys.',
     items: [
-      'Sona Masoori Rice',
-      'Slow-Cooked Dal & Sambar',
-      'Seasonal Poriyal & Aviyal',
-      'Homestyle Pepper Rasam & Curd',
-      'Fresh Coconut & Tomato Chutneys',
-      'Crisp Appalam & Elaneer Payasam',
+      'Steamed Sona Masoori Rice ',
+      'Pappu and Sambar ',
+      'Seasonal Vegetable Curry ',
+      'Poriyal or Aviyal ',
+      'Rasam and Curd ',
+      'Chutneys and Appadam ',
+      'Payasam ',
     ],
     image: '/media/images/thali/south-indian-thali.png',
   },
   {
     id: 'non-vegetarian',
     label: 'NON-VEG',
-    title: 'Deeply spiced & coastal.',
+    title: 'Bold Flavours from the South',
     description: 'Coastal curries, roasted meats and cooling accompaniments balanced with rice.',
     items: [
-      'Coastal Fish Curry & Ghee Rice',
-      'Chettinad Chicken Pepper Fry',
-      'Slow-Cooked Mutton Roast',
-      'Crab Milagu Masala Curry',
-      'House Special Sambar & Egg Gravy',
-      'Malabar Parotta & Payasam',
+      'Naatu Kodi Pulusu',
+      'Andhra Chicken Curry',
+      'Chepala Pulusu',
+      'Regional Mutton Curry',
+      'Avakai or Gongura Rice',
+      'Rasam and Traditional Accompaniments',
     ],
     image: '/media/images/thali/non-veg-thali.png',
   },
@@ -186,7 +187,7 @@ export function ThaliExperience() {
             id="thali-experience-heading"
             className="thali-experience__heading"
           >
-            One table.<br />
+            One Table.<br />
             Your{' '}
             <span className="thali-experience__dynamic-wrap">
               <span className={`thali-experience__word--dynamic is-${wordState}`}>
@@ -252,39 +253,38 @@ export function ThaliExperience() {
           className={`thali-reveal-stage ${canHover ? '' : 'is-touch'} ${isRevealing ? 'is-revealing' : ''}`}
           {...(canHover
             ? {
-                onPointerEnter: (event: PointerEvent<HTMLDivElement>) => { setLensPosition(event); setIsRevealing(true); },
-                onPointerMove: setLensPosition,
-                onPointerLeave: () => setIsRevealing(false),
-                onPointerDown: (event: PointerEvent<HTMLDivElement>) => { setLensPosition(event); setIsRevealing(true); },
-                onFocus: () => setIsRevealing(true),
-                onBlur: () => setIsRevealing(false),
-                tabIndex: 0,
-                role: 'img',
-                'aria-label': 'An empty brass thali reveals a complete South Indian feast as you hover',
-              }
+              onPointerEnter: (event: PointerEvent<HTMLDivElement>) => { setLensPosition(event); setIsRevealing(true); },
+              onPointerMove: setLensPosition,
+              onPointerLeave: () => setIsRevealing(false),
+              onPointerDown: (event: PointerEvent<HTMLDivElement>) => { setLensPosition(event); setIsRevealing(true); },
+              onFocus: () => setIsRevealing(true),
+              onBlur: () => setIsRevealing(false),
+              tabIndex: 0,
+              role: 'img',
+              'aria-label': 'An empty brass thali reveals a complete South Indian feast as you hover',
+            }
             : {
-                onClick: () => setIsRevealing((revealed) => !revealed),
-                onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    setIsRevealing((revealed) => !revealed);
-                  }
-                },
-                tabIndex: 0,
-                role: 'button',
-                'aria-pressed': isRevealing,
-                'aria-label': isRevealing
-                  ? 'Hide the thali'
-                  : 'Tap to reveal the complete South Indian feast',
-              })}
+              onClick: () => setIsRevealing((revealed) => !revealed),
+              onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setIsRevealing((revealed) => !revealed);
+                }
+              },
+              tabIndex: 0,
+              role: 'button',
+              'aria-pressed': isRevealing,
+              'aria-label': isRevealing
+                ? 'Hide the thali'
+                : 'Tap to reveal the complete South Indian feast',
+            })}
         >
           <img className="thali-reveal-stage__image" src="/media/images/thali/empty-plate.png" alt="" />
           {THALI_CHOICES.map((choice) => (
             <img
               key={choice.id}
-              className={`thali-reveal-stage__image thali-reveal-stage__image--full ${
-                choice.id === activeChoice.id ? 'is-active-dish' : ''
-              }`}
+              className={`thali-reveal-stage__image thali-reveal-stage__image--full ${choice.id === activeChoice.id ? 'is-active-dish' : ''
+                }`}
               src={choice.image}
               alt={choice.title}
               style={{

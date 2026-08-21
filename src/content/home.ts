@@ -200,54 +200,44 @@ export const EXPERIENCES_CONTENT = {
 };
 
 export const SIGNATURE_DISHES_CONTENT = {
-  heading: 'Flavours that stay with you',
-  intro: 'A small selection of dishes that express the kitchen’s point of view—familiar at heart, prepared with intention and made for the present moment.',
+  heading: 'Familiar in every detail.',
+  intro: 'From the glow of brass to the stories painted on our walls, every detail carries a quiet memory of the South.',
   dishes: [
     {
-      id: 'ghee-podi-idli',
-      name: 'Ghee Podi Idli',
-      description: 'Fluffy steamed rice cakes tossed in coarse roasted crimson spice mix and hot aromatic ghee. Served with coconut chutney.',
-      price: '₹240',
+      id: 'warmth-you-can-settle-into',
+      name: 'Warmth You Can Settle Into',
+      description: 'Comfortable tables, warm lighting and spaces designed for meals that are never rushed.',
       isVeg: true,
-      spiceLevel: 2,
-      allergens: ['Dairy', 'Nuts'],
-      image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1200&auto=format&fit=crop',
-      categoryLink: '/menu/#tiffin',
+      image: '/media/images/ambiance/1.png',
+      categoryLink: '/visit/',
     },
     {
-      id: 'mysore-masala-dosa',
-      name: 'Mysore Masala Dosa',
-      description: 'Thin, golden crisp rice crepe lined with spicy red garlic chutney and filled with seasoned potato masala.',
-      price: '₹290',
+      id: 'the-south-painted-in-memory',
+      name: 'The South, Painted in Memory',
+      description: 'Narrative artworks honour everyday rituals, from the chaata and rolu to hands measuring grain with instinct.',
       isVeg: true,
-      spiceLevel: 2,
-      allergens: ['Dairy'],
-      image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=1200&auto=format&fit=crop',
-      categoryLink: '/menu/#dosas',
+      image: '/media/images/ambiance/2.png',
+      categoryLink: '/visit/',
     },
     {
-      id: 'traditional-filter-coffee',
-      name: 'South Indian Filter Coffee',
-      description: 'Dark roasted South Indian coffee beans brewed through a brass drip filter, frothed with hot milk in a traditional davara tumbler.',
-      price: '₹140',
+      id: 'objects-that-remember-home',
+      name: 'Objects That Remember Home',
+      description: 'Brass vessels, ceramic jars, stone grinders, woven textures and wooden utensils bring familiar memories into the room.',
       isVeg: true,
-      allergens: ['Dairy'],
-      image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1200&auto=format&fit=crop',
-      categoryLink: '/menu/#beverages',
+      image: '/media/images/ambiance/3.png',
+      categoryLink: '/visit/',
     },
     {
-      id: 'elaneer-payasam',
-      name: 'Elaneer Payasam',
-      description: 'Delicate tender coconut milk dessert subtly infused with cardamom and topped with toasted golden cashews.',
-      price: '₹260',
+      id: 'every-table-made-to-welcome',
+      name: 'Every Table Made to Welcome',
+      description: 'For everyday meals, family conversations and occasions that bring generations together.',
       isVeg: true,
-      allergens: ['Nuts', 'Coconut'],
-      image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1200&auto=format&fit=crop',
-      categoryLink: '/menu/#desserts',
+      image: '/media/images/ambiance/4.png',
+      categoryLink: '/visit/',
     },
   ] as SignatureDishItem[],
-  ctaText: 'Explore the Full Menu',
-  ctaLink: '/menu/',
+  ctaText: 'STEP INSIDE →',
+  ctaLink: '/visit/',
 };
 
 export const AMANI_WAY_CONTENT = {
@@ -330,8 +320,8 @@ export interface QrOrderingStep {
 }
 
 export const QR_ORDERING_CONTENT = {
-  headingScript: 'Scan, order and',
-  headingMain: 'Relax.',
+  headingScript: 'Your Table,',
+  headingMain: 'Made Simpler.',
   body: "Scan your table's code to browse, customise your thali and call for the bill.",
   image: '/media/images/qr-ordering-app.png',
   imageAlt: "Amani's QR-based table ordering app open on a phone, showing today's thali deals and popular picks",
@@ -397,7 +387,7 @@ export const GATHERINGS_PREVIEW_CONTENT = {
   primaryCtaLink: '/gatherings/',
   secondaryCta: 'Explore the Spaces',
   secondaryCtaLink: '/gatherings/#spaces',
-  
+
   finalInvitation: {
     heading: 'Meet us around the table',
     description: "Choose the time, bring the people and let the rest of the meal unfold at Amani's.",
