@@ -5,7 +5,7 @@ import { MoodFinder } from '../../sections/menu/MoodFinder';
 import { MenuCategories } from '../../sections/menu/MenuCategories';
 import { DietaryInformation } from '../../sections/menu/DietaryInformation';
 import { DishDetailExperience } from '../../sections/menu/DishDetailExperience';
-import { QROrdering } from '../../sections/menu/QROrdering';
+import { ContactForm } from '../../sections/home/ContactForm';
 
 export function MenuPage() {
   useEffect(() => {
@@ -36,8 +36,8 @@ export function MenuPage() {
       {/* Section 06: Signature Dish Highlight */}
       <DishDetailExperience />
 
-      {/* Section 07: In-Restaurant QR Ordering */}
-      <QROrdering />
+      {/* Section 07: Contact Section */}
+      <ContactForm />
 
     </div>
   );

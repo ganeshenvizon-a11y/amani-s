@@ -538,30 +538,64 @@
 .menu-mobile-catbar {
   display: none;
   position: sticky;
-  top: 4.25rem;
-  z-index: 25;
+  top: 52px;
+  z-index: 90;
   margin-inline: calc(var(--amani-gutter) * -1);
-  padding: 0.6rem var(--amani-gutter);
-  background: rgba(248, 242, 229, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 0.45rem var(--amani-gutter);
+  background: var(--amani-canvas);
   border-bottom: 1px solid var(--amani-hairline);
-  box-shadow: 0 4px 14px rgba(23, 20, 17, 0.04);
-  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
-  will-change: transform;
+  box-shadow: 0 4px 16px rgba(23, 20, 17, 0.06);
+  transition: top 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.menu-mobile-catbar__inner {
+/* Scroll DOWN (Top to Bottom): Fixed directly to the VERY TOP of the screen */
+.menu-mobile-catbar--scroll-down {
+  top: 0px;
+}
+
+/* Scroll UP (Bottom to Top): Fixed directly to the BOTTOM of the header nav */
+.menu-mobile-catbar--scroll-up {
+  top: 52px;
+}
+
+.menu-mobile-catbar__rows-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.menu-mobile-catbar__row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y;
 }
 
-.menu-mobile-catbar__inner::-webkit-scrollbar {
+.menu-mobile-catbar__row.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto !important;
+}
+
+.menu-mobile-catbar__row::-webkit-scrollbar {
   display: none;
+}
+
+.menu-mobile-catbar__row--categories {
+  padding-top: 0.2rem;
+  border-top: 1px dashed rgba(122, 31, 36, 0.12);
+}
+
+.menu-mobile-catbar__diet-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
 }
 
 .menu-mobile-catbar__btn {
@@ -958,7 +992,28 @@
   color: var(--amani-maroon);
 }
 
-/* Category Section Group */
+/* Category Section Group & ScrollSpy Block */
+.menu-category-section-block {
+  scroll-margin-top: 140px;
+  padding-bottom: 3rem;
+  margin-bottom: 3.5rem;
+  border-bottom: 1px dashed var(--amani-hairline);
+}
+
+.menu-category-section-block:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.menu-section-num {
+  font-family: var(--amani-font-ui);
+  font-size: 0.75em;
+  color: var(--amani-maroon);
+  font-weight: 600;
+  margin-right: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
 .menu-section-group {
   padding-top: 0.5rem;
   scroll-margin-top: 6rem;
@@ -1276,17 +1331,6 @@
     display: block;
   }
 
-  .menu-mobile-catbar.is-hidden {
-    transform: translateY(calc(-100% - 4.5rem));
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .menu-mobile-catbar.is-visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
   .menu-categories__layout {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1478,64 +1522,6 @@
   line-height: 1;
 }
 
-/* ==========================================================================
-   Section 08 — In-restaurant QR ordering (light scene)
-   ========================================================================== */
-
-.menu-qr {
-  padding: clamp(5rem, 10vw, 9rem) 0;
-  background: var(--amani-canvas);
-  color: var(--amani-ink);
-}
-
-.menu-qr__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: clamp(2.5rem, 7vw, 6rem);
-  align-items: center;
-}
-
-.menu-qr h2 {
-  margin: 0.9rem 0 0;
-  color: var(--amani-ink);
-  font-size: var(--font-heading-1);
-}
-
-.menu-qr h2 em {
-  color: var(--amani-maroon);
-}
-
-.menu-qr__inner>div:first-child p {
-  max-width: 28rem;
-  margin: 1.5rem 0 0;
-  color: var(--amani-ink-muted);
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.menu-qr__code {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
-  width: clamp(9rem, 15vw, 12rem);
-  aspect-ratio: 1;
-  padding: 1.15rem;
-  background: var(--amani-void);
-  border-radius: var(--amani-radius-sm);
-}
-
-.menu-qr__code span {
-  border-radius: 3px;
-  background: var(--amani-cream-on-dark);
-}
-
-.menu-qr__code span:nth-child(2),
-.menu-qr__code span:nth-child(4),
-.menu-qr__code span:nth-child(6),
-.menu-qr__code span:nth-child(8) {
-  background: transparent;
-  border: 2px solid var(--amani-cream-on-dark);
-}
 
 /* ==========================================================================
    Section 09 — Closing reservation CTA
@@ -1614,8 +1600,7 @@
   .menu-intro__grid,
   .menu-mood__grid,
   .menu-dietary__grid,
-  .menu-feature__grid,
-  .menu-qr__inner {
+  .menu-feature__grid {
     grid-template-columns: 1fr;
   }
 
@@ -1629,10 +1614,6 @@
 
   .menu-feature__media {
     order: -1;
-  }
-
-  .menu-qr__inner {
-    justify-items: start;
   }
 
   .menu-group__grid {

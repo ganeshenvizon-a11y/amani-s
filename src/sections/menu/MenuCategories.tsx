@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
 import { MENU_SECTIONS, type MenuDish } from '../../content/menu';
 import { DietarySymbol } from '../../components/restaurant/DietarySymbol';
 
@@ -64,6 +63,56 @@ function getDishDescription(dish: MenuDish, categoryTitle: string): string {
 }
 
 type DietaryFilter = 'all' | 'veg' | 'non_veg' | 'egg';
+// Custom hook for smooth drag-to-scroll on touch & mouse desktop
+function useDraggableScroll<T extends HTMLElement = HTMLDivElement>() {
+  const ref = useRef<T | null>(null);
+  const isDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  const onPointerDown = (e: React.PointerEvent<T>) => {
+    if (e.button !== 0) return;
+    const el = ref.current;
+    if (!el) return;
+
+    if ((e.target as HTMLElement).tagName === 'INPUT') return;
+
+    isDownRef.current = true;
+    startXRef.current = e.clientX;
+    scrollLeftRef.current = el.scrollLeft;
+  };
+
+  const onPointerMove = (e: React.PointerEvent<T>) => {
+    if (!isDownRef.current) return;
+    const el = ref.current;
+    if (!el) return;
+
+    const dx = e.clientX - startXRef.current;
+    if (Math.abs(dx) > 12) {
+      el.classList.add('is-dragging');
+      el.scrollLeft = scrollLeftRef.current - dx;
+    }
+  };
+
+  const onPointerUp = () => {
+    isDownRef.current = false;
+    ref.current?.classList.remove('is-dragging');
+  };
+
+  const onPointerLeave = () => {
+    isDownRef.current = false;
+    ref.current?.classList.remove('is-dragging');
+  };
+
+  return {
+    ref,
+    onPointerDown,
+    onPointerMove,
+    onPointerUp,
+    onPointerLeave,
+  };
+}
+
 export function MenuCategories() {
   const [searchParams] = useSearchParams();
   // Selected category section state (starts on 'starters-soups', or 'search-all' when searching)
@@ -71,39 +120,38 @@ export function MenuCategories() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [dietaryFilter, setDietaryFilter] = useState<DietaryFilter>('all');
   const [itemLimits, setItemLimits] = useState<Record<string, number>>({});
-  // Mobile catbar auto-hide: only reveal when the user scrolls up (search intent)
-  const [isCatbarVisible, setIsCatbarVisible] = useState<boolean>(false);
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
-  const lastScrollY = useRef<number>(0);
 
-  // Reveal the mobile category/search bar on scroll-up, hide it on scroll-down.
+  // Draggable scroll refs for both mobile filter rows
+  const row1Drag = useDraggableScroll<HTMLDivElement>();
+  const row2Drag = useDraggableScroll<HTMLDivElement>();
+
+  // Scroll direction detection for header-relative filter bar pinning
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('up');
+  const lastYRef = useRef<number>(0);
+
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 991px)');
-    if (!mq.matches) return;
-
-    lastScrollY.current = window.scrollY;
+    lastYRef.current = window.scrollY;
     let ticking = false;
 
-    const update = () => {
+    const updateScrollDir = () => {
       const currentY = window.scrollY;
-      const delta = currentY - lastScrollY.current;
+      const delta = currentY - lastYRef.current;
 
-      if (currentY < 120) {
-        setIsCatbarVisible(false);
-      } else if (delta > 6) {
-        setIsCatbarVisible(false);
-      } else if (delta < -6) {
-        setIsCatbarVisible(true);
+      if (delta > 4 && currentY > 80) {
+        setScrollDirection('down');
+      } else if (delta < -4) {
+        setScrollDirection('up');
       }
 
-      lastScrollY.current = currentY;
+      lastYRef.current = currentY;
       ticking = false;
     };
 
     const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(update);
+        window.requestAnimationFrame(updateScrollDir);
         ticking = true;
       }
     };
@@ -111,6 +159,41 @@ export function MenuCategories() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // ScrollSpy: auto-detect active section on scroll through menu categories
+  useEffect(() => {
+    const isMobile = window.innerWidth < 991;
+    const rootMargin = isMobile ? '-25% 0px -55% 0px' : '-20% 0px -55% 0px';
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const secId = entry.target.getAttribute('data-section-id');
+            if (secId) {
+              setActiveSectionId(secId);
+            }
+          }
+        });
+      },
+      { rootMargin, threshold: 0.1 }
+    );
+
+    const blocks = document.querySelectorAll('.menu-category-section-block');
+    blocks.forEach((el) => observer.observe(el));
+
+    return () => {
+      blocks.forEach((el) => observer.unobserve(el));
+    };
+  }, [searchQuery, dietaryFilter]);
+
+  // Keep active mobile category button scrolled into view in horizontal catbar
+  useEffect(() => {
+    const activeBtn = document.querySelector(`.menu-mobile-catbar__btn[data-sec-id="${activeSectionId}"]`);
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, [activeSectionId]);
 
   useEffect(() => {
     const sectionParam = searchParams.get('section');
@@ -125,9 +208,10 @@ export function MenuCategories() {
 
     if (sectionParam || dietaryParam) {
       const timer = setTimeout(() => {
-        const menuEl = document.getElementById('menu-categories');
+        const targetId = sectionParam ? `section-${sectionParam}` : 'menu-categories';
+        const menuEl = document.getElementById(targetId);
         if (menuEl) {
-          const navOffset = 90;
+          const navOffset = window.innerWidth < 991 ? 140 : 100;
           const elementPosition = menuEl.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navOffset;
           window.scrollTo({
@@ -142,27 +226,22 @@ export function MenuCategories() {
 
   const handleClearSearch = () => {
     setSearchQuery('');
-    if (activeSectionId === 'search-all') {
-      setActiveSectionId(MENU_SECTIONS[0]?.id || 'starters-soups');
-    }
   };
 
-  // Category row selection handler — switches active category pane smoothly
+  // Category row selection handler — smooth scrolls to target category section
   const handleCategorySelect = (sectionId: string) => {
     setActiveSectionId(sectionId);
 
-    // Scroll menu container into comfortable view if needed
-    const menuEl = document.getElementById('menu-categories');
-    if (menuEl) {
-      const navOffset = 90;
-      const elementPosition = menuEl.getBoundingClientRect().top;
-      if (elementPosition < 0 || elementPosition > 300) {
-        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
+    const sectionEl = document.getElementById(`section-${sectionId}`);
+    if (sectionEl) {
+      const isMobile = window.innerWidth < 991;
+      const navOffset = isMobile ? 145 : 100;
+      const elementPosition = sectionEl.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -189,8 +268,6 @@ export function MenuCategories() {
     return true;
   };
 
-  const hasSearchQuery = searchQuery.trim() !== '';
-
   // Process matching categories and dishes for ALL sections
   const allMatchingSections = MENU_SECTIONS.map((section) => {
     const matchingCategories = section.categories.map((cat) => ({
@@ -207,69 +284,107 @@ export function MenuCategories() {
     };
   }).filter((sec) => sec.sectionTotalCount > 0);
 
-  const totalMatchingDishesAllSections = allMatchingSections.reduce(
-    (acc, sec) => acc + sec.sectionTotalCount,
-    0
-  );
-
-  // Active Category Section object for single section view
-  const activeSection = MENU_SECTIONS.find(s => s.id === activeSectionId) || MENU_SECTIONS[0];
-
-  // Active Category Groups for single active section view
-  const activeCategoryGroups = activeSection.categories.map(cat => ({
-    ...cat,
-    matchingDishes: cat.dishes.filter(matchesDish),
-  })).filter(cat => cat.matchingDishes.length > 0);
-
-  const activeSectionTotalCount = activeCategoryGroups.reduce((acc, cat) => acc + cat.matchingDishes.length, 0);
-
-  const isSearchAllMode = activeSectionId === 'search-all';
+  // Sections to display: if searching show all matching sections, else display active category section
+  const displayedMatchingSections = searchQuery.trim() !== ''
+    ? allMatchingSections
+    : allMatchingSections.filter((sec) => sec.id === activeSectionId);
 
   return (
     <section id="menu-categories" className="menu-categories" aria-label="Restaurant Menu">
       <div className="menu-container">
         
-        {/* MOBILE STICKY HORIZONTAL CATEGORY BAR (< 992px) */}
+        {/* MOBILE STICKY 2-ROW CATEGORY & FILTER BAR (< 992px) */}
         <nav
-          className={`menu-mobile-catbar ${isCatbarVisible || isSearchAllMode || searchQuery ? 'is-visible' : 'is-hidden'}`}
-          aria-label="Mobile Menu Categories"
+          className={`menu-mobile-catbar menu-mobile-catbar--scroll-${scrollDirection}`}
+          aria-label="Mobile Menu Filter and Categories"
         >
-          <div className="menu-mobile-catbar__inner">
-            <div className={`menu-mobile-catbar__search-wrap ${isSearchAllMode || searchQuery ? 'is-active' : ''}`}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onFocus={() => {
-                  if (activeSectionId !== 'search-all') setActiveSectionId('search-all');
-                }}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  if (activeSectionId !== 'search-all') setActiveSectionId('search-all');
-                }}
-                aria-label="Search menu items mobile"
-              />
-              {searchQuery && (
-                <button type="button" className="menu-cat-search-field__clear" onClick={handleClearSearch} aria-label="Clear search">✕</button>
-              )}
-            </div>
-            {MENU_SECTIONS.map((sec) => {
-              const isActive = sec.id === activeSectionId && !isSearchAllMode;
-              return (
+          <div className="menu-mobile-catbar__rows-wrap">
+            {/* ROW 1: Search Field + Dietary Quick Filters (Draggable) */}
+            <div
+              className="menu-mobile-catbar__row menu-mobile-catbar__row--filters"
+              ref={row1Drag.ref}
+              onPointerDown={row1Drag.onPointerDown}
+              onPointerMove={row1Drag.onPointerMove}
+              onPointerUp={row1Drag.onPointerUp}
+              onPointerLeave={row1Drag.onPointerLeave}
+            >
+              <div className={`menu-mobile-catbar__search-wrap ${searchQuery ? 'is-active' : ''}`}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  aria-label="Search menu items mobile"
+                />
+                {searchQuery && (
+                  <button type="button" className="menu-cat-search-field__clear" onClick={handleClearSearch} aria-label="Clear search">✕</button>
+                )}
+              </div>
+
+              {/* Dietary Filter Pills */}
+              <div className="menu-mobile-catbar__diet-btns" role="group" aria-label="Dietary filter options mobile">
                 <button
-                  key={sec.id}
                   type="button"
-                  className={`menu-mobile-catbar__btn ${isActive ? 'is-active' : ''}`}
-                  onClick={() => handleCategorySelect(sec.id)}
+                  className={`menu-diet-chip ${dietaryFilter === 'all' ? 'is-active' : ''}`}
+                  onClick={() => setDietaryFilter('all')}
                 >
-                  {sec.title}
+                  All
                 </button>
-              );
-            })}
+                <button
+                  type="button"
+                  className={`menu-diet-chip menu-diet-chip--veg ${dietaryFilter === 'veg' ? 'is-active' : ''}`}
+                  onClick={() => setDietaryFilter('veg')}
+                >
+                  <span className="dot dot--veg" />
+                  Veg
+                </button>
+                <button
+                  type="button"
+                  className={`menu-diet-chip menu-diet-chip--non_veg ${dietaryFilter === 'non_veg' ? 'is-active' : ''}`}
+                  onClick={() => setDietaryFilter('non_veg')}
+                >
+                  <span className="dot dot--non_veg" />
+                  Non-Veg
+                </button>
+                <button
+                  type="button"
+                  className={`menu-diet-chip menu-diet-chip--egg ${dietaryFilter === 'egg' ? 'is-active' : ''}`}
+                  onClick={() => setDietaryFilter('egg')}
+                >
+                  <span className="dot dot--egg" />
+                  Egg
+                </button>
+              </div>
+            </div>
+
+            {/* ROW 2: Categories Section (Placed Under Filter Row, Draggable) */}
+            <div
+              className="menu-mobile-catbar__row menu-mobile-catbar__row--categories"
+              ref={row2Drag.ref}
+              onPointerDown={row2Drag.onPointerDown}
+              onPointerMove={row2Drag.onPointerMove}
+              onPointerUp={row2Drag.onPointerUp}
+              onPointerLeave={row2Drag.onPointerLeave}
+            >
+              {MENU_SECTIONS.map((sec) => {
+                const isActive = sec.id === activeSectionId;
+                return (
+                  <button
+                    key={sec.id}
+                    type="button"
+                    data-sec-id={sec.id}
+                    className={`menu-mobile-catbar__btn ${isActive ? 'is-active' : ''}`}
+                    onClick={() => handleCategorySelect(sec.id)}
+                  >
+                    {sec.title}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </nav>
 
@@ -282,7 +397,7 @@ export function MenuCategories() {
               
               {/* 1. Integrated Left Sidebar Search Field */}
               <div className="menu-sidebar__search-wrap">
-                <div className={`menu-cat-search-field ${isSearchAllMode || searchQuery ? 'is-active' : ''}`}>
+                <div className={`menu-cat-search-field ${searchQuery ? 'is-active' : ''}`}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="menu-cat-search-field__icon">
                     <circle cx="11" cy="11" r="8" />
                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -292,17 +407,7 @@ export function MenuCategories() {
                     type="text"
                     placeholder="Search menu dishes..."
                     value={searchQuery}
-                    onFocus={() => {
-                      if (activeSectionId !== 'search-all') {
-                        setActiveSectionId('search-all');
-                      }
-                    }}
-                    onChange={(e) => {
-                      setSearchQuery(e.target.value);
-                      if (activeSectionId !== 'search-all') {
-                        setActiveSectionId('search-all');
-                      }
-                    }}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     aria-label="Search restaurant menu dishes"
                   />
                   {searchQuery && (
@@ -359,7 +464,7 @@ export function MenuCategories() {
               {/* 3. Main Category Rows (Soups & Starters, Main Course, Rice & Biryanis, etc.) */}
               <ul className="menu-sidebar__rows">
                 {MENU_SECTIONS.map((section, idx) => {
-                  const isActive = section.id === activeSectionId && !isSearchAllMode;
+                  const isActive = section.id === activeSectionId;
                   const secMatch = allMatchingSections.find(s => s.id === section.id);
                   const count = secMatch ? secMatch.sectionTotalCount : 0;
 
@@ -387,163 +492,47 @@ export function MenuCategories() {
 
           {/* RIGHT COLUMN — MENU CONTENT PANE (~64% WIDTH) */}
           <main className="menu-content" id="menu-content-pane">
+            {displayedMatchingSections.length > 0 ? (
+              <div className="menu-sections-vertical-stack">
+                {displayedMatchingSections.map((sec, idx) => {
+                  const sectionIndex = MENU_SECTIONS.findIndex((s) => s.id === sec.id);
+                  const displayNum = String(sectionIndex >= 0 ? sectionIndex + 1 : idx + 1).padStart(2, '0');
 
-
-            {/* Smooth Transition Pane */}
-            <AnimatePresence mode="wait">
-              {isSearchAllMode ? (
-                /* ALL SECTIONS SEARCH VIEW */
-                <motion.section
-                  key="search-all-pane"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="menu-section-pane"
-                  aria-label="All Menu Search Results"
-                >
-                  <header className="menu-section-group__header">
-                    <div className="menu-section-group__title-row">
-                      <h2>
-                        {hasSearchQuery ? (
-                          <>Search results for <em>"{searchQuery}"</em></>
-                        ) : (
-                          <>All Restaurant <em>Dishes</em></>
-                        )}
-                      </h2>
-                      <span className="menu-section-group__badge">{totalMatchingDishesAllSections} items</span>
-                    </div>
-                  </header>
-
-                  {totalMatchingDishesAllSections > 0 ? (
-                    <div className="menu-section-group__body">
-                      {allMatchingSections.map((sec) => (
-                        <div key={sec.id} className="menu-search-section-block" style={{ marginBottom: '3rem' }}>
-                          <div
-                            className="menu-subgroup__title"
-                            style={{
-                              fontSize: '1.25rem',
-                              fontFamily: 'var(--amani-font-display)',
-                              color: 'var(--amani-maroon)',
-                              borderBottom: '1px solid var(--amani-hairline)',
-                              paddingBottom: '0.5rem',
-                              marginBottom: '1.5rem',
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              alignItems: 'baseline'
-                            }}
-                          >
-                            <span>{sec.number}. {sec.title}</span>
-                            <span style={{ fontSize: '0.8rem', fontFamily: 'var(--amani-font-ui)', opacity: 0.7, fontWeight: 'normal' }}>
-                              {sec.sectionTotalCount} dish{sec.sectionTotalCount !== 1 ? 'es' : ''}
-                            </span>
-                          </div>
-
-                          {sec.categories.map((group) => (
-                            <div key={group.id} className="menu-subgroup" style={{ marginBottom: '1.75rem' }}>
-                              {sec.categories.length > 1 && (
-                                <h4 className="menu-subgroup__title" style={{ fontSize: '0.95rem', opacity: 0.85, marginBottom: '0.85rem' }}>
-                                  {group.title}
-                                </h4>
-                              )}
-                              <div className="menu-subgroup__grid">
-                                {group.matchingDishes.map((dish) => {
-                                  const isSignature = dish.signature || DISH_SIGNATURE_SET.has(dish.name);
-                                  const imageSrc = dish.image || DISH_IMAGE_MAP[dish.name] || CATEGORY_FALLBACK_IMAGES[sec.id] || '/media/images/dish-naatu-kodi-pulusu.jpg';
-                                  const descriptionText = getDishDescription(dish, sec.title);
-
-                                  return (
-                                    <article key={dish.name} className={`menu-dish-card ${isSignature ? 'menu-dish-card--signature' : ''}`}>
-                                      <div className="menu-dish-card__media">
-                                        <img
-                                          src={imageSrc}
-                                          alt={dish.name}
-                                          loading="lazy"
-                                        />
-                                        {isSignature && (
-                                          <span className="menu-dish-card__signature-tag">Signature</span>
-                                        )}
-                                      </div>
-
-                                      <div className="menu-dish-card__content">
-                                        <div className="menu-dish-card__top">
-                                          <div className="menu-dish-card__meta">
-                                            <DietarySymbol dietary={dish.dietary} showLabel={false} size={14} />
-                                          </div>
-                                          <span className="menu-dish-card__price">
-                                            {dish.price === null ? 'Market Price' : `₹${dish.price}`}
-                                          </span>
-                                        </div>
-
-                                        <h4 className="menu-dish-card__name">{dish.name}</h4>
-                                        <p className="menu-dish-card__desc">{descriptionText}</p>
-                                      </div>
-                                    </article>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          ))}
+                  return (
+                    <section
+                      key={sec.id}
+                      id={`section-${sec.id}`}
+                      data-section-id={sec.id}
+                      className="menu-category-section-block"
+                    >
+                      <header className="menu-section-group__header">
+                        <div className="menu-section-group__title-row">
+                          <h2 id={`heading-${sec.id}`}>
+                            <span className="menu-section-num">{displayNum}.</span> {sec.title}
+                          </h2>
+                          <span className="menu-section-group__badge">{sec.sectionTotalCount} items</span>
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    /* Empty State */
-                    <div className="menu-empty-state">
-                      <h3>No dishes found</h3>
-                      <p>
-                        No menu items matched {searchQuery ? `"${searchQuery}"` : ''} {dietaryFilter !== 'all' ? `with ${dietaryFilter === 'veg' ? 'Vegetarian' : dietaryFilter === 'non_veg' ? 'Non-Vegetarian' : 'Egg'} filter` : ''} across all categories.
-                      </p>
-                      <button
-                        type="button"
-                        className="menu-button"
-                        onClick={handleClearSearch}
-                      >
-                        Reset Search & Filters
-                      </button>
-                    </div>
-                  )}
-                </motion.section>
-              ) : (
-                /* SINGLE CATEGORY VIEW */
-                <motion.section
-                  key={activeSection.id}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="menu-section-pane"
-                  aria-labelledby={`heading-${activeSection.id}`}
-                >
-                  {/* Category Header */}
-                  <header className="menu-section-group__header">
-                    <div className="menu-section-group__title-row">
-                      <h2 id={`heading-${activeSection.id}`}>{activeSection.title}</h2>
-                      <span className="menu-section-group__badge">{activeSectionTotalCount} items</span>
-                    </div>
-                    {activeSection.note && (
-                      <p className="menu-section-group__note">{activeSection.note}</p>
-                    )}
-                  </header>
+                        {sec.note && (
+                          <p className="menu-section-group__note">{sec.note}</p>
+                        )}
+                      </header>
 
-                  {/* Active Category Group Dishes Listing */}
-                  {activeSectionTotalCount > 0 ? (
                     <div className="menu-section-group__body">
-                      {activeCategoryGroups.map(group => {
+                      {sec.categories.map((group) => {
                         const limit = itemLimits[group.id] || DEFAULT_ITEM_LIMIT;
                         const visibleDishes = group.matchingDishes.slice(0, limit);
                         const remainingCount = group.matchingDishes.length - visibleDishes.length;
 
                         return (
                           <div key={group.id} className="menu-subgroup">
-                            {activeSection.categories.length > 1 && (
+                            {sec.categories.length > 1 && (
                               <h3 className="menu-subgroup__title">{group.title}</h3>
                             )}
                             <div className="menu-subgroup__grid">
                               {visibleDishes.map((dish) => {
                                 const isSignature = dish.signature || DISH_SIGNATURE_SET.has(dish.name);
-                                const imageSrc = dish.image || DISH_IMAGE_MAP[dish.name] || CATEGORY_FALLBACK_IMAGES[activeSection.id] || '/media/images/dish-naatu-kodi-pulusu.jpg';
-                                const descriptionText = getDishDescription(dish, activeSection.title);
+                                const imageSrc = dish.image || DISH_IMAGE_MAP[dish.name] || CATEGORY_FALLBACK_IMAGES[sec.id] || '/media/images/dish-naatu-kodi-pulusu.jpg';
+                                const descriptionText = getDishDescription(dish, sec.title);
 
                                 return (
                                   <article key={dish.name} className={`menu-dish-card ${isSignature ? 'menu-dish-card--signature' : ''}`}>
@@ -576,7 +565,6 @@ export function MenuCategories() {
                               })}
                             </div>
 
-                            {/* Show More Button if more than 10 items exist in this group */}
                             {remainingCount > 0 && (
                               <div className="menu-subgroup__footer">
                                 <button
@@ -605,28 +593,29 @@ export function MenuCategories() {
                         );
                       })}
                     </div>
-                  ) : (
-                    /* Empty State when Search Query returns no results in this category */
-                    <div className="menu-empty-state">
-                      <h3>No dishes found in {activeSection.title}</h3>
-                      <p>
-                        No items matched {searchQuery ? `"${searchQuery}"` : ''} {dietaryFilter !== 'all' ? `with ${dietaryFilter === 'veg' ? 'Vegetarian' : dietaryFilter === 'non_veg' ? 'Non-Vegetarian' : 'Egg'} filter` : ''} in this category.
-                      </p>
-                      <button
-                        type="button"
-                        className="menu-button"
-                        onClick={() => {
-                          setSearchQuery('');
-                          setDietaryFilter('all');
-                        }}
-                      >
-                        Reset Filters
-                      </button>
-                    </div>
-                  )}
-                </motion.section>
-              )}
-            </AnimatePresence>
+                  </section>
+                );
+              })}
+              </div>
+            ) : (
+              /* Empty State */
+              <div className="menu-empty-state">
+                <h3>No dishes found</h3>
+                <p>
+                  No menu items matched {searchQuery ? `"${searchQuery}"` : ''} {dietaryFilter !== 'all' ? `with ${dietaryFilter === 'veg' ? 'Vegetarian' : dietaryFilter === 'non_veg' ? 'Non-Vegetarian' : 'Egg'} filter` : ''} across all categories.
+                </p>
+                <button
+                  type="button"
+                  className="menu-button"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setDietaryFilter('all');
+                  }}
+                >
+                  Reset Search & Filters
+                </button>
+              </div>
+            )}
           </main>
         </div>
       </div>

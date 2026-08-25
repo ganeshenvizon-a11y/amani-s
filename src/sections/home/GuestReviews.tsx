@@ -164,6 +164,7 @@ function DraggableStoryCard({ card }: { card: GuestStoryCard }) {
 
   return (
     <div
+      data-card-id={card.id}
       className={`amani-story-card absolute pointer-events-auto ${card.desktopPosClasses} ${
         isDragging ? 'z-50 cursor-grabbing' : 'cursor-grab'
       }`}
