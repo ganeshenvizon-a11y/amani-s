@@ -90,7 +90,7 @@ export function BrandStory() {
       {/* Background Pattern Texture Overlay */}
       <div className="brand-story__bg-pattern" aria-hidden="true">
         <img
-          src="/media/images/hero-pattern.png"
+          src="/media/images/hero-pattern.svg"
           alt=""
           className="brand-story__bg-pattern-img"
           loading="lazy"
@@ -160,7 +160,6 @@ export function BrandStory() {
                 loading={chapter.number === '01' || chapter.number === '02' ? 'eager' : 'lazy'}
                 decoding="async"
               />
-              <div className="brand-story-card__veil" aria-hidden="true" />
               <div className="brand-story-card__copy">
                 <h3>{chapter.title}</h3>
                 <span className="brand-story-card__arrow" aria-hidden="true">

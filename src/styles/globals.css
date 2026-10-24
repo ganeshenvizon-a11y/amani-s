@@ -27,7 +27,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: var(--amani-canvas, #F8F2E5);
+  background-color: var(--amani-canvas, #FAF9F6);
   color: var(--amani-ink, #171411);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   -webkit-font-smoothing: antialiased;
@@ -67,7 +67,7 @@ h6 span,
 .route-loading {
   width: 100%;
   min-height: 100svh;
-  background: var(--amani-canvas, #F8F2E5);
+  background: var(--amani-canvas, #FAF9F6);
 }
 
 .sr-only {
@@ -623,15 +623,7 @@ h6 span,
 }
 
 .mood-journey-card__veil {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to top, rgba(15, 10, 8, 0.62) 0%, rgba(15, 10, 8, 0.22) 35%, transparent 65%);
-  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mood-journey-card:hover .mood-journey-card__veil {
-  opacity: 0.85;
+  display: none;
 }
 
 .mood-journey-card__content {
@@ -647,18 +639,7 @@ h6 span,
 }
 
 .mood-journey-card__content::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  pointer-events: none;
-  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mood-journey-card:hover .mood-journey-card__content::before {
-  opacity: 0.8;
+  display: none;
 }
 
 .mood-journey-card__number {
@@ -942,7 +923,7 @@ h6 span,
   max-height: 100svh;
   overflow: hidden;
   color: var(--amani-ink);
-  background: #F4EFE5;
+  background: #FAF9F6;
 }
 
 .home-hero__bg-pattern {
@@ -2348,15 +2329,7 @@ body.image-lightbox-open {
 }
 
 .brand-story-card__veil {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to top, rgba(15, 10, 8, 0.62) 0%, rgba(15, 10, 8, 0.22) 35%, transparent 65%);
-  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.brand-story-card:hover .brand-story-card__veil {
-  opacity: 0.85;
+  display: none;
 }
 
 .brand-story-card {
@@ -2380,18 +2353,7 @@ body.image-lightbox-open {
 }
 
 .brand-story-card__copy::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  content: '';
-  pointer-events: none;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.brand-story-card:hover .brand-story-card__copy::before {
-  opacity: 0.8;
+  display: none;
 }
 
 .brand-story-card h3 {
@@ -2641,7 +2603,7 @@ body.image-lightbox-open {
   color: var(--amani-ink);
   background:
     radial-gradient(circle at 88% 10%, rgba(162, 91, 53, 0.1), transparent 28%),
-    linear-gradient(125deg, #f7f1e6 0%, var(--amani-canvas) 58%, #eee1cd 100%);
+    linear-gradient(125deg, #FAF9F6 0%, var(--amani-canvas) 58%, #eee1cd 100%);
 }
 
 
@@ -3139,7 +3101,7 @@ body.image-lightbox-open {
   height: 100svh;
   max-height: 100vh;
   overflow: hidden;
-  background-color: #F3EBDD;
+  background-color: var(--amani-canvas, #FAF9F6);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -3585,7 +3547,7 @@ body.image-lightbox-open {
   min-height: 100vh;
   min-height: 100dvh;
   padding: clamp(3rem, 6vh, 5rem) 1rem;
-  background-color: var(--amani-canvas, #F8F2E5);
+  background-color: var(--amani-canvas, #FAF9F6);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -3643,7 +3605,7 @@ body.image-lightbox-open {
 .amani-stories-heading-main {
   font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-weight: 700;
-  color: var(--amani-void, #742F1C);
+  color: var(--amani-void, #A95B43);
   font-size: clamp(2.1rem, 4.5vw, 5.2rem);
   letter-spacing: -0.035em;
   margin-top: 0.12em;
@@ -4185,7 +4147,7 @@ body.image-lightbox-open {
   height: 100svh;
   max-height: 100vh;
   overflow: hidden;
-  background-color: #F3EBDD;
+  background-color: var(--amani-canvas, #FAF9F6);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -4286,7 +4248,7 @@ body.image-lightbox-open {
   border-radius: var(--gath-card-radius);
   overflow: hidden;
   isolation: isolate;
-  background: var(--amani-canvas, #F8F2E5);
+  background: var(--amani-canvas, #FAF9F6);
   text-decoration: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
   transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -4336,7 +4298,7 @@ body.image-lightbox-open {
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.6rem 1.75rem 1.75rem;
-  background: var(--amani-canvas, #F8F2E5);
+  background: var(--amani-canvas, #FAF9F6);
 }
 
 .gath-duo-card__header {
@@ -4423,7 +4385,7 @@ body.image-lightbox-open {
   min-height: 100vh;
   min-height: 100dvh;
   padding: clamp(4rem, 8vh, 6.5rem) 1.5rem;
-  background-color: var(--amani-canvas, #F8F2E5);
+  background-color: var(--amani-canvas, #FAF9F6);
   border-top: 1px solid var(--amani-hairline, rgba(23, 20, 17, 0.08));
   border-bottom: 1px solid var(--amani-hairline, rgba(23, 20, 17, 0.08));
   display: flex;
@@ -4766,7 +4728,7 @@ body.image-lightbox-open {
   font-size: 11px;
   font-weight: 700;
   color: #D97706;
-  background: var(--amani-paper, #EFE5D4);
+  background: var(--amani-paper, #FAF9F6);
   padding: 2px 6px;
   border-radius: 4px;
   white-space: nowrap;
@@ -4918,7 +4880,7 @@ body.image-lightbox-open {
   font-weight: 600;
   letter-spacing: 0.03em;
   color: var(--amani-ink-soft, #403A34);
-  background: var(--amani-paper, #EFE5D4);
+  background: var(--amani-paper, #FAF9F6);
   padding: 4px 10px;
   border-radius: 12px;
   display: inline-flex;
@@ -5127,7 +5089,7 @@ body.image-lightbox-open {
 
 .visit-cta-btn:hover .visit-cta-btn__line {
   width: 56px;
-  background-color: #F8F2E5;
+  background-color: var(--amani-canvas, #FAF9F6);
 }
 
 @media (max-width: 380px) {
@@ -5148,7 +5110,7 @@ body.image-lightbox-open {
   position: relative;
   width: 100%;
   padding: clamp(2.25rem, 4.5vw, 3.75rem) var(--amani-gutter, clamp(1rem, 4vw, 3rem));
-  background-color: var(--amani-paper, #EFE5D4);
+  background-color: var(--amani-paper, #FAF9F6);
   color: var(--amani-ink, #171411);
   border-top: 1px solid var(--amani-hairline, rgba(23, 20, 17, 0.12));
   overflow: hidden;
@@ -5288,7 +5250,7 @@ a.home-contact-detail-value:hover {
 /* Card Wrapper & Form */
 .home-contact-card {
   padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  background: var(--amani-canvas, #F8F2E5);
+  background: var(--amani-canvas, #FAF9F6);
   border: 1px solid var(--amani-hairline, rgba(23, 20, 17, 0.12));
   border-radius: var(--amani-radius-md, 8px);
   box-shadow: 0 10px 30px rgba(23, 20, 17, 0.04);
@@ -5485,7 +5447,7 @@ a.home-contact-detail-value:hover {
 .menu-discovery {
   position: relative;
   width: 100%;
-  background-color: var(--amani-void, #742F1C);
+  background-color: var(--amani-void, #A95B43);
   color: var(--amani-cream-on-dark, #F4EDDF);
   padding: clamp(3.5rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
   box-sizing: border-box;
@@ -5594,7 +5556,7 @@ a.home-contact-detail-value:hover {
 }
 
 .menu-discovery__card:hover {
-  background-color: var(--amani-void, #742F1C);
+  background-color: var(--amani-void, #A95B43);
 }
 
 .menu-discovery__card:hover .menu-discovery__card-text {
@@ -5611,7 +5573,7 @@ a.home-contact-detail-value:hover {
 }
 
 .menu-discovery__card--highlight:hover {
-  background-color: var(--amani-void, #742F1C);
+  background-color: var(--amani-void, #A95B43);
 }
 
 .menu-discovery__card--highlight:hover .menu-discovery__card-text {

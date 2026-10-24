@@ -31,7 +31,44 @@ export function OurBeginning() {
         <div className="stories-beginning__collage">
           <figure className="stories-beginning__image stories-beginning__image--main"><img src="/media/images/grandma-cooking-stone-1.png" alt="A grandmother preparing food on a traditional stone grinder" loading="lazy" /></figure>
           <figure className="stories-beginning__image stories-beginning__image--small"><img src="/media/images/story/2.png" alt="The first warmly dressed Amani dining room" loading="lazy" /></figure>
-          <div className="stories-beginning__stamp" aria-hidden="true">FROM OUR<br />HOME TO YOURS</div>
+          <div className="stories-beginning__stamp" aria-label="100% authentic and homely food">
+            <svg viewBox="0 0 160 160" className="stories-beginning__stamp-svg" aria-hidden="true">
+              <defs>
+                <path id="stories-stamp-top" d="M 22,80 A 58,58 0 0,1 138,80" fill="none" />
+                <path id="stories-stamp-bottom" d="M 24,80 A 56,56 0 0,0 136,80" fill="none" />
+              </defs>
+              {/* Outer circular dashed & solid frame */}
+              <circle cx="80" cy="80" r="76" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 2.5" />
+              <circle cx="80" cy="80" r="71" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.85" />
+              {/* Inner decorative circle */}
+              <circle cx="80" cy="80" r="45" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
+              <circle cx="80" cy="80" r="42" fill="none" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 2" opacity="0.5" />
+              {/* Top curved text */}
+              <text fill="currentColor" className="stories-beginning__stamp-text">
+                <textPath href="#stories-stamp-top" startOffset="50%" textAnchor="middle">
+                  ★ 100% AUTHENTIC ★
+                </textPath>
+              </text>
+              {/* Bottom curved text */}
+              <text fill="currentColor" className="stories-beginning__stamp-text">
+                <textPath href="#stories-stamp-bottom" startOffset="50%" textAnchor="middle">
+                  ★ HOMELY FOOD ★
+                </textPath>
+              </text>
+              {/* Center ornament and AND connector */}
+              <text x="80" y="65" textAnchor="middle" fill="currentColor" className="stories-beginning__stamp-flourish">
+                ✦
+              </text>
+              <line x1="45" y1="79" x2="62" y2="79" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+              <text x="80" y="83" textAnchor="middle" fill="currentColor" className="stories-beginning__stamp-center-and">
+                AND
+              </text>
+              <line x1="98" y1="79" x2="115" y2="79" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+              <text x="80" y="103" textAnchor="middle" fill="currentColor" className="stories-beginning__stamp-flourish">
+                ✦
+              </text>
+            </svg>
+          </div>
         </div>
         <ol className="stories-timeline">{moments.map((moment) => <li className="stories-timeline__item" key={moment.year}><span>{moment.year}</span><p>{moment.text}</p></li>)}</ol>
       </div>

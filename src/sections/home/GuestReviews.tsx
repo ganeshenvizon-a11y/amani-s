@@ -336,7 +336,7 @@ export function GuestReviews() {
       {/* Hero Background Pattern Texture Overlay */}
       <div className="amani-stories-bg-pattern absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <img
-          src="/media/images/hero-pattern.png"
+          src="/media/images/hero-pattern.svg"
           alt=""
           className="w-full h-full object-cover"
           loading="lazy"

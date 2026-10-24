@@ -4,9 +4,9 @@
 
 :root {
   /* Canvases */
-  --amani-canvas: #F8F2E5;
+  --amani-canvas: #FAF9F6;
   /* Warm rice canvas (primary) */
-  --amani-paper: #EFE5D4;
+  --amani-paper: #FAF9F6;
   /* Soft paper tint */
   --amani-sand: #D8C7AA;
   /* Natural sand background */
@@ -43,7 +43,7 @@
   /* Restrained turmeric accent */
 
   /* Dark Editorial Scenes */
-  --amani-void: #742F1C;
+  --amani-void: #A95B43;
   /* Deep terracotta brown dark background */
   --amani-dark-warm: #3A190E;
   /* Warm dark terracotta surface */

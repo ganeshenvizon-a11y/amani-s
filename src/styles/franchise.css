@@ -19,3 +19,25 @@
 .franchise-page textarea::placeholder {
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
 }
+
+/* Value Propositions Section (on terracotta background) */
+.franchise-value-props {
+  background-color: var(--amani-void, #A95B43);
+  color: #FFFDF9;
+}
+
+.franchise-value-props h2 {
+  color: #FFFDF9;
+  font-family: var(--amani-font-display, 'Balery', sans-serif);
+}
+
+.franchise-value-props h2 em {
+  color: #FFDE94;
+  font-style: normal;
+  font-weight: 500;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.franchise-value-props p {
+  color: #FFF8EE;
+}

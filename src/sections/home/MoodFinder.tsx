@@ -59,7 +59,7 @@ export function MoodFinder() {
       {/* Background Pattern Texture Overlay */}
       <div className="home-mood-journey__bg-pattern" aria-hidden="true">
         <img
-          src="/media/images/hero-pattern.png"
+          src="/media/images/hero-pattern.svg"
           alt=""
           className="home-mood-journey__bg-pattern-img"
           loading="lazy"
@@ -123,7 +123,6 @@ export function MoodFinder() {
                   loading={index < 2 ? 'eager' : 'lazy'}
                   decoding="async"
                 />
-                <div className="mood-journey-card__veil" aria-hidden="true" />
                 <div className="mood-journey-card__content">
                   <h3 className="mood-journey-card__title">{mood.title}</h3>
                   <div className="mood-journey-card__footer">

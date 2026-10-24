@@ -10,7 +10,7 @@ Welcome to the central design and development specification document for **Amani
 
 ### Core Design Pillars
 1. **Tactile Editorial Craft**: High-contrast typography, vintage paper textures, organic torn edges, frosted scotch tape, rubber ink stamps, and physical card deck physics.
-2. **Generous Dining & Memory**: Warm, atmospheric visual tones, rich dark void scenes (`#742F1C`), rice/paper canvases (`#F8F2E5`), and deep terracotta/maroon accents (`#742F1C`, `#A34A31`).
+2. **Generous Dining & Memory**: Warm, atmospheric visual tones, rich dark void scenes (`#742F1C`), rice/paper canvases (`#FAF9F6`), and deep terracotta/maroon accents (`#742F1C`, `#A34A31`).
 3. **Smooth Micro-Interactions**: Critically damped spring physics, organic gravity drops, inertia-driven drag and throwing loops, dynamic cycling word reveals, and zero-snapping settling algorithms.
 
 ---
@@ -22,8 +22,8 @@ Welcome to the central design and development specification document for **Amani
 ```css
 :root {
   /* Canvases & Surfaces */
-  --amani-canvas:          #F8F2E5; /* Primary warm rice canvas */
-  --amani-paper:           #EFE5D4; /* Soft paper tint */
+  --amani-canvas:          #FAF9F6; /* Primary warm rice canvas */
+  --amani-paper:           #FAF9F6; /* Soft paper tint */
   --amani-sand:            #D8C7AA; /* Natural sand background */
   --amani-canvas-dim:      #EDE4D0; /* Cream surface shade (-8% lightness) */
 
@@ -43,7 +43,7 @@ Welcome to the central design and development specification document for **Amani
   --amani-turmeric:        #C99732; /* Restrained turmeric yellow */
 
   /* Dark Editorial Scenes */
-  --amani-void:            #742F1C; /* Deep terracotta dark background */
+  --amani-void:            #A95B43; /* Warm terracotta dark background */
   --amani-dark-warm:       #3A190E; /* Surface dark warm container */
   --amani-cream-on-dark:   #F4EDDF; /* Ivory text on dark void */
   --amani-cream-muted:     rgba(244, 237, 223, 0.7);
@@ -225,7 +225,7 @@ The Hero experience established on the **Home Page** serves as the core architec
 ┌────────────────────────────────────────────────────────────────────────┐
 │                          SECTION.HERO-EDITORIAL                       │
 │ ┌────────────────────────────────────────────────────────────────────┐ │
-│ │ .hero__bg-pattern (Grain Overlay / hero-pattern.png)               │ │
+│ │ .hero__bg-pattern (Geometric Tile Overlay / hero-pattern.svg)     │ │
 │ └────────────────────────────────────────────────────────────────────┘ │
 │                                                                        │
 │ ┌────────────────────────────────────────────────────────────────────┐ │

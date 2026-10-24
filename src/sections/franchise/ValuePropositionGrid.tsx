@@ -55,36 +55,36 @@ export function ValuePropositionGrid() {
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-y-14 lg:gap-x-16">
           {/* Section Header — sticky editorial column */}
           <Reveal direction="up" className="lg:col-span-5 lg:sticky lg:top-28 self-start">
-            <h2 className="font-display text-[length:var(--font-heading-1)] font-medium leading-[1.12] tracking-[-0.01em] text-[var(--amani-cream-on-dark)]">
+            <h2 className="font-display text-[length:var(--font-heading-1)] font-bold leading-[1.12] tracking-[-0.01em] text-[#FFFDF9]">
               Bring authentic culinary experiences everywhere &mdash; and grow{' '}
-              <em className="not-italic font-medium text-[var(--amani-turmeric)]">a brand people keep coming back for.</em>
+              <em className="not-italic font-medium text-[#FFDE94] [text-shadow:0_2px_12px_rgba(0,0,0,0.18)]">a brand people keep coming back for.</em>
             </h2>
-            <p className="mt-6 text-[length:var(--font-body)] text-[var(--amani-cream-muted)] leading-relaxed max-w-md">
+            <p className="mt-6 text-[length:var(--font-body)] text-[#FFF8EE] leading-relaxed max-w-md">
               Six pillars of partnership built from years of experience &mdash; backing your journey from day one.
             </p>
           </Reveal>
 
           {/* Value Propositions — editorial numbered list */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--amani-hairline-dark)] rounded-2xl overflow-hidden border border-[var(--amani-hairline-dark)]">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/20 rounded-2xl overflow-hidden border border-white/20">
             {VALUE_PROPOSITIONS.map((prop, index) => (
               <Reveal key={prop.title} direction="up" delay={index * 0.07}>
                 <article className="group relative h-full bg-[var(--amani-void)] hover:bg-[var(--amani-dark-warm)] transition-colors duration-300 p-7 sm:p-8 flex flex-col">
-                  {/* Turmeric edge accent that grows on hover */}
+                  {/* Gold edge accent that grows on hover */}
                   <span
-                    className="absolute left-0 top-0 h-0 w-[3px] bg-[var(--amani-turmeric)] transition-all duration-300 group-hover:h-full"
+                    className="absolute left-0 top-0 h-0 w-[3px] bg-[#FFDE94] transition-all duration-300 group-hover:h-full"
                     aria-hidden="true"
                   />
 
                   <div className="mb-6">
-                    <span className="font-display text-4xl sm:text-5xl leading-none text-[rgba(244,237,223,0.16)] transition-colors duration-300 group-hover:text-[var(--amani-turmeric)]">
+                    <span className="font-display text-4xl sm:text-5xl leading-none text-[#FFDE94]/60 transition-colors duration-300 group-hover:text-[#FFDE94]">
                       {prop.number}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-2xl sm:text-[1.7rem] font-normal leading-snug text-[var(--amani-cream-on-dark)] mb-3">
+                  <h3 className="font-display text-2xl sm:text-[1.7rem] font-bold leading-snug text-[#FFFDF9] mb-3">
                     {prop.title}
                   </h3>
-                  <p className="text-sm sm:text-[0.95rem] text-[var(--amani-cream-muted)] leading-relaxed">
+                  <p className="text-sm sm:text-[0.95rem] text-[#FFF6E8] leading-relaxed">
                     {prop.description}
                   </p>
                 </article>

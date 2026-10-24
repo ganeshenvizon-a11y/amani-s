@@ -385,7 +385,7 @@ export function Hero() {
     <section ref={heroRef} className="home-hero home-hero--editorial" aria-label="Welcome to Amani's">
       <div className="home-hero__bg-pattern" aria-hidden="true">
         <img
-          src="/media/images/hero-pattern.png"
+          src="/media/images/hero-pattern.svg"
           alt=""
           className="home-hero__bg-pattern-img"
           loading="eager"
