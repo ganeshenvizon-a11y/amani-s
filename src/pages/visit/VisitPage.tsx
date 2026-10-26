@@ -31,7 +31,7 @@ export function VisitPage() {
       </div>
 
       {/* 05 — Table Reservation & Contact Form */}
-      <ContactForm />
+      <ContactForm tone="void" />
     </>
   );
 }

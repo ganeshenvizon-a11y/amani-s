@@ -20,7 +20,7 @@ const DISCOVERY_CATEGORIES: MenuDiscoveryCategory[] = [
     path: '/menu?section=main-course',
   },
   {
-    title: 'Tiffins & Dosas',
+    title: 'Tandoor & Kebabs',
     path: '/menu?section=starters-soups',
   },
   {

@@ -354,6 +354,16 @@
 
 .vst-info {
   padding: clamp(4.5rem, 9vw, 8rem) 0;
+  background: var(--amani-void, #A95B43);
+  color: #FFFDF9;
+}
+
+.vst-info h2 {
+  color: #FFFDF9;
+}
+
+.vst-info h2 em {
+  color: #FFDE94;
 }
 
 /* Editorial split: the "Good to know" heading anchors the top-left, the Hours
@@ -387,8 +397,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: clamp(2rem, 4vw, 3.5rem);
-  border-top: 1px solid var(--amani-hairline);
-  border-bottom: 1px solid var(--amani-hairline);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .vst-info__cell {
@@ -397,20 +407,33 @@
 
 .vst-info__cell+.vst-info__cell {
   padding-left: clamp(2rem, 4vw, 3.5rem);
-  border-left: 1px solid var(--amani-hairline);
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .vst-info__label {
   display: block;
   margin-bottom: 0.9rem;
-  color: var(--amani-ink);
+  color: #FFFDF9;
   font-family: var(--amani-font-display);
   font-size: clamp(1.35rem, 2vw, 1.75rem);
   letter-spacing: -0.02em;
 }
 
+.vst-info__label--icon {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.vst-info__icon {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: #FFDE94;
+}
+
 .vst-info__value {
-  color: var(--amani-ink-muted);
+  color: #FFF6E8;
   font-size: 0.98rem;
   line-height: 1.65;
 }
@@ -432,7 +455,7 @@
 }
 
 .vst-hours__row--today {
-  color: var(--amani-ink);
+  color: #FFDE94;
   font-weight: 600;
 }
 
@@ -608,7 +631,7 @@
   .vst-info__cell+.vst-info__cell {
     padding-left: 0;
     border-left: 0;
-    border-top: 1px solid var(--amani-hairline);
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
   }
 
   .vst-find__actions .vst-button {

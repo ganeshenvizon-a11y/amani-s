@@ -7,7 +7,7 @@ export function DishDetailExperience() {
       <div className="menu-container menu-feature__grid">
         <Reveal className="menu-feature__media" direction="left">
           <img
-            src="/media/images/dish-naatu-kodi-pulusu.jpg"
+            src="/media/images/dish-naatu-kodi-pulusu.webp"
             alt="Naatu Kodi Pulusu simmered with country chicken and spices"
             loading="lazy"
           />

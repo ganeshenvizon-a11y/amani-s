@@ -9,15 +9,15 @@ import { gsap } from '../../lib/gsap';
 
 const HERO_CARDS = [
   {
-    image: '/media/images/happy-south-indian-dining.png',
+    image: '/media/images/happy-south-indian-dining.webp',
     alt: 'Happy Indian family enjoying a traditional South Indian meal in a warm restaurant setting',
   },
   {
-    image: '/media/images/dish-chepala-pulusu.jpg',
+    image: '/media/images/dish-chepala-pulusu.webp',
     alt: 'Chepala Pulusu — traditional Andhra fish curry',
   },
   {
-    image: '/media/images/grandma-cooking-stone-1.png',
+    image: '/media/images/grandma-cooking-stone-1.webp',
     alt: 'Grandmother cooking on a traditional stone in an Andhra kitchen',
   },
   {
@@ -25,11 +25,11 @@ const HERO_CARDS = [
     alt: "Warm and atmospheric restaurant interior ambience at Amani's",
   },
   {
-    image: '/media/images/dish-naatu-kodi-pulusu.jpg',
+    image: '/media/images/dish-naatu-kodi-pulusu.webp',
     alt: 'Naatu Kodi Pulusu — country chicken curry',
   },
   {
-    image: '/media/images/grandma-cooking-stone-2.png',
+    image: '/media/images/grandma-cooking-stone-2.webp',
     alt: 'Grandmother grinding spices on a traditional silbatta stone',
   },
 ];
@@ -422,7 +422,7 @@ export function Hero() {
 
       <div className="home-hero__card-deck" aria-label="Draggable Amani's visual introduction">
         {HERO_CARDS.map((card, index) => {
-          const meta = HERO_CARD_META[index] || { stamp: 'AMANI 1974', tag: 'TIFFIN' };
+          const meta = HERO_CARD_META[index] || { stamp: 'AMANI 1974', tag: 'BIRYANI' };
           const tearVariant = (index % 4) + 1;
           return (
             <button

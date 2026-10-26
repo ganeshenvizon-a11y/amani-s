@@ -30,7 +30,7 @@ const EMPTY: CateringFields = {
 };
 
 const EVENT_TYPES = ['Family ceremony', 'Wedding or engagement', 'Corporate event', 'Social celebration', 'Other'];
-const MEAL_TYPES = ['Breakfast / Tiffin', 'Lunch', 'Dinner', 'Full-day service'];
+const MEAL_TYPES = ['Lunch', 'Dinner', 'Full-day service'];
 const PREFERENCES = ['Vegetarian', 'Non-vegetarian', 'Both'];
 const SERVICES = ['Food only', 'Food with service staff', 'Full setup & counter service'];
 

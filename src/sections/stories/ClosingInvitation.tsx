@@ -4,7 +4,7 @@ import { Reveal } from '../../components/motion/Reveal';
 export function ClosingInvitation() {
   return (
     <section className="stories-closing" aria-labelledby="closing-title">
-      <img src="/media/images/testimonials/testimonial-grand-family.jpg" alt="A smiling family enjoying their time together at Amani's" loading="lazy" />
+      <img src="/media/images/testimonials/testimonial-grand-family.webp" alt="A smiling family enjoying their time together at Amani's" loading="lazy" />
       <div className="stories-closing__overlay" aria-hidden="true" />
       <Reveal className="stories-closing__content">
         <h2 id="closing-title">Some visits become<br /><em>traditions.</em></h2>

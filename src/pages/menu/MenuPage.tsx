@@ -12,7 +12,7 @@ export function MenuPage() {
     document.title = "Menu | Amani's South Indian Kitchen";
     document.querySelector('meta[name="description"]')?.setAttribute(
       'content',
-      "Explore Amani's South Indian menu featuring authentic Andhra curries, biryanis, thalis, and handcrafted regional dishes.",
+      "Explore Amani's South Indian menu featuring authentic Andhra curries, biryanis, tandoor kebabs, and handcrafted regional dishes.",
     );
   }, []);
 
@@ -37,7 +37,7 @@ export function MenuPage() {
       <DishDetailExperience />
 
       {/* Section 07: Contact Section */}
-      <ContactForm />
+      <ContactForm tone="void" />
 
     </div>
   );

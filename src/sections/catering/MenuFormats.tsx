@@ -3,13 +3,13 @@ import { Reveal } from '../../components/motion/Reveal';
 const menuFormats = [
   {
     tag: 'Traditional',
-    title: 'Banana Leaf & Sadya Feasts',
-    copy: 'Complete multi-course authentic South Indian banquets served with traditional warmth.',
+    title: 'Banana Leaf Feasts',
+    copy: 'Andhra curries, pulusus, biryanis and curd rice laid out on banana leaf, served with traditional warmth.',
   },
   {
-    tag: 'Morning & Evening',
-    title: 'Breakfast & Tiffin Buffets',
-    copy: 'Fresh idlis, crisp dosas, vadas, chutneys, and filter coffee brewed fresh on-site.',
+    tag: 'From the Tandoor',
+    title: 'Kebab & Tandoor Platters',
+    copy: 'Paneer tikka, tangdi and kalmi kebabs, mutton seekh and tandoori chicken, fired fresh on-site.',
   },
   {
     tag: 'Curated Mains',
@@ -24,12 +24,12 @@ const menuFormats = [
   {
     tag: 'Interactive',
     title: 'Live Counters & Beverages',
-    copy: 'Live dosa stations, freshly poured beverages, panakam, and traditional coolers.',
+    copy: 'Live biryani and tandoor counters, fresh lime soda, lassi, butter milk and seasonal coolers.',
   },
   {
     tag: 'Sweet Endings',
     title: 'Desserts & Authentic Sweets',
-    copy: 'Rich payasam, gulab jamun, halwas, and hand-crafted South Indian sweets.',
+    copy: 'Qubani ka Meetha, Double ka Meetha, gulab jamun, junnu and pot kulfi.',
   },
 ];
 

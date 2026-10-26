@@ -151,5 +151,7 @@ const router = createBrowserRouter([
 ]);
 
 export function AppRouter() {
-  return <RouterProvider router={router} />;
+  // Opt into the React Router v7 behaviour now: navigations are wrapped in
+  // React.startTransition (silences the v7 future-flag warning).
+  return <RouterProvider router={router} future={{ v7_startTransition: true }} />;
 }

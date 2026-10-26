@@ -4,6 +4,7 @@ import { WhyAmani } from '../../sections/stories/WhyAmani';
 import { OurBeginning } from '../../sections/stories/OurBeginning';
 import { FromKitchenToTable } from '../../sections/stories/FromKitchenToTable';
 import { ADayAtAmani } from '../../sections/stories/ADayAtAmani';
+import { ContactForm } from '../../sections/home/ContactForm';
 
 export function StoriesPage() {
   useEffect(() => {
@@ -30,6 +31,9 @@ export function StoriesPage() {
 
       {/* 05 — A Day at Amani */}
       <ADayAtAmani />
+
+      {/* 06 — Table Reservation & Contact Form */}
+      <ContactForm />
     </div>
   );
 }

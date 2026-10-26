@@ -29,8 +29,8 @@ export function OurBeginning() {
           <p className="stories-beginning__summary">The family behind Amani didn&rsquo;t set out to open a restaurant. They set out to recreate a kitchen they missed — a home kitchen in Hyderabad, and the Andhra cooking that came out of it.</p>
         </div>
         <div className="stories-beginning__collage">
-          <figure className="stories-beginning__image stories-beginning__image--main"><img src="/media/images/grandma-cooking-stone-1.png" alt="A grandmother preparing food on a traditional stone grinder" loading="lazy" /></figure>
-          <figure className="stories-beginning__image stories-beginning__image--small"><img src="/media/images/story/2.png" alt="The first warmly dressed Amani dining room" loading="lazy" /></figure>
+          <figure className="stories-beginning__image stories-beginning__image--main"><img src="/media/images/grandma-cooking-stone-1.webp" alt="A grandmother preparing food on a traditional stone grinder" loading="lazy" /></figure>
+          <figure className="stories-beginning__image stories-beginning__image--small"><img src="/media/images/story/2.webp" alt="The first warmly dressed Amani dining room" loading="lazy" /></figure>
           <div className="stories-beginning__stamp" aria-label="100% authentic and homely food">
             <svg viewBox="0 0 160 160" className="stories-beginning__stamp-svg" aria-hidden="true">
               <defs>

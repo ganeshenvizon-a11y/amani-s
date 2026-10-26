@@ -37,7 +37,7 @@ export function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="w-full flex flex-col">
+      <div className="home-sections w-full flex flex-col">
         <div className="home-hero-transition">
           {/* Section 01: Hero */}
           <Hero />

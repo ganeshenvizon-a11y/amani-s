@@ -7,7 +7,7 @@ export function FranchiseHero() {
     <section className="gath-hero" aria-labelledby="franchise-hero-title">
       <img
         className="gath-hero__bg"
-        src="/media/images/happy-south-indian-dining.png"
+        src="/media/images/happy-south-indian-dining.webp"
         alt="Amani's Restaurant Master Franchise Experience"
         fetchPriority="high"
       />

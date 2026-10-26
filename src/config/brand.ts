@@ -8,7 +8,7 @@ export const BRAND_CONFIG = {
   tagline: 'Made between food and feeling.',
   logoSvg: '/media/images/amani-logo.svg',
   logoMarkSvg: '/media/images/amani-logo-mark.svg',
-  logoWordmarkPng: '/media/images/amani-wordmark.png',
+  logoWordmarkPng: '/media/images/amani-wordmark.webp',
   loaderSymbolSvg: '/media/images/amani-loader-symbol.svg',
   ogImage: '/og/amani-og.jpg',
   twitterHandle: '@amanikitchen',

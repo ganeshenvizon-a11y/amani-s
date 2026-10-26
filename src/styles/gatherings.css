@@ -259,11 +259,15 @@
 }
 
 .gath-occasion__index {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--amani-terracotta);
   font-family: var(--amani-font-ui);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .gath-occasion h3 {
@@ -289,7 +293,20 @@
 
 .gath-gallery {
   padding: clamp(4.5rem, 9vw, 8rem) 0;
-  background: var(--amani-paper);
+  background: var(--amani-void, #A95B43);
+  color: #FFFDF9;
+}
+
+.gath-gallery h2 {
+  color: #FFFDF9;
+}
+
+.gath-gallery h2 em {
+  color: #FFDE94;
+}
+
+.gath-gallery .gath-head p {
+  color: #FFF8EE;
 }
 
 .gath-gallery__grid {

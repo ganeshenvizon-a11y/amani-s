@@ -7,7 +7,7 @@ export function Hero() {
     <section className="stories-hero" aria-labelledby="stories-hero-title">
       <img
         className="stories-hero__image"
-        src="/media/images/happy-south-indian-dining.png"
+        src="/media/images/happy-south-indian-dining.webp"
         alt="A family sharing a warm South Indian meal at Amani's"
         fetchPriority="high"
       />

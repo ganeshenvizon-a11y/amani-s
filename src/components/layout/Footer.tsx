@@ -178,7 +178,7 @@ export function Footer() {
       <div className="footer-media">
         <img
           ref={mediaImgRef}
-          src="/media/images/footer-table-memory.png"
+          src="/media/images/footer-table-memory.webp"
           alt="Hands serving traditional South Indian meal on banana leaf"
           loading="lazy"
           decoding="async"

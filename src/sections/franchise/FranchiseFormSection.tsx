@@ -75,16 +75,16 @@ export function FranchiseFormSection() {
   };
 
   return (
-    <section id="franchise-form" className="franchise-form-section py-20 lg:py-28 bg-[var(--amani-paper)] text-[var(--amani-ink)] border-t border-[var(--amani-hairline)] relative">
+    <section id="franchise-form" className="franchise-form-section py-20 lg:py-28 bg-[var(--amani-void)] text-[#FFFDF9] border-t border-white/20 relative">
       <div id="apply" />
       <div id="form" />
       <Container size="wide">
         {/* Section Header */}
         <Reveal direction="up" className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-display text-[length:var(--font-heading-1)] font-medium leading-[1.05] tracking-[-0.015em] mb-4 text-[var(--amani-ink)]">
-            Apply for an <em className="not-italic font-medium text-[var(--amani-maroon)]">Amani&apos;s outlet.</em>
+          <h2 className="font-display text-[length:var(--font-heading-1)] font-medium leading-[1.05] tracking-[-0.015em] mb-4 text-[#FFFDF9]">
+            Apply for an <em className="not-italic font-medium text-[#FFDE94]">Amani&apos;s outlet.</em>
           </h2>
-          <p className="text-[length:var(--font-body)] text-[var(--amani-ink-soft)] leading-relaxed">
+          <p className="text-[length:var(--font-body)] text-[#FFF8EE] leading-relaxed">
             Fill out the application below. Our team reviews every submission and will respond within 48 hours.
           </p>
         </Reveal>
@@ -96,7 +96,7 @@ export function FranchiseFormSection() {
           </Reveal>
 
           {/* Right Column: Form Container */}
-          <Reveal direction="up" delay={0.15} className="lg:col-span-8 p-6 sm:p-10 rounded-2xl bg-[var(--amani-canvas)] border border-[var(--amani-hairline)] shadow-[0_10px_30px_rgba(23,20,17,0.05)]">
+          <Reveal direction="up" delay={0.15} className="lg:col-span-8 p-6 sm:p-10 rounded-2xl bg-[var(--amani-canvas)] text-[var(--amani-ink)] shadow-[0_1.25rem_3rem_rgba(40,18,10,0.25)]">
             {submitted ? (
               <div className="text-center py-12 px-4" role="status" aria-live="polite">
                 <div className="w-16 h-16 rounded-full bg-[var(--amani-olive)] text-white flex items-center justify-center text-3xl mx-auto mb-6">

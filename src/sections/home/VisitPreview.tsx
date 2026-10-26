@@ -16,8 +16,8 @@ export function VisitPreview() {
 
   // Floating thumbnail pins positioned in the open right-side map area
   const landmarkPins = [
-    { top: '22%', left: '58%', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=300&auto=format&fit=crop', alt: 'Ghee Podi Idli' },
-    { top: '24%', left: '84%', image: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=300&auto=format&fit=crop', alt: 'Crisp Dosa' },
+    { top: '22%', left: '58%', image: '/media/images/signatures/chicken-biryani.webp', alt: 'Chicken Dum Biryani' },
+    { top: '24%', left: '84%', image: '/media/images/signatures/paneer-tikka.webp', alt: 'Paneer Tikka' },
     { top: '74%', left: '76%', image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=300&auto=format&fit=crop', alt: "Amani's Dining Room" },
   ];
 

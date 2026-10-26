@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 const moods = [
-  { name: 'Something comforting', suggestion: "Amani's South Veg Thali", image: '/media/images/thali/south-indian-thali.png' },
-  { name: 'Bring the heat', suggestion: 'Chilli Chicken with Masala Cola', image: '/media/images/dish-chicken-majestic.jpg' },
-  { name: 'Share the table', suggestion: 'Chicken Dum Biryani for the table', image: '/media/images/story/3.png' },
+  { name: 'Something comforting', suggestion: 'Perugu Chicken with Curd Rice', image: '/media/images/special dishes/Perugu Chicken.webp' },
+  { name: 'Bring the heat', suggestion: 'Chilli Chicken with Masala Cola', image: '/media/images/dish-chicken-majestic.webp' },
+  { name: 'Share the table', suggestion: 'Chicken Dum Biryani for the table', image: '/media/images/story/3.webp' },
 ];
 
 export function MoodFinder() {

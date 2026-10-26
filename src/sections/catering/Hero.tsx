@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
-import gatheringImg from '../../assets/gathering-table.jpg';
+import gatheringImg from '../../assets/gathering-table.webp';
 
 export function Hero() {
   const reduceMotion = useReducedMotion();

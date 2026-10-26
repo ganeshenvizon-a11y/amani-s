@@ -5440,6 +5440,49 @@ a.home-contact-detail-value:hover {
   background: var(--amani-maroon-tint, rgba(122, 31, 36, 0.1));
 }
 
+/* Void variant — used where the page rhythm puts the contact form on a dark
+   scene. The form card stays light, so only the info column flips. */
+.home-contact-section--void {
+  background-color: var(--amani-void, #A95B43);
+  color: #FFFDF9;
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+
+.home-contact-section--void .home-contact-monogram {
+  filter: brightness(0) invert(1);
+  opacity: 0.08;
+}
+
+.home-contact-section--void .home-contact-title {
+  color: #FFFDF9;
+}
+
+.home-contact-section--void .home-contact-title em,
+.home-contact-section--void .home-contact-quote .quote-mark,
+.home-contact-section--void .home-contact-detail-label,
+.home-contact-section--void a.home-contact-detail-value:hover {
+  color: #FFDE94;
+}
+
+.home-contact-section--void .home-contact-description,
+.home-contact-section--void .home-contact-quote .quote-text {
+  color: #FFF8EE;
+}
+
+.home-contact-section--void .home-contact-detail-value {
+  color: #FFFDF9;
+}
+
+.home-contact-section--void .home-contact-quote,
+.home-contact-section--void .home-contact-details {
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+
+.home-contact-section--void .home-contact-card {
+  border-color: transparent;
+  box-shadow: 0 1.25rem 3rem rgba(40, 18, 10, 0.25);
+}
+
 /* ==========================================================================
    Menu Discovery Section — Home Page
    ========================================================================== */
@@ -5649,5 +5692,216 @@ a.home-contact-detail-value:hover {
 
   .menu-discovery__card {
     min-height: 72px;
+  }
+}
+/* ==========================================================================
+   Home section rhythm — after the gathering statement, sections alternate
+   #FAF9F6 → --amani-void so a dark scene never follows a dark/image scene.
+   Order: Mood (light) · Thali (void) · Brand Story (light) · Signature (void)
+   · Reviews (light) · QR (void) · Visit map (light) · Gatherings (void)
+   · Contact (light)
+   ========================================================================== */
+
+.home-sections {
+  --home-rhythm-light: #FAF9F6;
+  --home-rhythm-accent: #F5D48C;
+  --home-rhythm-cream-soft: rgba(244, 237, 223, 0.82);
+  --home-rhythm-hairline: rgba(244, 237, 223, 0.22);
+}
+
+/* --- Light: Mood Finder & Brand Story (previously void) --- */
+.home-sections .home-mood-journey,
+.home-sections .brand-story {
+  background: var(--home-rhythm-light);
+  color: var(--amani-ink);
+}
+
+.home-sections .home-mood-journey::before,
+.home-sections .brand-story::before {
+  background: linear-gradient(90deg, transparent, rgba(23, 20, 17, 0.14), transparent);
+}
+
+.home-sections .home-mood-journey__bg-pattern-img,
+.home-sections .brand-story__bg-pattern-img {
+  mix-blend-mode: multiply;
+}
+
+.home-sections .home-mood-journey__motif,
+.home-sections .brand-story__motif {
+  color: var(--amani-terracotta);
+}
+
+.home-sections .mood-journey-card,
+.home-sections .brand-story-card {
+  border: none;
+  box-shadow: 0 1.25rem 3rem rgba(57, 37, 22, 0.18);
+}
+
+.home-sections .brand-story__copy {
+  color: var(--amani-ink-soft);
+}
+
+.home-sections .home-mood-journey__nav-btn,
+.home-sections .brand-story__nav-btn {
+  border-color: rgba(23, 20, 17, 0.18);
+  background: rgba(23, 20, 17, 0.04);
+  color: var(--amani-ink);
+}
+
+.home-sections .home-mood-journey__nav-btn:hover:not(:disabled),
+.home-sections .brand-story__nav-btn:hover:not(:disabled) {
+  background: rgba(23, 20, 17, 0.08);
+  border-color: rgba(23, 20, 17, 0.4);
+}
+
+.home-sections .home-mood-journey__nav-btn:disabled,
+.home-sections .brand-story__nav-btn:disabled {
+  border-color: rgba(23, 20, 17, 0.08);
+}
+
+/* --- Void: Thali Experience --- */
+.home-sections .thali-experience {
+  background: var(--amani-void);
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .thali-experience__heading,
+.home-sections .thali-experience__period,
+.home-sections .thali-experience__detail-heading,
+.home-sections .thali-experience__cta,
+.home-sections .thali-tab:hover {
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .thali-experience__word--dynamic,
+.home-sections .thali-tab.is-active,
+.home-sections .thali-experience__cta:hover {
+  color: var(--home-rhythm-accent);
+}
+
+.home-sections .thali-tab {
+  color: rgba(244, 237, 223, 0.66);
+}
+
+.home-sections .thali-tab__indicator,
+.home-sections .thali-experience__item-bullet {
+  background-color: var(--home-rhythm-accent);
+}
+
+.home-sections .thali-experience__tabs-line {
+  background-color: var(--home-rhythm-hairline);
+}
+
+.home-sections .thali-experience__detail-body {
+  color: var(--home-rhythm-cream-soft);
+}
+
+.home-sections .thali-experience__item {
+  color: rgba(244, 237, 223, 0.92);
+}
+
+/* --- Void: Signature Dishes (cards stay light) --- */
+.home-sections .signature-stack {
+  background: var(--amani-void);
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .signature-stack__intro>p,
+.home-sections .signature-stack__intro h2 em,
+.home-sections .signature-stack__menu-link:hover,
+.home-sections .signature-stack__menu-link:focus-visible {
+  color: var(--home-rhythm-accent);
+}
+
+.home-sections .signature-stack__motif {
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .signature-stack__summary {
+  color: var(--home-rhythm-cream-soft);
+}
+
+.home-sections .signature-stack__menu-link {
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .signature-stack-card {
+  box-shadow: 0 1.25rem 3.5rem rgba(40, 18, 10, 0.32);
+}
+
+.home-sections .signature-stack__dot {
+  background: rgba(244, 237, 223, 0.35);
+}
+
+.home-sections .signature-stack__dot.is-active {
+  background: var(--amani-cream-on-dark);
+}
+
+/* --- Void: QR Ordering --- */
+.home-sections .qr-ordering-section {
+  background-color: var(--amani-void);
+  border-color: var(--home-rhythm-hairline);
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .qr-ordering-heading-script,
+.home-sections .qr-ordering-step__title,
+.home-sections .qr-ordering-cta {
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .qr-ordering-heading-main {
+  color: var(--home-rhythm-accent);
+}
+
+.home-sections .qr-ordering-body {
+  color: var(--home-rhythm-cream-soft);
+}
+
+.home-sections .qr-ordering-step__num {
+  border-color: rgba(244, 237, 223, 0.35);
+  background: rgba(244, 237, 223, 0.1);
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .qr-ordering-step__desc {
+  color: rgba(244, 237, 223, 0.74);
+}
+
+.home-sections .qr-ordering-cta__line {
+  background: var(--amani-cream-on-dark);
+}
+
+.home-sections .qr-ordering-phone {
+  filter: drop-shadow(0 30px 60px rgba(40, 18, 10, 0.35));
+}
+
+/* --- Void: Gatherings --- */
+.home-sections .gatherings-section {
+  background-color: var(--amani-void);
+}
+
+.home-sections .gatherings-section .amani-numbers__col {
+  border-right-color: var(--home-rhythm-hairline);
+}
+
+.home-sections .gatherings-section .amani-numbers__editorial-title {
+  color: var(--amani-cream-on-dark);
+}
+
+.home-sections .gatherings-section .amani-numbers__support-text {
+  color: var(--home-rhythm-cream-soft);
+}
+
+/* All cards share the project's warm off-white with ink text. */
+.home-sections .gatherings-section .amani-numbers-card {
+  color: var(--amani-ink);
+  background-color: var(--amani-canvas-dim);
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .home-sections .gatherings-section .amani-numbers__col-bottom:has(.amani-numbers__editorial-title),
+  .home-sections .gatherings-section .amani-numbers__col-bottom:has(.amani-numbers__editorial-support) {
+    border-bottom-color: var(--home-rhythm-hairline);
   }
 }

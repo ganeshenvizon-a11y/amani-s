@@ -217,13 +217,13 @@
   margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.stories-beginning__intro {
-  border-bottom: 1px solid var(--amani-hairline);
+.stories-beginning__intro,
+.stories-day__head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-.stories-kitchen__heading,
-.stories-day__head {
-  border-bottom: 1px solid rgba(244, 237, 223, .12);
+.stories-kitchen__heading {
+  border-bottom: 1px solid var(--amani-hairline);
 }
 
 .stories-beginning__summary,
@@ -237,13 +237,13 @@
   align-self: flex-end;
 }
 
-.stories-beginning__summary {
-  color: var(--amani-ink-muted);
+.stories-beginning__summary,
+.stories-day__intro {
+  color: #FFF8EE;
 }
 
-.stories-kitchen__intro,
-.stories-day__intro {
-  color: rgba(244, 237, 223, .72);
+.stories-kitchen__intro {
+  color: var(--amani-ink-muted);
 }
 
 /* 02 — Why "Amani"? — centred editorial statement */
@@ -289,16 +289,17 @@
 }
 
 .stories-beginning {
-  background: var(--amani-paper);
+  background: var(--amani-void, #A95B43);
+  color: #FFFDF9;
   padding: clamp(5.5rem, 11vw, 10rem) 0;
 }
 
 .stories-beginning h2 {
-  color: var(--amani-ink);
+  color: #FFFDF9;
 }
 
 .stories-beginning h2 em {
-  color: var(--amani-terracotta);
+  color: #FFDE94;
 }
 
 .stories-beginning__collage {
@@ -340,13 +341,12 @@
   display: block;
   width: clamp(105px, 11vw, 150px);
   aspect-ratio: 1;
-  color: var(--amani-maroon);
+  color: #FFDE94;
   transform: rotate(11deg);
   z-index: 4;
   pointer-events: auto;
   user-select: none;
-  mix-blend-mode: multiply;
-  filter: drop-shadow(0 4px 12px rgba(116, 47, 28, 0.2));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -387,7 +387,7 @@
   gap: 2rem;
   margin: clamp(5rem, 11vw, 9rem) 0 0;
   padding: 0;
-  border-top: 1px solid var(--amani-hairline);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
   list-style: none;
 }
 
@@ -396,14 +396,14 @@
 }
 
 .stories-timeline__item span {
-  color: var(--amani-terracotta);
+  color: #FFDE94;
   font: 400 clamp(1.8rem, 2.5vw, 2.6rem)/1 var(--amani-font-display);
 }
 
 .stories-timeline__item p {
   max-width: 280px;
   margin: .7rem 0 0;
-  color: var(--amani-ink-soft);
+  color: #FFF6E8;
   font-size: .87rem;
   line-height: 1.65;
 }
@@ -456,16 +456,16 @@
 
 .stories-kitchen {
   padding: clamp(5.5rem, 10vw, 9rem) 0;
-  background: var(--amani-void, #A95B43);
-  color: #FFFDF9;
+  background: var(--amani-canvas);
+  color: var(--amani-ink);
 }
 
 .stories-kitchen .stories-kitchen__heading {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid var(--amani-hairline);
 }
 
 .stories-kitchen h2 {
-  color: #FFFDF9;
+  color: var(--amani-ink);
   font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-size: var(--font-heading-1);
   font-weight: 700;
@@ -473,14 +473,13 @@
 }
 
 .stories-kitchen h2 em {
-  color: #FFDE94;
+  color: var(--amani-maroon);
   font-style: normal;
   font-weight: 500;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 .stories-kitchen .stories-kitchen__intro {
-  color: #FFF8EE;
+  color: var(--amani-ink-muted);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: clamp(0.95rem, 1.1vw, 1.05rem);
   line-height: 1.7;
@@ -493,7 +492,7 @@
   margin-top: clamp(2.5rem, 4vw, 3.5rem);
   overflow: hidden;
   border-radius: var(--amani-radius-sm, 4px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 48px rgba(57, 37, 22, 0.18);
 }
 
 .stories-kitchen__feature img {
@@ -540,13 +539,13 @@
 }
 
 .stories-kitchen__step {
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid var(--amani-hairline);
   padding-top: 1.5rem;
 }
 
 .stories-kitchen__step>span {
   display: inline-block;
-  color: #FFDE94;
+  color: var(--amani-terracotta);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: 0.78rem;
   font-weight: 800;
@@ -557,7 +556,7 @@
 
 .stories-kitchen__step h3 {
   margin: 0 0 0.85rem;
-  color: #FFFDF9;
+  color: var(--amani-ink);
   font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-size: clamp(1.2rem, 1.6vw, 1.55rem);
   font-weight: 700;
@@ -567,7 +566,7 @@
 
 .stories-kitchen__step p {
   margin: 0;
-  color: #FFF6E8;
+  color: var(--amani-ink-soft);
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: 0.95rem;
   line-height: 1.7;
@@ -575,25 +574,17 @@
 
 .stories-day {
   padding: clamp(5.5rem, 11vw, 10rem) 0;
-  background: var(--amani-canvas);
-  color: var(--amani-ink);
+  background: var(--amani-void, #A95B43);
+  color: #FFFDF9;
 }
 
 .stories-day h2 {
-  color: var(--amani-ink);
+  color: #FFFDF9;
 }
 
 .stories-day h2 em {
-  color: var(--amani-maroon);
+  color: #FFDE94;
   font-style: normal;
-}
-
-.stories-day__head {
-  border-bottom-color: var(--amani-hairline);
-}
-
-.stories-day__intro {
-  color: var(--amani-ink-muted);
 }
 
 .stories-day__scenes {
@@ -607,11 +598,11 @@
 
 .stories-scene {
   padding-top: 1.35rem;
-  border-top: 1px solid var(--amani-hairline);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .stories-scene__time {
-  color: var(--amani-terracotta);
+  color: #FFDE94;
   font-family: var(--amani-font-ui, 'Manrope', sans-serif);
   font-size: .72rem;
   font-weight: 700;
@@ -621,7 +612,7 @@
 
 .stories-scene__label {
   margin: .7rem 0 .8rem;
-  color: var(--amani-ink);
+  color: #FFFDF9;
   font-family: var(--amani-font-display);
   font-size: clamp(1.5rem, 2.2vw, 2.05rem);
   font-weight: 400;
@@ -631,7 +622,7 @@
 
 .stories-scene__text {
   margin: 0;
-  color: var(--amani-ink-muted);
+  color: #FFF6E8;
   font-size: .92rem;
   line-height: 1.65;
 }

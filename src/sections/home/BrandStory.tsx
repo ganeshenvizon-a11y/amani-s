@@ -13,7 +13,7 @@ const STORY_CHAPTERS = [
     label: 'Familiar aroma ',
     title: 'It begins with an aroma you remember.',
     body: 'Curry leaves crackling, spices warming and something familiar taking shape in the kitchen. ',
-    image: '/media/images/story/1.png',
+    image: '/media/images/story/1.webp',
     alt: 'Grandmother preparing food in a warm home kitchen',
   },
   {
@@ -21,7 +21,7 @@ const STORY_CHAPTERS = [
     label: 'Patience and preparation',
     title: 'With food given time, care and patience. ',
     body: 'Flavours are built slowly - through familiar methods, thoughtful preparation and an instinct for when something feels right. ',
-    image: '/media/images/story/2.png',
+    image: '/media/images/story/2.webp',
     alt: 'Grandmother serving guests in a small family restaurant',
   },
   {
@@ -29,7 +29,7 @@ const STORY_CHAPTERS = [
     label: 'The welcoming table',
     title: 'At a table that always makes room.',
     body: 'For children, parents, elders, familiar faces and those joining us for the first time.',
-    image: '/media/images/story/3.png',
+    image: '/media/images/story/3.webp',
     alt: 'Family and guests sharing a South Indian meal together',
   },
   {
@@ -37,7 +37,7 @@ const STORY_CHAPTERS = [
     label: 'The return of home',
     title: 'And in flavours that bring home closer.',
     body: 'A contemporary South Indian table shaped by memory, generosity and the warmth of being cared for.',
-    image: '/media/images/story/4.png',
+    image: '/media/images/story/4.webp',
     alt: 'The next generation greeting guests in a warm restaurant',
   },
 ];

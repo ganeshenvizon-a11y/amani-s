@@ -2,9 +2,9 @@ import { motion, useReducedMotion } from 'motion/react';
 
 const scenes = [
   { label: 'Early morning', time: '06:30', text: 'The grinder is on before the sun. Produce arrives at the back door, stocks go on to simmer, and the first pots of curry begin their slow build.' },
-  { label: 'Midday', time: '13:00', text: 'The tiffin and thali rush. Banana leaves are laid, biryani lids are lifted, and plates move across the floor without a pause.' },
+  { label: 'Midday', time: '13:00', text: 'The lunch rush. Banana leaves are laid, biryani lids are lifted, and plates move across the floor without a pause.' },
   { label: 'Evening', time: '20:00', text: 'Dinner settles into a rhythm. Tables fill with regulars and first-timers alike, orders call out, and the kitchen finds its second wind.' },
-  { label: 'Closing', time: 'Late', text: 'The last guests linger over filter coffee. Counters are wiped down, tomorrow’s prep is set, and the kitchen finally exhales.' },
+  { label: 'Closing', time: 'Late', text: 'The last guests linger over Qubani ka Meetha. Counters are wiped down, tomorrow’s prep is set, and the kitchen finally exhales.' },
 ];
 
 export function ADayAtAmani() {

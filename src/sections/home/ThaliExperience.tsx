@@ -21,17 +21,16 @@ const THALI_CHOICES: ThaliChoice[] = [
     id: 'vegetarian',
     label: 'VEGETARIAN',
     title: 'A Generous Vegetarian Table ',
-    description: 'Seasonal vegetables, slow-cooked dal, sambar and fresh chutneys.',
+    description: 'Paneer, slow-cooked dal, vegetable curries and breads fresh from the tandoor.',
     items: [
-      'Steamed Sona Masoori Rice ',
-      'Pappu and Sambar ',
-      'Seasonal Vegetable Curry ',
-      'Poriyal or Aviyal ',
-      'Rasam and Curd ',
-      'Chutneys and Appadam ',
-      'Payasam ',
+      'Veg Dum Biryani',
+      'Paneer Butter Masala',
+      'Dal Tadka',
+      'Mix Veg Curry',
+      'Butter Naan',
+      'Curd Rice',
     ],
-    image: '/media/images/thali/south-indian-thali.png',
+    image: '/media/images/thali/south-indian-thali.webp',
   },
   {
     id: 'non-vegetarian',
@@ -39,14 +38,14 @@ const THALI_CHOICES: ThaliChoice[] = [
     title: 'Bold Flavours from the South',
     description: 'Coastal curries, roasted meats and cooling accompaniments balanced with rice.',
     items: [
-      'Naatu Kodi Pulusu',
+      'Natukodi Pulusu',
       'Andhra Chicken Curry',
-      'Chepala Pulusu',
-      'Regional Mutton Curry',
-      'Avakai or Gongura Rice',
-      'Rasam and Traditional Accompaniments',
+      'Nellore Chepala Pulusu',
+      'Mutton Curry',
+      'Gongura Mutton Biryani',
+      'Curd Rice',
     ],
-    image: '/media/images/thali/non-veg-thali.png',
+    image: '/media/images/thali/non-veg-thali.webp',
   },
 ];
 
@@ -261,7 +260,7 @@ export function ThaliExperience() {
               onBlur: () => setIsRevealing(false),
               tabIndex: 0,
               role: 'img',
-              'aria-label': 'An empty brass thali reveals a complete South Indian feast as you hover',
+              'aria-label': 'An empty brass plate reveals a complete Amani’s spread as you hover',
             }
             : {
               onClick: () => setIsRevealing((revealed) => !revealed),
@@ -275,11 +274,11 @@ export function ThaliExperience() {
               role: 'button',
               'aria-pressed': isRevealing,
               'aria-label': isRevealing
-                ? 'Hide the thali'
-                : 'Tap to reveal the complete South Indian feast',
+                ? 'Hide the spread'
+                : 'Tap to reveal the complete Amani’s spread',
             })}
         >
-          <img className="thali-reveal-stage__image" src="/media/images/thali/empty-plate.png" alt="" />
+          <img className="thali-reveal-stage__image" src="/media/images/thali/empty-plate.webp" alt="" />
           {THALI_CHOICES.map((choice) => (
             <img
               key={choice.id}
@@ -297,10 +296,10 @@ export function ThaliExperience() {
           <p className="thali-reveal-stage__hint">
             <span className="thali-reveal-stage__hint-icon" aria-hidden="true">+</span>
             {canHover
-              ? (isRevealing ? 'A FEAST, REVEALED' : 'HOVER TO REVEAL THE THALI')
-              : (isRevealing ? 'A FEAST, REVEALED' : 'TAP TO REVEAL THE THALI')}
+              ? (isRevealing ? 'A FEAST, REVEALED' : 'HOVER TO REVEAL THE SPREAD')
+              : (isRevealing ? 'A FEAST, REVEALED' : 'TAP TO REVEAL THE SPREAD')}
           </p>
-          <span className="thali-reveal-stage__caption">THE AMANI'S THALI</span>
+          <span className="thali-reveal-stage__caption">THE AMANI'S SPREAD</span>
         </div>
 
       </div>

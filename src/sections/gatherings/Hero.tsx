@@ -6,7 +6,7 @@ export function Hero() {
     <section className="gath-hero" aria-labelledby="gath-hero-title">
       <img
         className="gath-hero__bg"
-        src="/media/images/gathering.png"
+        src="/media/images/gathering.webp"
         alt="Gatherings and Private Dining at Amani South Indian Kitchen"
         fetchPriority="high"
       />

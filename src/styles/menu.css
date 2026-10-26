@@ -420,7 +420,8 @@
 
 .menu-mood {
   padding: clamp(4.5rem, 9vw, 8rem) 0;
-  background: var(--amani-paper);
+  background: var(--amani-void, #A95B43);
+  color: #FFFDF9;
 }
 
 .menu-mood__grid {
@@ -432,8 +433,13 @@
 
 .menu-mood h2 {
   margin-top: 0.9rem;
-  color: var(--amani-ink);
+  color: #FFFDF9;
   font-size: var(--font-heading-1);
+}
+
+.menu-mood h2 em,
+.menu-dietary h2 em {
+  color: #FFDE94;
 }
 
 .menu-mood__options {
@@ -451,8 +457,9 @@
   width: 100%;
   padding: 1.1rem 1.4rem;
   color: var(--amani-ink);
-  background: transparent;
-  border: 1px solid var(--amani-hairline);
+  background: var(--amani-canvas);
+  border: 1px solid transparent;
+  box-shadow: 0 0.5rem 1.5rem rgba(40, 18, 10, 0.16);
   border-radius: var(--amani-radius-md);
   font-family: var(--amani-font-ui);
   font-size: 1.02rem;
@@ -477,7 +484,8 @@
 .menu-mood__options button[aria-selected='true'] {
   color: var(--amani-cream-on-dark);
   background: var(--amani-maroon);
-  border-color: var(--amani-maroon);
+  border-color: #FFDE94;
+  box-shadow: 0 0.75rem 1.75rem rgba(40, 18, 10, 0.3);
 }
 
 .menu-mood__options button[aria-selected='true'] span {
@@ -490,8 +498,9 @@
   gap: 1.5rem;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   background: var(--amani-canvas);
-  border: 1px solid var(--amani-hairline);
+  border: none;
   border-radius: var(--amani-radius-md);
+  box-shadow: 0 1.25rem 3rem rgba(40, 18, 10, 0.25);
 }
 
 .menu-mood__answer img {
@@ -1373,7 +1382,8 @@
 
 .menu-dietary {
   padding: clamp(4.5rem, 9vw, 8rem) var(--amani-gutter);
-  background: var(--amani-paper);
+  background: var(--amani-void, #A95B43);
+  color: #FFFDF9;
 }
 
 .menu-dietary__grid {
@@ -1385,7 +1395,7 @@
 
 .menu-dietary h2 {
   margin-top: 0.9rem;
-  color: var(--amani-ink);
+  color: #FFFDF9;
   font-size: var(--font-heading-1);
 }
 
@@ -1402,7 +1412,7 @@
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: start;
   padding-block: 1.5rem;
-  border-bottom: 1px solid var(--amani-hairline);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .menu-dietary__list article:first-child {
@@ -1413,14 +1423,42 @@
   display: inline-flex;
   align-items: center;
   height: 1.25rem;
-  color: var(--amani-terracotta);
+  color: #FFDE94;
   font-size: 0.95rem;
   line-height: 1;
 }
 
+/* Official FSSAI symbol colours vanish on the void background, so each
+   dietary option sits on a light pill (same treatment as .menu-feature). */
+.menu-dietary .menu-diet {
+  justify-self: start;
+  height: auto;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: #FFFDF9;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(40, 18, 10, 0.18);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.menu-dietary .menu-diet--veg {
+  color: #0F8A48;
+}
+
+.menu-dietary .menu-diet--non_veg {
+  color: #B91C1C;
+}
+
+.menu-dietary .menu-diet--egg {
+  color: #B45309;
+}
+
 .menu-dietary__list article p {
   margin: 0;
-  color: var(--amani-ink-muted);
+  color: #FFF6E8;
   font-size: 0.94rem;
   line-height: 1.6;
 }
@@ -1439,14 +1477,14 @@
 }
 
 /* ==========================================================================
-   Section 07 — Signature dish highlight (dark scene)
+   Section 07 — Signature dish highlight (light scene)
    ========================================================================== */
 
 .menu-feature {
   position: relative;
   padding: clamp(5rem, 10vw, 9rem) 0;
-  background: var(--amani-void, #A95B43);
-  color: #FFFDF9;
+  background: var(--amani-canvas);
+  color: var(--amani-ink);
 }
 
 .menu-feature__grid {
@@ -1459,7 +1497,7 @@
 .menu-feature__media {
   overflow: hidden;
   border-radius: var(--amani-radius-sm);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 16px 36px rgba(57, 37, 22, 0.18);
 }
 
 .menu-feature__media img {
@@ -1477,22 +1515,21 @@
 
 .menu-feature h2 {
   margin: 0.9rem 0 0;
-  color: #FFFDF9;
+  color: var(--amani-ink);
   font-family: var(--amani-font-display, 'Balery', sans-serif);
   font-size: var(--font-heading-1);
   letter-spacing: -0.02em;
 }
 
 .menu-feature h2 em {
-  color: #FFDE94;
+  color: var(--amani-maroon);
   font-style: italic;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 .menu-feature__copy p {
   max-width: 30rem;
   margin: 1.5rem 0 0;
-  color: #FFF6E8;
+  color: var(--amani-ink-soft);
   font-family: var(--amani-font-ui, sans-serif);
   font-size: 1.05rem;
   line-height: 1.75;
@@ -1503,7 +1540,7 @@
   gap: clamp(2rem, 5vw, 4rem);
   margin: 2.25rem 0 0;
   padding-top: 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid var(--amani-hairline);
 }
 
 .menu-feature dl div {
@@ -1512,7 +1549,7 @@
 }
 
 .menu-feature dt {
-  color: #FFE6B5;
+  color: var(--amani-terracotta);
   font-family: var(--amani-font-ui);
   font-size: 0.72rem;
   font-weight: 800;
@@ -1522,7 +1559,7 @@
 
 .menu-feature dd {
   margin: 0;
-  color: #FFFFFF;
+  color: var(--amani-ink);
   font-family: var(--amani-font-display);
   font-size: clamp(1.6rem, 2.4vw, 2.2rem);
   line-height: 1.1;
@@ -1537,8 +1574,8 @@
   background: #FFFDF9;
   padding: 0.35rem 0.85rem;
   border-radius: 9999px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(57, 37, 22, 0.08);
+  border: 1px solid var(--amani-hairline);
 }
 
 .menu-feature .menu-diet .dietary-label {

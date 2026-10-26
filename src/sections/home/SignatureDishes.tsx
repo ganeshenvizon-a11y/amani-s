@@ -12,22 +12,22 @@ const SIGNATURE_CARDS = [
   {
     headline: 'Warmth You Can Settle Into',
     supportingLine: 'Comfortable tables, warm lighting and spaces designed for meals that are never rushed.',
-    image: '/media/images/ambiance/1.png',
+    image: '/media/images/ambiance/1.webp',
   },
   {
     headline: 'The South, Painted in Memory',
     supportingLine: 'Narrative artworks honour everyday rituals, from the chaata and rolu to hands measuring grain with instinct.',
-    image: '/media/images/ambiance/2.png',
+    image: '/media/images/ambiance/2.webp',
   },
   {
     headline: 'Objects That Remember Home',
     supportingLine: 'Brass vessels, ceramic jars, stone grinders, woven textures and wooden utensils bring familiar memories into the room.',
-    image: '/media/images/ambiance/3.png',
+    image: '/media/images/ambiance/3.webp',
   },
   {
     headline: 'Every Table Made to Welcome',
     supportingLine: 'For everyday meals, family conversations and occasions that bring generations together.',
-    image: '/media/images/ambiance/4.png',
+    image: '/media/images/ambiance/4.webp',
   },
 ] as const;
 

@@ -16,17 +16,17 @@ type SwipeStart = { x: number; y: number };
 
 const GATHERING_SLIDES = [
   {
-    image: '/media/images/gathering-family-dining.jpg',
+    image: '/media/images/gathering-family-dining.webp',
     alt: 'Comfortable family dining at Amani South Indian restaurant',
     titleLines: ['Family', 'Dining'],
   },
   {
-    image: '/media/images/gathering-children-elders.jpg',
+    image: '/media/images/gathering-children-elders.webp',
     alt: 'Thoughtful support for children and elders with comfortable seating at Amani',
     titleLines: ['Thoughtful', 'Care'],
   },
   {
-    image: '/media/images/gathering-attentive-service.jpg',
+    image: '/media/images/gathering-attentive-service.webp',
     alt: 'Attentive, unintrusive service at Amani South Indian restaurant',
     titleLines: ['Attentive', 'Service'],
   },

@@ -18,19 +18,19 @@ export const GUEST_REVIEWS_CONTENT = {
   reviews: [
     {
       id: 'rev-01',
-      quote: 'The Ghee Podi Idli took me straight back to Sunday mornings in Chennai. Restrained, deeply aromatic, and served in an atmosphere that makes you want to stay for hours.',
+      quote: 'The Gongura Mutton Biryani took me straight back to Sunday lunches at home. Tangy, deeply aromatic, and served in an atmosphere that makes you want to stay for hours.',
       author: 'Ananya Rao',
       source: 'Diner Review',
       date: 'July 2026',
-      dishMentioned: 'Ghee Podi Idli',
+      dishMentioned: 'Gongura Mutton Biryani',
     },
     {
       id: 'rev-02',
-      quote: 'Finally a South Indian restaurant that treats regional cuisine with the quiet elegance it deserves. The Mysore Masala Dosa is crisp perfection.',
+      quote: 'Finally a South Indian restaurant that treats regional cuisine with the quiet elegance it deserves. The Ulavacharu Chicken Biryani is perfection.',
       author: 'Vikram & Priya Mehta',
       source: 'Google Review',
       date: 'June 2026',
-      dishMentioned: 'Mysore Masala Dosa',
+      dishMentioned: 'Ulavacharu Chicken Biryani',
     },
     {
       id: 'rev-03',
@@ -42,11 +42,11 @@ export const GUEST_REVIEWS_CONTENT = {
     },
     {
       id: 'rev-04',
-      quote: 'The filter coffee in the brass davara tumbler at the end of the meal is non-negotiable. Pure nostalgic comfort.',
+      quote: 'The Qubani ka Meetha at the end of the meal is non-negotiable. Pure Hyderabadi comfort.',
       author: 'Kavitha Sundaram',
       source: 'Food & Dining Guide',
       date: 'April 2026',
-      dishMentioned: 'Filter Coffee',
+      dishMentioned: 'Qubani Ka Meetha',
     },
   ] as ReviewItem[],
 };

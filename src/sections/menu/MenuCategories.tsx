@@ -7,10 +7,10 @@ const DEFAULT_ITEM_LIMIT = 10;
 
 // Curated image map for key signature dishes
 const DISH_IMAGE_MAP: Record<string, string> = {
-  'Natukodi Pulusu': '/media/images/dish-naatu-kodi-pulusu.jpg',
-  'Andhra Chicken Curry': '/media/images/dish-andhra-chicken-curry.jpg',
-  'Nellore Chepala Pulusu': '/media/images/dish-chepala-pulusu.jpg',
-  'Chicken Majestic': '/media/images/dish-chicken-majestic.jpg',
+  'Natukodi Pulusu': '/media/images/dish-naatu-kodi-pulusu.webp',
+  'Andhra Chicken Curry': '/media/images/dish-andhra-chicken-curry.webp',
+  'Nellore Chepala Pulusu': '/media/images/dish-chepala-pulusu.webp',
+  'Chicken Majestic': '/media/images/dish-chicken-majestic.webp',
   'Paneer Tikka': '/media/images/signatures/paneer-tikka.webp',
   'Chicken Dum Biryani': '/media/images/signatures/chicken-biryani.webp',
   'Gongura Mutton Biryani': '/media/images/signatures/gongura-mutton-curry.webp',
@@ -22,9 +22,9 @@ const DISH_IMAGE_MAP: Record<string, string> = {
 // Fallback images per category section ensuring ALL items display an image thumbnail
 const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   'starters-soups': '/media/images/signatures/paneer-tikka.webp',
-  'main-course': '/media/images/dish-andhra-chicken-curry.jpg',
+  'main-course': '/media/images/dish-andhra-chicken-curry.webp',
   'rice-biryanis': '/media/images/signatures/chicken-biryani.webp',
-  'breads-indo-chinese': '/media/images/dish-chicken-majestic.jpg',
+  'breads-indo-chinese': '/media/images/dish-chicken-majestic.webp',
   'sweets-drinks': '/media/images/signatures/avakai-biryani.webp',
 };
 
@@ -531,7 +531,7 @@ export function MenuCategories() {
                             <div className="menu-subgroup__grid">
                               {visibleDishes.map((dish) => {
                                 const isSignature = dish.signature || DISH_SIGNATURE_SET.has(dish.name);
-                                const imageSrc = dish.image || DISH_IMAGE_MAP[dish.name] || CATEGORY_FALLBACK_IMAGES[sec.id] || '/media/images/dish-naatu-kodi-pulusu.jpg';
+                                const imageSrc = dish.image || DISH_IMAGE_MAP[dish.name] || CATEGORY_FALLBACK_IMAGES[sec.id] || '/media/images/dish-naatu-kodi-pulusu.webp';
                                 const descriptionText = getDishDescription(dish, sec.title);
 
                                 return (

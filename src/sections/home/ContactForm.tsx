@@ -31,7 +31,12 @@ const TOPICS = [
   'Feedback & Compliments',
 ];
 
-export function ContactForm() {
+interface ContactFormProps {
+  /** Section background: light (default) or the dark `--amani-void` scene. */
+  tone?: 'light' | 'void';
+}
+
+export function ContactForm({ tone = 'light' }: ContactFormProps) {
   const [fields, setFields] = useState<ContactFields>(INITIAL_FIELDS);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -59,7 +64,11 @@ export function ContactForm() {
   };
 
   return (
-    <section id="home-contact" className="home-contact-section" aria-labelledby="home-contact-heading">
+    <section
+      id="home-contact"
+      className={`home-contact-section${tone === 'void' ? ' home-contact-section--void' : ''}`}
+      aria-labelledby="home-contact-heading"
+    >
       <div id="contact" />
       <div id="reserve" />
       <div className="home-contact-container">
